@@ -1,0 +1,15 @@
+:root {
+  --fontsize-small: 0.75rem;
+  --fontsize-bit-small: 0.875rem;
+  --fontsize-normal: 1rem;
+  --fontsize-bit-big: 1.125rem;
+  --fontsize-big: 1.25rem;
+  --fontsize-mini-title: 1.5rem;
+  --fontsize-title: 2rem;
+  --color-desc: #747171;
+  --color-light-desc: #9e9292;
+  --color-light-border: rgb(230, 230, 230);
+  --color-sky-blue: rgba(63, 198, 247, 0.9);
+  --color-light-black: #474c50;
+  --color-black: #3d3333;
+}
