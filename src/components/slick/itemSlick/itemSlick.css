@@ -77,11 +77,11 @@
   .slick_service_container .slick-slider,
   .slick_service_container .slick-list,
   .slick_service_container .slick-track {
-    width: 100vw;
+    transform: translateX(-16px);
+    width: calc(100vw + 16px);
     overflow: hidden;
   }
   .slick_service_container .slick-slide {
-    padding: 0 30px 0 20px;
-    margin-right: -40px;
+    padding: 0 12.5px;
   }
 }

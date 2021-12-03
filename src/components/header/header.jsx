@@ -22,6 +22,7 @@ const Header = (props) => {
             alt="travel_with_dog"
             className={styles.logo}
             onClick={() => {
+              setToggleOn(false);
               navigate("/");
               window.scrollTo({ top: 0 });
             }}
@@ -54,6 +55,7 @@ const Header = (props) => {
             <li
               className={styles.sub_button_item}
               onClick={() => {
+                setToggleOn(false);
                 navigate("/map");
                 window.scrollTo({ top: 0 });
               }}

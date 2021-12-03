@@ -126,4 +126,13 @@
   .off {
     display: none;
   }
+
+  .menu_list {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+
+  .sub_button_container {
+    padding-bottom: 30px;
+  }
 }

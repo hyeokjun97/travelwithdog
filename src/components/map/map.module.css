@@ -43,11 +43,26 @@
 }
 
 .icon {
-  font-size: var(--fontsize-big);
+  font-size: var(--fontsize-mini-title);
   color: var(--color-sky-blue);
 }
 
 .map {
   width: 100%;
   height: 100vh;
+}
+
+@media screen and (max-width: 1050px) {
+  .side_bar {
+    width: 100vw;
+    height: 45vh;
+    top: 65vh;
+  }
+  .input_container {
+    height: 55px;
+  }
+  .list {
+    height: auto;
+    padding-bottom: 100px;
+  }
 }

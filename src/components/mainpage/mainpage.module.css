@@ -48,6 +48,7 @@
 
 .list_title {
   margin-left: 12.5px;
+  margin-bottom: 14px;
   font-size: var(--fontsize-mini-title);
   font-weight: 700;
   color: var(--color-black);
@@ -75,6 +76,7 @@
   }
   .list_title {
     font-size: var(--fontsize-big);
+    margin-left: 20px;
   }
   .list_part {
     width: 100%;

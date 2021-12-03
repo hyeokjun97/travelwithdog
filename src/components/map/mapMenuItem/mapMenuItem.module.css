@@ -1,6 +1,6 @@
 .item {
   width: 100%;
-  height: 180px;
+  height: 150px;
   border: 1px solid lightgray;
   display: flex;
   flex-direction: row;
@@ -19,6 +19,7 @@ p {
 }
 
 .image {
+  max-width: 45%;
   min-width: 45%;
   height: 100%;
 }
