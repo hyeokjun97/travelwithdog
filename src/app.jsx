@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./app.module.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Mainpage from "./components/mainpage/mainpage";
 import Header from "./components/header/header";
+import Map from "./components/map/map";
 
 const App = (props) => {
   return (
@@ -11,6 +11,7 @@ const App = (props) => {
         <Header />
         <Routes>
           <Route path="/" element={<Mainpage />}></Route>
+          <Route path="/map" element={<Map />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

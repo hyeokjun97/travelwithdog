@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import styles from "./header.module.css";
 
 const Header = (props) => {
+  const navigate = useNavigate();
   const [toggleOn, setToggleOn] = useState(false);
   return (
     <header className={styles.header}>
@@ -19,6 +21,10 @@ const Header = (props) => {
             src="/images/logo.svg"
             alt="travel_with_dog"
             className={styles.logo}
+            onClick={() => {
+              navigate("/");
+              window.scrollTo({ top: 0 });
+            }}
           />
         </div>
 
@@ -32,9 +38,9 @@ const Header = (props) => {
           <ul className={styles.menu_list}>
             <li className={styles.menu_item}>숙박</li>
             <li className={styles.menu_item}>패키지</li>
-            <li className={styles.menu_item}>입장권</li>
             <li className={styles.menu_item}>교통편</li>
-            <li className={styles.menu_item}>맛집</li>
+            <li className={styles.menu_item}>커뮤니티</li>
+            <li className={styles.menu_item}>렌터카</li>
           </ul>
         </nav>
         <div
@@ -45,7 +51,15 @@ const Header = (props) => {
           }`}
         >
           <ul className={styles.sub_button_list}>
-            <li className={styles.sub_button_item}>블로그</li>
+            <li
+              className={styles.sub_button_item}
+              onClick={() => {
+                navigate("/map");
+                window.scrollTo({ top: 0 });
+              }}
+            >
+              멍:지
+            </li>
             <li className={styles.sub_button_item}>로그인</li>
             <li className={styles.sub_button_item}>회원가입</li>
           </ul>

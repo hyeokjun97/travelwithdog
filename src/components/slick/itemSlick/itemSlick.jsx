@@ -1,4 +1,4 @@
-import React, { Component, useRef } from "react";
+import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "./itemSlick.css";
@@ -60,7 +60,7 @@ export default class ItemSlick extends Component {
       speed: 500,
       swipeToSlide: true,
       slidesToShow: 4,
-      slidesToScroll: 4,
+      slidesToScroll: 4, //위의 두개 지워주면 반응형 슬라이드 가능
       arrows: true,
       variableWIdth: true,
       nextArrow: <NextArrow />,

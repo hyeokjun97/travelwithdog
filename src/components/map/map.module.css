@@ -1,0 +1,53 @@
+.side_bar {
+  width: 32%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 99;
+
+  box-shadow: 0 10px 10px lightgray;
+  background-color: white;
+}
+
+.list {
+  height: calc(100vh - 164px);
+  overflow-y: scroll;
+}
+
+.search_container {
+  width: 100%;
+  background-color: rgb(252, 252, 252);
+}
+
+.input_container {
+  width: 100%;
+  height: 64px;
+  border: 1px solid var(--color-light-border);
+  padding: 0 12px 0 8px;
+  font-size: var(--fontsize-normal);
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input {
+  width: 90%;
+  height: 45px;
+  outline: none;
+  border: none;
+}
+
+.icon {
+  font-size: var(--fontsize-big);
+  color: var(--color-sky-blue);
+}
+
+.map {
+  width: 100%;
+  height: 100vh;
+}

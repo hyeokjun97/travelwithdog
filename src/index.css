@@ -8,6 +8,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+input,
+textarea {
+  font-size: var(--fontsize-normal);
+}
+
 * {
   box-sizing: border-box;
 }

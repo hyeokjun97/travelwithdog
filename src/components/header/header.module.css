@@ -96,16 +96,19 @@
     width: auto;
     height: auto;
     flex-direction: column;
-    padding: 14px 0;
   }
 
   .logo_container {
     width: auto;
+    height: 80px;
+    display: flex;
+    align-items: center;
   }
 
   .menu_list {
     flex-direction: column;
     margin: 30px 0;
+    padding: 14px 0;
   }
   .menu_item {
     height: 45px;

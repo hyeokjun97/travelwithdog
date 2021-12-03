@@ -1,6 +1,6 @@
 .top_banner {
   display: inline-block;
-  width: 100vw;
+  width: 100%;
   height: calc(100vh - 100px);
   margin: 100px 0 70px 0;
   background: url("https://public.travelforest.co.kr/image/jeju/1900jeju.jpg");
@@ -9,7 +9,7 @@
 }
 
 .top_filter {
-  width: 100vw;
+  width: 100%;
   height: calc(100vh - 100px);
   background-color: rgba(0, 0, 0, 0.1);
   display: flex;
@@ -54,6 +54,13 @@
 }
 
 @media screen and (max-width: 1050px) {
+  .top_banner {
+    height: calc(100vh - 80px);
+    margin-top: 80px;
+  }
+  .top_filter {
+    height: calc(100vh - 80px);
+  }
   .title {
     font-size: var(--fontsize-title);
   }
@@ -69,9 +76,20 @@
   .list_title {
     font-size: var(--fontsize-big);
   }
+  .list_part {
+    width: 100%;
+    overflow: hidden;
+  }
 }
 
 @media screen and (max-width: 768px) {
+  .top_banner {
+    height: calc(100vh - 80px);
+    margin-top: 80px;
+  }
+  .top_filter {
+    height: calc(100vh - 80px);
+  }
   .title {
     font-size: var(--fontsize-big);
   }
@@ -83,5 +101,9 @@
     width: 80%;
     font-size: var(--fontsize-normal);
     text-align: center;
+  }
+
+  .list_part {
+    overflow: hidden;
   }
 }

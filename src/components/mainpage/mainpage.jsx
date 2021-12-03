@@ -1,8 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ItemSlick from "../slick/itemSlick/itemSlick";
 import styles from "./mainpage.module.css";
 
 const Mainpage = (props) => {
+  const listRef = useRef();
+
+  const setObserver = () => {
+    const observer = new IntersectionObserver((entries, observer) => {
+      console.log(entries);
+    });
+    observer.observe(listRef.current);
+  };
+  useEffect(() => {
+    setObserver();
+  }, []);
   return (
     <div className={styles.mainpage}>
       <div className={styles.top_banner}>
@@ -16,21 +27,21 @@ const Mainpage = (props) => {
         </div>
       </div>
       <div className={styles.list_part}>
-        <div className={styles.list_container}>
+        <div ref={listRef} className={styles.list_container}>
           <p className={styles.list_title}>
             반려견과 함께하는 차박(Car Camping)
           </p>
           <ItemSlick viewItems={chabak} />
         </div>
-        <div className={styles.list_container}>
+        <div ref={listRef} className={styles.list_container}>
           <p className={styles.list_title}>제주 반려견 여행 BEST</p>
           <ItemSlick viewItems={jejuBest.reverse()} />
         </div>
-        <div className={styles.list_container}>
+        <div ref={listRef} className={styles.list_container}>
           <p className={styles.list_title}>강릉/동해 반려견 여행 BEST</p>
           <ItemSlick viewItems={chabak} />
         </div>
-        <div className={styles.list_container}>
+        <div ref={listRef} className={styles.list_container}>
           <p className={styles.list_title}>양양/속초 반려견 여행 BEST</p>
           <ItemSlick viewItems={jejuBest} />
         </div>

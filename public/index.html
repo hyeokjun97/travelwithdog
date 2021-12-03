@@ -11,6 +11,19 @@
     />
 
     <title>React App</title>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5cf06eeeaf4ef802865607258107945"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5cf06eeeaf4ef802865607258107945&libraries=LIBRARY"
+    ></script>
+
+    <script type="text/javascript">
+      Kakao.init("%REACT_APP_KAKAO_JS_KEY%");
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

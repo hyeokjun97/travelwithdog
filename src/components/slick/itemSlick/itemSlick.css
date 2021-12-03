@@ -72,3 +72,16 @@
 .slick_service_container .slick-slide {
   padding: 0 12.5px;
 }
+
+@media screen and (max-width: 768px) {
+  .slick_service_container .slick-slider,
+  .slick_service_container .slick-list,
+  .slick_service_container .slick-track {
+    width: 100vw;
+    overflow: hidden;
+  }
+  .slick_service_container .slick-slide {
+    padding: 0 30px 0 20px;
+    margin-right: -40px;
+  }
+}
