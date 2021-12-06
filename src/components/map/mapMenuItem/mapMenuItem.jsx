@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./mapMenuItem.module.css";
 
-const MapMenuItem = ({ item }) => {
+const MapMenuItem = ({ item, onItemClickHandler }) => {
   return (
-    <div className={styles.item}>
+    <div className={styles.item} onClick={onItemClickHandler}>
       <img
         src={`https://public.travelforest.co.kr/${item.images[0].url}`}
         alt={item.name_ko}

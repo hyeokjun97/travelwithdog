@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import styles from "./map.module.css";
 import axios from "axios";
 import MapMenuItem from "./mapMenuItem/mapMenuItem";
+import MapPopup from "./mapPopup/mapPopup";
 
 const Map = (props) => {
   const [inputValue, setInputValue] = useState("");
   const [spotList, setSpotList] = useState(null);
   const [resultSpotList, setResultSpotList] = useState(null);
   const [map, setMap] = useState(null);
+  const [popupOn, setPopupOn] = useState(false);
+  const [popupValue, setPopupValue] = useState(null);
 
   const mapStart = () => {
     const container = document.getElementById("map");
@@ -34,6 +37,21 @@ const Map = (props) => {
       })
       .catch((err) => console.error(err));
   };
+  const onItemClickHandler = (data) => {
+    setPopupValue(data);
+    setPopupOn(true);
+  };
+
+  const onFilterClickHandler = (e) => {
+    if (e.target.dataset.filter) {
+      setPopupOn(false);
+    }
+  };
+
+  const onCloseButtonHandler = () => {
+    setPopupOn(false);
+  };
+
   useEffect(() => {
     mapStart();
     loadSpotList();
@@ -45,11 +63,29 @@ const Map = (props) => {
     }
     const result = spotList.filter((spot) => spot.name_ko.includes(inputValue));
     setResultSpotList(result);
-    console.log(result);
   }, [inputValue]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", () => setPopupOn(false));
+    return () => {
+      document.removeEventListener("keydown", () => setPopupOn(false));
+    };
+  }, []);
 
   return (
     <div className={styles.body}>
+      {popupOn && (
+        <div
+          className={styles.filter}
+          data-filter="true"
+          onClick={onFilterClickHandler}
+        >
+          <MapPopup
+            popupValue={popupValue}
+            onCloseButtonHandler={onCloseButtonHandler}
+          />
+        </div>
+      )}
       <div className={styles.side_bar}>
         <div className={styles.search_container}>
           <div className={styles.input_container}>
@@ -67,7 +103,11 @@ const Map = (props) => {
         <div className={styles.list}>
           {resultSpotList &&
             resultSpotList.map((item) => (
-              <MapMenuItem key={item.id} item={item} />
+              <MapMenuItem
+                key={item.id}
+                item={item}
+                onItemClickHandler={() => onItemClickHandler(item)}
+              />
             ))}
         </div>
       </div>

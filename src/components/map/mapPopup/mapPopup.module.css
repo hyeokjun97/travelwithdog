@@ -1,0 +1,131 @@
+.popup {
+  width: 600px;
+  height: 80vh;
+  background-color: white;
+  position: relative;
+}
+
+.close_icon {
+  font-size: var(--fontsize-title);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.data_container {
+  margin-top: 2vh;
+  padding: 6px 20px;
+  height: 36vh;
+  overflow-y: scroll;
+}
+
+.name_and_type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.name {
+  font-size: var(--fontsize-mini-title);
+  font-weight: 600;
+}
+
+.type {
+  margin-top: 4px;
+  margin-left: 12px;
+  font-size: var(--fontsize-normal);
+  color: var(--color-desc);
+}
+
+.rating_and_sns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 8px 0 20px 0;
+}
+
+.insta {
+  width: 20px;
+  height: 20px;
+  margin-left: 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.desc {
+  font-size: var(--fontsize-normal);
+  color: var(--color-black);
+  margin: 18px 0 24px 0;
+}
+
+.sub_data_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub_data_title {
+  font-size: var(--fontsize-normal);
+  font-weight: 500;
+  color: #027be3;
+  margin-bottom: 4px;
+}
+
+.sub_data {
+  font-size: var(--fontsize-normal);
+  font-weight: 400;
+  color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .popup {
+    width: 90%;
+    transform: translateY(5vh);
+  }
+
+  .close_icon {
+    font-size: var(--fontsize-mini-title);
+  }
+
+  .name {
+    font-size: var(--fontsize-bit-big);
+    font-weight: 600;
+  }
+
+  .type {
+    margin-top: 0;
+    margin-left: 6px;
+    font-size: var(--fontsize-bit-small);
+    color: var(--color-desc);
+  }
+
+  .insta {
+    width: 18px;
+    height: 18px;
+    margin-left: 12px;
+  }
+
+  .desc {
+    font-size: var(--fontsize-small);
+    margin: 12px 0;
+  }
+
+  .sub_data_container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sub_data_title {
+    font-size: var(--fontsize-bit-small);
+    font-weight: 500;
+    color: #027be3;
+    margin-bottom: 1px;
+  }
+
+  .sub_data {
+    font-size: var(--fontsize-small);
+    font-weight: 400;
+    color: black;
+  }
+}

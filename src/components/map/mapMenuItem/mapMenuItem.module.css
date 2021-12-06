@@ -37,6 +37,13 @@ p {
   margin: 4px 0 8px 0;
   font-size: var(--fontsize-bit-big);
   font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .desc {
