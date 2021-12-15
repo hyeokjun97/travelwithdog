@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
-import "./itemSlick.css";
+import "./itemSlickOne.css";
 import "slick-carousel/slick/slick-theme.css";
 
 //모바일되면 arrow 없애고 슬라이드 형식으로 전환
@@ -18,8 +18,8 @@ function NextArrow(props) {
       style={{
         ...style,
         display: "block",
-        width: 30,
-        height: 30,
+        width: 20,
+        height: 20,
         top: 170,
         right: -30,
         zIndex: 2,
@@ -40,8 +40,8 @@ function PrevArrow(props) {
       style={{
         ...style,
         display: "block",
-        width: 30,
-        height: 30,
+        width: 20,
+        height: 20,
         top: 170,
         left: -30,
         zIndex: 2,
@@ -52,7 +52,7 @@ function PrevArrow(props) {
   );
 }
 
-export default class ItemSlick extends Component {
+export default class ItemSlickOne extends Component {
   render() {
     const { viewItems } = this.props;
     const width = window.innerWidth;

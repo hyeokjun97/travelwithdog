@@ -1,16 +1,17 @@
 .top_banner {
   display: inline-block;
   width: 100%;
-  height: calc(100vh - 100px);
-  margin: 100px 0 70px 0;
+  height: 80vh;
+  margin-bottom: 70px;
   background: url("https://public.travelforest.co.kr/image/jeju/1900jeju.jpg");
   background-size: cover;
   background-position: center;
 }
 
 .top_filter {
+  padding-top: 20vh;
   width: 100%;
-  height: calc(100vh - 100px);
+  height: 80vh;
   background-color: rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -36,9 +37,49 @@
 }
 
 .subtitle {
-  margin-top: 20px;
+  margin-top: 40px;
+  margin-bottom: 70px;
+  font-size: var(--fontsize-mini-title);
+  font-weight: 700;
+}
+
+.search_container {
+  width: 650px;
+  height: 55px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 16px;
+  padding: 0 14px;
+}
+
+.search_input {
+  border: none;
+  outline: none;
   font-size: var(--fontsize-big);
-  font-weight: 500;
+  color: var(--color-light-black);
+  padding-top: 4px;
+  padding-left: 4px;
+  font-weight: 600;
+  width: 95%;
+}
+
+.search_icon_container {
+  cursor: pointer;
+}
+
+.search_icon {
+  font-size: var(--fontsize-mini-title);
+  color: var(--color-light-black);
+}
+
+.tag_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 14px;
 }
 
 .list_part {
@@ -49,24 +90,18 @@
 .list_title {
   margin-left: 12.5px;
   margin-bottom: 14px;
-  font-size: var(--fontsize-mini-title);
+  font-size: var(--fontsize-big);
   font-weight: 700;
-  color: var(--color-black);
+  color: rgb(72, 72, 72);
 }
 
 @media screen and (max-width: 1050px) {
-  .top_banner {
-    height: calc(100vh - 80px);
-    margin-top: 80px;
-  }
   .top_filter {
-    height: calc(100vh - 80px);
+    padding-top: 20vh;
   }
-  .title {
-    font-size: var(--fontsize-title);
-  }
+  .title,
   .title_two {
-    font-size: 32px;
+    font-size: var(--fontsize-title);
   }
 
   .subtitle {
@@ -74,6 +109,22 @@
     font-size: var(--fontsize-big);
     text-align: center;
   }
+
+  .search_and_tag_container {
+    width: 90%;
+  }
+
+  .search_container {
+    width: 100%;
+    height: 45px;
+    margin: auto;
+  }
+
+  .search_input {
+    width: 90%;
+    font-size: var(--fontsize-normal);
+  }
+
   .list_title {
     font-size: var(--fontsize-big);
     margin-left: 20px;
@@ -85,24 +136,16 @@
 }
 
 @media screen and (max-width: 768px) {
-  .top_banner {
-    height: calc(100vh - 80px);
-    margin-top: 80px;
-  }
-  .top_filter {
-    height: calc(100vh - 80px);
-  }
-  .title {
-    font-size: var(--fontsize-big);
-  }
+  .title,
   .title_two {
-    font-size: 26px;
+    font-size: var(--fontsize-big);
   }
 
   .subtitle {
     width: 80%;
     font-size: var(--fontsize-normal);
     text-align: center;
+    margin: 20px 0;
   }
 
   .list_part {

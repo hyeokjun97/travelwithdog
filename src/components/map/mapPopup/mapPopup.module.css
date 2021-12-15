@@ -46,12 +46,21 @@
   margin: 8px 0 20px 0;
 }
 
+.rating {
+  margin-right: 8px;
+}
+
 .insta {
-  width: 20px;
-  height: 20px;
-  margin-left: 12px;
+  width: 24px;
+  height: 24px;
+  margin: 0 4px;
   cursor: pointer;
   border-radius: 4px;
+  transition: 150ms all ease-in;
+}
+
+.insta:hover {
+  transform: scale(1.1);
 }
 
 .desc {
@@ -69,7 +78,7 @@
   font-size: var(--fontsize-normal);
   font-weight: 500;
   color: #027be3;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .sub_data {
@@ -89,6 +98,14 @@
   }
 
   .name {
+    max-width: 85%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    word-wrap: break-word;
+    word-break: break-all;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     font-size: var(--fontsize-bit-big);
     font-weight: 600;
   }
@@ -103,7 +120,7 @@
   .insta {
     width: 18px;
     height: 18px;
-    margin-left: 12px;
+    margin-left: 4px;
   }
 
   .desc {

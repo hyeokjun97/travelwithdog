@@ -13,11 +13,15 @@
 
 .slick_service_container .item {
   outline: none;
-  width: 250px;
   height: 311px;
   border-radius: 4px;
   border: 1px solid rgb(215, 214, 214);
   cursor: pointer;
+  transition: 150ms all ease;
+}
+
+.slick_service_container .item:hover {
+  box-shadow: 2px 5px 10px lightgray;
 }
 
 .slick_service_container .thumbnail {
@@ -53,7 +57,7 @@
 }
 
 .slick_service_container .title {
-  font-size: var(--font-size-big);
+  font-size: var(--fontsize-normal);
   font-weight: 600;
   color: black;
   margin: 0;

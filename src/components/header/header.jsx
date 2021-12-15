@@ -1,12 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import styles from "./header.module.css";
+import { debounce } from "lodash";
 
 const Header = (props) => {
+  const headerRef = useRef();
   const navigate = useNavigate();
   const [toggleOn, setToggleOn] = useState(false);
+  const [scrollValue, setScrollValue] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener(
+      "scroll",
+      debounce(() => {
+        setScrollValue(window.scrollY);
+      }, 10)
+    );
+  }, []);
+
   return (
-    <header className={styles.header}>
+    <header
+      ref={headerRef}
+      className={`${
+        !toggleOn
+          ? scrollValue < 140
+            ? `${styles.header} ${styles.header_on}`
+            : `${styles.header} ${styles.header_off}`
+          : `${styles.header} ${styles.header_off}`
+      }`}
+    >
       <div
         onClick={() => {
           setToggleOn(!toggleOn);
@@ -32,7 +54,7 @@ const Header = (props) => {
         <nav
           className={`${
             toggleOn
-              ? `${styles.navbar} : ${styles.on}`
+              ? `${styles.navbar} ${styles.on}`
               : `${styles.navbar} ${styles.off}`
           }`}
         >

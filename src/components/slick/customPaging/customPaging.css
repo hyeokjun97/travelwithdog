@@ -18,8 +18,8 @@
 
 .slick-dots .dot_image,
 .slick-dots li {
-  width: 112px;
-  height: 80px;
+  width: 104px;
+  height: 70px;
   border: 1px solid white;
 }
 
@@ -48,7 +48,7 @@
   .slick-dots .dot_image,
   .slick-dots li {
     width: 18vw;
-    height: 60px;
+    height: 50px;
   }
   .slick-dots {
     transform: translateY(-5vh);
