@@ -33,7 +33,7 @@ const MapPopup = ({ popupValue, onCloseButtonHandler }) => {
         <div className={styles.rating_and_sns}>
           <p className={styles.rating}>여기에평점</p>
           {instaUrl && (
-            <a href={instaUrl} target="_blank">
+            <a href={instaUrl} rel="noreferrer">
               <img
                 src="/images/insta.png"
                 alt="instagram"
@@ -42,7 +42,7 @@ const MapPopup = ({ popupValue, onCloseButtonHandler }) => {
             </a>
           )}
           {blogUrl && (
-            <a href={blogUrl} target="_blank">
+            <a href={blogUrl} rel="noreferrer">
               <img
                 src="/images/naver_blog.png"
                 alt="naver_blog"

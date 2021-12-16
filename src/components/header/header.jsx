@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import styles from "./header.module.css";
 import { debounce } from "lodash";
 
-const Header = (props) => {
+const Header = ({ categoryList }) => {
   const headerRef = useRef();
   const navigate = useNavigate();
   const [toggleOn, setToggleOn] = useState(false);
@@ -59,11 +59,18 @@ const Header = (props) => {
           }`}
         >
           <ul className={styles.menu_list}>
-            <li className={styles.menu_item}>숙박</li>
-            <li className={styles.menu_item}>패키지</li>
-            <li className={styles.menu_item}>교통편</li>
-            <li className={styles.menu_item}>커뮤니티</li>
-            <li className={styles.menu_item}>렌터카</li>
+            {categoryList.map((category) => (
+              <li
+                key={category.id}
+                className={styles.menu_item}
+                onClick={() => {
+                  navigate(`/category/${category.route}`);
+                  window.scrollTo({ top: 0 });
+                }}
+              >
+                {category.title}
+              </li>
+            ))}
           </ul>
         </nav>
         <div

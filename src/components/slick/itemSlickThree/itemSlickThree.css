@@ -34,16 +34,29 @@
   font-size: var(--fontsize-normal);
   font-weight: 700;
   color: var(--color-light-gray);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  padding-left: 6px;
+}
+
+.slick_three_container .star_container {
+  padding: 4px 0 6px 4px;
 }
 
 .slick_three_container .price {
   color: rgb(13, 13, 13);
   font-weight: 600;
+  padding-left: 6px;
 }
 
 .slick_three_container .data_container {
   width: 100%;
-  padding: 14px 0 0 8px;
+  padding: 14px 0 0 0;
 }
 
 .slick_three_container .arrow {

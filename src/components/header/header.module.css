@@ -9,6 +9,7 @@
   z-index: 100 !important;
   overflow-x: hidden;
   transition: 150ms all ease;
+  white-space: nowrap;
 }
 
 .header_on {

@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "./itemSlickOne.css";
 import "slick-carousel/slick/slick-theme.css";
+import ReactStars from "react-rating-stars-component";
 
 //모바일되면 arrow 없애고 슬라이드 형식으로 전환
 //모바일에서 원하는 곳에 멈추지 않고 항상 두 엘리먼트 사이에서 강제로 멈추게 됨
@@ -94,6 +95,19 @@ export default class ItemSlickOne extends Component {
               <div className="data_container">
                 <p className="type">{item.type}</p>
                 <p className="title">{item.title}</p>
+                <div className="star_container">
+                  <ReactStars
+                    count={5}
+                    edit={false}
+                    size={14}
+                    value={4}
+                    activeColor="#000000"
+                    isHalf={true}
+                    emptyIcon={<i className="fas fa-paw"></i>}
+                    halfIcon={<i className="fas fa-paw"></i>}
+                    filledIcon={<i className="fas fa-paw"></i>}
+                  />
+                </div>
                 <p className="price">{`${item.price.toLocaleString(
                   "ko-KR"
                 )}원`}</p>
