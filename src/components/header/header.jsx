@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import styles from "./header.module.css";
 import { debounce } from "lodash";
 
-const Header = ({ categoryList }) => {
+const Header = ({ categoryList, loginPopupHandler }) => {
   const headerRef = useRef();
   const navigate = useNavigate();
   const [toggleOn, setToggleOn] = useState(false);
@@ -40,7 +40,7 @@ const Header = ({ categoryList }) => {
       <div className={styles.body}>
         <div className={styles.logo_container}>
           <img
-            src="/images/logo.svg"
+            src="/travelWithDog/images/logo.svg"
             alt="travel_with_dog"
             className={styles.logo}
             onClick={() => {
@@ -64,6 +64,7 @@ const Header = ({ categoryList }) => {
                 key={category.id}
                 className={styles.menu_item}
                 onClick={() => {
+                  setToggleOn(false);
                   navigate(`/category/${category.route}`);
                   window.scrollTo({ top: 0 });
                 }}
@@ -91,7 +92,9 @@ const Header = ({ categoryList }) => {
             >
               멍:지
             </li>
-            <li className={styles.sub_button_item}>로그인</li>
+            <li className={styles.sub_button_item} onClick={loginPopupHandler}>
+              로그인
+            </li>
             <li className={styles.sub_button_item}>회원가입</li>
           </ul>
         </div>

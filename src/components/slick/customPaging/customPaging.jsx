@@ -6,7 +6,7 @@ function NextArrow(props) {
   const { className, style, onClick } = props;
   return (
     <img
-      src="/modoorock/images/arrow-right.png"
+      src="/travelWithDog/images/arrow-right.png"
       alt="arrow"
       className={`${className} arrow`}
       style={{
@@ -25,7 +25,7 @@ function PrevArrow(props) {
   const { className, style, onClick } = props;
   return (
     <img
-      src="/modoorock/images/arrow-left.png"
+      src="/travelWithDog/images/arrow-left.png"
       alt="arrow"
       className={`${className} arrow`}
       style={{

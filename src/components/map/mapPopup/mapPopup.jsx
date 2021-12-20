@@ -21,7 +21,10 @@ const MapPopup = ({ popupValue, onCloseButtonHandler }) => {
   }, []);
   return (
     <div className={styles.popup}>
-      <div onClick={onCloseButtonHandler}>
+      <div
+        className={styles.close_icon_container}
+        onClick={onCloseButtonHandler}
+      >
         <i className={`${styles.close_icon} fas fa-times`}></i>
       </div>
       {popupValue && <CustomPaging imageList={popupValue.images.slice(0, 4)} />}

@@ -12,7 +12,7 @@ function NextArrow(props) {
 
   return (
     <img
-      src="/images/arrow-right.png"
+      src="/travelWithDog/images/arrow-right.png"
       alt="arrow"
       className={`${className} arrow_right`}
       style={{
@@ -34,7 +34,7 @@ function PrevArrow(props) {
 
   return (
     <img
-      src="/images/arrow-left.png"
+      src="/travelWithDog/images/arrow-left.png"
       alt="arrow"
       className={`${className} arrow_left`}
       style={{

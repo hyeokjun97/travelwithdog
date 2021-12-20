@@ -7,7 +7,11 @@ const Footer = (props) => {
       <div className={styles.top}>
         <ul className={styles.top_menu}>
           <li>
-            <img src="/images/logo.svg" alt="logo" className={styles.logo} />
+            <img
+              src="/travelWithDog/images/logo.svg"
+              alt="logo"
+              className={styles.logo}
+            />
           </li>
           <li>소개</li>
           <li>우리의 약속</li>
@@ -20,21 +24,39 @@ const Footer = (props) => {
       </div>
       <div className={styles.bottom}>
         <div className={styles.sns_container}>
-          <img
-            src="/images/facebook.png"
-            alt="sns_icon"
-            className={styles.sns_icon}
-          />
-          <img
-            src="/images/kakao.png"
-            alt="sns_icon"
-            className={styles.sns_icon}
-          />
-          <img
-            src="/images/insta.png"
-            alt="sns_icon"
-            className={styles.sns_icon}
-          />
+          <a
+            href="https://www.facebook.com/travelforest"
+            target="_blank"
+            rel="noopenner"
+          >
+            <img
+              src="/travelWithDog/images/facebook.png"
+              alt="sns_icon"
+              className={styles.sns_icon}
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/travelforest"
+            target="_blank"
+            rel="noopenner"
+          >
+            <img
+              src="/travelWithDog/images/kakao.png"
+              alt="sns_icon"
+              className={styles.sns_icon}
+            />
+          </a>{" "}
+          <a
+            href="https://www.facebook.com/travelforest"
+            target="_blank"
+            rel="noopenner"
+          >
+            <img
+              src="/travelWithDog/images/insta.png"
+              alt="sns_icon"
+              className={styles.sns_icon}
+            />
+          </a>
         </div>
         <p className={styles.text}>
           대표: 김신철 | 사업자등록번호: 822-87-00041 [확인] | 관광사업등록: 제
