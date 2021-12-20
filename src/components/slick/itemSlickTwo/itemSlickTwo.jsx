@@ -70,6 +70,20 @@ export default class ItemSlickTwo extends Component {
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
       };
+    } else if (width > 700) {
+      settings = {
+        accessibility: false,
+        dots: false,
+        infinite: false,
+
+        swipeToSlide: true,
+        arrows: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        variableWIdth: true,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
+      };
     } else {
       settings = {
         accessibility: false,

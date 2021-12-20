@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import styles from "./header.module.css";
 import { debounce } from "lodash";
 
-const Header = ({ categoryList, loginPopupHandler }) => {
+const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
   const headerRef = useRef();
   const navigate = useNavigate();
   const [toggleOn, setToggleOn] = useState(false);
@@ -92,10 +92,24 @@ const Header = ({ categoryList, loginPopupHandler }) => {
             >
               멍:지
             </li>
-            <li className={styles.sub_button_item} onClick={loginPopupHandler}>
+            <li
+              className={styles.sub_button_item}
+              onClick={() => {
+                setToggleOn(false);
+                loginPopupHandler();
+              }}
+            >
               로그인
             </li>
-            <li className={styles.sub_button_item}>회원가입</li>
+            <li
+              className={styles.sub_button_item}
+              onClick={() => {
+                setToggleOn(false);
+                signupPopupHandler();
+              }}
+            >
+              회원가입
+            </li>
           </ul>
         </div>
       </div>

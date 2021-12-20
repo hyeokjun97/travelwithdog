@@ -30,7 +30,7 @@ const Footer = (props) => {
             rel="noopenner"
           >
             <img
-              src="/travelWithDog/images/facebook.png"
+              src="/travelWithDog/images/facebook_white.png"
               alt="sns_icon"
               className={styles.sns_icon}
             />
@@ -41,7 +41,7 @@ const Footer = (props) => {
             rel="noopenner"
           >
             <img
-              src="/travelWithDog/images/kakao.png"
+              src="/travelWithDog/images/kakao_white.png"
               alt="sns_icon"
               className={styles.sns_icon}
             />
@@ -52,7 +52,7 @@ const Footer = (props) => {
             rel="noopenner"
           >
             <img
-              src="/travelWithDog/images/insta.png"
+              src="/travelWithDog/images/naver_blog_white.png"
               alt="sns_icon"
               className={styles.sns_icon}
             />

@@ -1,6 +1,6 @@
 .login_popup {
-  width: 500px;
-  height: 650px;
+  width: 531px;
+  height: 656px;
   background-color: white;
   border-radius: 16px;
   padding: 24px 30px;
@@ -76,7 +76,8 @@
   height: 40px;
   outline: none;
   border: none;
-  background-color: rgb(29, 95, 41);
+  background-color: #044c0c;
+  opacity: 0.9;
   border-radius: 8px;
   color: white;
   font-size: var(--fontsize-normal);
@@ -145,4 +146,49 @@
   font-size: var(--fontsize-bit-small);
   margin-top: 6px;
   color: rgb(142, 142, 142);
+}
+
+@media screen and (max-width: 765px) {
+  .login_popup {
+    width: 90%;
+    height: auto;
+  }
+
+  .logo {
+    margin-bottom: 0;
+  }
+
+  .text {
+    font-size: var(--fontsize-bit-small);
+  }
+
+  .save_id_text {
+    font-size: var(--fontsize-bit-small);
+  }
+
+  .submit_button {
+    height: 40px;
+  }
+
+  .sub_button_container {
+    width: 90%;
+  }
+
+  .divide_container {
+    margin-top: 16px;
+  }
+
+  .social_container {
+    margin-top: 0;
+    padding: 16px;
+  }
+
+  .social_image {
+    width: 45px;
+    height: 45px;
+  }
+
+  .divide_line {
+    width: 18%;
+  }
 }

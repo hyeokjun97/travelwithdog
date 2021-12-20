@@ -57,6 +57,7 @@ export default class ItemSlickFour extends Component {
   render() {
     const { viewItems } = this.props;
     const width = window.innerWidth;
+    console.log(width);
     let settings;
     if (width > 1050) {
       settings = {
@@ -67,6 +68,19 @@ export default class ItemSlickFour extends Component {
         slidesToShow: 5,
         slidesToScroll: 5,
         arrows: true,
+        variableWIdth: true,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
+      };
+    } else if (width > 700) {
+      settings = {
+        accessibility: false,
+        dots: false,
+        infinite: false,
+        swipeToSlide: true,
+        arrows: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
         variableWIdth: true,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,

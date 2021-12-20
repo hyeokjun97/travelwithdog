@@ -27,7 +27,7 @@
   transform: translateY(-4vh);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 765px) {
   .custom_paging_container .slick-slider,
   .custom_paging_container .slick-list,
   .custom_paging_container .slick-track {

@@ -54,7 +54,7 @@
   padding: 0 6px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 765px) {
   .slick_two_container .slick-slider,
   .slick_two_container .slick-list,
   .slick_two_container .slick-track {

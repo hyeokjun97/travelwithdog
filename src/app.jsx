@@ -7,9 +7,11 @@ import Map from "./components/map/map";
 import Footer from "./components/footer/footer";
 import CategoryPage from "./components/categoryPage/categoryPage";
 import Login from "./components/login/login";
+import Signup from "./components/signup/signup";
 
 const App = (props) => {
   const [loginPopupOn, setLoginPopupOn] = useState(false);
+  const [signupPopupOn, setSignupPopupOn] = useState(false);
 
   const [chabak, setChabak] = useState([
     {
@@ -536,8 +538,13 @@ const App = (props) => {
     setLoginPopupOn(true);
   };
 
+  const signupPopupHandler = () => {
+    setSignupPopupOn(true);
+  };
+
   const onCloseButtonHandler = () => {
     setLoginPopupOn(false);
+    setSignupPopupOn(false);
   };
 
   const keyHandler = (e) => {
@@ -545,6 +552,7 @@ const App = (props) => {
       return;
     }
     setLoginPopupOn(false);
+    setSignupPopupOn(false);
   };
 
   useEffect(() => {
@@ -561,11 +569,20 @@ const App = (props) => {
           <Header
             categoryList={categoryList}
             loginPopupHandler={loginPopupHandler}
+            signupPopupHandler={signupPopupHandler}
           />
         )}
         {loginPopupOn && (
           <div className={styles.filter}>
-            <Login onCloseButtonHandler={onCloseButtonHandler} />
+            <Login
+              onCloseButtonHandler={onCloseButtonHandler}
+              signupPopupHandler={signupPopupHandler}
+            />
+          </div>
+        )}
+        {signupPopupOn && (
+          <div className={styles.filter}>
+            <Signup onCloseButtonHandler={onCloseButtonHandler} />
           </div>
         )}
         <Routes>
