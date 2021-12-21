@@ -9,6 +9,7 @@ import CategoryPage from "./components/categoryPage/categoryPage";
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 import Rentcar from "./components/rentcar/rentcar";
+import Mypage from "./components/mypage/mypage";
 
 const App = (props) => {
   const [loginPopupOn, setLoginPopupOn] = useState(false);
@@ -605,8 +606,14 @@ const App = (props) => {
               element={<CategoryPage categoryList={categoryList} />}
             ></Route>
           )}
-          <Route path="/rentcar" element={<Rentcar />}></Route>
+          {chabak && (
+            <Route
+              path="/rentcar"
+              element={<Rentcar chabak={chabak} />}
+            ></Route>
+          )}
           <Route path="/map" element={<Map />}></Route>
+          <Route path="/mypage/:path" element={<Mypage />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>

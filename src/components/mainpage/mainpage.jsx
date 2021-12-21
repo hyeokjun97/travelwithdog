@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import ItemSlickFour from "../slick/itemSlickFour/itemSlickFour";
 import ItemSlickOne from "../slick/itemSlickOne/itemSlickOne";
 import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
@@ -7,6 +8,7 @@ import TagButton from "../tagButton/tagButton";
 import styles from "./mainpage.module.css";
 
 const Mainpage = ({ chabak, jejuBest, hotList, tagButtonList }) => {
+  const navigate = useNavigate();
   const listRef = useRef();
 
   const setObserver = () => {
@@ -35,7 +37,12 @@ const Mainpage = ({ chabak, jejuBest, hotList, tagButtonList }) => {
                 className={styles.search_input}
                 placeholder="원하시는 키워드로 검색해보세요"
               />
-              <div className={styles.search_icon_container}>
+              <div
+                className={styles.search_icon_container}
+                onClick={() => {
+                  navigate("/mypage/edit");
+                }}
+              >
                 <i className={`${styles.search_icon} fas fa-search`}></i>
               </div>
             </div>
