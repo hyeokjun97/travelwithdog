@@ -9,7 +9,6 @@
 .slick_two_container .slick-list,
 .slick_two_container .slick-track {
   width: 100%;
-  height: 250px;
 }
 
 .slick_two_container .item {
@@ -67,5 +66,8 @@
   }
   .slick_two_container .title {
     font-size: var(--fontsize-bit-big);
+  }
+  .slick_two_container .thumbnail {
+    height: 180px;
   }
 }

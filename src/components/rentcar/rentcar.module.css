@@ -1,0 +1,189 @@
+.top_banner {
+  display: inline-block;
+  width: 100%;
+  height: 80vh;
+  margin-bottom: 70px;
+  background: url("/src/background/rentcar_banner.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.top_filter {
+  padding-top: 20vh;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title_container {
+  text-align: end;
+}
+
+.title,
+.title_two,
+.subtitle {
+  margin: 0;
+  color: white;
+}
+
+.title,
+.title_two {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.title_two {
+  margin: 6px 0;
+}
+
+.subtitle {
+  margin-top: 40px;
+  margin-bottom: 70px;
+  font-size: var(--fontsize-mini-title);
+  font-weight: 700;
+}
+
+.search_container {
+  width: 1000px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 16px;
+  padding: 0 40px;
+}
+
+.search_text {
+  margin-bottom: 2px;
+}
+
+.search_input_date {
+  cursor: pointer;
+}
+
+.search_input_date:hover {
+  border: 1px solid var(--color-sky-blue);
+}
+
+.date_picker {
+  position: absolute;
+  bottom: -30px;
+  border: 1px solid lightgray;
+  display: none;
+}
+
+.on {
+  display: block;
+}
+
+.search_input,
+.search_input_date {
+  width: 220px;
+  height: 35px;
+  border: 1px solid #999999;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: 500;
+  color: var(--color-black);
+  font-size: var(--fontsize-normal);
+  padding: 0 6px;
+}
+.search_input_date {
+  width: 400px;
+  line-height: 35px;
+  padding: 0 12px;
+  font-weight: 500;
+  color: var(--color-black);
+}
+.search_icon_container {
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.search_icon {
+  font-size: var(--fontsize-mini-title);
+  color: var(--color-light-black);
+}
+
+.tag_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.list_part {
+  width: 1100px;
+  margin: auto;
+}
+
+.list_title {
+  margin-left: 12.5px;
+  margin-bottom: 14px;
+  font-size: var(--fontsize-big);
+  font-weight: 700;
+  color: rgb(72, 72, 72);
+}
+
+@media screen and (max-width: 1050px) {
+  .top_filter {
+    padding-top: 20vh;
+  }
+  .title,
+  .title_two {
+    font-size: var(--fontsize-title);
+  }
+
+  .subtitle {
+    width: 80%;
+    font-size: var(--fontsize-big);
+    text-align: center;
+  }
+
+  .search_and_tag_container {
+    width: 90%;
+  }
+
+  .search_container {
+    width: 100%;
+    height: 45px;
+    margin: auto;
+  }
+
+  .search_input {
+    width: 90%;
+    font-size: var(--fontsize-normal);
+  }
+
+  .list_title {
+    font-size: var(--fontsize-big);
+    margin-left: 20px;
+  }
+  .list_part {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .title,
+  .title_two {
+    font-size: var(--fontsize-big);
+  }
+
+  .subtitle {
+    width: 80%;
+    font-size: var(--fontsize-normal);
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .list_part {
+    overflow: hidden;
+  }
+}

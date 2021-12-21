@@ -46,6 +46,13 @@
 
 .slick_three_container .star_container {
   padding: 4px 0 6px 4px;
+  display: flex;
+  flex-direction: row;
+}
+
+.slick_three_container .rating_text {
+  margin-left: 8px;
+  font-weight: 700;
 }
 
 .slick_three_container .price {
@@ -79,5 +86,8 @@
   }
   .slick_three_container .slick-slide {
     padding: 0 12.5px;
+  }
+  .slick_three_container .thumbnail {
+    height: 180px;
   }
 }

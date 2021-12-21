@@ -8,6 +8,7 @@ import Footer from "./components/footer/footer";
 import CategoryPage from "./components/categoryPage/categoryPage";
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
+import Rentcar from "./components/rentcar/rentcar";
 
 const App = (props) => {
   const [loginPopupOn, setLoginPopupOn] = useState(false);
@@ -604,6 +605,7 @@ const App = (props) => {
               element={<CategoryPage categoryList={categoryList} />}
             ></Route>
           )}
+          <Route path="/rentcar" element={<Rentcar />}></Route>
           <Route path="/map" element={<Map />}></Route>
         </Routes>
         <Footer />

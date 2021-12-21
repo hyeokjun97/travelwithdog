@@ -120,6 +120,7 @@ export default class ItemSlickFour extends Component {
                     halfIcon={<i className="fas fa-paw"></i>}
                     filledIcon={<i className="fas fa-paw"></i>}
                   />
+                  <p className="rating_text">4.0점</p>
                 </div>
                 <p className="price">{`${item.price.toLocaleString(
                   "ko-KR"
