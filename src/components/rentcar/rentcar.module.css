@@ -31,6 +31,7 @@
   color: white;
   font-size: 36px;
   font-weight: 700;
+  text-shadow: 2px 3px 5px lightgray;
 }
 
 .title_two {
@@ -57,10 +58,21 @@
 
 .search_input_date {
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.search_input_date:hover {
+.search_input_date:hover,
+.search_input:hover {
   border: 1px solid var(--color-sky-blue);
+}
+
+.date_icon {
+  margin-right: 10px;
+  margin-bottom: 1px;
+  color: var(--color-light-black);
+  font-size: 15px;
 }
 
 .date_picker {
@@ -68,11 +80,14 @@
   top: 110px;
   left: 0;
   border: 1px solid lightgray;
-  display: none;
+  visibility: hidden;
+  transform: scale(0);
+  transition: 100ms all ease;
 }
 
 .on {
-  display: block;
+  visibility: visible;
+  transform: scale(1);
 }
 
 .search_input,
@@ -80,6 +95,7 @@
   width: 220px;
   height: 35px;
   border: 1px solid #999999;
+  outline: none;
   border-radius: 5px;
   background-color: white;
   font-weight: 500;
@@ -190,6 +206,25 @@
     overflow: hidden;
     margin-bottom: 80px;
   }
+  .search_icon_container {
+    background-color: rgba(29, 94, 36, 0.9);
+    width: 100%;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search_icon {
+    color: white;
+  }
+
+  .date_icon {
+    margin-right: 7px;
+    color: var(--color-light-black);
+    font-size: 13px;
+  }
 }
 
 @media screen and (max-width: 765px) {
@@ -201,7 +236,8 @@
     left: 5%;
     bottom: 30px;
   }
-  .search_input_date {
+  .search_input_date,
+  .search_input {
     font-size: var(--fontsize-bit-small);
   }
   .date_picker {

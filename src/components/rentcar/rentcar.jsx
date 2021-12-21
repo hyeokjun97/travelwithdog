@@ -127,6 +127,7 @@ const Rentcar = ({ chabak }) => {
                 className={styles.search_input_date}
                 onClick={datePickerOpenHandler}
               >
+                <i className={`${styles.date_icon} fas fa-calendar`}></i>
                 {dateShow}
               </div>
               <div
@@ -141,7 +142,7 @@ const Rentcar = ({ chabak }) => {
                   onChange={(item) => setDate([item.selection])}
                   moveRangeOnFirstSelection={false}
                   ranges={date}
-                  months={2}
+                  months={window.innerWidth > 768 ? 2 : 1}
                   direction={
                     window.innerWidth > 768 ? "horizontal" : "vertical"
                   }
