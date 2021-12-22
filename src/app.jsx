@@ -12,6 +12,9 @@ import Rentcar from "./components/rentcar/rentcar";
 import Mypage from "./components/mypage/mypage";
 import MobileMypage from "./components/mobile/mobileMypage/mobileMypage";
 import MobileMypageDetail from "./components/mobile/mobileMypage/mobileMypageDetail/mobileMypageDetail";
+import MobileFooter from "./components/mobile/mobileFooter/mobileFooter";
+import MobileHeader from "./components/mobile/mobileHeader/mobileHeader";
+import MobileCategory from "./components/mobile/mobileCategory/mobileCategory";
 
 const App = (props) => {
   const [deviceSize, setDeviceSize] = useState(() => {
@@ -522,15 +525,29 @@ const App = (props) => {
     },
     {
       id: 4,
-      title: "커뮤니티",
-      route: "community",
+      title: "제주도",
+      route: "jeju",
       subtitle: "회원들의 여행기를 경험해보세요",
       cardList: [],
     },
     {
       id: 5,
-      title: "렌터카",
-      route: "rentcar",
+      title: "강릉",
+      route: "gang",
+      subtitle: "강아지와 함께 렌트카를 타고 여행해보세요",
+      cardList: [],
+    },
+    {
+      id: 6,
+      title: "입장권",
+      route: "ticket",
+      subtitle: "회원들의 여행기를 경험해보세요",
+      cardList: [],
+    },
+    {
+      id: 7,
+      title: "맛집",
+      route: "restaurant",
       subtitle: "강아지와 함께 렌트카를 타고 여행해보세요",
       cardList: [],
     },
@@ -575,12 +592,16 @@ const App = (props) => {
   return (
     <div>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
-        {categoryList && (
-          <Header
-            categoryList={categoryList}
-            loginPopupHandler={loginPopupHandler}
-            signupPopupHandler={signupPopupHandler}
-          />
+        {deviceSize ? (
+          categoryList && (
+            <Header
+              categoryList={categoryList}
+              loginPopupHandler={loginPopupHandler}
+              signupPopupHandler={signupPopupHandler}
+            />
+          )
+        ) : (
+          <MobileHeader />
         )}
         {loginPopupOn && (
           <div className={styles.filter}>
@@ -615,6 +636,14 @@ const App = (props) => {
               element={<CategoryPage categoryList={categoryList} />}
             ></Route>
           )}
+          {categoryList && (
+            <Route
+              path="/mobile/category/:path"
+              element={
+                <MobileCategory categoryList={categoryList} chabak={chabak} />
+              }
+            ></Route>
+          )}
           {chabak && (
             <Route
               path="/rentcar"
@@ -629,7 +658,7 @@ const App = (props) => {
             element={<MobileMypageDetail />}
           ></Route>
         </Routes>
-        <Footer />
+        {deviceSize ? <Footer /> : <MobileFooter />}
       </BrowserRouter>
     </div>
   );

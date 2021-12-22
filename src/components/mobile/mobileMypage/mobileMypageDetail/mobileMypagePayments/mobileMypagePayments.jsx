@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import styles from "./mobileMypagePayments.module.css";
+import MobileMypagePaymentsCancelItem from "./mobileMypagePaymentsCancelItem/mobileMypagePaymentsCancelItem";
 import MobileMypagePaymentsItem from "./mobileMypagePaymentsItem/mobileMypagePaymentsItem";
 
 const MobileMypagePayments = (props) => {
@@ -15,7 +16,13 @@ const MobileMypagePayments = (props) => {
           ? "결제취소내역"
           : ""}
       </h3>
-      <MobileMypagePaymentsItem />
+      {path === "payments" ? (
+        <MobileMypagePaymentsItem />
+      ) : path === "paymentscancel" ? (
+        <MobileMypagePaymentsCancelItem />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

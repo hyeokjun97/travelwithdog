@@ -48,6 +48,13 @@
 
 .rating {
   margin-right: 8px;
+  display: flex;
+  flex-direction: row;
+}
+
+.rating_text {
+  margin-left: 8px;
+  font-weight: 500;
 }
 
 .insta {
@@ -90,7 +97,7 @@
 @media screen and (max-width: 765px) {
   .popup {
     width: 90%;
-    transform: translateY(5vh);
+    transform: translateY(-1vh);
   }
 
   .close_icon {

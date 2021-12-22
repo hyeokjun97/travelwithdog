@@ -78,6 +78,9 @@
 }
 
 @media screen and (max-width: 765px) {
+  .slick_four_container {
+    margin-bottom: 40px;
+  }
   .slick_four_container .slick-slider,
   .slick_four_container .slick-list,
   .slick_four_container .slick-track {
@@ -90,7 +93,7 @@
   }
 
   .slick_four_container .thumbnail {
-    height: 300px;
+    height: 260px;
   }
   .slick_four_container .data_container {
     height: 120px;

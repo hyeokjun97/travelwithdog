@@ -1,31 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import ItemSlickFour from "../slick/itemSlickFour/itemSlickFour";
-import ItemSlickOne from "../slick/itemSlickOne/itemSlickOne";
-import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
-import ItemSlickTwo from "../slick/itemSlickTwo/itemSlickTwo";
-import styles from "./categoryPage.module.css";
+import MenuSlick from "../../slick/menuSlick/menuSlick";
+import styles from "./mobileCategory.module.css";
+import ItemSlickFour from "../../slick/itemSlickFour/itemSlickFour";
+import ItemSlickOne from "../../slick/itemSlickOne/itemSlickOne";
+import ItemSlickThree from "../../slick/itemSlickThree/itemSlickThree";
+import ItemSlickTwo from "../../slick/itemSlickTwo/itemSlickTwo";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CategoryPage = ({ categoryList }) => {
-  const [category, setCategory] = useState(null);
+const MobileCategory = ({ categoryList }) => {
+  const navigate = useNavigate();
   const { path } = useParams();
+  const [category, setCategory] = useState(null);
+
+  const onCategoryChangeHandler = (data) => {
+    navigate(`/mobile/category/${data.route}`);
+  };
 
   useEffect(() => {
-    categoryList.forEach((cate) => {
-      if (cate.route === path) {
-        setCategory(cate);
-        return false;
+    categoryList.forEach((cat) => {
+      if (cat.route === path) {
+        setCategory(cat);
       }
     });
   }, [path]);
 
   return (
-    <main className={styles.main}>
-      <div className={styles.top_banner}>
-        <div className={styles.top_filter}>
-          <p className={styles.title}>{category && category.title}</p>
-          <p className={styles.subtitle}>{category && category.subtitle}</p>
-        </div>
+    <div className={styles.main}>
+      <div className={styles.top}>
+        <h2 className={styles.top_title}>어떤 상품을 찾으시나요?</h2>
+        {category && (
+          <MenuSlick
+            viewItems={categoryList}
+            category={category}
+            onCategoryChangeHandler={onCategoryChangeHandler}
+          />
+        )}
       </div>
       <div className={styles.list_part}>
         {category &&
@@ -55,8 +64,7 @@ const CategoryPage = ({ categoryList }) => {
             )
           )}
       </div>
-    </main>
+    </div>
   );
 };
-
-export default CategoryPage;
+export default MobileCategory;

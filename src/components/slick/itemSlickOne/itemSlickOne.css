@@ -99,6 +99,9 @@
 }
 
 @media screen and (max-width: 765px) {
+  .slick_service_container {
+    height: 330px;
+  }
   .slick_service_container .slick-slider,
   .slick_service_container .slick-list,
   .slick_service_container .slick-track {

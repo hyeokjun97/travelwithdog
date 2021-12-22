@@ -136,6 +136,9 @@
 }
 
 @media screen and (max-width: 765px) {
+  .top_banner {
+    margin-bottom: 40px;
+  }
   .title,
   .title_two {
     font-size: var(--fontsize-big);

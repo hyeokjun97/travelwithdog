@@ -40,7 +40,6 @@ const Mainpage = ({ chabak, jejuBest, hotList, tagButtonList, deviceSize }) => {
               <div
                 className={styles.search_icon_container}
                 onClick={() => {
-                  console.log(deviceSize);
                   deviceSize
                     ? navigate("/mypage/edit")
                     : navigate("/mobile/mypage");

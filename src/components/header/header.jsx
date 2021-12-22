@@ -59,19 +59,43 @@ const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
           }`}
         >
           <ul className={styles.menu_list}>
-            {categoryList.map((category) => (
-              <li
-                key={category.id}
-                className={styles.menu_item}
-                onClick={() => {
-                  setToggleOn(false);
-                  navigate(`/category/${category.route}`);
-                  window.scrollTo({ top: 0 });
-                }}
-              >
-                {category.title}
-              </li>
-            ))}
+            {categoryList.slice(0, 3).map(
+              (
+                category //임시로 3개만
+              ) => (
+                <li
+                  key={category.id}
+                  className={styles.menu_item}
+                  onClick={() => {
+                    setToggleOn(false);
+                    navigate(`/category/${category.route}`);
+                    window.scrollTo({ top: 0 });
+                  }}
+                >
+                  {category.title}
+                </li>
+              )
+            )}
+            <li
+              className={styles.menu_item}
+              onClick={() => {
+                setToggleOn(false);
+                navigate("/rentcar");
+                window.scrollTo({ top: 0 });
+              }}
+            >
+              렌터카
+            </li>
+            <li
+              className={styles.menu_item}
+              onClick={() => {
+                setToggleOn(false);
+                navigate("/community");
+                window.scrollTo({ top: 0 });
+              }}
+            >
+              커뮤니티
+            </li>
           </ul>
         </nav>
         <div

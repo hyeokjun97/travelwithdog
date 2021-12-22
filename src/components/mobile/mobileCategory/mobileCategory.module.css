@@ -1,0 +1,43 @@
+.main {
+  margin-top: 80px;
+}
+
+.top_title {
+  font-size: var(--fontsize-big);
+  padding: 30px 0 10px 20px;
+}
+
+.list_part {
+  padding: 34px 0;
+}
+
+.list_title {
+  margin-left: 12.5px;
+  margin-bottom: 14px;
+  font-size: var(--fontsize-mini-title);
+  font-weight: 700;
+  color: rgb(72, 72, 72);
+}
+
+@media screen and (max-width: 1050px) {
+  .top_filter {
+    padding-top: 20vh;
+  }
+  .title {
+    font-size: var(--fontsize-title);
+  }
+
+  .subtitle {
+    font-size: var(--fontsize-big);
+  }
+
+  .list_title {
+    font-size: var(--fontsize-big);
+    margin-left: 24px;
+    margin-bottom: 8px;
+  }
+  .list_part {
+    width: 100%;
+    overflow: hidden;
+  }
+}

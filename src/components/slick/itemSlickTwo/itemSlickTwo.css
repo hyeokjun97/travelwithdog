@@ -54,6 +54,9 @@
 }
 
 @media screen and (max-width: 765px) {
+  .slick_two_container {
+    margin-bottom: 40px;
+  }
   .slick_two_container .slick-slider,
   .slick_two_container .slick-list,
   .slick_two_container .slick-track {

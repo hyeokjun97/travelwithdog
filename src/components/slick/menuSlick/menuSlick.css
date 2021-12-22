@@ -1,0 +1,23 @@
+.menu_slick_container {
+  border-bottom: 1px solid var(--color-light-border);
+  height: 28px;
+  background-color: white;
+}
+.menu_slick_container .item {
+  height: 28px;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.menu_slick_container .title {
+  padding: 0 4px;
+  padding-bottom: 5px;
+}
+
+.menu_slick_container .selected {
+  border-bottom: 3px solid var(--color-sky-blue);
+}
+
+.slick-slide div {
+  outline: none;
+}

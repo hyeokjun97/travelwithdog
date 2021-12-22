@@ -57,7 +57,6 @@ export default class ItemSlickFour extends Component {
   render() {
     const { viewItems } = this.props;
     const width = window.innerWidth;
-    console.log(width);
     let settings;
     if (width > 1050) {
       settings = {

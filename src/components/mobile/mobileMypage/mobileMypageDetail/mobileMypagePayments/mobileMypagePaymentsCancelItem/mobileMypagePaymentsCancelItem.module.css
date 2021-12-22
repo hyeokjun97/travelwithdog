@@ -78,3 +78,20 @@
   border: 1px solid var(--color-light-border);
   box-shadow: 2px 3px 3px lightgray;
 }
+
+.price_and_button_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.purchase_button {
+  outline: none;
+  border: none;
+  background-color: var(--color-green);
+  color: white;
+  font-weight: 700;
+  padding: 4px 6px;
+  border-radius: 4px;
+}

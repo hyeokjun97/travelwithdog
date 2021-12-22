@@ -99,7 +99,7 @@ export default class ItemSlickThree extends Component {
         prevArrow: <PrevArrow />,
       };
     }
-    console.log(viewItems);
+
     return (
       <div className="slick_three_container">
         <Slider {...settings}>

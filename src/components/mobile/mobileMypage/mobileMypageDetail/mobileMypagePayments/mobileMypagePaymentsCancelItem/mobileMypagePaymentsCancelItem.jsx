@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import styles from "./mobileMypagePaymentsItem.module.css";
+import styles from "./mobileMypagePaymentsCancelItem.module.css";
 
-const MobileMypagePaymentsItem = (props) => {
+const MobileMypagePaymentsCancelItem = (props) => {
   const [open, setOpen] = useState(false);
 
   const onOpenHandler = () => {
     setOpen(!open);
+  };
+
+  const purchaseHandler = (e) => {
+    e.stopPropagation();
   };
 
   return (
@@ -32,7 +36,15 @@ const MobileMypagePaymentsItem = (props) => {
               <p className={styles.number_text}>2인</p>
             </div>
           </div>
-          <p className={styles.price}>20,000원</p>
+          <div className={styles.price_and_button_container}>
+            <p className={styles.price}>20,000원</p>
+            <button
+              className={styles.purchase_button}
+              onClick={purchaseHandler}
+            >
+              이어서결제
+            </button>
+          </div>
         </div>
       </div>
 
@@ -49,4 +61,4 @@ const MobileMypagePaymentsItem = (props) => {
     </div>
   );
 };
-export default MobileMypagePaymentsItem;
+export default MobileMypagePaymentsCancelItem;

@@ -8,6 +8,7 @@
 .input_container {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 12px 0;
 }
 
@@ -18,7 +19,7 @@
 
 .input {
   width: 65%;
-  height: 26px;
+  height: 30px;
   outline: none;
   border: 1px solid #9b9b9b;
   border-radius: 4px;
@@ -52,4 +53,12 @@
   border: none;
   color: white;
   cursor: pointer;
+}
+
+.checkbox {
+  -ms-transform: scale(1.1); /* IE */
+  -moz-transform: scale(1.1); /* FF */
+  -webkit-transform: scale(1.1); /* Safari and Chrome */
+  -o-transform: scale(1.1); /* Opera */
+  transform: scale(1.1);
 }

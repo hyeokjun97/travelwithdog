@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CustomPaging from "../../slick/customPaging/customPaging";
 import styles from "./mapPopup.module.css";
+import ReactStars from "react-rating-stars-component";
 
 const MapPopup = ({ popupValue, onCloseButtonHandler }) => {
   const [instaUrl, setInstaUrl] = useState(null);
@@ -34,20 +35,33 @@ const MapPopup = ({ popupValue, onCloseButtonHandler }) => {
           <p className={styles.type}>{popupValue.spot_category_name}</p>
         </div>
         <div className={styles.rating_and_sns}>
-          <p className={styles.rating}>여기에평점</p>
+          <div className={styles.rating}>
+            <ReactStars
+              count={5}
+              edit={false}
+              size={14}
+              value={4}
+              activeColor="#000000"
+              isHalf={true}
+              emptyIcon={<i className="fas fa-paw"></i>}
+              halfIcon={<i className="fas fa-paw"></i>}
+              filledIcon={<i className="fas fa-paw"></i>}
+            />
+            <p className={styles.rating_text}>4.0점</p>
+          </div>
           {instaUrl && (
-            <a href={instaUrl} rel="noreferrer">
+            <a href={instaUrl} rel="noreferrer" target="_blank">
               <img
-                src="/images/insta.png"
+                src="/travelWithDog/images/insta.png"
                 alt="instagram"
                 className={styles.insta}
               />
             </a>
           )}
           {blogUrl && (
-            <a href={blogUrl} rel="noreferrer">
+            <a href={blogUrl} rel="noreferrer" target="_blank">
               <img
-                src="/images/naver_blog.png"
+                src="/travelWithDog/images/naver_blog.png"
                 alt="naver_blog"
                 className={styles.insta}
               />
