@@ -7,7 +7,7 @@ import ItemSlickTwo from "../slick/itemSlickTwo/itemSlickTwo";
 import TagButton from "../tagButton/tagButton";
 import styles from "./mainpage.module.css";
 
-const Mainpage = ({ chabak, jejuBest, hotList, tagButtonList }) => {
+const Mainpage = ({ chabak, jejuBest, hotList, tagButtonList, deviceSize }) => {
   const navigate = useNavigate();
   const listRef = useRef();
 
@@ -40,7 +40,10 @@ const Mainpage = ({ chabak, jejuBest, hotList, tagButtonList }) => {
               <div
                 className={styles.search_icon_container}
                 onClick={() => {
-                  navigate("/mypage/edit");
+                  console.log(deviceSize);
+                  deviceSize
+                    ? navigate("/mypage/edit")
+                    : navigate("/mobile/mypage");
                 }}
               >
                 <i className={`${styles.search_icon} fas fa-search`}></i>

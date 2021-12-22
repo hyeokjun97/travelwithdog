@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./app.module.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Mainpage from "./components/mainpage/mainpage";
@@ -10,8 +10,16 @@ import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 import Rentcar from "./components/rentcar/rentcar";
 import Mypage from "./components/mypage/mypage";
+import MobileMypage from "./components/mobile/mobileMypage/mobileMypage";
+import MobileMypageDetail from "./components/mobile/mobileMypage/mobileMypageDetail/mobileMypageDetail";
 
 const App = (props) => {
+  const [deviceSize, setDeviceSize] = useState(() => {
+    if (window.innerWidth > 1100) {
+      return true;
+    }
+    return false;
+  });
   const [loginPopupOn, setLoginPopupOn] = useState(false);
   const [signupPopupOn, setSignupPopupOn] = useState(false);
 
@@ -536,9 +544,9 @@ const App = (props) => {
     tagList: ["렌터카", "당일치기", "대형견", "제주도"],
   });
 
-  const loginPopupHandler = () => {
+  const loginPopupHandler = useCallback(() => {
     setLoginPopupOn(true);
-  };
+  }, []);
 
   const signupPopupHandler = () => {
     setSignupPopupOn(true);
@@ -596,6 +604,7 @@ const App = (props) => {
                 jejuBest={jejuBest}
                 hotList={hotList}
                 tagButtonList={tagButtonList}
+                deviceSize={deviceSize}
               />
             }
           ></Route>
@@ -614,6 +623,11 @@ const App = (props) => {
           )}
           <Route path="/map" element={<Map />}></Route>
           <Route path="/mypage/:path" element={<Mypage />}></Route>
+          <Route path="/mobile/mypage" element={<MobileMypage />}></Route>
+          <Route
+            path="/mobile/mypage/:path"
+            element={<MobileMypageDetail />}
+          ></Route>
         </Routes>
         <Footer />
       </BrowserRouter>

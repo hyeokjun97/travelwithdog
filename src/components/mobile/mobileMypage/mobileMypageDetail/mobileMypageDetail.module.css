@@ -1,0 +1,9 @@
+.main {
+  margin-top: 80px;
+  border-top: 1px solid var(--color-light-border);
+}
+
+.title {
+  margin: 0;
+  padding: 30px 30px 0 30px;
+}
