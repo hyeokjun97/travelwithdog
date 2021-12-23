@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
-import "./itemSlickFive.css";
+import "./carSlick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 //모바일되면 arrow 없애고 슬라이드 형식으로 전환
@@ -20,7 +20,7 @@ function NextArrow(props) {
         display: "block",
         width: 20,
         height: 20,
-        top: 117,
+        top: 220,
         right: -30,
         zIndex: 2,
       }}
@@ -42,7 +42,7 @@ function PrevArrow(props) {
         display: "block",
         width: 20,
         height: 20,
-        top: 117,
+        top: 220,
         left: -30,
         zIndex: 2,
         backgroundColor: "transparent",
@@ -52,7 +52,7 @@ function PrevArrow(props) {
   );
 }
 
-export default class ItemSlickFive extends Component {
+export default class CarSlick extends Component {
   render() {
     const { viewItems } = this.props;
     const width = window.innerWidth;
@@ -63,12 +63,14 @@ export default class ItemSlickFive extends Component {
         infinite: false,
         speed: 500,
         swipeToSlide: true,
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 1,
+        slidesToScroll: 1,
         arrows: true,
         variableWIdth: true,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
+        rows: 2,
+        slidesPerRow: 2,
       };
     } else {
       settings = {
@@ -82,17 +84,53 @@ export default class ItemSlickFive extends Component {
         variableWIdth: true,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
+        rows: 2,
+        slidesPerRow: 2,
       };
     }
 
     return (
-      <div className="slick_five_container">
+      <div className="car_slick_container">
         <Slider {...settings}>
           {viewItems.map((item) => (
             <div key={item.idx} className="item">
-              <img src={item.image} alt="thumbnail" className="thumbnail" />
-              <div className="data_container">
-                <p className="title">{item.title}</p>
+              <div className="box">
+                <div className="image_container">
+                  <img
+                    src="/travelWithDog/images/car_example.png"
+                    alt="thumbnail"
+                    className="thumbnail"
+                  />
+                </div>
+                <div className="data_container">
+                  <div className="title_container">
+                    <p className="title">5인승 중형</p>
+                    <p className="title_big">올뉴 말리부(휘)</p>
+                  </div>
+                  <div className="option_container">
+                    <div className="option">
+                      <p className="option_title">무보험</p>
+                      <div className="price_container">
+                        <p className="price_number">96,000</p>
+                        <p className="price_unit">원</p>
+                      </div>
+                    </div>
+                    <div className="option">
+                      <p className="option_title">일반자차</p>
+                      <div className="price_container">
+                        <p className="price_number">125,000</p>
+                        <p className="price_unit">원</p>
+                      </div>
+                    </div>
+                    <div className="option">
+                      <p className="option_title">완전자차</p>
+                      <div className="price_container">
+                        <p className="price_number">147,000</p>
+                        <p className="price_unit">원</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

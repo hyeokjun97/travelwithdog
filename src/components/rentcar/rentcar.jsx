@@ -5,7 +5,7 @@ import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
-import ItemSlickTwo from "../slick/itemSlickFive/itemSlickFive";
+import ItemSlickFive from "../slick/itemSlickFive/itemSlickFive";
 import ItemList from "../itemList/itemList";
 
 const Rentcar = ({ chabak }) => {
@@ -138,7 +138,9 @@ const Rentcar = ({ chabak }) => {
                 }`}
               >
                 <DateRange
-                  editableDateInputs={true}
+                  minDate={new Date()}
+                  editableDateInputs={false}
+                  showSelectionPreview={true}
                   onChange={(item) => setDate([item.selection])}
                   moveRangeOnFirstSelection={false}
                   ranges={date}
@@ -219,7 +221,7 @@ const Rentcar = ({ chabak }) => {
         <div className={styles.recommend_part}>
           <p className={styles.title}>트래블위드독의 또 다른 추천 상품</p>
           <div className={styles.recommend_container}>
-            <ItemSlickTwo viewItems={chabak} />
+            <ItemSlickFive viewItems={chabak} />
           </div>
         </div>
         <div className={styles.knowhow_part}>

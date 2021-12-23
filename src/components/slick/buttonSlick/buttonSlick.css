@@ -1,0 +1,30 @@
+.button_slick_container {
+  width: 95%;
+  height: 28px;
+  margin: auto;
+  background-color: white;
+}
+
+.button_slick_container .item {
+  width: 92%;
+  margin: auto;
+  height: 32px;
+  line-height: 30px;
+  text-align: center;
+  padding: 0 10px;
+  font-size: var(--fontsize-small);
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  transition: 150ms all ease;
+  white-space: nowrap;
+}
+
+.slick-slide div {
+  outline: none;
+}
+
+.button_slick_container .on {
+  background-color: var(--color-sky-blue);
+  color: white;
+  font-weight: 700;
+}

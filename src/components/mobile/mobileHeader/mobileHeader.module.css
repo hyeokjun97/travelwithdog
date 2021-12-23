@@ -16,6 +16,7 @@
 
 .logo {
   width: 36%;
+  max-width: 170px;
 }
 
 .search_container {

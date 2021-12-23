@@ -5,17 +5,15 @@ import styles from "./mobileHeader.module.css";
 const MobileHeader = (props) => {
   const navigate = useNavigate();
   return (
-    <header
-      className={styles.header}
-      onClick={() => {
-        navigate("/");
-        window.scrollTo({ top: 0 });
-      }}
-    >
+    <header className={styles.header}>
       <img
         src="/travelWithDog/images/logo.svg"
         alt="logo"
         className={styles.logo}
+        onClick={() => {
+          navigate("/");
+          window.scrollTo({ top: 0 });
+        }}
       />
       <div className={styles.search_container}>
         <input

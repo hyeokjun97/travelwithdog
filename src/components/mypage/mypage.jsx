@@ -15,6 +15,8 @@ const Mypage = (props) => {
         return "회원정보수정";
       } else if (path === "payments") {
         return "결제내역";
+      } else if (path === "paymentscancel") {
+        return "결제취소내역";
       } else if (path === "qna") {
         return "문의/답변";
       } else if (path === "community") {
@@ -57,6 +59,18 @@ const Mypage = (props) => {
                 }}
               >
                 결제내역
+              </li>
+              <li
+                className={`${
+                  path === "paymentscancel"
+                    ? `${styles.menu_item} ${styles.on}`
+                    : `${styles.menu_item}`
+                }`}
+                onClick={() => {
+                  navigate("/mypage/paymentscancel");
+                }}
+              >
+                결제취소내역
               </li>
               <li
                 className={`${

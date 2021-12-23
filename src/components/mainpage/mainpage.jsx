@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CarSlick from "../slick/carSlick/carSlick";
 import ItemSlickFour from "../slick/itemSlickFour/itemSlickFour";
 import ItemSlickOne from "../slick/itemSlickOne/itemSlickOne";
 import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
@@ -9,13 +10,23 @@ import styles from "./mainpage.module.css";
 
 const Mainpage = ({ chabak, jejuBest, hotList, tagButtonList, deviceSize }) => {
   const navigate = useNavigate();
-  const listRef = useRef();
+  const listRef = useRef([]);
 
   const setObserver = () => {
-    const observer = new IntersectionObserver((entries, observer) => {
-      console.log(entries);
+    let observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log("DSd");
+          entry.target.style.visibility = "visible";
+        } else {
+          console.log("NOT");
+          entry.target.style.visibility = "hidden";
+        }
+      });
     });
-    observer.observe(listRef.current);
+    listRef.current.forEach((entry) => {
+      observer.observe(entry);
+    });
   };
   useEffect(() => {
     setObserver();
@@ -57,22 +68,58 @@ const Mainpage = ({ chabak, jejuBest, hotList, tagButtonList, deviceSize }) => {
         </div>
       </div>
       <div className={styles.list_part}>
-        <div ref={listRef} className={styles.list_container}>
+        <div
+          ref={(el) => (listRef.current[0] = el)}
+          className={styles.list_container}
+        >
           <p className={styles.list_title}>HOT한 여행지 순위</p>
           <ItemSlickTwo viewItems={hotList} />
         </div>
-        <div ref={listRef} className={styles.list_container}>
+        <div
+          ref={(el) => (listRef.current[1] = el)}
+          className={styles.list_container}
+        >
           <p className={styles.list_title}>현재 인기 있는 숙소</p>
           <ItemSlickThree viewItems={chabak} />
         </div>
 
-        <div ref={listRef} className={styles.list_container}>
+        <div
+          ref={(el) => (listRef.current[2] = el)}
+          className={styles.list_container}
+        >
           <p className={styles.list_title}>현재 인기 있는 숙소</p>
           <ItemSlickFour viewItems={chabak} />
         </div>
-        <div ref={listRef} className={styles.list_container}>
+        <div
+          ref={(el) => (listRef.current[3] = el)}
+          className={styles.list_container}
+        >
           <p className={styles.list_title}>양양/속초 반려견 여행 BEST</p>
           <ItemSlickOne viewItems={jejuBest} />
+        </div>
+        <div className={styles.map_part}>
+          <img
+            src="/travelWithDog/images/map_logo.png"
+            alt="meongji_logo"
+            className={styles.map_logo}
+          />
+          <p className={styles.map_title}>반려여행을 위한 공공지도</p>
+          <p className={styles.map_subtitle}>반려견과 어디를 가야할까?</p>
+          <p>
+            <b>반려견 동반</b>이 가능한 <b>식당, 카페, 여행지, 숙소</b>가 모두
+            지도 안에!
+          </p>
+          <div className={styles.map_main}>
+            <div className={styles.map}></div>
+            <div className={styles.map_list}></div>
+          </div>
+        </div>
+        <div
+          ref={(el) => (listRef.current[3] = el)}
+          className={styles.list_container}
+        >
+          <p className={styles.list_title}>가장 인기있는 펫 렌터카</p>
+          <CarSlick viewItems={jejuBest} />
         </div>
       </div>
     </div>

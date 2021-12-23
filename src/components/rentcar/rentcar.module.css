@@ -176,7 +176,7 @@
 
 @media screen and (max-width: 1100px) {
   .title_container {
-    display: none;
+    right: 5%;
   }
 
   .search_container {
@@ -228,6 +228,23 @@
 }
 
 @media screen and (max-width: 765px) {
+  .top_banner {
+    margin-top: 80px;
+    height: calc(100vh - 140px);
+  }
+  .top_filter {
+    height: calc(100vh - 140px);
+  }
+
+  .title_container {
+    top: auto;
+    bottom: 400px;
+  }
+
+  .top_title,
+  .top_title_two {
+    font-size: var(--fontsize-big);
+  }
   .title {
     margin-left: 22px;
   }

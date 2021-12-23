@@ -39,6 +39,7 @@
 .side_bar_container {
   width: 100%;
   border: 2px solid rgba(29, 94, 36, 0.35);
+  border-bottom: 1px solid rgba(29, 94, 36, 0.35);
 }
 
 .menu_item {
@@ -51,6 +52,7 @@
 
 .on {
   color: var(--color-green);
+  font-weight: 700;
 }
 
 .main_part {
