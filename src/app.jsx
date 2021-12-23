@@ -17,6 +17,7 @@ import MobileHeader from "./components/mobile/mobileHeader/mobileHeader";
 import MobileCategory from "./components/mobile/mobileCategory/mobileCategory";
 import axios from "axios";
 import Find from "./components/find/find";
+import SearchPage from "./components/searchPage/searchPage";
 
 //페이지 리로딩 시 로딩 페이지 띄우기
 const App = (props) => {
@@ -685,6 +686,7 @@ const App = (props) => {
               element={<Rentcar chabak={chabak} />}
             ></Route>
           )}
+          <Route path="/search/:query" element={<SearchPage />}></Route>
           <Route path="/map" element={<Map />}></Route>
           <Route path="/mypage/:path" element={<Mypage />}></Route>
           <Route path="/mobile/mypage" element={<MobileMypage />}></Route>
