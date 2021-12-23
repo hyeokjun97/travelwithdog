@@ -15,7 +15,10 @@ import MobileMypageDetail from "./components/mobile/mobileMypage/mobileMypageDet
 import MobileFooter from "./components/mobile/mobileFooter/mobileFooter";
 import MobileHeader from "./components/mobile/mobileHeader/mobileHeader";
 import MobileCategory from "./components/mobile/mobileCategory/mobileCategory";
+import axios from "axios";
+import Find from "./components/find/find";
 
+//페이지 리로딩 시 로딩 페이지 띄우기
 const App = (props) => {
   const [deviceSize, setDeviceSize] = useState(() => {
     if (window.innerWidth > 1100) {
@@ -25,6 +28,9 @@ const App = (props) => {
   });
   const [loginPopupOn, setLoginPopupOn] = useState(false);
   const [signupPopupOn, setSignupPopupOn] = useState(false);
+  const [findPopupOn, setFindPopupOn] = useState(false);
+
+  const [spotList, setSpotList] = useState(null);
 
   const [chabak, setChabak] = useState([
     {
@@ -569,9 +575,23 @@ const App = (props) => {
     setSignupPopupOn(true);
   };
 
+  const findPopupHandler = () => {
+    setFindPopupOn(true);
+  };
+
   const onCloseButtonHandler = () => {
     setLoginPopupOn(false);
     setSignupPopupOn(false);
+    setFindPopupOn(false);
+  };
+
+  const loadSpotList = () => {
+    axios
+      .get("/api/spots")
+      .then((response) => {
+        setSpotList(response.data.spots);
+      })
+      .catch((err) => console.error(err));
   };
 
   const keyHandler = (e) => {
@@ -580,6 +600,7 @@ const App = (props) => {
     }
     setLoginPopupOn(false);
     setSignupPopupOn(false);
+    setFindPopupOn(false);
   };
 
   useEffect(() => {
@@ -588,6 +609,11 @@ const App = (props) => {
       window.removeEventListener("keydown", keyHandler);
     };
   }, [keyHandler]);
+
+  //컴포넌트 마운트 시에 불러오기
+  useEffect(() => {
+    loadSpotList();
+  }, []);
 
   return (
     <div>
@@ -608,6 +634,7 @@ const App = (props) => {
             <Login
               onCloseButtonHandler={onCloseButtonHandler}
               signupPopupHandler={signupPopupHandler}
+              findPopupHandler={findPopupHandler}
             />
           </div>
         )}
@@ -616,19 +643,27 @@ const App = (props) => {
             <Signup onCloseButtonHandler={onCloseButtonHandler} />
           </div>
         )}
+        {findPopupOn && (
+          <div className={styles.filter}>
+            <Find onCloseButtonHandler={onCloseButtonHandler} />
+          </div>
+        )}
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Mainpage
-                chabak={chabak}
-                jejuBest={jejuBest}
-                hotList={hotList}
-                tagButtonList={tagButtonList}
-                deviceSize={deviceSize}
-              />
-            }
-          ></Route>
+          {spotList && (
+            <Route
+              path="/"
+              element={
+                <Mainpage
+                  chabak={chabak}
+                  jejuBest={jejuBest}
+                  hotList={hotList}
+                  tagButtonList={tagButtonList}
+                  deviceSize={deviceSize}
+                  spotList={spotList}
+                />
+              }
+            ></Route>
+          )}
 
           {categoryList && (
             <Route

@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./login.module.css";
 
-const Login = ({ onCloseButtonHandler, signupPopupHandler }) => {
+const Login = ({
+  onCloseButtonHandler,
+  signupPopupHandler,
+  findPopupHandler,
+}) => {
   return (
     <div className={styles.login_popup}>
       <div onClick={onCloseButtonHandler}>
@@ -43,7 +47,15 @@ const Login = ({ onCloseButtonHandler, signupPopupHandler }) => {
       </form>
       <div className={styles.sub_button_container}>
         <div className={styles.sub_button}>아이디찾기</div>
-        <div className={styles.sub_button}>비밀번호찾기</div>
+        <div
+          className={styles.sub_button}
+          onClick={() => {
+            onCloseButtonHandler();
+            findPopupHandler();
+          }}
+        >
+          비밀번호찾기
+        </div>
         <div
           className={styles.sub_button}
           onClick={() => {

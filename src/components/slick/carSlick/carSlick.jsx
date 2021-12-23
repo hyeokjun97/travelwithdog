@@ -84,8 +84,6 @@ export default class CarSlick extends Component {
         variableWIdth: true,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
-        rows: 2,
-        slidesPerRow: 2,
       };
     }
 
