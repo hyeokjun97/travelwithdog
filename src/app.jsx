@@ -31,7 +31,7 @@ const App = (props) => {
   const [signupPopupOn, setSignupPopupOn] = useState(false);
   const [findPopupOn, setFindPopupOn] = useState(false);
 
-  const [spotList, setSpotList] = useState(null);
+  //const [spotList, setSpotList] = useState(null);
 
   const [chabak, setChabak] = useState([
     {
@@ -586,14 +586,14 @@ const App = (props) => {
     setFindPopupOn(false);
   };
 
-  const loadSpotList = () => {
-    axios
-      .get("/api/spots")
-      .then((response) => {
-        setSpotList(response.data.spots);
-      })
-      .catch((err) => console.error(err));
-  };
+  //const loadSpotList = () => {
+  //  axios
+  //    .get("/api/spots")
+  //    .then((response) => {
+  //      setSpotList(response.data.spots);
+  //    })
+  //    .catch((err) => console.error(err));
+  //};
 
   const keyHandler = (e) => {
     if (e.key !== "Escape") {
@@ -612,9 +612,9 @@ const App = (props) => {
   }, [keyHandler]);
 
   //컴포넌트 마운트 시에 불러오기
-  useEffect(() => {
-    loadSpotList();
-  }, []);
+  //useEffect(() => {
+  //  loadSpotList();
+  //}, []);
 
   return (
     <div>
@@ -650,21 +650,18 @@ const App = (props) => {
           </div>
         )}
         <Routes>
-          {spotList && (
-            <Route
-              path="/"
-              element={
-                <Mainpage
-                  chabak={chabak}
-                  jejuBest={jejuBest}
-                  hotList={hotList}
-                  tagButtonList={tagButtonList}
-                  deviceSize={deviceSize}
-                  spotList={spotList}
-                />
-              }
-            ></Route>
-          )}
+          <Route
+            path="/"
+            element={
+              <Mainpage
+                chabak={chabak}
+                jejuBest={jejuBest}
+                hotList={hotList}
+                tagButtonList={tagButtonList}
+                deviceSize={deviceSize}
+              />
+            }
+          ></Route>
 
           {categoryList && (
             <Route

@@ -111,11 +111,6 @@ const Mainpage = ({
           </p>
           <div className={styles.map_main}>
             <div className={styles.map}></div>
-            <div className={styles.map_list}>
-              {spotList.map((spot) => (
-                <MainpageMapItem key={spot.id} item={spot} />
-              ))}
-            </div>
           </div>
         </div>
         <div className={styles.list_container}>
