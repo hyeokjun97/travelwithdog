@@ -26,7 +26,7 @@ const MobileMypage = (props) => {
             >
               정보수정
             </p>
-            <p className={styles.top_text}>로그아웃</p>
+            <p className={styles.top_text_two}>로그아웃</p>
           </div>
         </div>
       </div>

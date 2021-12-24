@@ -8,7 +8,8 @@ const TagButton = ({ value }) => {
     <div
       className={styles.button}
       onClick={() => {
-        navigate("/rentcar");
+        navigate(`/search/${value}`);
+        window.scrollTo({ top: 0 });
       }}
     >
       <p className={styles.text}>{`#${value}`}</p>

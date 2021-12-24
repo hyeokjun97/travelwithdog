@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 export default class ButtonSlick extends Component {
   render() {
     const { buttonList, selected, onSelectChangeHandler } = this.props;
-
     let settings = {
       dots: false,
       infinite: false,
@@ -22,10 +21,10 @@ export default class ButtonSlick extends Component {
       <div className="button_slick_container">
         <Slider {...settings}>
           {buttonList.map((item) => (
-            <div key={item.id} className="">
+            <div key={item.id}>
               <div
                 className={`${
-                  item.route === selected.route ? "item on" : "item"
+                  item.title === selected.title ? "item on" : "item"
                 }`}
                 onClick={() => {
                   onSelectChangeHandler(item);

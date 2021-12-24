@@ -10,3 +10,9 @@
     margin: auto;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .main {
+    justify-content: space-between;
+  }
+}

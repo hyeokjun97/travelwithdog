@@ -18,6 +18,8 @@ import MobileCategory from "./components/mobile/mobileCategory/mobileCategory";
 import axios from "axios";
 import Find from "./components/find/find";
 import SearchPage from "./components/searchPage/searchPage";
+import LoadingPage from "./components/loadingPage/loadingPage";
+import MobileSearchPage from "./components/mobile/mobileSearchPage/mobileSearchPage";
 
 //페이지 리로딩 시 로딩 페이지 띄우기
 const App = (props) => {
@@ -683,7 +685,11 @@ const App = (props) => {
               element={<Rentcar chabak={chabak} />}
             ></Route>
           )}
-          <Route path="/search/:query" element={<SearchPage />}></Route>
+          {deviceSize ? (
+            <Route path="/search/:query" element={<SearchPage />}></Route>
+          ) : (
+            <Route path="/search/:query" element={<MobileSearchPage />}></Route>
+          )}
           <Route path="/map" element={<Map />}></Route>
           <Route path="/mypage/:path" element={<Mypage />}></Route>
           <Route path="/mobile/mypage" element={<MobileMypage />}></Route>
@@ -691,7 +697,9 @@ const App = (props) => {
             path="/mobile/mypage/:path"
             element={<MobileMypageDetail />}
           ></Route>
+          <Route path="/test" element={<LoadingPage />}></Route>
         </Routes>
+
         {deviceSize ? <Footer /> : <MobileFooter />}
       </BrowserRouter>
     </div>

@@ -3,6 +3,7 @@ import Item from "./item/item";
 import styles from "./itemList.module.css";
 
 const ItemList = ({ itemList }) => {
+  console.log(itemList);
   return (
     <div className={styles.main}>
       {itemList.map((item) => (

@@ -76,7 +76,6 @@ export default class ItemSlickThree extends Component {
         accessibility: false,
         dots: false,
         infinite: false,
-
         swipeToSlide: true,
         arrows: false,
         slidesToShow: 3,

@@ -20,30 +20,41 @@ const Mainpage = ({
   const navigate = useNavigate();
   const listRef = useRef([]);
   const [regionSelect, setRegionSelect] = useState("제주");
+  const [searchInput, setSearchInput] = useState("");
+
+  const onSearchInputChangeHandler = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const onSearchSubmitHandler = () => {
+    if (searchInput === "") {
+      alert("검색어를 입력해주세요");
+      return;
+    }
+    navigate(`/search/${searchInput}`);
+    window.scrollTo({ top: 0 });
+  };
 
   const onRegionChangeHandler = (e) => {
     setRegionSelect(e.target.innerText);
   };
 
-  const setObserver = () => {
-    let observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          console.log("DSd");
-          entry.target.style.visibility = "visible";
-        } else {
-          console.log("NOT");
-          entry.target.style.visibility = "hidden";
-        }
-      });
-    });
-    listRef.current.forEach((entry) => {
-      observer.observe(entry);
-    });
+  const keyHandler = (e) => {
+    if (e.key !== "Enter") {
+      return;
+    }
+    //모바일에서 헤더 검색창과 중복 이벤트 발생 막기
+    if (e.target.dataset.name === "search_input") {
+      onSearchSubmitHandler();
+    }
   };
+
   useEffect(() => {
-    setObserver();
-  }, []);
+    window.addEventListener("keydown", keyHandler);
+
+    return () => window.removeEventListener("keydown", keyHandler);
+  }, [keyHandler]);
+
   return (
     <div className={styles.mainpage}>
       <div className={styles.top_banner}>
@@ -57,17 +68,16 @@ const Mainpage = ({
           <div className={styles.search_and_tag_container}>
             <div className={styles.search_container}>
               <input
+                value={searchInput}
+                onChange={onSearchInputChangeHandler}
                 type="text"
+                data-name="search_input"
                 className={styles.search_input}
                 placeholder="원하시는 키워드로 검색해보세요"
               />
               <div
                 className={styles.search_icon_container}
-                onClick={() => {
-                  deviceSize
-                    ? navigate("/mypage/edit")
-                    : navigate("/mobile/mypage");
-                }}
+                onClick={onSearchSubmitHandler}
               >
                 <i className={`${styles.search_icon} fas fa-search`}></i>
               </div>
@@ -105,6 +115,7 @@ const Mainpage = ({
           />
           <p className={styles.map_title}>반려여행을 위한 공공지도</p>
           <p className={styles.map_subtitle}>반려견과 어디를 가야할까?</p>
+
           <p>
             <b>반려견 동반</b>이 가능한 <b>식당, 카페, 여행지, 숙소</b>가 모두
             지도 안에!

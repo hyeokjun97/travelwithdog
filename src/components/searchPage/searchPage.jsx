@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./searchPage.module.css";
 
 const SearchPage = (props) => {
+  //컴포넌트 마운트 시 마다 서버 요청해서 결과값 받아오고 분류, 정렬 선택 여부로 보여주기
   const { query } = useParams();
-  const [searchValue, setSearchValue] = useState(query ? query : "");
+  const [searchValue, setSearchValue] = useState("");
   const onSearchValueChangeHandler = (e) => {
     setSearchValue(e.target.value);
   };
+
+  useEffect(() => {
+    setSearchValue(query);
+  }, [query]);
   return (
     <div className={styles.body}>
       <div className={styles.container}>

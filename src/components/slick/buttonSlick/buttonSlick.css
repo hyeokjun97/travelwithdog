@@ -1,6 +1,5 @@
 .button_slick_container {
-  width: 95%;
-  height: 28px;
+  width: 100%;
   margin: auto;
   background-color: white;
 }
@@ -8,8 +7,8 @@
 .button_slick_container .item {
   width: 92%;
   margin: auto;
-  height: 32px;
-  line-height: 30px;
+  height: 29px;
+  line-height: 28px;
   text-align: center;
   padding: 0 10px;
   font-size: var(--fontsize-small);

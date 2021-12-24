@@ -92,6 +92,7 @@ export default class ItemSlickFour extends Component {
         centerMode: true,
         centerPadding: "40px",
         swipeToSlide: true,
+        slidesToShow: 1,
         arrows: true,
         variableWIdth: true,
         nextArrow: <NextArrow />,

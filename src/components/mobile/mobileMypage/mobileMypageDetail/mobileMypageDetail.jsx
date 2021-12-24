@@ -53,13 +53,16 @@ const MobileMypageDetail = (props) => {
 
   return (
     <div className={styles.main}>
-      {selected && (
-        <ButtonSlick
-          buttonList={buttonList}
-          selected={selected}
-          onSelectChangeHandler={onSelectChangeHandler}
-        />
-      )}
+      <div className={styles.button_container}>
+        {selected && (
+          <ButtonSlick
+            buttonList={buttonList}
+            selected={selected}
+            onSelectChangeHandler={onSelectChangeHandler}
+          />
+        )}
+      </div>
+
       {path === "edit" ? (
         <MobileMypageEdit />
       ) : path === "payments" ? (
