@@ -1,0 +1,108 @@
+.item {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 14px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.36);
+  margin-bottom: 25px 0;
+}
+
+.image {
+  width: 40%;
+  border-radius: 12px 0 0 12px;
+}
+
+.data_container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title_and_price {
+  height: 203px;
+  padding: 15px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: var(--fontsize-big);
+  font-weight: 500;
+}
+
+.button_container {
+  height: 47px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.button_view {
+  width: 73.7%;
+  outline: none;
+  border: none;
+  background-color: #d7d7d7;
+  cursor: pointer;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_text {
+  margin-right: 6px;
+}
+.icon {
+  font-size: var(--fontsize-bit-small);
+}
+
+.button {
+  width: 26.4%;
+  outline: none;
+  background-color: #5e5e5e;
+  border: none;
+  border-radius: 0 0 12px 0;
+  cursor: pointer;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  color: white;
+}
+
+.price_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 17px;
+}
+
+.price_box {
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: var(--fontsize-bit-big);
+}
+
+.price {
+  font-weight: 500;
+}
+
+.price_box_total {
+  display: flex;
+  flex-direction: row;
+  margin-top: 7px;
+}
+
+.price_total_sub {
+  font-size: var(--fontsize-bit-big);
+  font-weight: 500;
+}
+
+.price_total {
+}

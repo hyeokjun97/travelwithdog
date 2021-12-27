@@ -23,7 +23,7 @@ const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
       ref={headerRef}
       className={`${
         !toggleOn
-          ? scrollValue < 140
+          ? scrollValue < 80
             ? `${styles.header} ${styles.header_on}`
             : `${styles.header} ${styles.header_off}`
           : `${styles.header} ${styles.header_off}`

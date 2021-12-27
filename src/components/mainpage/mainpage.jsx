@@ -116,7 +116,7 @@ const Mainpage = ({
           <p className={styles.map_title}>반려여행을 위한 공공지도</p>
           <p className={styles.map_subtitle}>반려견과 어디를 가야할까?</p>
 
-          <p>
+          <p className={styles.map_subtitle}>
             <b>반려견 동반</b>이 가능한 <b>식당, 카페, 여행지, 숙소</b>가 모두
             지도 안에!
           </p>

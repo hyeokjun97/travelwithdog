@@ -20,6 +20,7 @@ import Find from "./components/find/find";
 import SearchPage from "./components/searchPage/searchPage";
 import LoadingPage from "./components/loadingPage/loadingPage";
 import MobileSearchPage from "./components/mobile/mobileSearchPage/mobileSearchPage";
+import ProductDetail from "./components/productDetail/productDetail";
 
 //페이지 리로딩 시 로딩 페이지 띄우기
 const App = (props) => {
@@ -606,10 +607,20 @@ const App = (props) => {
     setFindPopupOn(false);
   };
 
+  //const onDeviceSizeChangeHandler = () => {
+  //  if (window.innerWidth > 800) {
+  //    setDeviceSize(true);
+  //  } else {
+  //    setDeviceSize(false);
+  //  }
+  //};
+
   useEffect(() => {
+    //window.addEventListener("resize", onDeviceSizeChangeHandler);
     window.addEventListener("keydown", keyHandler);
     return () => {
       window.removeEventListener("keydown", keyHandler);
+      //window.removeEventListener("resize", onDeviceSizeChangeHandler);
     };
   }, [keyHandler]);
 
@@ -697,7 +708,7 @@ const App = (props) => {
             path="/mobile/mypage/:path"
             element={<MobileMypageDetail />}
           ></Route>
-          <Route path="/test" element={<LoadingPage />}></Route>
+          <Route path="/test" element={<ProductDetail />}></Route>
         </Routes>
 
         {deviceSize ? <Footer /> : <MobileFooter />}

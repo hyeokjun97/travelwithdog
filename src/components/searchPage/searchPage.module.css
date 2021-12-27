@@ -28,7 +28,7 @@
 
 .main {
   width: 900px;
-  height: 100vh;
+
   background-color: white;
   border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
@@ -98,4 +98,40 @@
 
 .sort_part {
   padding: 14px 20px;
+}
+
+.main {
+  padding: 30px;
+}
+
+.result {
+  font-size: var(--fontsize-bit-big);
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.division_name {
+  font-size: var(--fontsize-big);
+  font-weight: 700;
+  margin-top: 37px;
+  margin-left: 8px;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 980px;
+  }
+  .main {
+    width: 700px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    width: 780px;
+  }
+  .main {
+    width: 500px;
+  }
 }

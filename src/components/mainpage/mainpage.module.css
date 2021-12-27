@@ -179,6 +179,9 @@
   .mainpage {
     background-color: white;
   }
+  .top_banner {
+    margin-bottom: 50px;
+  }
   .top_filter {
     padding-top: 20vh;
   }
@@ -274,5 +277,25 @@
     background: url("../../background/main_bottom_mobile.png") center/cover
       no-repeat;
     margin-bottom: 100px;
+  }
+
+  .map_logo {
+    margin-left: 4px;
+    width: 120px;
+    height: 41px;
+  }
+
+  .map_title {
+    padding-left: 4px;
+    font-size: var(--fontsize-bit-big);
+  }
+
+  .map_subtitle {
+    padding-left: 4px;
+    font-size: var(--fontsize-small);
+  }
+
+  .map_main {
+    margin-top: 16px;
   }
 }

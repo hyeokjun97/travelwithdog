@@ -4,15 +4,3 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
-
-@media screen and (max-width: 1100px) {
-  .main {
-    margin: auto;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .main {
-    justify-content: space-between;
-  }
-}
