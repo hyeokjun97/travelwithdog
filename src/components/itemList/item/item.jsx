@@ -6,9 +6,9 @@ const Item = ({ item }) => {
   return (
     <div key={item.idx} className={styles.item}>
       <img src={item.image} alt="thumbnail" className={styles.thumbnail} />
-      <div className="data_container">
-        <p className="title">{item.title}</p>
-        <div className="star_container">
+      <div className={styles.data_container}>
+        <p className={styles.title}>{item.title}</p>
+        <div className={styles.star_container}>
           <ReactStars
             count={5}
             edit={false}

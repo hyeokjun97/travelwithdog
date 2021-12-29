@@ -1,7 +1,7 @@
 .body {
   width: 100%;
   background-color: rgb(250, 250, 250);
-  padding: 138px 0;
+  padding: 170px 0;
 }
 
 .container {
@@ -24,6 +24,25 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.image_container:after {
+  content: "+12개 더 보기";
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  padding: 12px 20px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 150ms all ease-in;
+}
+
+.image_container:hover:after {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .image_left_container {
@@ -33,6 +52,7 @@
 .image_left {
   width: 100%;
   height: 350px;
+  cursor: pointer;
 }
 
 .image_right_container {
@@ -40,6 +60,7 @@
   height: 354px;
   display: flex;
   flex-direction: column;
+  transform: translateY(-1px);
 }
 
 .image_right_sub_container {
@@ -51,6 +72,7 @@
   width: 50%;
   height: 177px;
   padding: 2px 0 2px 4px;
+  cursor: pointer;
 }
 
 .top_data_container {
@@ -90,7 +112,12 @@
 }
 
 .menu_bar {
-  margin-top: 20px;
+  padding-top: 20px;
+  margin-top: -9px;
+  position: sticky;
+  top: 101px;
+  background-color: white;
+  z-index: 999;
 }
 
 .menu_list {
@@ -101,7 +128,7 @@
 }
 
 .menu_list > li {
-  padding: 8px 10px;
+  padding: 4px 10px 12px 10px;
   margin-right: 20px;
   font-size: var(--fontsize-bit-big);
   font-weight: 500;
@@ -109,7 +136,8 @@
   cursor: pointer;
 }
 
-.menu_list > .selected {
+.menu_list > li:hover {
+  margin-bottom: -2px;
   border-bottom: 2px solid #101010;
 }
 
@@ -117,6 +145,7 @@
   padding: 36px 20px;
   background-color: white;
   margin-bottom: 9px;
+  scroll-margin: 130px;
 }
 
 .part_title_container {
@@ -139,6 +168,63 @@
   padding: 25px 20px;
 }
 
+.map_main {
+  padding: 25px 22px;
+}
+
+.map_top {
+  display: flex;
+  flex-direction: row;
+}
+
+.map_image {
+  width: 63%;
+  border-radius: 14px;
+}
+
+.map_attraction_list {
+  width: 37%;
+  padding-left: 3%;
+}
+
+.map_attraction_title {
+  font-size: var(--fontsize-big);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.map_attraction_item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #c7c7c7;
+  padding: 1px 0;
+  margin-bottom: 20px;
+}
+
+.map_attraction_name {
+  font-size: var(--fontsize-bit-big);
+  color: #101010;
+}
+
+.map_attraction_dist {
+  font-size: var(--fontsize-big);
+  color: #626262;
+}
+
+.map_bottom {
+  margin-top: 11px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.map_location {
+  margin-left: 3px;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 500;
+}
+
 .article_main {
   padding: 23px 45px;
 }
@@ -151,6 +237,7 @@
   padding: 36px 20px 0 36px;
   background-color: white;
   border-radius: 0 0 12px 12px;
+  scroll-margin: 130px;
 }
 
 .slick_title {
@@ -173,4 +260,21 @@
 
 .with_main {
   padding: 33px 20px;
+}
+
+.go_up_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--fontsize-title);
+  position: fixed;
+  right: calc(50% - 520px);
+  bottom: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--color-green);
+  color: white;
+  cursor: pointer;
+  z-index: 10000;
 }

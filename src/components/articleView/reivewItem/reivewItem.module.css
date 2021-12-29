@@ -1,0 +1,26 @@
+.review {
+  width: 100%;
+  padding: 13px 0;
+  border-bottom: 1px solid #dadada;
+}
+
+.sub_data_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.name {
+  font-weight: 700;
+  color: #0e0e0e;
+}
+
+.date {
+  font-size: var(--fontsize-bit-small);
+  color: #0e0e0e;
+}
+
+.comment {
+  color: #0e0e0e;
+}

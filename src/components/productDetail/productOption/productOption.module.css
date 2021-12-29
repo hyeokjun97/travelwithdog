@@ -1,17 +1,41 @@
 .item {
   width: 100%;
+
+  margin-bottom: 25px;
+}
+.main {
   height: 250px;
   display: flex;
   flex-direction: row;
   background-color: white;
   border-radius: 14px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.36);
-  margin-bottom: 25px 0;
+  position: relative;
+}
+
+.main_on {
+  border-radius: 14px 14px 0 0;
+}
+
+.main:after {
+  content: "즉시 확정";
+  position: absolute;
+  top: 15px;
+  left: -5px;
+  background-color: #3c9413;
+  padding: 6px 24px;
+  color: white;
+  font-weight: 700;
+  border-radius: 8px;
 }
 
 .image {
   width: 40%;
   border-radius: 12px 0 0 12px;
+}
+
+.image_on {
+  border-radius: 12px 0 0 0;
 }
 
 .data_container {
@@ -26,12 +50,11 @@
   padding: 15px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .title {
   font-size: var(--fontsize-big);
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .button_container {
@@ -39,6 +62,10 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+}
+
+.button_container_on {
+  border-radius: 0;
 }
 
 .button_view {
@@ -74,35 +101,54 @@
   color: white;
 }
 
+.button_on {
+  border-radius: 0;
+}
+
 .price_container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 17px;
+  flex-direction: row;
+  padding: 20px 0;
 }
 
 .price_box {
   width: 150px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   font-size: var(--fontsize-bit-big);
+  margin-right: 36px;
 }
 
 .price {
   font-weight: 500;
+  margin-left: 10px;
 }
 
-.price_box_total {
+.option_detail_container {
+  background-color: white;
+  border-radius: 0 0 14px 14px;
+  border: 1px solid black;
+  padding: 13px 30px;
+}
+
+.menu_list {
   display: flex;
   flex-direction: row;
-  margin-top: 7px;
+  border-bottom: 1px solid lightgray;
+  padding-left: 10px;
 }
 
-.price_total_sub {
+.menu_list > li {
+  padding: 8px 10px;
+  margin-right: 20px;
   font-size: var(--fontsize-bit-big);
   font-weight: 500;
+  color: #101010;
+  cursor: pointer;
 }
 
-.price_total {
+.detail_main {
+  padding: 20px 0;
+  height: 250px;
+  overflow-y: scroll;
 }

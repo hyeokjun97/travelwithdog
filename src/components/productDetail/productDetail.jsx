@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./productDetail.module.css";
 import ReactStars from "react-rating-stars-component";
 import ProductOption from "./productOption/productOption";
@@ -8,6 +8,11 @@ import ProductReview from "./productReview/productReview";
 import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
 
 const ProductDetail = (props) => {
+  const introRef = useRef();
+  const mapRef = useRef();
+  const optionRef = useRef();
+  const articleRef = useRef();
+  const reviewRef = useRef();
   const [jejuBest, setJejuBest] = useState([
     {
       idx: 0,
@@ -134,31 +139,97 @@ const ProductDetail = (props) => {
               <p className={styles.rating_review_number}>32개의 리뷰</p>
             </div>
           </div>
-          <nav className={styles.menu_bar}>
-            <ul className={styles.menu_list}>
-              <li>상품소개</li>
-              <li>옵션선택</li>
-              <li>위치정보</li>
-              <li>여행기(8)</li>
-              <li>리뷰(32)</li>
-            </ul>
-          </nav>
-          <div className={styles.part}>
-            <div className={styles.part_title_container}>
-              <p className={styles.part_title}>상품 소개</p>
-            </div>
-            <div className={styles.intro_main}></div>
-          </div>
         </div>
-        <div className={styles.part}>
+        <nav className={styles.menu_bar}>
+          <ul className={styles.menu_list}>
+            <li
+              onClick={() =>
+                introRef.current.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              상품소개
+            </li>
+            <li
+              onClick={() =>
+                optionRef.current.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              옵션선택
+            </li>
+            <li
+              onClick={() =>
+                mapRef.current.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              위치정보
+            </li>
+            <li
+              onClick={() =>
+                articleRef.current.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              여행기(8)
+            </li>
+            <li
+              onClick={() =>
+                reviewRef.current.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              리뷰(32)
+            </li>
+          </ul>
+        </nav>
+        <div ref={introRef} className={styles.part}>
+          <div className={styles.part_title_container}>
+            <p className={styles.part_title}>상품 소개</p>
+          </div>
+          <div className={styles.intro_main}></div>
+        </div>
+        <div ref={optionRef} className={styles.part}>
           <div className={styles.part_title_container}>
             <p className={styles.part_title}>옵션 선택</p>
           </div>
           <div className={styles.option_main}>
             <ProductOption />
+            <ProductOption />
           </div>
         </div>
-        <div className={styles.part}>
+        <div ref={mapRef} className={styles.part}>
+          <div className={styles.part_title_container}>
+            <p className={styles.part_title}>위치 정보</p>
+          </div>
+          <div className={styles.map_main}>
+            <div className={styles.map_top}>
+              <img
+                src="/travelWithDog/images/map_example.png"
+                alt="map"
+                className={styles.map_image}
+              />
+              <div className={styles.map_attraction_list}>
+                <p className={styles.map_attraction_title}>주변 관광지</p>
+                <div className={styles.map_attraction_item}>
+                  <p className={styles.map_attraction_name}>주문진 수산시장</p>
+                  <p className={styles.map_attraction_dist}>270m</p>
+                </div>
+                <div className={styles.map_attraction_item}>
+                  <p className={styles.map_attraction_name}>주문진 수산시장</p>
+                  <p className={styles.map_attraction_dist}>270m</p>
+                </div>
+                <div className={styles.map_attraction_item}>
+                  <p className={styles.map_attraction_name}>주문진 수산시장</p>
+                  <p className={styles.map_attraction_dist}>270m</p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.map_bottom}>
+              <i className={`${styles.map_icon} fas fa-map-marker-alt`}></i>
+              <p className={styles.map_location}>
+                부산 해운대구 해운대해변로296
+              </p>
+            </div>
+          </div>
+        </div>
+        <div ref={articleRef} className={styles.part}>
           <div className={styles.part_title_container}>
             <p className={styles.part_title}>여행기(8)</p>
           </div>
@@ -166,7 +237,8 @@ const ProductDetail = (props) => {
             <ArticleSlick viewItems={jejuBest} />
           </div>
         </div>
-        <div className={styles.review_part}>
+
+        <div ref={reviewRef} className={styles.review_part}>
           <div className={styles.part_title_container}>
             <p className={styles.part_title}>리뷰(32)</p>
           </div>
@@ -187,6 +259,12 @@ const ProductDetail = (props) => {
           <div className={styles.with_main}>
             <ItemSlickThree viewItems={jejuBest} />
           </div>
+        </div>
+        <div
+          className={styles.go_up_button}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <i className={`${styles.go_up_icon} fas fa-arrow-up`}></i>
         </div>
       </div>
     </div>

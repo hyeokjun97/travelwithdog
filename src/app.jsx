@@ -21,6 +21,9 @@ import SearchPage from "./components/searchPage/searchPage";
 import LoadingPage from "./components/loadingPage/loadingPage";
 import MobileSearchPage from "./components/mobile/mobileSearchPage/mobileSearchPage";
 import ProductDetail from "./components/productDetail/productDetail";
+import ReservationPage from "./components/reservationPage/reservationPage";
+import ArticleView from "./components/articleView/articleView";
+import ArticleWrite from "./components/articleWrite/articleWrite";
 
 //페이지 리로딩 시 로딩 페이지 띄우기
 const App = (props) => {
@@ -709,6 +712,9 @@ const App = (props) => {
             element={<MobileMypageDetail />}
           ></Route>
           <Route path="/test" element={<ProductDetail />}></Route>
+          <Route path="/res" element={<ReservationPage />}></Route>
+          <Route path="/article" element={<ArticleView />}></Route>
+          <Route path="/articlew" element={<ArticleWrite />}></Route>
         </Routes>
 
         {deviceSize ? <Footer /> : <MobileFooter />}
