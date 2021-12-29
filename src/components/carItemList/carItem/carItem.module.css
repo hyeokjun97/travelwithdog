@@ -1,0 +1,150 @@
+.item {
+  width: 48%;
+  outline: none;
+  border-radius: 4px;
+  padding: 9px 10px;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  height: 200px;
+  background-color: rgb(242, 242, 242);
+  padding: 35px 10px 35px 20px;
+  border-radius: 14px;
+}
+
+.image_container {
+  width: 33%;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.thumbnail {
+  width: 100%;
+  height: auto;
+}
+
+.thumbnail:hover {
+  box-shadow: 2px 5px 10px lightgray;
+}
+
+.data_container {
+  width: 67%;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title_container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.title {
+  font-size: var(--fontsize-bit-small);
+  color: #292929;
+}
+
+.title_big {
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  margin-left: 8px;
+  color: #1a1a1a;
+}
+
+.option {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-right: 10px;
+  border-bottom: 1px solid #b2b2b2;
+  padding: 8px 0 4px 0;
+}
+
+.option_title {
+  font-size: var(--fontsize-bit-small);
+  font-weight: 700;
+}
+
+.price_container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  font-weight: 700;
+}
+
+.price_number {
+  color: #ce435c;
+}
+
+.price_unit {
+  font-size: var(--fontsize-small);
+  margin-left: 2px;
+}
+
+@media screen and (max-width: 765px) {
+  .box {
+    height: auto;
+    padding: 20px;
+    flex-direction: column;
+  }
+
+  .image_container {
+    width: 100%;
+    height: 50%;
+    display: block;
+  }
+
+  .thumbnail {
+    max-width: 90%;
+    height: 90%;
+    width: auto;
+    margin: auto;
+  }
+
+  .data_container {
+    width: 100%;
+    padding: 20px 0 12px 0;
+  }
+
+  .title_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  .title {
+    font-size: var(--fontsize-bit-small);
+  }
+
+  .title_big {
+    font-size: var(--fontsize-normal);
+    margin: 0;
+  }
+
+  .option_container {
+    width: 100%;
+  }
+
+  .option {
+    padding: 8px 0;
+  }
+
+  .option_title {
+    font-size: var(--fontsize-bit-small);
+  }
+  .price_number {
+    font-size: var(--fontsize-normal);
+  }
+  .price_unit {
+    font-size: var(--fontsize-bit-small);
+  }
+}

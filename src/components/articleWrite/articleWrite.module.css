@@ -16,13 +16,13 @@
 }
 
 .title {
-  font-size: var(--fontsize-title);
+  font-size: var(--fontsize-mini-title);
   font-weight: 700;
   color: #0b0b0b;
 }
 
 .desc {
-  font-size: var(--fontsize-big);
+  font-size: var(--fontsize-bit-big);
   color: #686868;
   margin: 10px 0 20px 0;
 }

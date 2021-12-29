@@ -1,0 +1,47 @@
+.filter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(9, 9, 9, 0.92);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: white;
+  width: 531px;
+  height: 826px;
+  padding: 24px 40px;
+  position: relative;
+}
+
+.logo {
+  width: 138px;
+}
+
+.title {
+  font-size: var(--fontsize-mini-title);
+  font-weight: 700;
+}
+
+.content {
+  height: 630px;
+  overflow-y: scroll;
+  white-space: pre-line;
+}
+
+.close_icon {
+  position: absolute;
+  top: 40px;
+  right: 30px;
+  font-size: var(--fontsize-big);
+  transition: 100ms all ease;
+  cursor: pointer;
+}
+
+.close_icon:hover {
+  color: red;
+}

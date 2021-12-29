@@ -24,6 +24,8 @@ import ProductDetail from "./components/productDetail/productDetail";
 import ReservationPage from "./components/reservationPage/reservationPage";
 import ArticleView from "./components/articleView/articleView";
 import ArticleWrite from "./components/articleWrite/articleWrite";
+import CarSearchPage from "./components/carSearchPage/carSearchPage";
+import CarDetail from "./components/carDetail/carDetail";
 
 //페이지 리로딩 시 로딩 페이지 띄우기
 const App = (props) => {
@@ -715,6 +717,8 @@ const App = (props) => {
           <Route path="/res" element={<ReservationPage />}></Route>
           <Route path="/article" element={<ArticleView />}></Route>
           <Route path="/articlew" element={<ArticleWrite />}></Route>
+          <Route path="/carsearch" element={<CarSearchPage />}></Route>
+          <Route path="/cardetail" element={<CarDetail />}></Route>
         </Routes>
 
         {deviceSize ? <Footer /> : <MobileFooter />}

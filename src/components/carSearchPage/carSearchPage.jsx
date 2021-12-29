@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CarItemList from "../carItemList/carItemList";
 import ItemList from "../itemList/itemList";
-import styles from "./searchPage.module.css";
+import styles from "./carSearchPage.module.css";
 
-const SearchPage = (props) => {
+const CarSearchPage = (props) => {
   //컴포넌트 마운트 시 마다 서버 요청해서 결과값 받아오고 분류, 정렬 선택 여부로 보여주기
   const { query } = useParams();
   const [jejuBest, setJejuBest] = useState([
@@ -63,15 +64,6 @@ const SearchPage = (props) => {
       type: "입장권",
       price: 20000,
     },
-    {
-      idx: 7,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/100746/548935_medium_1608107406.jpg?1608107406",
-      title:
-        "[바티칸 공인가이드] 이것이 베테랑 클라쓰! 에너지 넘치는 바티칸 반일 투어!",
-      type: "투어패키지",
-      price: 20000,
-    },
   ]);
   const [searchValue, setSearchValue] = useState("");
   const onSearchValueChangeHandler = (e) => {
@@ -101,7 +93,7 @@ const SearchPage = (props) => {
             </div>
           </div>
           <div className={styles.division_part}>
-            <p className={styles.side_menu_title}>분류</p>
+            <p className={styles.side_menu_title}>차종</p>
             <div className={styles.checkbox_list}>
               <div className={styles.checkbox_container}>
                 <input type="checkbox" className={styles.checkbox} />
@@ -109,49 +101,61 @@ const SearchPage = (props) => {
               </div>
               <div className={styles.checkbox_container}>
                 <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>숙소</p>
+                <p className={styles.checkbox_text}>소형</p>
               </div>
               <div className={styles.checkbox_container}>
                 <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>패키지</p>
+                <p className={styles.checkbox_text}>준중형</p>
               </div>
               <div className={styles.checkbox_container}>
                 <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>교통편</p>
+                <p className={styles.checkbox_text}>중형</p>
               </div>
               <div className={styles.checkbox_container}>
                 <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>커뮤니티</p>
+                <p className={styles.checkbox_text}>고급</p>
+              </div>
+              <div className={styles.checkbox_container}>
+                <input type="checkbox" className={styles.checkbox} />
+                <p className={styles.checkbox_text}>SUV</p>
               </div>
             </div>
           </div>
           <div className={styles.sort_part}>
-            <p className={styles.side_menu_title}>정렬</p>
+            <p className={styles.side_menu_title}>연료</p>
             <div className={styles.checkbox_list}>
               <div className={styles.checkbox_container}>
                 <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>최신순</p>
+                <p className={styles.checkbox_text}>휘발유</p>
               </div>
               <div className={styles.checkbox_container}>
                 <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>리뷰많은순</p>
+                <p className={styles.checkbox_text}>경유</p>
               </div>
               <div className={styles.checkbox_container}>
                 <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>평점높은순</p>
+                <p className={styles.checkbox_text}>LPG</p>
+              </div>
+              <div className={styles.checkbox_container}>
+                <input type="checkbox" className={styles.checkbox} />
+                <p className={styles.checkbox_text}>하이브리드</p>
+              </div>
+              <div className={styles.checkbox_container}>
+                <input type="checkbox" className={styles.checkbox} />
+                <p className={styles.checkbox_text}>전기</p>
               </div>
             </div>
           </div>
         </aside>
         <div className={styles.main}>
           <p className={styles.result}>{`검색결과 총 ${255}건`}</p>
-          <p className={styles.division_name}>숙소 (126)</p>
+
           <div className={styles.result_list}>
-            <ItemList itemList={jejuBest} />
+            <CarItemList itemList={jejuBest} />
           </div>
         </div>
       </div>
     </div>
   );
 };
-export default SearchPage;
+export default CarSearchPage;

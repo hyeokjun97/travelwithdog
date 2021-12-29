@@ -1,4 +1,5 @@
 import React from "react";
+import SummerNote from "../summerNote/summerNote";
 import styles from "./articleWrite.module.css";
 
 const ArticleWrite = (props) => {
@@ -20,7 +21,7 @@ const ArticleWrite = (props) => {
           spellCheck="false"
           placeholder="내용을 입력하세요"
         />
-        <div className={styles.editort_container}>여기에 에디터</div>
+        <SummerNote />
         <div className={styles.button_container}>
           <button className={styles.button}>업로드</button>
         </div>

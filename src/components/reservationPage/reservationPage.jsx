@@ -1,4 +1,5 @@
 import React from "react";
+import InformPopup from "../informPopup/informPopup";
 import styles from "./reservationPage.module.css";
 
 const ReservationPage = (props) => {
@@ -100,7 +101,8 @@ const ReservationPage = (props) => {
           <div className={styles.checkbox_container_top}>
             <input type="checkbox" className={styles.checkbox} />
             <p className={styles.checkbox_text}>
-              상품 정보 및 규정에 동의합니다.
+              <span className={styles.green}>상품 정보 및 규정</span>에
+              동의합니다.
             </p>
           </div>
         </div>
@@ -116,16 +118,21 @@ const ReservationPage = (props) => {
           <div className={styles.checkbox_container}>
             <input type="checkbox" className={styles.checkbox} />
             <p className={styles.checkbox_text}>
-              개인정보처리방침에 동의합니다.
+              <span className={styles.green}>개인정보처리방침</span>에
+              동의합니다.
             </p>
           </div>
           <div className={styles.checkbox_container}>
             <input type="checkbox" className={styles.checkbox} />
-            <p className={styles.checkbox_text}>여행약관에 동의합니다.</p>
+            <p className={styles.checkbox_text}>
+              <span className={styles.green}>여행약관</span>에 동의합니다.
+            </p>
           </div>
           <div className={styles.checkbox_container}>
             <input type="checkbox" className={styles.checkbox} />
-            <p className={styles.checkbox_text}>전체약관에 동의합니다.</p>
+            <p className={styles.checkbox_text}>
+              <span className={styles.green}>전체약관</span>에 동의합니다.
+            </p>
           </div>
         </div>
         <div className={styles.bottom}>

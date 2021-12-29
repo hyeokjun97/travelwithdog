@@ -31,7 +31,7 @@ const Mypage = (props) => {
     <div className={styles.mypage}>
       <div className={styles.top_banner}></div>
       <div className={styles.main}>
-        <div className={styles.side_bar}>
+        <aside className={styles.side_bar}>
           <p className={styles.side_bar_title}>마이페이지</p>
           <div className={styles.side_bar_container}>
             <div className={styles.side_bar_divide_line}></div>
@@ -110,7 +110,7 @@ const Mypage = (props) => {
               </li>
             </ul>
           </div>
-        </div>
+        </aside>
         <div className={styles.main_part}>
           <h2 className={styles.title}>{pageName}</h2>
           <div className={styles.main_divide_line}></div>
