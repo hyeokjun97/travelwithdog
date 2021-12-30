@@ -1,28 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import styles from "./map.module.css";
 import axios from "axios";
 import MapMenuItem from "./mapMenuItem/mapMenuItem";
 import MapPopup from "./mapPopup/mapPopup";
+import { useGoogleMaps } from "react-hook-google-maps";
 
 const Map = (props) => {
   const [inputValue, setInputValue] = useState("");
   const [spotList, setSpotList] = useState(null);
   const [resultSpotList, setResultSpotList] = useState(null);
-  const [map, setMap] = useState(null);
   const [popupOn, setPopupOn] = useState(false);
   const [popupValue, setPopupValue] = useState(null);
 
-  const mapStart = () => {
-    const container = document.getElementById("map");
-    const options = {
-      center: new window.kakao.maps.LatLng(
-        33.41133915114478,
-        126.33676192021225
-      ),
-      level: 9,
-    };
-    setMap(new window.kakao.maps.Map(container, options));
-  };
+  const { ref, map, google } = useGoogleMaps(
+    // Use your own API key, you can get one from Google (https://console.cloud.google.com/google/maps-apis/overview)
+    "AIzaSyBPhISFJtqCcepYE1K3TLuiTzZd_9OJqUY",
+    // NOTE: even if you change options later
+    {
+      center: { lat: 33.41133915114478, lng: 126.33676192021225 },
+      zoom: 11,
+    }
+  );
+
+  useEffect(() => {
+    if (!map) {
+      return;
+    }
+    if (!spotList) {
+      return;
+    }
+    spotList.forEach((spot) => {
+      const marker = new google.maps.Marker({
+        position: { lat: spot.latitude, lng: spot.longitude },
+        map: map,
+        //icon: "/travelWithDog/images/icons.svg#rentcar",
+      });
+
+      google.maps.event.addListener(marker, "click", () => {
+        setPopupValue(spot);
+        setPopupOn(true);
+      });
+    });
+  }, [map, spotList]);
+
+  //const mapStart = () => {
+  //  const container = document.getElementById("map");
+  //  const options = {
+  //    center: new window.kakao.maps.LatLng(
+  //      33.41133915114478,
+  //      126.33676192021225
+  //    ),
+  //    level: 9,
+  //  };
+  //  setMap(new window.kakao.maps.Map(container, options));
+  //};
 
   const inputValueChangeHandler = (e) => {
     setInputValue(e.target.value);
@@ -53,7 +84,6 @@ const Map = (props) => {
   };
 
   useEffect(() => {
-    mapStart();
     loadSpotList();
   }, []);
 
@@ -111,7 +141,7 @@ const Map = (props) => {
             ))}
         </div>
       </div>
-      <div id="map" className={styles.map}></div>
+      <div ref={ref} className={styles.map}></div>
     </div>
   );
 };

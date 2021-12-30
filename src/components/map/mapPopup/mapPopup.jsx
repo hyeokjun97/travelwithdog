@@ -4,6 +4,7 @@ import styles from "./mapPopup.module.css";
 import ReactStars from "react-rating-stars-component";
 
 const MapPopup = ({ popupValue, onCloseButtonHandler }) => {
+  console.log(popupValue);
   const [instaUrl, setInstaUrl] = useState(null);
   const [blogUrl, setBlogUrl] = useState(null);
 
