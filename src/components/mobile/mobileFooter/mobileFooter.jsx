@@ -62,6 +62,10 @@ const MobileFooter = (props) => {
             ? `${styles.button} ${styles.on}`
             : `${styles.button}`
         }`}
+        onClick={() => {
+          navigate("/testroute");
+          window.scrollTo({ top: 0 });
+        }}
       >
         <i className={`${styles.icon} far fa-comments`}></i>
         <p className={styles.text}>커뮤니티</p>

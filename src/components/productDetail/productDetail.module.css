@@ -114,10 +114,11 @@
 .menu_bar {
   padding-top: 20px;
   margin-top: -9px;
+  position: -webkit-sticky;
   position: sticky;
   top: 101px;
   background-color: white;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .menu_list {
@@ -149,7 +150,7 @@
 }
 
 .part_title_container {
-  border-bottom: 2px solid #c7c7c7;
+  border-bottom: 1px solid #c7c7c7;
   padding-bottom: 6px;
 }
 
@@ -254,7 +255,7 @@
 
 .part_title_container_bottom {
   margin-top: 40px;
-  border-bottom: 2px solid #c7c7c7;
+  border-bottom: 1px solid #c7c7c7;
   padding-bottom: 6px;
 }
 
@@ -378,5 +379,6 @@
   .part,
   .review_part {
     scroll-margin: 110px;
+    overflow-x: hidden;
   }
 }

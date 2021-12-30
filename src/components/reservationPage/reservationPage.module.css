@@ -286,7 +286,8 @@
     width: 95%;
   }
 
-  .product_name {
+  .top_title {
+    margin-bottom: 20px;
   }
 
   .image {

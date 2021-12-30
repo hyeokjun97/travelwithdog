@@ -27,6 +27,7 @@ import ArticleWrite from "./components/articleWrite/articleWrite";
 import CarSearchPage from "./components/carSearchPage/carSearchPage";
 import CarDetail from "./components/carDetail/carDetail";
 import MobileCarSearch from "./components/mobile/mobileCarSearch/mobileCarSearch";
+import TestPage from "./components/testPage/testPage";
 
 //페이지 리로딩 시 로딩 페이지 띄우기
 const App = (props) => {
@@ -724,6 +725,7 @@ const App = (props) => {
             <Route path="/carsearch" element={<MobileCarSearch />}></Route>
           )}
           <Route path="/cardetail" element={<CarDetail />}></Route>
+          <Route path="/testroute" element={<TestPage />}></Route>
         </Routes>
 
         {deviceSize ? <Footer /> : <MobileFooter />}

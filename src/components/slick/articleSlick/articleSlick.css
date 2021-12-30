@@ -84,7 +84,7 @@
   .article_slick_container .slick-list,
   .article_slick_container .slick-track {
     transform: translateX(-16px);
-    width: calc(100vw + 16px);
+    width: 100vw;
     overflow: hidden;
   }
   .article_slick_container .slick-slide {

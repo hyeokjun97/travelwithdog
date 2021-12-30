@@ -35,3 +35,7 @@ textarea {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
+
+select {
+  background-color: white;
+}
