@@ -7,7 +7,9 @@ const ArticleView = (props) => {
     <div className={styles.body}>
       <div className={styles.top_banner}>
         <div className={styles.top_data_container}>
-          <p className={styles.title}>제주도 3박4일 여행기</p>
+          <p className={styles.title}>
+            제주도 3박4일 여행기 제주도 3박4일 여행기 제주도 3박4일 여행기
+          </p>
           <p className={styles.name}>이종혁 회원님</p>
         </div>
       </div>

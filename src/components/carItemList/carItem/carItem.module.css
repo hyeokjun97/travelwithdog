@@ -27,10 +27,6 @@
   height: auto;
 }
 
-.thumbnail:hover {
-  box-shadow: 2px 5px 10px lightgray;
-}
-
 .data_container {
   width: 67%;
   padding-left: 30px;
@@ -88,7 +84,10 @@
   margin-left: 2px;
 }
 
-@media screen and (max-width: 765px) {
+@media screen and (max-width: 1000px) {
+  .item {
+    width: 100%;
+  }
   .box {
     height: auto;
     padding: 20px;
@@ -98,14 +97,15 @@
   .image_container {
     width: 100%;
     height: 50%;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .thumbnail {
     max-width: 90%;
     height: 90%;
     width: auto;
-    margin: auto;
   }
 
   .data_container {

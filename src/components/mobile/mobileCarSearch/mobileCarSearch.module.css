@@ -1,0 +1,87 @@
+.page {
+  margin-top: 100px;
+  padding: 0 12px;
+}
+
+.text_container {
+  padding: 0 6px;
+}
+
+.title {
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  margin-bottom: 6px;
+  margin-left: 1px;
+}
+
+.number {
+  font-size: var(--fontsize-bit-small);
+  color: var(--color-desc);
+}
+
+.button_container {
+  margin: 16px 0;
+}
+
+.divide_line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-light-border);
+}
+
+.sort_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.sort_list {
+  display: flex;
+  flex-direction: row;
+}
+
+.sort_button,
+.sort_button_mid {
+  font-size: var(--fontsize-small);
+  color: var(--color-desc);
+  margin: 0 6px;
+  position: relative;
+  cursor: pointer;
+}
+
+.sort_button_mid:after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: -8px;
+  width: 1px;
+  height: 14px;
+  background-color: var(--color-light-desc);
+}
+
+.sort_button_mid:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: -6px;
+  width: 1px;
+  height: 14px;
+  background-color: var(--color-light-desc);
+}
+
+.sort_on {
+  color: var(--color-sky-blue);
+}
+
+.select_title {
+  padding: 0 8px;
+  margin-bottom: 4px;
+  font-size: var(--fontsize-bit-small);
+  font-weight: 500;
+}
+
+.button_slick_container_bottom {
+  margin-top: 16px;
+}

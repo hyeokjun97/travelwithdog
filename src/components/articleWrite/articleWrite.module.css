@@ -61,3 +61,18 @@
   font-weight: 700;
   cursor: pointer;
 }
+
+@media screen and (max-width: 1000px) {
+  .body {
+    padding: 80px 0 60px 0;
+  }
+  .main {
+    width: 100%;
+    border-radius: 0;
+    padding: 40px 10px;
+  }
+
+  .desc {
+    font-size: var(--fontsize-normal);
+  }
+}

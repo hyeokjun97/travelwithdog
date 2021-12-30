@@ -126,6 +126,10 @@ const CarSearchPage = (props) => {
             <div className={styles.checkbox_list}>
               <div className={styles.checkbox_container}>
                 <input type="checkbox" className={styles.checkbox} />
+                <p className={styles.checkbox_text}>전체</p>
+              </div>
+              <div className={styles.checkbox_container}>
+                <input type="checkbox" className={styles.checkbox} />
                 <p className={styles.checkbox_text}>휘발유</p>
               </div>
               <div className={styles.checkbox_container}>
