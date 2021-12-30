@@ -47,7 +47,7 @@
 
 .product_name {
   font-size: var(--fontsize-big);
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .product_detail_data_container {
@@ -250,7 +250,7 @@
 }
 
 .button {
-  width: 82%;
+  width: 60%;
   height: 56px;
   border-radius: 0 0 0 30px;
   outline: none;
@@ -259,10 +259,11 @@
   font-size: var(--fontsize-big);
   font-weight: 500;
   color: #777777;
+  cursor: pointer;
 }
 
 .button_purchase {
-  width: 18%;
+  width: 40%;
   height: 56px;
   border-radius: 0 0 30px 0;
   outline: none;
@@ -271,10 +272,129 @@
   font-weight: 700;
   font-size: var(--fontsize-big);
   color: #ffffff;
+  cursor: pointer;
 }
 
 .green {
   font-weight: 700;
   color: var(--color-green);
   cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+  .main {
+    width: 95%;
+  }
+
+  .product_name {
+  }
+
+  .image {
+    width: 50%;
+  }
+
+  .product_detail_data_container {
+    align-items: flex-start;
+  }
+
+  .product_detail_text_left,
+  .product_detail_text {
+    font-size: var(--fontsize-normal);
+  }
+
+  .auth_container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .auth_form {
+    margin-bottom: 10px;
+  }
+
+  .auth_input_container,
+  .auth_form {
+    width: 100%;
+  }
+
+  .auth_input {
+    width: 40%;
+  }
+
+  .auth_button {
+    width: 17%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .body {
+    padding: 80px 0 60px 0;
+  }
+  .main {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .top {
+    padding: 20px;
+  }
+
+  .product_data_container {
+    flex-direction: column;
+  }
+  .product_data {
+    padding: 10px 0;
+    margin: 0;
+  }
+
+  .product_name {
+    margin-bottom: 20px;
+  }
+
+  .image {
+    width: 100%;
+  }
+
+  .top,
+  .bottom,
+  .button_container,
+  .button_purchase,
+  .button {
+    border-radius: 0;
+  }
+
+  .part,
+  .part_checkbox {
+    padding: 20px;
+  }
+
+  .product_detail_data {
+    width: 100%;
+  }
+
+  .auth_input {
+    width: 68%;
+  }
+
+  .auth_button {
+    width: 30%;
+  }
+
+  .tourist_data_input_container {
+    flex-direction: column;
+  }
+
+  .tourist_data_text {
+    margin-bottom: 6px;
+  }
+
+  .tourist_data_input_form,
+  .tourist_data_select_form,
+  .tourist_select {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .checkbox_text {
+    font-size: var(--fontsize-bit-small);
+  }
 }

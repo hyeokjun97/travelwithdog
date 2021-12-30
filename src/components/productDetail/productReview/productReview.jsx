@@ -19,12 +19,11 @@ const ProductReview = (props) => {
         />
         <p className={styles.rating_text}>4.0점</p>
         <p className={styles.name}>김**</p>
-        <p className={styles.content}>
-          침실도 너무 마음에 들고 마당도 너무 마음에 들었습니다. 너무 만족해요
-          !침실도 너무 마음에 들고 마당도 너무 마음에 들었습니다. 너무 만족해요
-          !
-        </p>
       </div>
+      <p className={styles.content}>
+        침실도 너무 마음에 들고 마당도 너무 마음에 들었습니다. 너무 만족해요
+        !침실도 너무 마음에 들고 마당도 너무 마음에 들었습니다. 너무 만족해요 !
+      </p>
     </div>
   );
 };

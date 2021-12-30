@@ -48,7 +48,11 @@ const ProductOption = (props) => {
             }`}
           >
             <button
-              className={styles.button_view}
+              className={`${
+                openValue
+                  ? `${styles.button_view} ${styles.button_on}`
+                  : `${styles.button_view}`
+              }`}
               onClick={() => changeOpenValueHandler("detail")}
             >
               <p className={styles.button_text}>상품 정보 및 규정 보기</p>
@@ -79,15 +83,15 @@ const ProductOption = (props) => {
           </nav>
           <div className={styles.detail_main}>
             1. 프리미엄 미팅 서비스 <br></br>2. 렌트카 1박 2일(최대 24시간)
-            이용- 뉴모닝 또는 스파크 경차 기준 (업그레이드 가능)- 자차 보험
+            이용- 뉴모닝 또는 스파크 경차 기준 (업그레이드 가능)- 자차 보험
             (일반) <br></br>3. 트래블키트 (랜트카 수령시) <br></br>4. 부산 영무
             파라드 호텔 1박 (조식불포함)<br></br>
             1. 프리미엄 미팅 서비스 <br></br>2. 렌트카 1박 2일(최대 24시간)
-            이용- 뉴모닝 또는 스파크 경차 기준 (업그레이드 가능)- 자차 보험
+            이용- 뉴모닝 또는 스파크 경차 기준 (업그레이드 가능)- 자차 보험
             (일반) <br></br>3. 트래블키트 (랜트카 수령시) <br></br>4. 부산 영무
             파라드 호텔 1박 (조식불포함)<br></br>
             1. 프리미엄 미팅 서비스 <br></br>2. 렌트카 1박 2일(최대 24시간)
-            이용- 뉴모닝 또는 스파크 경차 기준 (업그레이드 가능)- 자차 보험
+            이용- 뉴모닝 또는 스파크 경차 기준 (업그레이드 가능)- 자차 보험
             (일반) <br></br>3. 트래블키트 (랜트카 수령시) <br></br>4. 부산 영무
             파라드 호텔 1박 (조식불포함)<br></br>
           </div>

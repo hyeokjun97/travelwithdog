@@ -79,16 +79,15 @@
   .review_slick_container .slick-list,
   .review_slick_container .slick-track {
     transform: translateX(-16px);
-    width: calc(100vw + 16px);
+    width: calc(100vw);
     overflow: hidden;
   }
-  .review_slick_container .slick-slide {
-    padding: 0 12.5px;
+
+  .review_slick_container .desc {
+    font-size: var(--fontsize-bit-small);
   }
-  .review_slick_container .title {
-    font-size: var(--fontsize-bit-big);
-  }
-  .review_slick_container .thumbnail {
-    height: 180px;
+
+  .review_slick_container .name {
+    font-size: var(--fontsize-bit-small);
   }
 }
