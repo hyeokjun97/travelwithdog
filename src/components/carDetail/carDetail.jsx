@@ -69,7 +69,7 @@ const CarDetail = (props) => {
                 <p className={styles.range_text}>반납 일시</p>
                 <p className={styles.range}>2021년 12월 17일 (금) 10:30</p>
               </div>
-              <div className={styles.range_item}>
+              <div className={styles.range_item_right}>
                 <p className={styles.range_text}>대여 시간</p>
                 <p className={styles.range}>46시간</p>
               </div>
