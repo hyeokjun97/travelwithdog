@@ -85,3 +85,121 @@
 .button_slick_container_bottom {
   margin-top: 16px;
 }
+
+.main {
+  padding-bottom: 100px;
+}
+
+.range_button {
+  width: 100%;
+  height: 37px;
+  line-height: 32px;
+  outline: none;
+  border: none;
+  background-color: var(--color-sky-blue);
+  color: white;
+  font-size: var(--fontsize-normal);
+  font-weight: 700;
+  border-radius: 4px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.range_text {
+  margin-bottom: 2px;
+}
+
+.range_input_date {
+  cursor: pointer;
+}
+
+.range_input_date:hover,
+.range_input:hover {
+  border: 1px solid var(--color-sky-blue);
+}
+
+.range_input_box,
+.range_input_box_date {
+  margin: 16px 0;
+  width: 100%;
+  position: relative;
+}
+
+.date_icon {
+  margin-right: 10px;
+  margin-bottom: 1px;
+  color: var(--color-light-black);
+  font-size: 15px;
+}
+
+.date_picker {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  border: 1px solid lightgray;
+  visibility: hidden;
+  transform: scale(0);
+  transition: 100ms all ease;
+  z-index: 99;
+}
+
+.on {
+  visibility: visible;
+  transform: scale(1);
+}
+
+.range_input,
+.range_input_date {
+  width: 100%;
+  height: 35px;
+  border: 1px solid #999999;
+  outline: none;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: 500;
+  color: var(--color-black);
+  font-size: var(--fontsize-normal);
+  padding: 0 6px;
+}
+.range_input_date {
+  line-height: 35px;
+  padding: 0 12px;
+  font-weight: 500;
+  color: var(--color-black);
+}
+.range_icon_container {
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.range_icon {
+  font-size: var(--fontsize-mini-title);
+  color: var(--color-light-black);
+}
+
+.range_container {
+  padding: 6px 0 20px 0;
+  margin: 20px 0;
+  width: 100%;
+  flex-direction: column;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+.range_input_date,
+.range_input {
+  font-size: var(--fontsize-bit-small);
+}
+
+.range_icon_container {
+  background-color: rgba(29, 94, 36, 0.9);
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.range_icon {
+  color: white;
+}

@@ -94,6 +94,7 @@
 
 .checkbox_text {
   font-size: var(--fontsize-bit-big);
+  cursor: pointer;
 }
 
 .sort_part {

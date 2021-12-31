@@ -6,7 +6,7 @@ import "bootstrap/js/modal";
 import "bootstrap/js/dropdown";
 import "bootstrap/js/tooltip";
 import "./summerNote.css";
-//import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 
 const SummerNote = ({ where, onContentChangeHandler, initial }) => {

@@ -28,10 +28,6 @@ const MobileSearchPage = (props) => {
     },
     {
       id: 5,
-      title: "렌터카",
-    },
-    {
-      id: 5,
       title: "커뮤니티",
     },
   ]);

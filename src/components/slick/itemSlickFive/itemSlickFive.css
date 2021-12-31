@@ -24,6 +24,7 @@
   outline: none;
   border-radius: 10px;
   margin: auto;
+  padding: 0 !important;
   transition: 150ms all ease;
 }
 

@@ -36,6 +36,9 @@
 .car_slick_container .thumbnail {
   width: 100%;
   height: auto;
+  padding: 0 !important;
+  background-color: transparent !important;
+  border: none !important;
 }
 
 .car_slick_container .thumbnail:hover {

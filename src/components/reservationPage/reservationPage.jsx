@@ -1,10 +1,101 @@
-import React from "react";
-import InformPopup from "../informPopup/informPopup";
+import React, { useState } from "react";
+import Popup from "../popup/popup";
 import styles from "./reservationPage.module.css";
 
 const ReservationPage = (props) => {
+  const [agreeValue, setAgreeValue] = useState({
+    one: false,
+    two: false,
+    three: false,
+    four: false,
+  });
+
+  const { one, two, three, four } = agreeValue;
+
+  const onAgreeChangeHandler = (e) => {
+    console.log(e.target.name);
+    const target = e.target.name;
+    if (target === "four" && e.target.checked) {
+      setAgreeValue({
+        ...agreeValue,
+        two: true,
+        three: true,
+        four: true,
+      });
+    } else if (target === "four" && !e.target.checked) {
+      setAgreeValue({
+        ...agreeValue,
+        two: false,
+        three: false,
+        four: false,
+      });
+    } else if (
+      (target === "two" && !e.target.checked) ||
+      (target === "three" && !e.target.checked)
+    ) {
+      setAgreeValue({
+        ...agreeValue,
+        [target]: e.target.checked,
+        four: false,
+      });
+    } else {
+      setAgreeValue({
+        ...agreeValue,
+        [target]: e.target.checked,
+      });
+    }
+  };
+
+  //팝업 설정 부분 모두 임시
+  const [popupValue, setPopupValue] = useState(false);
+  const onPopupValueChangeHandler = () => {
+    setPopupValue({
+      title: "상품 정보 및 규정",
+      content: `어렵다고만 생각했던 애완견 동반 여행! 
+    이제 누구보다 쉽고, 편하게 여행할 수 있습니다.  
+    
+    더 이상 팻호텔에 맡겨놓거나, 지인에게 사랑하는 댕댕이를 맡기지 마세요. 
+    
+    동물병원 원장님들과 애견인들이 모여 만든 프리미엄 애견여행 서비스 
+    애견여행에 필요한 핵심이.. 그리고 세심한 서비스가 준비되어있습니다. 
+    
+    - 더 이상 남의 눈치보지 말고
+    - 우리들만의 편안한 휴가를 
+    - 애견전용 랜트카
+    - 애견을 위한 다양한 트래블키트
+    
+    이제 댕댕이와 함께 여행하세요. 
+    
+    이제부터 우리는 ... 댕댕이와 함께 여행합니다. 
+    
+    이제 누구보다 쉽고, 편하게 여행할 수 있습니다.  
+    
+    더 이상 팻호텔에 맡겨놓거나, 지인에게 사랑하는 댕댕이를 맡기지 마세요. 
+    
+    동물병원 원장님들과 애견인들이 모여 만든 프리미엄 애견여행 서비스 
+    애견여행에 필요한 핵심이.. 그리고 세심한 서비스가 준비되어있습니다. 
+    
+    - 더 이상 남의 눈치보지 말고
+    - 우리들만의 편안한 휴가를 
+    - 애견전용 랜트카
+    - 애견을 위한 다양한 트래블키트
+    
+    이제 댕댕이와 함께 여행하세요. 
+    
+    이제부터 우리는 ... 댕댕이와 함께 여행합니다. 
+    `,
+    });
+  };
+
+  const onPopupCloseHandler = () => {
+    setPopupValue(false);
+  };
+
   return (
     <div className={styles.body}>
+      {popupValue && (
+        <Popup data={popupValue} onPopupCloseHandler={onPopupCloseHandler} />
+      )}
       <main className={styles.main}>
         <div className={styles.top}>
           <h2 className={styles.top_title}>상품 예약</h2>
@@ -99,7 +190,13 @@ const ReservationPage = (props) => {
             </div>
           </div>
           <div className={styles.checkbox_container_top}>
-            <input type="checkbox" className={styles.checkbox} />
+            <input
+              type="checkbox"
+              name="one"
+              checked={one}
+              onChange={onAgreeChangeHandler}
+              className={styles.checkbox}
+            />
             <p className={styles.checkbox_text}>
               <span className={styles.green}>상품 정보 및 규정</span>에
               동의합니다.
@@ -116,23 +213,44 @@ const ReservationPage = (props) => {
         </div>
         <div className={styles.part_checkbox}>
           <div className={styles.checkbox_container}>
-            <input type="checkbox" className={styles.checkbox} />
+            <input
+              type="checkbox"
+              name="two"
+              checked={two}
+              onChange={onAgreeChangeHandler}
+              className={styles.checkbox}
+            />
             <p className={styles.checkbox_text}>
-              <span className={styles.green}>개인정보처리방침</span>에
-              동의합니다.
+              <span
+                className={styles.green}
+                onClick={onPopupValueChangeHandler}
+              >
+                개인정보처리방침
+              </span>
+              에 동의합니다.
             </p>
           </div>
           <div className={styles.checkbox_container}>
-            <input type="checkbox" className={styles.checkbox} />
+            <input
+              type="checkbox"
+              name="three"
+              checked={three}
+              onChange={onAgreeChangeHandler}
+              className={styles.checkbox}
+            />
             <p className={styles.checkbox_text}>
               <span className={styles.green}>여행약관</span>에 동의합니다.
             </p>
           </div>
           <div className={styles.checkbox_container}>
-            <input type="checkbox" className={styles.checkbox} />
-            <p className={styles.checkbox_text}>
-              <span className={styles.green}>전체약관</span>에 동의합니다.
-            </p>
+            <input
+              type="checkbox"
+              name="four"
+              checked={four}
+              onChange={onAgreeChangeHandler}
+              className={styles.checkbox}
+            />
+            <p className={styles.checkbox_text}>전체약관에 동의합니다.</p>
           </div>
         </div>
         <div className={styles.bottom}>

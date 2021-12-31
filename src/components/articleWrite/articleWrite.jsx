@@ -19,7 +19,7 @@ const ArticleWrite = (props) => {
           type="text"
           className={styles.title_input}
           spellCheck="false"
-          placeholder="내용을 입력하세요"
+          placeholder="제목"
         />
         <SummerNote />
         <div className={styles.button_container}>

@@ -43,18 +43,6 @@ const Map = (props) => {
     });
   }, [map, spotList]);
 
-  //const mapStart = () => {
-  //  const container = document.getElementById("map");
-  //  const options = {
-  //    center: new window.kakao.maps.LatLng(
-  //      33.41133915114478,
-  //      126.33676192021225
-  //    ),
-  //    level: 9,
-  //  };
-  //  setMap(new window.kakao.maps.Map(container, options));
-  //};
-
   const inputValueChangeHandler = (e) => {
     setInputValue(e.target.value);
   };

@@ -1,3 +1,8 @@
+.body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden !important;
+}
 .side_bar {
   width: 32%;
   height: 100vh;
@@ -50,6 +55,10 @@
 .map {
   width: 100%;
   height: 100vh;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  overflow: hidden !important;
 }
 
 .filter {

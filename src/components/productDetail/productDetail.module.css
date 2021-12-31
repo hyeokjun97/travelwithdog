@@ -118,7 +118,7 @@
   position: sticky;
   top: 101px;
   background-color: white;
-  z-index: 9999;
+  z-index: 999;
 }
 
 .menu_list {

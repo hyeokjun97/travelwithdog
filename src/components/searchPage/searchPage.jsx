@@ -78,9 +78,29 @@ const SearchPage = (props) => {
     setSearchValue(e.target.value);
   };
 
+  const [classSelect, setClassSelect] = useState("전체");
+  const [sortSelect, setSortSelect] = useState("최신순");
+
+  const onClassSelectChangeHandler = (e) => {
+    if (e.target.tagName === "P") {
+      setClassSelect(e.target.innerText);
+    } else if (e.target.tagName === "INPUT") {
+      setClassSelect(e.target.name);
+    }
+  };
+
+  const onSortSelectChangeHandler = (e) => {
+    if (e.target.tagName === "P") {
+      setSortSelect(e.target.innerText);
+    } else if (e.target.tagName === "INPUT") {
+      setSortSelect(e.target.name);
+    }
+  };
+
   useEffect(() => {
     setSearchValue(query);
   }, [query]);
+
   return (
     <div className={styles.body}>
       <div className={styles.container}>
@@ -104,24 +124,79 @@ const SearchPage = (props) => {
             <p className={styles.side_menu_title}>분류</p>
             <div className={styles.checkbox_list}>
               <div className={styles.checkbox_container}>
-                <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>전체</p>
+                <input
+                  type="checkbox"
+                  name="전체"
+                  checked={classSelect === "전체" ? true : false}
+                  onChange={onClassSelectChangeHandler}
+                  className={styles.checkbox}
+                />
+                <p
+                  className={styles.checkbox_text}
+                  onClick={onClassSelectChangeHandler}
+                >
+                  전체
+                </p>
               </div>
               <div className={styles.checkbox_container}>
-                <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>숙소</p>
+                <input
+                  type="checkbox"
+                  name="숙소"
+                  checked={classSelect === "숙소" ? true : false}
+                  onChange={onClassSelectChangeHandler}
+                  className={styles.checkbox}
+                />
+                <p
+                  className={styles.checkbox_text}
+                  onClick={onClassSelectChangeHandler}
+                >
+                  숙소
+                </p>
               </div>
               <div className={styles.checkbox_container}>
-                <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>패키지</p>
+                <input
+                  type="checkbox"
+                  name="패키지"
+                  checked={classSelect === "패키지" ? true : false}
+                  onChange={onClassSelectChangeHandler}
+                  className={styles.checkbox}
+                />
+                <p
+                  className={styles.checkbox_text}
+                  onClick={onClassSelectChangeHandler}
+                >
+                  패키지
+                </p>
               </div>
               <div className={styles.checkbox_container}>
-                <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>교통편</p>
+                <input
+                  type="checkbox"
+                  name="교통편"
+                  checked={classSelect === "교통편" ? true : false}
+                  onChange={onClassSelectChangeHandler}
+                  className={styles.checkbox}
+                />
+                <p
+                  className={styles.checkbox_text}
+                  onClick={onClassSelectChangeHandler}
+                >
+                  교통편
+                </p>
               </div>
               <div className={styles.checkbox_container}>
-                <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>커뮤니티</p>
+                <input
+                  type="checkbox"
+                  name="커뮤니티"
+                  checked={classSelect === "커뮤니티" ? true : false}
+                  onChange={onClassSelectChangeHandler}
+                  className={styles.checkbox}
+                />
+                <p
+                  className={styles.checkbox_text}
+                  onClick={onClassSelectChangeHandler}
+                >
+                  커뮤니티
+                </p>
               </div>
             </div>
           </div>
@@ -129,16 +204,49 @@ const SearchPage = (props) => {
             <p className={styles.side_menu_title}>정렬</p>
             <div className={styles.checkbox_list}>
               <div className={styles.checkbox_container}>
-                <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>최신순</p>
+                <input
+                  type="checkbox"
+                  name="최신순"
+                  checked={sortSelect === "최신순" ? true : false}
+                  onChange={onSortSelectChangeHandler}
+                  className={styles.checkbox}
+                />
+                <p
+                  className={styles.checkbox_text}
+                  onClick={onSortSelectChangeHandler}
+                >
+                  최신순
+                </p>
               </div>
               <div className={styles.checkbox_container}>
-                <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>리뷰많은순</p>
+                <input
+                  type="checkbox"
+                  name="리뷰많은순"
+                  checked={sortSelect === "리뷰많은순" ? true : false}
+                  onChange={onSortSelectChangeHandler}
+                  className={styles.checkbox}
+                />
+                <p
+                  className={styles.checkbox_text}
+                  onClick={onSortSelectChangeHandler}
+                >
+                  리뷰많은순
+                </p>
               </div>
               <div className={styles.checkbox_container}>
-                <input type="checkbox" className={styles.checkbox} />
-                <p className={styles.checkbox_text}>평점높은순</p>
+                <input
+                  type="checkbox"
+                  name="평점높은순"
+                  checked={sortSelect === "평점높은순" ? true : false}
+                  onChange={onSortSelectChangeHandler}
+                  className={styles.checkbox}
+                />
+                <p
+                  className={styles.checkbox_text}
+                  onClick={onSortSelectChangeHandler}
+                >
+                  평점높은순
+                </p>
               </div>
             </div>
           </div>
