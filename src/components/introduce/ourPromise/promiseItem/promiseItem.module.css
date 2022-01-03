@@ -1,0 +1,18 @@
+.item {
+  margin-bottom: 150px;
+}
+.icon {
+  font-size: 5rem;
+  color: var(--color-green);
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+
+.desc {
+  font-size: var(--fontsize-bit-big);
+  white-space: pre-wrap;
+}

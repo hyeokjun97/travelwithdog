@@ -13,9 +13,8 @@ const Map = (props) => {
   const [popupValue, setPopupValue] = useState(null);
 
   const { ref, map, google } = useGoogleMaps(
-    // Use your own API key, you can get one from Google (https://console.cloud.google.com/google/maps-apis/overview)
-    "AIzaSyBPhISFJtqCcepYE1K3TLuiTzZd_9OJqUY",
-    // NOTE: even if you change options later
+    process.env.REACT_APP_MAP_KEY,
+
     {
       center: { lat: 33.41133915114478, lng: 126.33676192021225 },
       zoom: 11,

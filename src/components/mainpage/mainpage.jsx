@@ -8,6 +8,7 @@ import ItemSlickTwo from "../slick/itemSlickTwo/itemSlickTwo";
 import TagButton from "../tagButton/tagButton";
 import styles from "./mainpage.module.css";
 import MainpageMapItem from "./mainpageMapItem/mainpageMapItem";
+import { useGoogleMaps } from "react-hook-google-maps";
 
 const Mainpage = ({
   chabak,
@@ -54,6 +55,15 @@ const Mainpage = ({
 
     return () => window.removeEventListener("keydown", keyHandler);
   }, [keyHandler]);
+
+  const { ref, map, google } = useGoogleMaps(
+    process.env.REACT_APP_MAP_KEY,
+
+    {
+      center: { lat: 33.41133915114478, lng: 126.53676192021225 },
+      zoom: 10,
+    }
+  );
 
   return (
     <div className={styles.mainpage}>
@@ -121,7 +131,7 @@ const Mainpage = ({
             지도 안에!
           </p>
           <div className={styles.map_main}>
-            <div className={styles.map}></div>
+            <div ref={ref} className={styles.map}></div>
           </div>
         </div>
         <div className={styles.list_container}>

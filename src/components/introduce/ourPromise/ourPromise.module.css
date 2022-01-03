@@ -1,0 +1,17 @@
+.main {
+  text-align: center;
+  padding: 41px 0;
+}
+
+.title {
+  font-size: 2rem;
+  color: #0f0f0f;
+  margin: 0;
+}
+
+.desc {
+  white-space: pre-wrap;
+  font-size: var(--fontsize-bit-big);
+  margin: 27px 0;
+  margin-bottom: 110px;
+}

@@ -1,0 +1,14 @@
+.main {
+  text-align: center;
+  padding: 10px 0;
+}
+.title {
+  font-size: 3rem;
+  color: var(--color-green);
+}
+.desc {
+  white-space: pre-wrap;
+  font-size: var(--fontsize-bit-big);
+  margin: 70px 0;
+  color: #131313;
+}

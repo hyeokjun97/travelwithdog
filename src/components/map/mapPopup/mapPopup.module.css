@@ -273,4 +273,8 @@
     font-size: var(--fontsize-small);
     text-align: center;
   }
+
+  .blog {
+    height: 30px;
+  }
 }

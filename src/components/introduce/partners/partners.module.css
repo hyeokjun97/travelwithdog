@@ -1,0 +1,39 @@
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 70px;
+}
+.desc {
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+.item_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 3%;
+  margin-top: 100px;
+}
+
+.item {
+  width: 28%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon {
+  font-size: 3.7rem;
+  color: var(--color-green);
+}
+
+.item_title {
+  font-size: var(--fontsize-mini-title);
+  margin-bottom: 16px;
+}
+
+.item_desc {
+  white-space: pre-line;
+}
