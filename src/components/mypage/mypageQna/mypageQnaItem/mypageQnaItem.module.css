@@ -44,6 +44,13 @@
   font-size: var(--fontsize-bit-big);
   font-weight: 500;
   color: #131313;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .date {

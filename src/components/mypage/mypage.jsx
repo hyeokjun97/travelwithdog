@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./mypage.module.css";
+import MypageCommunity from "./mypageCommunity/mypageCommunity";
 import MypageEdit from "./mypageEdit/mypageEdit";
 import MypagePayments from "./mypagePayments/mypagePayments";
 import MypageQna from "./mypageQna/mypageQna";
@@ -9,6 +10,8 @@ import MypageWithdrawal from "./mypageWithdrawal/mypageWithdrawal";
 const Mypage = (props) => {
   const { path } = useParams();
   const navigate = useNavigate();
+  const [communitySelect, setCommunitySelect] = useState("글");
+
   const [pageName, setPageName] = useState(null);
   useEffect(() => {
     const pageNameSetting = () => {
@@ -113,7 +116,34 @@ const Mypage = (props) => {
           </div>
         </aside>
         <div className={styles.main_part}>
-          <h2 className={styles.title}>{pageName}</h2>
+          <div className={styles.title_container}>
+            <h2 className={styles.title}>{pageName}</h2>
+            {path === "community" && (
+              <div className={styles.button_container}>
+                <button
+                  className={`${
+                    communitySelect === "글"
+                      ? `${styles.button_left} ${styles.select_on}`
+                      : `${styles.button_left}`
+                  }`}
+                  onClick={() => setCommunitySelect("글")}
+                >
+                  글
+                </button>
+                <button
+                  className={`${
+                    communitySelect === "댓글"
+                      ? `${styles.button_right} ${styles.select_on}`
+                      : `${styles.button_right}`
+                  }`}
+                  onClick={() => setCommunitySelect("댓글")}
+                >
+                  댓글
+                </button>
+              </div>
+            )}
+          </div>
+
           <div className={styles.main_divide_line}></div>
           {path === "edit" ? (
             <MypageEdit />
@@ -123,6 +153,8 @@ const Mypage = (props) => {
             <MypagePayments />
           ) : path === "qna" ? (
             <MypageQna />
+          ) : path === "community" ? (
+            <MypageCommunity communitySelect={communitySelect} />
           ) : (
             <></>
           )}

@@ -1,0 +1,28 @@
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #8f8f8f;
+  padding: 10px 0;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  color: #131313;
+}
+
+.division {
+  text-align: center;
+  width: 10%;
+}
+
+.title {
+  width: 55%;
+}
+
+.date {
+  width: 20%;
+}
+
+.empty {
+  width: 10%;
+}

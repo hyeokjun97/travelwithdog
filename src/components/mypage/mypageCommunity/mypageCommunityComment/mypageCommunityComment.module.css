@@ -1,0 +1,27 @@
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #8f8f8f;
+  padding: 10px 8px;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  color: #131313;
+}
+
+.title {
+  width: 35%;
+}
+
+.comment {
+  width: 35%;
+}
+
+.date {
+  width: 15%;
+}
+
+.empty {
+  width: 10%;
+}
