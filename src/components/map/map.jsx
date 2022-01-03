@@ -83,12 +83,19 @@ const Map = (props) => {
     setResultSpotList(result);
   }, [inputValue]);
 
+  const keyHandler = (e) => {
+    if (e.key !== "Escape") {
+      return;
+    }
+    setPopupOn(false);
+  };
+
   useEffect(() => {
-    document.addEventListener("keydown", () => setPopupOn(false));
+    document.addEventListener("keydown", keyHandler);
     return () => {
-      document.removeEventListener("keydown", () => setPopupOn(false));
+      document.removeEventListener("keydown", keyHandler);
     };
-  }, []);
+  }, [keyHandler]);
 
   return (
     <div className={styles.body}>

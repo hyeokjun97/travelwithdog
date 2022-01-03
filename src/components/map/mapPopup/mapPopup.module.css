@@ -1,12 +1,14 @@
 .popup {
-  width: 600px;
+  width: 531px;
   height: 80vh;
   background-color: white;
   position: relative;
+  border-radius: 14px;
+  transform: translateY(3vh);
 }
 
 .close_icon {
-  font-size: var(--fontsize-title);
+  font-size: var(--fontsize-big);
   position: absolute;
   top: 16px;
   right: 16px;
@@ -15,10 +17,20 @@
 }
 
 .data_container {
-  margin-top: 2vh;
-  padding: 6px 20px;
-  height: 36vh;
+  height: calc(80vh - 308px);
   overflow-y: scroll;
+}
+
+.top {
+  padding: 16px 18px;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.name_and_type_and_sns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .name_and_type {
@@ -29,21 +41,20 @@
 
 .name {
   font-size: var(--fontsize-mini-title);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .type {
-  margin-top: 4px;
-  margin-left: 12px;
-  font-size: var(--fontsize-normal);
-  color: var(--color-desc);
+  margin-left: 8px;
+  font-size: var(--fontsize-bit-big);
+  color: #565656;
 }
 
 .rating_and_sns {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 8px 0 20px 0;
+  margin: 5px 0 12px 0;
 }
 
 .rating {
@@ -52,9 +63,10 @@
   flex-direction: row;
 }
 
-.rating_text {
-  margin-left: 8px;
-  font-weight: 500;
+.sns_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .insta {
@@ -63,35 +75,107 @@
   margin: 0 4px;
   cursor: pointer;
   border-radius: 4px;
-  transition: 150ms all ease-in;
 }
 
-.insta:hover {
-  transform: scale(1.1);
+.blog {
+  width: 30px;
+  height: 34px;
+  margin: 0 4px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .desc {
   font-size: var(--fontsize-normal);
   color: var(--color-black);
-  margin: 18px 0 24px 0;
+  white-space: pre-line;
+}
+
+.sort_container {
+  border-bottom: 1px solid #c4c4c4;
+  padding: 16px 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sort_item {
+  width: 13%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circle {
+  width: 42px;
+  height: 42px;
+  background-color: #3f3f3f;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sort_image {
+  width: 37px;
+  height: 42px;
+}
+
+.sort_image_park {
+  margin-left: 3px;
+}
+
+.sort_image_in {
+  width: 32px;
+  height: 32px;
+}
+
+.sort_image_circle {
+  width: 28px;
+  height: 28px;
+}
+
+.sort_text {
+  position: absolute;
+  z-index: 2;
+  color: white;
+  font-weight: 700;
+  top: 17px;
+  left: 27px;
+}
+
+.sort_title {
+  font-size: var(--fontsize-bit-small);
+  color: #2b2b2b;
+  margin-top: 8px;
 }
 
 .sub_data_container {
   display: flex;
   flex-direction: column;
+  padding: 15px 19px 18px 15px;
+  border-bottom: 1px solid #c4c4c4;
 }
 
 .sub_data_title {
-  font-size: var(--fontsize-normal);
+  font-size: var(--fontsize-bit-big);
   font-weight: 500;
-  color: #027be3;
+  color: #6b6b6b;
   margin-bottom: 6px;
 }
 
 .sub_data {
-  font-size: var(--fontsize-normal);
-  font-weight: 400;
-  color: black;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 500;
+  color: #282828;
+}
+
+.nearby_container {
+  padding: 18px 19px;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  column-rule: #232323;
 }
 
 @media screen and (max-width: 765px) {
@@ -102,6 +186,10 @@
 
   .close_icon {
     font-size: var(--fontsize-mini-title);
+  }
+
+  .data_container {
+    height: calc(80vh - 280px);
   }
 
   .name {
@@ -141,15 +229,48 @@
   }
 
   .sub_data_title {
-    font-size: var(--fontsize-bit-small);
+    font-size: var(--fontsize-small);
     font-weight: 500;
-    color: #027be3;
     margin-bottom: 1px;
   }
 
   .sub_data {
     font-size: var(--fontsize-small);
-    font-weight: 400;
-    color: black;
+  }
+
+  .sort_image {
+    width: 28px;
+    height: 32px;
+  }
+
+  .circle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .sort_image_circle {
+    width: 22px;
+    height: 22px;
+  }
+
+  .sort_image_in {
+    width: 26px;
+    height: 26px;
+  }
+
+  .sort_image_park {
+    width: 20px;
+    height: 20px;
+  }
+
+  .sort_text {
+    top: 11px;
+    left: 15px;
+    font-size: var(--fontsize-bit-small);
+  }
+
+  .sort_title {
+    font-size: var(--fontsize-small);
+    text-align: center;
   }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./mapMenuItem.module.css";
+import ReactStars from "react-rating-stars-component";
 
 const MapMenuItem = ({ item, onItemClickHandler }) => {
   return (
@@ -12,7 +13,19 @@ const MapMenuItem = ({ item, onItemClickHandler }) => {
       <div className={styles.data_container}>
         <p className={styles.type}>{item.spot_category_name}</p>
         <p className={styles.name}>{item.name_ko}</p>
-        <p className={styles.rating}>{item.rating}</p>
+        <p className={styles.rating}>
+          <ReactStars
+            count={5}
+            edit={false}
+            size={14}
+            value={item.rating}
+            activeColor="#000000"
+            isHalf={true}
+            emptyIcon={<i className="fas fa-paw"></i>}
+            halfIcon={<i className="fas fa-paw"></i>}
+            filledIcon={<i className="fas fa-paw"></i>}
+          />
+        </p>
         <p className={styles.desc}>{item.description}</p>
       </div>
     </div>

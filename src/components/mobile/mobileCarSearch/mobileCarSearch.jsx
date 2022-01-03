@@ -21,6 +21,7 @@ const MobileCarSearch = (props) => {
   ]);
   const [dateShow, setDateShow] = useState("");
   const timeList = [
+    "시간 선택",
     "08시 00분",
     "08시 30분",
     "09시 00분",
@@ -50,10 +51,6 @@ const MobileCarSearch = (props) => {
     "21시 00분",
     "21시 30분",
     "22시 00분",
-    "22시 30분",
-    "23시 00분",
-    "23시 30분",
-    "24시 00분",
   ];
 
   //영문 달을 숫자로 바꾸어 줌
