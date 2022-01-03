@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "./mypage.module.css";
 import MypageEdit from "./mypageEdit/mypageEdit";
 import MypagePayments from "./mypagePayments/mypagePayments";
+import MypageQna from "./mypageQna/mypageQna";
 import MypageWithdrawal from "./mypageWithdrawal/mypageWithdrawal";
 
 const Mypage = (props) => {
@@ -120,6 +121,8 @@ const Mypage = (props) => {
             <MypageWithdrawal />
           ) : path === "payments" ? (
             <MypagePayments />
+          ) : path === "qna" ? (
+            <MypageQna />
           ) : (
             <></>
           )}
