@@ -147,6 +147,12 @@ const Rentcar = ({ chabak }) => {
                   }
                   locale={ko}
                 />
+                <button
+                  className={styles.date_picker_button}
+                  onClick={() => setDatePickerOn(false)}
+                >
+                  선택
+                </button>
               </div>
             </div>
             <div className={styles.search_input_box}>

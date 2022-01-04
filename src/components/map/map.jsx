@@ -5,7 +5,7 @@ import MapMenuItem from "./mapMenuItem/mapMenuItem";
 import MapPopup from "./mapPopup/mapPopup";
 import { useGoogleMaps } from "react-hook-google-maps";
 
-const Map = (props) => {
+const Map = ({ deviceSize }) => {
   const [inputValue, setInputValue] = useState("");
   const [spotList, setSpotList] = useState(null);
   const [resultSpotList, setResultSpotList] = useState(null);
@@ -107,6 +107,7 @@ const Map = (props) => {
           <MapPopup
             popupValue={popupValue}
             onCloseButtonHandler={onCloseButtonHandler}
+            deviceSize={deviceSize}
           />
         </div>
       )}

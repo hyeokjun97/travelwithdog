@@ -710,7 +710,7 @@ const App = (props) => {
           ) : (
             <Route path="/search/:query" element={<MobileSearchPage />}></Route>
           )}
-          <Route path="/map" element={<Map />}></Route>
+          <Route path="/map" element={<Map deviceSize={deviceSize} />}></Route>
           <Route path="/mypage/:path" element={<Mypage />}></Route>
           <Route path="/mobile/mypage" element={<MobileMypage />}></Route>
           <Route

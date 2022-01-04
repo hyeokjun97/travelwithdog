@@ -53,6 +53,7 @@ const MobileMypageDetail = (props) => {
 
   return (
     <div className={styles.main}>
+      <h2 className={styles.title}>마이페이지</h2>
       <div className={styles.button_container}>
         {selected && (
           <ButtonSlick

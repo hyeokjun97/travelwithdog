@@ -12,3 +12,16 @@
   margin: 70px 0;
   color: #131313;
 }
+
+@media screen and (max-width: 1200px) {
+  .image {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .desc {
+    font-size: var(--fontsize-normal);
+    margin-top: 30px;
+  }
+}

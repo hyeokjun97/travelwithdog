@@ -43,7 +43,7 @@ const Introduce = (props) => {
       <div className={styles.top_banner}></div>
       <div className={styles.main}>
         <aside className={styles.side_bar}>
-          <p className={styles.side_bar_title}>마이페이지</p>
+          <p className={styles.side_bar_title}>트래블포레스트</p>
           <div className={styles.side_bar_container}>
             <div className={styles.side_bar_divide_line}></div>
             <ul>

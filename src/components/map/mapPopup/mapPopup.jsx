@@ -3,7 +3,7 @@ import CustomPaging from "../../slick/customPaging/customPaging";
 import styles from "./mapPopup.module.css";
 import ReactStars from "react-rating-stars-component";
 
-const MapPopup = ({ popupValue, onCloseButtonHandler }) => {
+const MapPopup = ({ popupValue, onCloseButtonHandler, deviceSize }) => {
   const [instaUrl, setInstaUrl] = useState(null);
   const [blogUrl, setBlogUrl] = useState(null);
 
@@ -63,7 +63,7 @@ const MapPopup = ({ popupValue, onCloseButtonHandler }) => {
               <ReactStars
                 count={5}
                 edit={false}
-                size={22}
+                size={deviceSize ? 22 : 16}
                 value={4}
                 activeColor="#000000"
                 isHalf={true}

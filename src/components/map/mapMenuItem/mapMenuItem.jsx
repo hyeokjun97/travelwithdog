@@ -13,7 +13,7 @@ const MapMenuItem = ({ item, onItemClickHandler }) => {
       <div className={styles.data_container}>
         <p className={styles.type}>{item.spot_category_name}</p>
         <p className={styles.name}>{item.name_ko}</p>
-        <p className={styles.rating}>
+        <div className={styles.rating}>
           <ReactStars
             count={5}
             edit={false}
@@ -25,7 +25,7 @@ const MapMenuItem = ({ item, onItemClickHandler }) => {
             halfIcon={<i className="fas fa-paw"></i>}
             filledIcon={<i className="fas fa-paw"></i>}
           />
-        </p>
+        </div>
         <p className={styles.desc}>{item.description}</p>
       </div>
     </div>

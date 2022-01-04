@@ -164,6 +164,20 @@
   visibility: hidden;
   transform: scale(0);
   transition: 100ms all ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.date_picker_button {
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: skyblue;
+  color: white;
+  padding: 10px 0;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .on {

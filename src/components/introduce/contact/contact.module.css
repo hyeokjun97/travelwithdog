@@ -42,3 +42,9 @@
   height: 369px;
   margin: auto;
 }
+
+@media screen and (max-width: 780px) {
+  .map {
+    width: 100%;
+  }
+}

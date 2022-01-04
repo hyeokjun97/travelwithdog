@@ -4,9 +4,11 @@
 
 .button_container {
   padding: 0 6px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-light-border);
 }
 
 .title {
-  margin: 0;
-  padding: 30px 30px 0 30px;
+  padding: 12px 12px 0 12px;
+  font-size: var(--fontsize-big);
 }

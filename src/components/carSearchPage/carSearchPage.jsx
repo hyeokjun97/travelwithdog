@@ -436,6 +436,12 @@ const CarSearchPage = (props) => {
                   }
                   locale={ko}
                 />
+                <button
+                  className={styles.date_picker_button}
+                  onClick={() => setDatePickerOn(false)}
+                >
+                  선택
+                </button>
               </div>
             </div>
             <div className={styles.range_input_box}>

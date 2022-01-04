@@ -111,3 +111,34 @@
 .button_right {
   border-radius: 0 6px 6px 0;
 }
+
+@media screen and (max-width: 1350px) {
+  .main {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main {
+    width: 92%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .side_bar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .main_part {
+    width: 100%;
+  }
+
+  .title {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    margin-top: 0;
+  }
+}

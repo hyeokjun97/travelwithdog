@@ -16,3 +16,9 @@
   font-size: var(--fontsize-bit-big);
   white-space: pre-wrap;
 }
+
+@media screen and (max-width: 768px) {
+  .desc {
+    font-size: var(--fontsize-normal);
+  }
+}

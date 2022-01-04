@@ -80,7 +80,7 @@
   .side_bar {
     width: 100vw;
     height: 41vh;
-    top: 59vh;
+    top: calc(59vh - 49px);
   }
   .input_container {
     height: 55px;
@@ -88,5 +88,15 @@
   .list {
     height: auto;
     padding-bottom: 100px;
+  }
+  .search_container {
+    height: 50px;
+    padding: 0;
+    border: none;
+  }
+  .input_container {
+    height: 100%;
+    border-radius: 0;
+    border-width: 1px;
   }
 }
