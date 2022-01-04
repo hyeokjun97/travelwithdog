@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./footer.module.css";
 
 const Footer = (props) => {
+  const navigate = useNavigate();
   return (
     <footer className={styles.footer}>
       <div className={styles.top}>
@@ -13,13 +15,62 @@ const Footer = (props) => {
               className={styles.logo}
             />
           </li>
-          <li>소개</li>
-          <li>우리의 약속</li>
-          <li>파트너</li>
-          <li>찾아오시는 길</li>
-          <li>개인정보처리방침</li>
-          <li>여행약관</li>
-          <li>이용약관</li>
+          <li
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+              navigate("/introduce/aboutus");
+            }}
+          >
+            소개
+          </li>
+          <li
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+              navigate("/introduce/promise");
+            }}
+          >
+            우리의 약속
+          </li>
+          <li
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+              navigate("/introduce/partners");
+            }}
+          >
+            파트너
+          </li>
+          <li
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+              navigate("/introduce/contact");
+            }}
+          >
+            찾아오시는 길
+          </li>
+          <li
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+              navigate("/introduce/privacypolicy");
+            }}
+          >
+            개인정보처리방침
+          </li>
+          <li
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+              navigate("/introduce/travelterms");
+            }}
+          >
+            여행약관
+          </li>
+          <li
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+              navigate("/introduce/userterms");
+            }}
+          >
+            이용약관
+          </li>
         </ul>
       </div>
       <div className={styles.bottom}>

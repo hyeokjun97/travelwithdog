@@ -9,6 +9,9 @@ const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
   const [toggleOn, setToggleOn] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
 
+  const { pathname } = window.location;
+  const pathList = pathname.split("/");
+
   useEffect(() => {
     window.addEventListener(
       "scroll",
@@ -23,7 +26,11 @@ const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
       ref={headerRef}
       className={`${
         !toggleOn
-          ? scrollValue < 80
+          ? scrollValue < 80 &&
+            (pathList[2] === "" ||
+              pathList[2] === "rentcar" ||
+              pathList[2] === "category" ||
+              pathList[2] === "community")
             ? `${styles.header} ${styles.header_on}`
             : `${styles.header} ${styles.header_off}`
           : `${styles.header} ${styles.header_off}`

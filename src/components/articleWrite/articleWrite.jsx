@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import SummerNote from "../summerNote/summerNote";
 import styles from "./articleWrite.module.css";
 
 const ArticleWrite = (props) => {
+  const [content, setContent] = useState("");
+  const onContentChangeHandler = (data) => {
+    setContent(data);
+  };
   return (
     <div className={styles.body}>
       <main className={styles.main}>
@@ -21,7 +25,7 @@ const ArticleWrite = (props) => {
           spellCheck="false"
           placeholder="제목"
         />
-        <SummerNote />
+        <SummerNote onContentChangeHandler={onContentChangeHandler} />
         <div className={styles.button_container}>
           <button className={styles.button}>업로드</button>
         </div>
