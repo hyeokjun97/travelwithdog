@@ -1,7 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./productOption.module.css";
+import { DateRange, DateRangePicker } from "react-date-range";
+import { addDays } from "date-fns";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { ko } from "react-date-range/dist/locale/index.js";
 
 const ProductOption = (props) => {
+  //date-range
+  const [datePickerOn, setDatePickerOn] = useState(false);
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 1),
+      key: "selection",
+    },
+  ]);
+  const [dateShow, setDateShow] = useState("");
+  //영문 달을 숫자로 바꾸어 줌
+  const monthTranslator = (selectedMonth) => {
+    const monthList = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    for (let i = 0; i < monthList.length; i++) {
+      if (monthList[i] === selectedMonth) {
+        return i + 1;
+      }
+    }
+  };
+
+  //영문 요일을 한글로 바꾸어 줌
+  const dayTranslator = (selectedDay) => {
+    const dayList = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const korDayList = ["월", "화", "수", "목", "금", "토", "일"];
+    for (let i = 0; i < dayList.length; i++) {
+      if (dayList[i] === selectedDay) {
+        return korDayList[i];
+      }
+    }
+  };
+
+  const datePickerOpenHandler = (e) => {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    setDatePickerOn(!datePickerOn);
+  };
+  //
   const [openValue, setOpenValue] = useState(false);
   const changeOpenValueHandler = (value) => {
     if (openValue === value) {
@@ -10,6 +66,28 @@ const ProductOption = (props) => {
     }
     setOpenValue(value);
   };
+
+  const closeDetailHandler = () => {
+    setOpenValue(false);
+  };
+
+  useEffect(() => {
+    if (!date) {
+      return;
+    }
+    const { startDate, endDate } = date[0];
+
+    const startList = startDate.toString().split(" ");
+    const endList = endDate.toString().split(" ");
+    setDateShow(
+      `${monthTranslator(startList[1])}월 ${startList[2]}일 (${dayTranslator(
+        startList[0]
+      )}) - ${monthTranslator(endList[1])}월 ${endList[2]}일 (${dayTranslator(
+        endList[0]
+      )})`
+    );
+  }, [date]);
+
   return (
     <div className={styles.item}>
       <div
@@ -72,7 +150,7 @@ const ProductOption = (props) => {
         </div>
       </div>
       {openValue === "detail" ? (
-        <div className={styles.option_detail_container}>
+        <div className={styles.option_detail_container_info}>
           <nav className={styles.menu_bar}>
             <ul className={styles.menu_list}>
               <li>포함사항</li>
@@ -99,7 +177,76 @@ const ProductOption = (props) => {
       ) : (
         openValue === "reservation" && (
           <div className={styles.option_detail_container}>
-            <p>예약한다</p>
+            <div className={styles.option_detail_content}>
+              <div className={styles.date_and_number_container}>
+                <div className={styles.date}>
+                  <p className={styles.option_detail_title}>날짜 선택</p>
+                  <div
+                    className={styles.date_select}
+                    onClick={datePickerOpenHandler}
+                  >
+                    {dateShow}
+                    <div
+                      className={`${
+                        datePickerOn
+                          ? `${styles.date_picker} ${styles.on}`
+                          : `${styles.date_picker} ${styles.off}`
+                      }`}
+                    >
+                      <DateRange
+                        minDate={new Date()}
+                        editableDateInputs={false}
+                        showSelectionPreview={true}
+                        onChange={(item) => setDate([item.selection])}
+                        moveRangeOnFirstSelection={false}
+                        ranges={date}
+                        months={window.innerWidth > 768 ? 2 : 1}
+                        direction={
+                          window.innerWidth > 768 ? "horizontal" : "vertical"
+                        }
+                        locale={ko}
+                      />
+                      <button
+                        className={styles.date_picker_button}
+                        onClick={() => setDatePickerOn(false)}
+                      >
+                        선택
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.number}>
+                  <p className={styles.option_detail_title}>반려인 수</p>
+                  <select className={styles.select}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+                <div className={styles.number}>
+                  <p className={styles.option_detail_title}>반려견 수</p>
+                  <select className={styles.select}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+              </div>
+              <div className={styles.final_price_container}>
+                <p className={styles.final_price_title}>예상 결제 금액</p>
+                <p className={styles.final_price}>201,000원</p>
+              </div>
+            </div>
+            <div className={styles.option_detail_bottom}>
+              <button
+                className={styles.button_close}
+                onClick={closeDetailHandler}
+              >
+                <span>접기</span>
+                <i className={`${styles.up_icon} fas fa-chevron-up`}></i>
+              </button>
+              <button className={styles.button_purchase}>결제하기</button>
+            </div>
           </div>
         )
       )}

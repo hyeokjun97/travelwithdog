@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./login.module.css";
 
 const Login = ({
@@ -6,6 +6,27 @@ const Login = ({
   signupPopupHandler,
   findPopupHandler,
 }) => {
+  const [inputValue, setInputValue] = useState({
+    id: "",
+    password: "",
+  });
+
+  const [idSave, setIdSave] = useState(false);
+
+  const { id, password } = inputValue;
+
+  const onInputValueChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setInputValue({
+      ...inputValue,
+      [name]: value,
+    });
+  };
+
+  const onIdSaveChangeHandler = (e) => {
+    setIdSave(e.target.checked);
+  };
+
   return (
     <div className={styles.login_popup}>
       <div onClick={onCloseButtonHandler}>
@@ -21,6 +42,9 @@ const Login = ({
         <div className={styles.input_container}>
           <p className={styles.text}>이메일</p>
           <input
+            name="id"
+            onChange={onInputValueChangeHandler}
+            value={id}
             type="email"
             className={styles.input}
             placeholder="이메일"
@@ -30,6 +54,9 @@ const Login = ({
         <div className={styles.input_container}>
           <p className={styles.text}>비밀번호</p>
           <input
+            name="password"
+            onChange={onInputValueChangeHandler}
+            value={password}
             type="password"
             className={styles.input}
             placeholder="비밀번호"
@@ -38,7 +65,12 @@ const Login = ({
         </div>
 
         <div className={styles.save_id_container}>
-          <input type="checkbox" className={styles.save_id} />
+          <input
+            value={idSave}
+            onChange={onIdSaveChangeHandler}
+            type="checkbox"
+            className={styles.save_id}
+          />
           <p className={styles.save_id_text}>아이디 저장</p>
         </div>
         <button type="submit" className={styles.submit_button}>

@@ -10,6 +10,21 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
 
 const CarSearchPage = (props) => {
+  const [timeValue, setTimeValue] = useState({
+    rentTime: "",
+    returnTime: "",
+  });
+
+  const { rentTime, returnTime } = timeValue;
+
+  const onTimeChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setTimeValue({
+      ...timeValue,
+      [name]: value,
+    });
+  };
+
   //date-range
   const [datePickerOn, setDatePickerOn] = useState(false);
   const [date, setDate] = useState([
@@ -195,6 +210,10 @@ const CarSearchPage = (props) => {
   useEffect(() => {
     setSearchValue(query);
   }, [query]);
+
+  useEffect(() => {
+    console.log(searchValue);
+  }, [searchValue]);
   return (
     <div className={styles.body}>
       <div className={styles.container}>
@@ -446,9 +465,14 @@ const CarSearchPage = (props) => {
             </div>
             <div className={styles.range_input_box}>
               <p className={styles.range_text}>대여시각</p>
-              <select className={styles.range_input}>
+              <select
+                name="rentTime"
+                value={rentTime}
+                onChange={onTimeChangeHandler}
+                className={styles.range_input}
+              >
                 {timeList.map((time) => (
-                  <option key={time} value="time">
+                  <option key={time} value={time === "시간 선택" ? "" : time}>
                     {time}
                   </option>
                 ))}
@@ -457,9 +481,14 @@ const CarSearchPage = (props) => {
 
             <div className={styles.range_input_box}>
               <p className={styles.range_text}>반납시각</p>
-              <select className={styles.range_input}>
+              <select
+                name="returnTime"
+                value={returnTime}
+                onChange={onTimeChangeHandler}
+                className={styles.range_input}
+              >
                 {timeList.map((time) => (
-                  <option key={time} value="time">
+                  <option key={time} value={time === "시간 선택" ? "" : time}>
                     {time}
                   </option>
                 ))}

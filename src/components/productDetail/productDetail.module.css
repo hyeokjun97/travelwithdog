@@ -380,5 +380,10 @@
   .review_part {
     scroll-margin: 110px;
     overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .option_main {
+    padding-bottom: 120px;
   }
 }

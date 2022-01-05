@@ -3,6 +3,7 @@ import Popup from "../popup/popup";
 import styles from "./reservationPage.module.css";
 
 const ReservationPage = (props) => {
+  //여행자 수에 따라 달라지는 여행자 정보 입력 란 처리 방법 생각
   const [agreeValue, setAgreeValue] = useState({
     one: false,
     two: false,

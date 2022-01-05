@@ -69,18 +69,27 @@
   }
 }
 
-@media screen and (max-width: 400px) {
-  .item {
-    width: calc(50% - 14px);
-    height: 150px;
-  }
-  .image {
-    height: 150px;
-  }
-}
-
 @media screen and (max-width: 765px) {
+  .item {
+    width: 48%;
+    height: auto;
+    margin: 1%;
+    margin-bottom: 30px;
+  }
+
   .thumbnail {
-    height: 180px;
+    height: 120px;
+    border-radius: 8px;
+  }
+
+  .data_container {
+    padding-top: 8px;
+    height: auto;
+  }
+  .title {
+    padding-left: 3px;
+  }
+  .price {
+    padding-left: 4px;
   }
 }

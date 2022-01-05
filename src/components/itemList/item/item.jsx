@@ -4,7 +4,7 @@ import ReactStars from "react-rating-stars-component";
 
 const Item = ({ item }) => {
   return (
-    <div key={item.idx} className={styles.item}>
+    <div className={styles.item}>
       <img src={item.image} alt="thumbnail" className={styles.thumbnail} />
       <div className={styles.data_container}>
         <p className={styles.title}>{item.title}</p>

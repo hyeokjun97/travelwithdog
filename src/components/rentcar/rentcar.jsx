@@ -89,6 +89,21 @@ const Rentcar = ({ chabak }) => {
     setDatePickerOn(!datePickerOn);
   };
 
+  const [timeValue, setTimeValue] = useState({
+    rentTime: "",
+    returnTime: "",
+  });
+
+  const { rentTime, returnTime } = timeValue;
+
+  const onTimeChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setTimeValue({
+      ...timeValue,
+      [name]: value,
+    });
+  };
+
   useEffect(() => {
     if (!date) {
       return;
@@ -157,9 +172,14 @@ const Rentcar = ({ chabak }) => {
             </div>
             <div className={styles.search_input_box}>
               <p className={styles.search_text}>대여시각</p>
-              <select className={styles.search_input}>
+              <select
+                name="rentTime"
+                value={rentTime}
+                onChange={onTimeChangeHandler}
+                className={styles.search_input}
+              >
                 {timeList.map((time) => (
-                  <option key={time} value="time">
+                  <option key={time} value={time === "시간 선택" ? "" : time}>
                     {time}
                   </option>
                 ))}
@@ -168,9 +188,14 @@ const Rentcar = ({ chabak }) => {
 
             <div className={styles.search_input_box}>
               <p className={styles.search_text}>반납시각</p>
-              <select className={styles.search_input}>
+              <select
+                name="returnTime"
+                value={returnTime}
+                onChange={onTimeChangeHandler}
+                className={styles.search_input}
+              >
                 {timeList.map((time) => (
-                  <option key={time} value="time">
+                  <option key={time} value={time === "시간 선택" ? "" : time}>
                     {time}
                   </option>
                 ))}
