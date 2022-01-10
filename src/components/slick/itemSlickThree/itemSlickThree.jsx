@@ -103,10 +103,16 @@ export default class ItemSlickThree extends Component {
       <div className="slick_three_container">
         <Slider {...settings}>
           {viewItems.map((item) => (
-            <div key={item.idx} className="item">
-              <img src={item.image} alt="thumbnail" className="thumbnail" />
+            <div key={item.id} className="item">
+              <img
+                src={item.product && item.product.tour.image.url}
+                alt="thumbnail"
+                className="thumbnail"
+              />
               <div className="data_container">
-                <p className="title">{item.title}</p>
+                <p className="title">
+                  {item.product && item.product.tour.name_en}
+                </p>
                 <div className="star_container">
                   <ReactStars
                     count={5}
@@ -121,9 +127,10 @@ export default class ItemSlickThree extends Component {
                   />
                   <p className="rating_text">4.0점</p>
                 </div>
-                <p className="price">{`${item.price.toLocaleString(
-                  "ko-KR"
-                )}원`}</p>
+                <p className="price">{`${
+                  item.product &&
+                  item.product.tour.price.toLocaleString("ko-KR")
+                }원`}</p>
               </div>
             </div>
           ))}

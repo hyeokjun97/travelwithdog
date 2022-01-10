@@ -17,9 +17,11 @@ const Mainpage = ({
   tagButtonList,
   spotList,
   deviceSize,
+  loadPageInfo,
 }) => {
   const navigate = useNavigate();
   const listRef = useRef([]);
+  const [pageData, setPageData] = useState(null);
   const [regionSelect, setRegionSelect] = useState("제주");
   const [searchInput, setSearchInput] = useState("");
 
@@ -65,16 +67,51 @@ const Mainpage = ({
     }
   );
 
+  const settingPageData = (data) => {
+    setPageData(data);
+  };
+
+  useEffect(() => {
+    loadPageInfo("home", settingPageData);
+  }, []);
+
+  useEffect(() => {
+    if (!pageData) {
+      return;
+    }
+    console.log(pageData);
+  }, [pageData]);
+
+  //<div className={styles.list_container}>
+  //        <p className={styles.list_title}>HOT한 여행지 순위</p>
+  //        <ItemSlickTwo viewItems={hotList} />
+  //      </div>
+  //      <div className={styles.list_container}>
+  //        <p className={styles.list_title}>현재 인기 있는 숙소</p>
+  //        <ItemSlickThree viewItems={chabak} />
+  //      </div>
+  //      <div className={styles.list_container}>
+  //        <p className={styles.list_title}>현재 인기 있는 숙소</p>
+  //        <ItemSlickFour viewItems={chabak} />
+  //      </div>
+  //      <div className={styles.list_container}>
+  //        <p className={styles.list_title}>양양/속초 반려견 여행 BEST</p>
+  //        <ItemSlickOne viewItems={jejuBest} />
+  //      </div>
+
   return (
     <div className={styles.mainpage}>
-      <div className={styles.top_banner}>
+      <div
+        className={styles.top_banner}
+        style={
+          pageData && {
+            background: `url("${pageData.image_url}") center/cover no-repeat`,
+          }
+        }
+      >
         <div className={styles.top_filter}>
-          <p className={styles.title}>사랑하는 댕댕이와 함께하는 추억여행,</p>
-          <p className={styles.title_two}>트래블위드독이 함께합니다.</p>
-          <p className={styles.subtitle}>
-            중/대형견과 함께하는 여행이 어렵다고요? 중/대형견 전용 렌터카를
-            찾아보세요.
-          </p>
+          <p className={styles.title}>{pageData && pageData.title}</p>
+          <p className={styles.subtitle}>{pageData && pageData.subtitle}</p>
           <div className={styles.search_and_tag_container}>
             <div className={styles.search_container}>
               <input
@@ -101,22 +138,17 @@ const Mainpage = ({
         </div>
       </div>
       <div className={styles.list_part}>
-        <div className={styles.list_container}>
-          <p className={styles.list_title}>HOT한 여행지 순위</p>
-          <ItemSlickTwo viewItems={hotList} />
-        </div>
-        <div className={styles.list_container}>
-          <p className={styles.list_title}>현재 인기 있는 숙소</p>
-          <ItemSlickThree viewItems={chabak} />
-        </div>
-        <div className={styles.list_container}>
-          <p className={styles.list_title}>현재 인기 있는 숙소</p>
-          <ItemSlickFour viewItems={chabak} />
-        </div>
-        <div className={styles.list_container}>
-          <p className={styles.list_title}>양양/속초 반려견 여행 BEST</p>
-          <ItemSlickOne viewItems={jejuBest} />
-        </div>
+        {pageData &&
+          pageData.sections.map((section) => (
+            <div key={section.title} className={styles.list_container}>
+              <p className={styles.list_title}>{section.title}</p>
+              {section.subtitle && (
+                <p className={styles.list_subtitle}>{section.subtitle}</p>
+              )}
+              <ItemSlickThree viewItems={section.items} />
+            </div>
+          ))}
+
         <div className={styles.map_part}>
           <img
             src="/travelWithDog/images/map_logo.png"

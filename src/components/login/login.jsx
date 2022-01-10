@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styles from "./login.module.css";
 
@@ -25,6 +26,31 @@ const Login = ({
 
   const onIdSaveChangeHandler = (e) => {
     setIdSave(e.target.checked);
+  };
+
+  const onLoginHandler = (e) => {
+    e.preventDefault();
+    if (id === "" || password === "") {
+      alert("이메일과 비밀번호를 입력해주세요.");
+      return;
+    }
+    axios
+      .patch(`${process.env.REACT_APP_BASEURL}/auth/login`, {
+        email: id,
+        password,
+      })
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("token", response.data.access_token);
+        localStorage.setItem("refreshToken", response.data.refresh_token);
+        onCloseButtonHandler();
+        console.log(localStorage);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(err.response.data.message);
+        //아이디가 이메일 형식 아닐경우 + 비밀번호 8자리 아래로 입력한 경우 처리
+      });
   };
 
   return (
@@ -73,7 +99,11 @@ const Login = ({
           />
           <p className={styles.save_id_text}>아이디 저장</p>
         </div>
-        <button type="submit" className={styles.submit_button}>
+        <button
+          type="submit"
+          className={styles.submit_button}
+          onClick={onLoginHandler}
+        >
           로그인
         </button>
       </form>

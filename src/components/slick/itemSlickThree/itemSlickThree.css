@@ -88,6 +88,7 @@
     width: calc(100vw + 16px);
     overflow: hidden;
   }
+
   .slick_three_container .slick-slide {
     padding: 0 12.5px;
   }

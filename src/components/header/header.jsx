@@ -75,11 +75,11 @@ const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
                   className={styles.menu_item}
                   onClick={() => {
                     setToggleOn(false);
-                    navigate(`/category/${category.route}`);
+                    navigate(`/category/${category.url}`);
                     window.scrollTo({ top: 0 });
                   }}
                 >
-                  {category.title}
+                  {category.name}
                 </li>
               )
             )}

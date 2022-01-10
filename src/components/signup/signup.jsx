@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import styles from "./signup.module.css";
 
 const Signup = ({ onCloseButtonHandler }) => {
+  const [confirmedId, setConfirmedId] = useState(null);
   const [inputValue, setInputValue] = useState({
     id: "",
     password: "",
     passwordConfirm: "",
-    phone: "",
     authNum: "",
   });
 
@@ -15,7 +16,7 @@ const Signup = ({ onCloseButtonHandler }) => {
     policy: false,
   });
 
-  const { id, password, passwordConfirm, phone, authNum } = inputValue;
+  const { id, password, passwordConfirm, authNum } = inputValue;
   const { recieve, policy } = checkboxValue;
 
   const onInputValueChangeHandler = (e) => {
@@ -35,9 +36,85 @@ const Signup = ({ onCloseButtonHandler }) => {
     });
   };
 
-  useEffect(() => {
-    console.log(checkboxValue);
-  }, [checkboxValue]);
+  const getEmailToken = () => {
+    if (id === "") {
+      alert("이메일 주소를 입력해주세요");
+      return;
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/auth/email/token`, {
+        email: id,
+      })
+      .then((response) => alert("인증번호가 발송되었습니다."))
+      .catch((err) => {
+        console.error(err);
+        alert(err.response.data.message);
+      });
+  };
+
+  const authEmailToken = () => {
+    if (authNum === "") {
+      alert("인증번호를 입력해주세요");
+      return;
+    }
+    if (authNum.length !== 6) {
+      alert("인증번호는 6자리입니다.");
+      return;
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/auth/email/verify`, {
+        email: id,
+        token: authNum,
+      })
+      .then((response) => {
+        alert("인증이 완료되었습니다.");
+        setConfirmedId(response.data);
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(err.response.data.message);
+      });
+  };
+
+  const onSignupSubmitHandler = (e) => {
+    e.preventDefault();
+    if (!confirmedId) {
+      alert("이메일 인증을 완료해주세요");
+      return;
+    }
+    if (password.length < 8) {
+      alert("비밀번호는 최소 8자리 이상이어야 합니다.");
+      return;
+    }
+    if (password !== passwordConfirm) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    if (!checkboxValue.policy) {
+      alert(
+        "개인정보처리방침 및 트래블포레스트 이용약관에 동의하셔야 가입이 가능합니다."
+      );
+      return;
+    }
+
+    axios
+      .put(`${process.env.REACT_APP_BASEURL}/auth/register`, {
+        id: confirmedId.id,
+        email: confirmedId.email,
+        password: password,
+        password_confirmation: passwordConfirm,
+      })
+      .then((response) => {
+        alert("회원가입이 완료되었습니다.");
+        window.location.href = "/travelWithDog";
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(err.response.data.message);
+      });
+  };
 
   return (
     <div className={styles.signup_popup}>
@@ -62,8 +139,14 @@ const Signup = ({ onCloseButtonHandler }) => {
               className={styles.input_with_button}
               placeholder="이메일 주소"
               spellCheck="false"
+              disabled={confirmedId ? true : false}
             />
-            <button type="button" className={styles.confirm_button}>
+            <button
+              type="button"
+              className={styles.confirm_button}
+              onClick={getEmailToken}
+              disabled={confirmedId ? true : false}
+            >
               인증번호받기
             </button>
           </div>
@@ -76,8 +159,14 @@ const Signup = ({ onCloseButtonHandler }) => {
               className={styles.input_with_button}
               placeholder="인증번호를 입력해주세요."
               spellCheck="false"
+              disabled={confirmedId ? true : false}
             />
-            <button type="button" className={styles.confirm_button}>
+            <button
+              type="button"
+              className={styles.confirm_button}
+              onClick={authEmailToken}
+              disabled={confirmedId ? true : false}
+            >
               인증번호확인
             </button>
           </div>
@@ -108,22 +197,6 @@ const Signup = ({ onCloseButtonHandler }) => {
           />
         </div>
 
-        <div className={styles.input_container_bottom}>
-          <p className={styles.text}>연락처</p>
-          <input
-            name="phone"
-            onChange={onInputValueChangeHandler}
-            value={phone}
-            type="text"
-            className={styles.input}
-            placeholder="연락처"
-            spellCheck="false"
-          />
-          <p className={styles.alert}>
-            *한국 내 연락처는 <b>국가번호를 제외</b>하고 입력해주세요.
-          </p>
-        </div>
-
         <div className={styles.agree_container}>
           <div className={styles.agree}>
             <input
@@ -152,7 +225,11 @@ const Signup = ({ onCloseButtonHandler }) => {
             </p>
           </div>
         </div>
-        <button type="submit" className={styles.submit_button}>
+        <button
+          type="submit"
+          className={styles.submit_button}
+          onClick={onSignupSubmitHandler}
+        >
           회원가입
         </button>
       </form>
