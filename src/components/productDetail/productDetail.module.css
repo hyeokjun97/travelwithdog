@@ -388,10 +388,9 @@ img {
     transform: translateX(-20px);
   }
   .part,
-  .review_part {
-    scroll-margin: 110px;
-    overflow-x: hidden;
-    overflow-y: hidden;
+  .review_part,
+  .part_intro {
+    scroll-margin-top: 120px;
   }
 
   .option_main {

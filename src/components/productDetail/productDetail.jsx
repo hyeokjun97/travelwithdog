@@ -238,8 +238,9 @@ const ProductDetail = (props) => {
               <p className={styles.part_title}>옵션 선택</p>
             </div>
             <div className={styles.option_main}>
-              <ProductOption />
-              <ProductOption />
+              {product.items.map((item) => (
+                <ProductOption key={item.id} item={item} />
+              ))}
             </div>
           </div>
           <div ref={mapRef} className={styles.part}>

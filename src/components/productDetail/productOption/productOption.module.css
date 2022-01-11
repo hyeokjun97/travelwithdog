@@ -144,7 +144,7 @@
   padding-left: 10px;
 }
 
-.menu_list > li {
+.menu_item {
   padding: 8px 10px;
   margin-right: 20px;
   font-size: var(--fontsize-bit-big);
@@ -153,9 +153,14 @@
   cursor: pointer;
 }
 
+.menu_item_on {
+  border-bottom: 2px solid #3a3a3a;
+}
+
 .detail_main {
   padding: 20px 0;
   height: 250px;
+  white-space: pre-wrap;
   overflow-y: scroll;
 }
 
@@ -421,7 +426,7 @@
     padding: 0;
   }
 
-  .menu_list > li {
+  .menu_item {
     white-space: nowrap;
     font-size: var(--fontsize-bit-small);
     font-weight: 700;
@@ -431,6 +436,7 @@
 
   .detail_main {
     font-size: var(--fontsize-small);
+    padding: 20px 6px;
   }
 
   .date_picker {

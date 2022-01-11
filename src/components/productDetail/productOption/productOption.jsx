@@ -6,7 +6,9 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
 
-const ProductOption = (props) => {
+const ProductOption = ({ item }) => {
+  const [menuSelected, setMenuSelected] = useState("포함사항");
+
   //date-range
   const [datePickerOn, setDatePickerOn] = useState(false);
   const [date, setDate] = useState([
@@ -71,6 +73,10 @@ const ProductOption = (props) => {
     setOpenValue(false);
   };
 
+  const onMenuSelectChangeHandler = (e) => {
+    setMenuSelected(e.target.innerText);
+  };
+
   useEffect(() => {
     if (!date) {
       return;
@@ -104,18 +110,16 @@ const ProductOption = (props) => {
         />
         <div className={styles.data_container}>
           <div className={styles.title_and_price}>
-            <p className={styles.title}>
-              [디럭스트윈 펫룸]강릉 씨베이 호텔 반려견 여행 1박 2일
-            </p>
+            <p className={styles.title}>{item.name}</p>
             <div className={styles.price_container}>
-              <div className={styles.price_box}>
-                <p className={styles.price_title}>반려인</p>
-                <p className={styles.price}>150,000원</p>
-              </div>
-              <div className={styles.price_box}>
-                <p className={styles.price_title}>반려견</p>
-                <p className={styles.price}>51,000원</p>
-              </div>
+              {item.supplier.prices.map((price) => (
+                <div key={price.id} className={styles.price_box}>
+                  <p className={styles.price_title}>{price.unit.name}</p>
+                  <p className={styles.price}>{`${price.price.toLocaleString(
+                    "ko-kr"
+                  )}원`}</p>
+                </div>
+              ))}
             </div>
           </div>
           <div
@@ -153,26 +157,64 @@ const ProductOption = (props) => {
         <div className={styles.option_detail_container_info}>
           <nav className={styles.menu_bar}>
             <ul className={styles.menu_list}>
-              <li>포함사항</li>
-              <li>불포함사항</li>
-              <li>유의사항</li>
-              <li>취소규정</li>
+              <li
+                className={
+                  menuSelected === "포함사항"
+                    ? `${styles.menu_item} ${styles.menu_item_on}`
+                    : `${styles.menu_item}`
+                }
+                onClick={onMenuSelectChangeHandler}
+              >
+                포함사항
+              </li>
+              <li
+                className={
+                  menuSelected === "불포함사항"
+                    ? `${styles.menu_item} ${styles.menu_item_on}`
+                    : `${styles.menu_item}`
+                }
+                onClick={onMenuSelectChangeHandler}
+              >
+                불포함사항
+              </li>
+              <li
+                className={
+                  menuSelected === "유의사항"
+                    ? `${styles.menu_item} ${styles.menu_item_on}`
+                    : `${styles.menu_item}`
+                }
+                onClick={onMenuSelectChangeHandler}
+              >
+                유의사항
+              </li>
+              <li
+                className={
+                  menuSelected === "취소규정"
+                    ? `${styles.menu_item} ${styles.menu_item_on}`
+                    : `${styles.menu_item}`
+                }
+                onClick={onMenuSelectChangeHandler}
+              >
+                취소규정
+              </li>
             </ul>
           </nav>
-          <div className={styles.detail_main}>
-            1. 프리미엄 미팅 서비스 <br></br>2. 렌트카 1박 2일(최대 24시간)
-            이용- 뉴모닝 또는 스파크 경차 기준 (업그레이드 가능)- 자차 보험
-            (일반) <br></br>3. 트래블키트 (랜트카 수령시) <br></br>4. 부산 영무
-            파라드 호텔 1박 (조식불포함)<br></br>
-            1. 프리미엄 미팅 서비스 <br></br>2. 렌트카 1박 2일(최대 24시간)
-            이용- 뉴모닝 또는 스파크 경차 기준 (업그레이드 가능)- 자차 보험
-            (일반) <br></br>3. 트래블키트 (랜트카 수령시) <br></br>4. 부산 영무
-            파라드 호텔 1박 (조식불포함)<br></br>
-            1. 프리미엄 미팅 서비스 <br></br>2. 렌트카 1박 2일(최대 24시간)
-            이용- 뉴모닝 또는 스파크 경차 기준 (업그레이드 가능)- 자차 보험
-            (일반) <br></br>3. 트래블키트 (랜트카 수령시) <br></br>4. 부산 영무
-            파라드 호텔 1박 (조식불포함)<br></br>
-          </div>
+          <div
+            className={styles.detail_main}
+            dangerouslySetInnerHTML={{
+              __html: `${
+                menuSelected === "포함사항"
+                  ? item.supplier.inclusion
+                  : menuSelected === "불포함사항"
+                  ? item.supplier.exclusion
+                  : menuSelected === "유의사항"
+                  ? item.supplier.note
+                  : menuSelected === "취소규정"
+                  ? item.supplier.cancellation
+                  : ""
+              }`,
+            }}
+          ></div>
         </div>
       ) : (
         openValue === "reservation" && (
