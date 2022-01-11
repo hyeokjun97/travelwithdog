@@ -27,8 +27,7 @@
   position: relative;
 }
 
-.image_container:after {
-  content: "+12개 더 보기";
+.image_container_button {
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -41,7 +40,7 @@
   transition: 150ms all ease-in;
 }
 
-.image_container:hover:after {
+.image_container_button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -69,7 +68,7 @@
 }
 
 .image_right {
-  width: 50%;
+  width: 50% !important;
   height: 177px;
   padding: 2px 0 2px 4px;
   cursor: pointer;
@@ -142,7 +141,8 @@
   border-bottom: 2px solid #101010;
 }
 
-.part {
+.part,
+.part_intro {
   padding: 36px 20px;
   background-color: white;
   margin-bottom: 9px;
@@ -160,7 +160,15 @@
 }
 
 .intro_main {
-  height: 30vh;
+  padding: 20px 4px;
+}
+
+.intro_main > p {
+  margin-bottom: 10px;
+}
+
+img {
+  width: 100%;
 }
 
 .option_main {
@@ -322,6 +330,9 @@
 
   .image_right_container {
     display: none;
+  }
+  .part_intro {
+    padding: 36px 10px;
   }
   .review_part {
     padding: 36px 20px;

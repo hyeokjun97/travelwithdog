@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./productDetail.module.css";
 import ReactStars from "react-rating-stars-component";
 import ProductOption from "./productOption/productOption";
@@ -6,13 +6,21 @@ import ArticleSlick from "../slick/articleSlick/articleSlick";
 import ReviewSlick from "../slick/reviewSlick/reviewSlick";
 import ProductReview from "./productReview/productReview";
 import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const ProductDetail = (props) => {
+  const { path } = useParams();
   const introRef = useRef();
   const mapRef = useRef();
   const optionRef = useRef();
   const articleRef = useRef();
   const reviewRef = useRef();
+
+  //transfer는 rentcar 컴포넌트에서 사용 / 만약 여기서 분류가 더 추가된다면 방법 생각해야됨
+  const [product, setProduct] = useState(null);
+
+  //추천상품 임시데이터
   const [jejuBest, setJejuBest] = useState([
     {
       idx: 0,
@@ -80,193 +88,240 @@ const ProductDetail = (props) => {
       price: 20000,
     },
   ]);
+
+  useEffect(() => {
+    const loadProductInfo = () => {
+      axios
+        .get(`${process.env.REACT_APP_BASEURL}/products/${path}`)
+        .then((response) => setProduct(response.data.tour))
+        .catch((err) => console.error(err));
+    };
+    loadProductInfo();
+  }, []);
+
   return (
     <div className={styles.body}>
-      <div className={styles.container}>
-        <div className={styles.top}>
-          <div className={styles.image_container}>
-            <div className={styles.image_left_container}>
-              <img
-                src="/travelWithDog/images/example.png"
-                alt="product_image"
-                className={styles.image_left}
-              />
-            </div>
-            <div className={styles.image_right_container}>
-              <div className={styles.image_right_sub_container}>
+      {product && (
+        <div className={styles.container}>
+          <div className={styles.top}>
+            <div className={styles.image_container}>
+              <div className={styles.image_left_container}>
                 <img
-                  src="/travelWithDog/images/example.png"
+                  src={product.images[0].url}
                   alt="product_image"
-                  className={styles.image_right}
-                />
-                <img
-                  src="/travelWithDog/images/example.png"
-                  alt="product_image"
-                  className={styles.image_right}
+                  className={styles.image_left}
                 />
               </div>
-              <div className={styles.image_right_sub_container}>
-                <img
-                  src="/travelWithDog/images/example.png"
-                  alt="product_image"
-                  className={styles.image_right}
-                />
-                <img
-                  src="/travelWithDog/images/example.png"
-                  alt="product_image"
-                  className={styles.image_right}
-                />
-              </div>
-            </div>
-          </div>
-          <div className={styles.top_data_container}>
-            <p className={styles.product_title}>파라다이스 호텔 부산</p>
-            <div className={styles.top_rating_container}>
-              <div className={styles.star_container}>
-                <ReactStars
-                  count={5}
-                  edit={false}
-                  size={20}
-                  value={4}
-                  activeColor="#000000"
-                  isHalf={true}
-                  emptyIcon={<i className="fas fa-paw"></i>}
-                  halfIcon={<i className="fas fa-paw"></i>}
-                  filledIcon={<i className="fas fa-paw"></i>}
-                />
-                <p className={styles.rating_text}>4.0점</p>
-              </div>
-              <p className={styles.rating_review_number}>32개의 리뷰</p>
-            </div>
-          </div>
-        </div>
-        <nav className={styles.menu_bar}>
-          <ul className={styles.menu_list}>
-            <li
-              onClick={() =>
-                introRef.current.scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              상품소개
-            </li>
-            <li
-              onClick={() =>
-                optionRef.current.scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              옵션선택
-            </li>
-            <li
-              onClick={() =>
-                mapRef.current.scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              위치정보
-            </li>
-            <li
-              onClick={() =>
-                articleRef.current.scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              여행기(8)
-            </li>
-            <li
-              onClick={() =>
-                reviewRef.current.scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              리뷰(32)
-            </li>
-          </ul>
-        </nav>
-        <div ref={introRef} className={styles.part}>
-          <div className={styles.part_title_container}>
-            <p className={styles.part_title}>상품 소개</p>
-          </div>
-          <div className={styles.intro_main}></div>
-        </div>
-        <div ref={optionRef} className={styles.part}>
-          <div className={styles.part_title_container}>
-            <p className={styles.part_title}>옵션 선택</p>
-          </div>
-          <div className={styles.option_main}>
-            <ProductOption />
-            <ProductOption />
-          </div>
-        </div>
-        <div ref={mapRef} className={styles.part}>
-          <div className={styles.part_title_container}>
-            <p className={styles.part_title}>위치 정보</p>
-          </div>
-          <div className={styles.map_main}>
-            <div className={styles.map_top}>
-              <img
-                src="/travelWithDog/images/map_example.png"
-                alt="map"
-                className={styles.map_image}
-              />
-              <div className={styles.map_attraction_list}>
-                <p className={styles.map_attraction_title}>주변 관광지</p>
-                <div className={styles.map_attraction_item}>
-                  <p className={styles.map_attraction_name}>주문진 수산시장</p>
-                  <p className={styles.map_attraction_dist}>270m</p>
+              <div className={styles.image_right_container}>
+                <div className={styles.image_right_sub_container}>
+                  <img
+                    src={
+                      product.images[1]
+                        ? product.images[1].url
+                        : "/travelWithDog/images/no_image.jpeg"
+                    }
+                    alt="product_image"
+                    className={styles.image_right}
+                  />
+                  <img
+                    src={
+                      product.images[2]
+                        ? product.images[2].url
+                        : "/travelWithDog/images/no_image.jpeg"
+                    }
+                    alt="product_image"
+                    className={styles.image_right}
+                  />
                 </div>
-                <div className={styles.map_attraction_item}>
-                  <p className={styles.map_attraction_name}>주문진 수산시장</p>
-                  <p className={styles.map_attraction_dist}>270m</p>
-                </div>
-                <div className={styles.map_attraction_item}>
-                  <p className={styles.map_attraction_name}>주문진 수산시장</p>
-                  <p className={styles.map_attraction_dist}>270m</p>
+                <div className={styles.image_right_sub_container}>
+                  <img
+                    src={
+                      product.images[3]
+                        ? product.images[3].url
+                        : "/travelWithDog/images/no_image.jpeg"
+                    }
+                    alt="product_image"
+                    className={styles.image_right}
+                  />
+                  <img
+                    src={
+                      product.images[4]
+                        ? product.images[4].url
+                        : "/travelWithDog/images/no_image.jpeg"
+                    }
+                    alt="product_image"
+                    className={styles.image_right}
+                  />
                 </div>
               </div>
+              {product.images.length > 5 && (
+                <div className={styles.image_container_button}>{`+${
+                  product.images.length - 5
+                }개 더 보기`}</div>
+              )}
             </div>
-            <div className={styles.map_bottom}>
-              <i className={`${styles.map_icon} fas fa-map-marker-alt`}></i>
-              <p className={styles.map_location}>
-                부산 해운대구 해운대해변로296
-              </p>
+            <div className={styles.top_data_container}>
+              <p className={styles.product_title}>{product.name_en}</p>
+              <div className={styles.top_rating_container}>
+                <div className={styles.star_container}>
+                  <ReactStars
+                    count={5}
+                    edit={false}
+                    size={20}
+                    value={4}
+                    activeColor="#000000"
+                    isHalf={true}
+                    emptyIcon={<i className="fas fa-paw"></i>}
+                    halfIcon={<i className="fas fa-paw"></i>}
+                    filledIcon={<i className="fas fa-paw"></i>}
+                  />
+                  <p className={styles.rating_text}>4.0점</p>
+                </div>
+                <p className={styles.rating_review_number}>32개의 리뷰</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div ref={articleRef} className={styles.part}>
-          <div className={styles.part_title_container}>
-            <p className={styles.part_title}>여행기(8)</p>
-          </div>
-          <div className={styles.article_main}>
-            <ArticleSlick viewItems={jejuBest} />
-          </div>
-        </div>
-
-        <div ref={reviewRef} className={styles.review_part}>
-          <div className={styles.part_title_container}>
-            <p className={styles.part_title}>리뷰(32)</p>
-          </div>
-          <div className={styles.review_main}>
-            <p className={styles.slick_title}>BEST 리뷰</p>
-            <ReviewSlick viewItems={jejuBest} />
+          <nav className={styles.menu_bar}>
+            <ul className={styles.menu_list}>
+              <li
+                onClick={() =>
+                  introRef.current.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                상품소개
+              </li>
+              <li
+                onClick={() =>
+                  optionRef.current.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                옵션선택
+              </li>
+              <li
+                onClick={() =>
+                  mapRef.current.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                위치정보
+              </li>
+              <li
+                onClick={() =>
+                  articleRef.current.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                여행기(8)
+              </li>
+              <li
+                onClick={() =>
+                  reviewRef.current.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                리뷰(32)
+              </li>
+            </ul>
+          </nav>
+          <div ref={introRef} className={styles.part_intro}>
             <div className={styles.part_title_container}>
-              <p className={styles.part_title}>32개의 리뷰</p>
+              <p className={styles.part_title}>상품 소개</p>
             </div>
-            <div className={styles.all_review_container}>
-              <ProductReview />
-              <ProductReview />
+            <div
+              className={styles.intro_main}
+              dangerouslySetInnerHTML={{ __html: product.comment }}
+            ></div>
+            <div
+              className={styles.intro_main}
+              dangerouslySetInnerHTML={{ __html: product.description }}
+            ></div>
+          </div>
+          <div ref={optionRef} className={styles.part}>
+            <div className={styles.part_title_container}>
+              <p className={styles.part_title}>옵션 선택</p>
+            </div>
+            <div className={styles.option_main}>
+              <ProductOption />
+              <ProductOption />
             </div>
           </div>
-          <div className={styles.part_title_container_bottom}>
-            <p className={styles.part_title}>함께 즐기기 좋은 상품</p>
+          <div ref={mapRef} className={styles.part}>
+            <div className={styles.part_title_container}>
+              <p className={styles.part_title}>위치 정보</p>
+            </div>
+            <div className={styles.map_main}>
+              <div className={styles.map_top}>
+                <img
+                  src="/travelWithDog/images/map_example.png"
+                  alt="map"
+                  className={styles.map_image}
+                />
+                <div className={styles.map_attraction_list}>
+                  <p className={styles.map_attraction_title}>주변 관광지</p>
+                  <div className={styles.map_attraction_item}>
+                    <p className={styles.map_attraction_name}>
+                      주문진 수산시장
+                    </p>
+                    <p className={styles.map_attraction_dist}>270m</p>
+                  </div>
+                  <div className={styles.map_attraction_item}>
+                    <p className={styles.map_attraction_name}>
+                      주문진 수산시장
+                    </p>
+                    <p className={styles.map_attraction_dist}>270m</p>
+                  </div>
+                  <div className={styles.map_attraction_item}>
+                    <p className={styles.map_attraction_name}>
+                      주문진 수산시장
+                    </p>
+                    <p className={styles.map_attraction_dist}>270m</p>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.map_bottom}>
+                <i className={`${styles.map_icon} fas fa-map-marker-alt`}></i>
+                <p className={styles.map_location}>
+                  부산 해운대구 해운대해변로296
+                </p>
+              </div>
+            </div>
           </div>
-          <div className={styles.with_main}>
-            <ItemSlickThree viewItems={jejuBest} />
+          <div ref={articleRef} className={styles.part}>
+            <div className={styles.part_title_container}>
+              <p className={styles.part_title}>여행기(8)</p>
+            </div>
+            <div className={styles.article_main}>
+              <ArticleSlick viewItems={jejuBest} />
+            </div>
+          </div>
+
+          <div ref={reviewRef} className={styles.review_part}>
+            <div className={styles.part_title_container}>
+              <p className={styles.part_title}>리뷰(32)</p>
+            </div>
+            <div className={styles.review_main}>
+              <p className={styles.slick_title}>BEST 리뷰</p>
+              <ReviewSlick viewItems={jejuBest} />
+              <div className={styles.part_title_container}>
+                <p className={styles.part_title}>32개의 리뷰</p>
+              </div>
+              <div className={styles.all_review_container}>
+                <ProductReview />
+                <ProductReview />
+              </div>
+            </div>
+            <div className={styles.part_title_container_bottom}>
+              <p className={styles.part_title}>함께 즐기기 좋은 상품</p>
+            </div>
+            <div className={styles.with_main}>
+              <ItemSlickThree viewItems={jejuBest} />
+            </div>
+          </div>
+          <div
+            className={styles.go_up_button}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <i className={`${styles.go_up_icon} fas fa-arrow-up`}></i>
           </div>
         </div>
-        <div
-          className={styles.go_up_button}
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          <i className={`${styles.go_up_icon} fas fa-arrow-up`}></i>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

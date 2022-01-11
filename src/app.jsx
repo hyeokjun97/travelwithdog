@@ -388,7 +388,7 @@ const App = (props) => {
             path="/mobile/mypage/:path"
             element={<MobileMypageDetail />}
           ></Route>
-          <Route path="/test" element={<ProductDetail />}></Route>
+          <Route path="/product/:path" element={<ProductDetail />}></Route>
           <Route path="/res" element={<ReservationPage />}></Route>
           <Route path="/article" element={<ArticleView />}></Route>
           <Route path="/articlew" element={<ArticleWrite />}></Route>

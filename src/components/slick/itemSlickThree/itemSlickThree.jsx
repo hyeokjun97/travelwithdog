@@ -98,12 +98,11 @@ export default class ItemSlickThree extends Component {
         prevArrow: <PrevArrow />,
       };
     }
-
     return (
       <div className="slick_three_container">
         <Slider {...settings}>
           {viewItems.map((item) => (
-            <div key={item.id} className="item">
+            <div key={item.idx ? item.idx : item.product_id} className="item">
               <img
                 src={item.product && item.product.tour.image.url}
                 alt="thumbnail"
