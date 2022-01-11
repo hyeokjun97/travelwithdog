@@ -8,6 +8,7 @@ import ProductReview from "./productReview/productReview";
 import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import ImageViewSlick from "../slick/imageViewSlick/imageViewSlick";
 
 const ProductDetail = (props) => {
   const { path } = useParams();
@@ -19,6 +20,8 @@ const ProductDetail = (props) => {
 
   //transfer는 rentcar 컴포넌트에서 사용 / 만약 여기서 분류가 더 추가된다면 방법 생각해야됨
   const [product, setProduct] = useState(null);
+
+  const [imageViewOn, setImageViewOn] = useState(false);
 
   //추천상품 임시데이터
   const [jejuBest, setJejuBest] = useState([
@@ -89,6 +92,10 @@ const ProductDetail = (props) => {
     },
   ]);
 
+  const imageViewOnHandler = () => {
+    setImageViewOn(!imageViewOn);
+  };
+
   useEffect(() => {
     const loadProductInfo = () => {
       axios
@@ -99,12 +106,27 @@ const ProductDetail = (props) => {
     loadProductInfo();
   }, []);
 
+  useEffect(() => {
+    console.log(product);
+  }, [product]);
+
   return (
     <div className={styles.body}>
       {product && (
         <div className={styles.container}>
+          {imageViewOn && (
+            <div className={styles.image_view_container}>
+              <ImageViewSlick
+                imageList={product.images}
+                onCloseHandler={imageViewOnHandler}
+              />
+            </div>
+          )}
           <div className={styles.top}>
-            <div className={styles.image_container}>
+            <div
+              className={styles.image_container}
+              onClick={imageViewOnHandler}
+            >
               <div className={styles.image_left_container}>
                 <img
                   src={product.images[0].url}
