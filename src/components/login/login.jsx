@@ -48,8 +48,14 @@ const Login = ({
       })
       .catch((err) => {
         console.error(err);
-        alert(err.response.data.message);
-        //아이디가 이메일 형식 아닐경우 + 비밀번호 8자리 아래로 입력한 경우 처리
+
+        if (err.response.data.message) {
+          alert(err.response.data.message);
+        } else if (err.response.data.messages.password) {
+          alert("비밀번호는 최소 8자리 이상이어야 합니다.");
+        } else if (err.response.data.messages.email) {
+          alert("이메일 형식에 맞지 않습니다.");
+        }
       });
   };
 
