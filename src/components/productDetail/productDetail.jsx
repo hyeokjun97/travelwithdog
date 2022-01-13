@@ -18,6 +18,8 @@ const ProductDetail = (props) => {
   const articleRef = useRef();
   const reviewRef = useRef();
 
+  const [viewDetailOn, setViewDetailOn] = useState(false);
+
   //transfer는 rentcar 컴포넌트에서 사용 / 만약 여기서 분류가 더 추가된다면 방법 생각해야됨
   const [product, setProduct] = useState(null);
 
@@ -94,6 +96,10 @@ const ProductDetail = (props) => {
 
   const imageViewOnHandler = () => {
     setImageViewOn(!imageViewOn);
+  };
+
+  const detailViewChangeHandler = () => {
+    setViewDetailOn(true);
   };
 
   useEffect(() => {
@@ -242,7 +248,26 @@ const ProductDetail = (props) => {
               </li>
             </ul>
           </nav>
-          <div ref={introRef} className={styles.part_intro}>
+          <div
+            ref={introRef}
+            className={`${
+              viewDetailOn ? `${styles.part_intro}` : `${styles.part_intro_off}`
+            }`}
+          >
+            <div
+              className={`${
+                viewDetailOn
+                  ? `${styles.bottom_filter_off}`
+                  : `${styles.bottom_filter}`
+              }`}
+            >
+              <button
+                className={styles.view_detail_button}
+                onClick={detailViewChangeHandler}
+              >
+                상세 보기
+              </button>
+            </div>
             <div className={styles.part_title_container}>
               <p className={styles.part_title}>상품 소개</p>
             </div>

@@ -17,8 +17,7 @@
   border-radius: 14px 14px 0 0;
 }
 
-.main:after {
-  content: "즉시 확정";
+.tag {
   position: absolute;
   top: 15px;
   left: -5px;
@@ -219,6 +218,7 @@
   font-size: var(--fontsize-bit-big);
   font-weight: 700;
   color: #101010;
+  font-size: var(--fontsize-bit-small);
 }
 
 .date_select {
@@ -394,7 +394,7 @@
   }
 
   .option_detail_title {
-    font-size: var(--fontsize-normal);
+    font-size: var(--fontsize-bit-small);
     margin-bottom: 4px;
   }
 
@@ -441,5 +441,9 @@
 
   .date_picker {
     left: -22px;
+  }
+  .button_purchase,
+  .button_close {
+    font-size: var(--fontsize-normal);
   }
 }

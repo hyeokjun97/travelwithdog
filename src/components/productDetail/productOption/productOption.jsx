@@ -101,6 +101,9 @@ const ProductOption = ({ item }) => {
           openValue ? `${styles.main} ${styles.main_on}` : `${styles.main}`
         }`}
       >
+        <div className={styles.tag}>
+          {item.supplier.product_confirmation_code.name}
+        </div>
         <img
           src="/travelWithDog/images/example.png"
           alt="option_image"

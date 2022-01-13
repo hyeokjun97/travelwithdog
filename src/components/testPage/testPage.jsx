@@ -7,7 +7,7 @@ const TestPage = (props) => {
     <div style={{ marginTop: "200px" }}>
       <div
         style={{ marginTop: "20px", cursor: "pointer" }}
-        onClick={() => nav("/test")}
+        onClick={() => nav("/product/16701")}
       >
         상품상세
       </div>
@@ -19,7 +19,7 @@ const TestPage = (props) => {
       </div>
       <div
         style={{ marginTop: "20px", cursor: "pointer" }}
-        onClick={() => nav("/article")}
+        onClick={() => nav("/article/6")}
       >
         여행기보기
       </div>

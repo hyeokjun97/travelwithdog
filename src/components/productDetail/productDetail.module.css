@@ -142,11 +142,48 @@
 }
 
 .part,
-.part_intro {
+.part_intro,
+.part_intro_off {
   padding: 36px 20px;
   background-color: white;
   margin-bottom: 9px;
   scroll-margin: 130px;
+}
+
+.part_intro_off {
+  height: 450px;
+  overflow-y: hidden;
+  position: relative;
+}
+
+.bottom_filter {
+  width: 100%;
+  height: 150px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0), #fff 99%);
+}
+
+.bottom_filter_off {
+  display: none;
+}
+
+.view_detail_button {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  outline: none;
+  border: 1px solid var(--color-light-border);
+  background-color: var(--color-green);
+  color: white;
+  font-size: var(--fontsize-normal);
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .part_title_container {
