@@ -4,6 +4,7 @@
   margin-bottom: 80px;
 }
 
+/*이 3개 차이 알아내서 따로 스타일 지정해야됨*/
 .slick_template .slick-slider,
 .slick_template .slick-list,
 .slick_template .slick-track {

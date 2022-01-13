@@ -229,7 +229,7 @@
     margin-bottom: 40px;
   }
   .title {
-    font-size: var(--fontsize-big);
+    font-size: var(--fontsize-mini-title);
     padding-left: 7%;
     padding-right: 7%;
     text-align: center;
@@ -238,6 +238,7 @@
   .subtitle {
     width: 80%;
     font-size: var(--fontsize-normal);
+    font-weight: 500;
     text-align: center;
     margin: 20px 0;
   }
