@@ -49,7 +49,7 @@ const MobileFooter = (props) => {
             : `${styles.button}`
         }`}
         onClick={() => {
-          navigate("/mobile/category/lodging");
+          navigate("/mobile/category/jeju");
           window.scrollTo({ top: 0 });
         }}
       >

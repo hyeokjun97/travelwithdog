@@ -8,17 +8,18 @@ import ItemSlickTwo from "../../slick/itemSlickTwo/itemSlickTwo";
 import { useNavigate, useParams } from "react-router-dom";
 
 const MobileCategory = ({ categoryList }) => {
+  console.log(categoryList);
   const navigate = useNavigate();
   const { path } = useParams();
   const [category, setCategory] = useState(null);
 
   const onCategoryChangeHandler = (data) => {
-    navigate(`/mobile/category/${data.route}`);
+    navigate(`/mobile/category/${data.url}`);
   };
 
   useEffect(() => {
     categoryList.forEach((cat) => {
-      if (cat.route === path) {
+      if (cat.url.slice(1) === path) {
         setCategory(cat);
       }
     });

@@ -17,6 +17,7 @@ export default class MenuSlick extends Component {
       slidesToShow: 4,
       slidesToScroll: 1,
     };
+    console.log(viewItems, category);
     return (
       <div className="menu_slick_container">
         <Slider {...settings}>
@@ -30,10 +31,10 @@ export default class MenuSlick extends Component {
             >
               <p
                 className={`${
-                  category.title === item.title ? "title selected" : "title"
+                  category.name === item.name ? "title selected" : "title"
                 }`}
               >
-                {item.title}
+                {item.name}
               </p>
             </div>
           ))}

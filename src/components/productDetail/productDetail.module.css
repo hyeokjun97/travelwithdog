@@ -368,7 +368,8 @@ img {
   .image_right_container {
     display: none;
   }
-  .part_intro {
+  .part_intro,
+  .part_intro_off {
     padding: 36px 10px;
   }
   .review_part {
