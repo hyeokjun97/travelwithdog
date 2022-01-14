@@ -1,21 +1,24 @@
 import React from "react";
-import styles from "./mainpageMapItem.module.css";
+import styles from "./mapSectionItem.module.css";
 import ReactStars from "react-rating-stars-component";
 
-const MainpageMapItem = ({ item }) => {
+const MapSectionItem = ({ item }) => {
   return (
     <div className={styles.item}>
       <div className={styles.image_container}>
         <img
-          src={`https://public.travelforest.co.kr/${item.images[0].url}`}
+          src={`${
+            item.images &&
+            `https://public.travelforest.co.kr/${item.images[0].url}`
+          }`}
           alt="spot_image"
           className={styles.image}
         />
       </div>
 
       <div className={styles.data_container}>
-        <p className={styles.type}>{item.spot_category_name}</p>
-        <p className={styles.name}>{item.name_ko}</p>
+        <p className={styles.type}>{item.categories[0].name}</p>
+        <p className={styles.name}>{item.name}</p>
         <div className={styles.rating}>
           <ReactStars
             count={5}
@@ -35,4 +38,4 @@ const MainpageMapItem = ({ item }) => {
   );
 };
 
-export default MainpageMapItem;
+export default MapSectionItem;

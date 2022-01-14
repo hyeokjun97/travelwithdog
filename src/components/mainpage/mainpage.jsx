@@ -7,8 +7,7 @@ import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
 import ItemSlickTwo from "../slick/itemSlickTwo/itemSlickTwo";
 import TagButton from "../tagButton/tagButton";
 import styles from "./mainpage.module.css";
-import MainpageMapItem from "./mainpageMapItem/mainpageMapItem";
-import { useGoogleMaps } from "react-hook-google-maps";
+import MapSection from "../mapSection/mapSection";
 
 const Mainpage = ({
   chabak,
@@ -57,15 +56,6 @@ const Mainpage = ({
 
     return () => window.removeEventListener("keydown", keyHandler);
   }, [keyHandler]);
-
-  const { ref, map, google } = useGoogleMaps(
-    process.env.REACT_APP_MAP_KEY,
-
-    {
-      center: { lat: 33.41133915114478, lng: 126.53676192021225 },
-      zoom: 10,
-    }
-  );
 
   const settingPageData = (data) => {
     setPageData(data);
@@ -162,9 +152,7 @@ const Mainpage = ({
             <b>반려견 동반</b>이 가능한 <b>식당, 카페, 여행지, 숙소</b>가 모두
             지도 안에!
           </p>
-          <div className={styles.map_main}>
-            <div ref={ref} className={styles.map}></div>
-          </div>
+          <MapSection />
         </div>
         <div className={styles.list_container}>
           <p className={styles.list_title}>가장 인기있는 펫 렌터카</p>

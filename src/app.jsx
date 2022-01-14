@@ -43,8 +43,7 @@ const App = (props) => {
   const [signupPopupOn, setSignupPopupOn] = useState(false);
   const [findPopupOn, setFindPopupOn] = useState(false);
 
-  //const [spotList, setSpotList] = useState(null);
-
+  //임시데이터
   const [chabak, setChabak] = useState([
     {
       idx: 0,
@@ -250,46 +249,6 @@ const App = (props) => {
     setFindPopupOn(false);
   };
 
-  //const loadSpotList = () => {
-  //  axios
-  //    .get("/api/spots")
-  //    .then((response) => {
-  //      setSpotList(response.data.spots);
-  //    })
-  //    .catch((err) => console.error(err));
-  //};
-
-  const keyHandler = (e) => {
-    if (e.key !== "Escape") {
-      return;
-    }
-    setLoginPopupOn(false);
-    setSignupPopupOn(false);
-    setFindPopupOn(false);
-  };
-
-  //const onDeviceSizeChangeHandler = () => {
-  //  if (window.innerWidth > 800) {
-  //    setDeviceSize(true);
-  //  } else {
-  //    setDeviceSize(false);
-  //  }
-  //};
-
-  useEffect(() => {
-    //window.addEventListener("resize", onDeviceSizeChangeHandler);
-    window.addEventListener("keydown", keyHandler);
-    return () => {
-      window.removeEventListener("keydown", keyHandler);
-      //window.removeEventListener("resize", onDeviceSizeChangeHandler);
-    };
-  }, [keyHandler]);
-
-  //컴포넌트 마운트 시에 불러오기
-  //useEffect(() => {
-  //  loadSpotList();
-  //}, []);
-
   const loadPageList = () => {
     axios
       .get(`${process.env.REACT_APP_BASEURL}/site/pages`)
@@ -304,6 +263,25 @@ const App = (props) => {
       .catch((err) => console.error(err));
   };
 
+  const keyHandler = (e) => {
+    if (e.key !== "Escape") {
+      return;
+    }
+    setLoginPopupOn(false);
+    setSignupPopupOn(false);
+    setFindPopupOn(false);
+  };
+
+  useEffect(() => {
+    //window.addEventListener("resize", onDeviceSizeChangeHandler);
+    window.addEventListener("keydown", keyHandler);
+    return () => {
+      window.removeEventListener("keydown", keyHandler);
+      //window.removeEventListener("resize", onDeviceSizeChangeHandler);
+    };
+  }, [keyHandler]);
+
+  //컴포넌트 마운트 시에 불러오기
   useEffect(() => {
     loadPageList();
   }, []);
