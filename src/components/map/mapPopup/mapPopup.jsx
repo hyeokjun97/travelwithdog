@@ -28,13 +28,15 @@ const MapPopup = ({ popupValue, onCloseButtonHandler, deviceSize }) => {
       >
         <i className={`${styles.close_icon} fas fa-times`}></i>
       </div>
-      {popupValue && <CustomPaging imageList={popupValue.images.slice(0, 4)} />}
+      {popupValue && popupValue.images && (
+        <CustomPaging imageList={popupValue.images.slice(0, 4)} />
+      )}
       <div className={styles.data_container}>
         <div className={styles.top}>
           <div className={styles.name_and_type_and_sns}>
             <div className={styles.name_and_type}>
-              <p className={styles.name}>{popupValue.name_ko}</p>
-              <p className={styles.type}>{popupValue.spot_category_name}</p>
+              <p className={styles.name}>{popupValue.name}</p>
+              <p className={styles.type}>{popupValue.categories[0].name}</p>
             </div>
             <div className={styles.sns_container}>
               {instaUrl && (

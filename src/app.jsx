@@ -30,6 +30,7 @@ import MobileCarSearch from "./components/mobile/mobileCarSearch/mobileCarSearch
 import TestPage from "./components/testPage/testPage";
 import NewsView from "./components/newsView/newsView";
 import Introduce from "./components/introduce/introduce";
+import ErrorPage from "./components/errorPage/errorPage";
 
 //페이지 리로딩 시 로딩 페이지 띄우기
 const App = (props) => {
@@ -379,6 +380,7 @@ const App = (props) => {
           <Route path="/testroute" element={<TestPage />}></Route>
           <Route path="/news" element={<NewsView />}></Route>
           <Route path="/introduce/:path" element={<Introduce />}></Route>
+          <Route path="/error" element={<ErrorPage />}></Route>
         </Routes>
 
         {deviceSize ? <Footer /> : <MobileFooter />}

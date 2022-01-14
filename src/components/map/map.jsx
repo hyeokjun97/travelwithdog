@@ -30,7 +30,10 @@ const Map = ({ deviceSize }) => {
     }
     spotList.forEach((spot) => {
       const marker = new google.maps.Marker({
-        position: { lat: spot.latitude, lng: spot.longitude },
+        position: {
+          lat: spot.position.coordinates[1],
+          lng: spot.position.coordinates[0],
+        },
         map: map,
         //icon: "/travelWithDog/images/icons.svg#rentcar",
       });
@@ -48,10 +51,10 @@ const Map = ({ deviceSize }) => {
 
   const loadSpotList = () => {
     axios
-      .get("/api/spots")
+      .get(`${process.env.REACT_APP_BASEURL}/spots`)
       .then((response) => {
-        setSpotList(response.data.spots);
-        setResultSpotList(response.data.spots);
+        setSpotList(response.data);
+        setResultSpotList(response.data);
       })
       .catch((err) => console.error(err));
   };
@@ -78,7 +81,11 @@ const Map = ({ deviceSize }) => {
     if (!spotList) {
       return;
     }
-    const result = spotList.filter((spot) => spot.name_ko.includes(inputValue));
+    if (inputValue === "") {
+      setResultSpotList(spotList);
+      return;
+    }
+    const result = spotList.filter((spot) => spot.name.includes(inputValue));
     setResultSpotList(result);
   }, [inputValue]);
 
