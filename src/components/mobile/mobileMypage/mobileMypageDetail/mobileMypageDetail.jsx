@@ -6,6 +6,7 @@ import MobileMypageCommunity from "./mobileMypageCommunity/mobileMypageCommunity
 import styles from "./mobileMypageDetail.module.css";
 import MobileMypageEdit from "./mobileMypageEdit/mobileMypageEdit";
 import MobileMypagePayments from "./mobileMypagePayments/mobileMypagePayments";
+import MobileMypageQna from "./mobileMypageQna/mobileMypageQna";
 
 const MobileMypageDetail = (props) => {
   const navigate = useNavigate();
@@ -73,6 +74,8 @@ const MobileMypageDetail = (props) => {
         <MobileMypagePayments />
       ) : path === "community" ? (
         <MobileMypageCommunity />
+      ) : path === "qna" ? (
+        <MobileMypageQna />
       ) : (
         <></>
       )}
