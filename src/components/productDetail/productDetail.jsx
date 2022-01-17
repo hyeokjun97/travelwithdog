@@ -102,6 +102,20 @@ const ProductDetail = (props) => {
     setViewDetailOn(true);
   };
 
+  const keyHandler = (e) => {
+    if (e.key !== "Escape") {
+      return;
+    }
+    setImageViewOn(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", keyHandler);
+    return () => {
+      window.removeEventListener("keydown", keyHandler);
+    };
+  }, [keyHandler]);
+
   useEffect(() => {
     const loadProductInfo = () => {
       axios
@@ -111,10 +125,6 @@ const ProductDetail = (props) => {
     };
     loadProductInfo();
   }, []);
-
-  useEffect(() => {
-    console.log(product);
-  }, [product]);
 
   return (
     <div className={styles.body}>

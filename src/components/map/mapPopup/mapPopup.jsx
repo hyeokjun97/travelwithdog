@@ -2,12 +2,25 @@ import React, { useEffect, useState } from "react";
 import CustomPaging from "../../slick/customPaging/customPaging";
 import styles from "./mapPopup.module.css";
 import ReactStars from "react-rating-stars-component";
+import axios from "axios";
 
 const MapPopup = ({ popupValue, onCloseButtonHandler, deviceSize }) => {
   const [instaUrl, setInstaUrl] = useState(null);
   const [blogUrl, setBlogUrl] = useState(null);
+  const [spotData, setSpotData] = useState(null);
+
+  const loadSpotData = () => {
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/spots/${popupValue.id}`)
+      .then((response) => setSpotData(response.data))
+      .catch((err) => console.error(err));
+  };
 
   useEffect(() => {
+    //데이터 로드
+    loadSpotData();
+
+    //블로그, 인스타그램 링크 설정
     const links = popupValue.links;
     if (!links) {
       return;
@@ -150,34 +163,30 @@ const MapPopup = ({ popupValue, onCloseButtonHandler, deviceSize }) => {
             <p className={styles.sort_title}>주차장</p>
           </div>
         </div>
-
         <div className={styles.sub_data_container}>
-          {popupValue.address && (
-            <span className={styles.sub_data_title}>
-              주소 <span className={styles.sub_data}>{popupValue.address}</span>
-            </span>
+          {spotData && spotData.address && (
+            <div className={styles.sub_data_item}>
+              <p className={styles.sub_data_title}>주소</p>
+              <span className={styles.sub_data}>{spotData.address}</span>
+            </div>
           )}
-          {popupValue.telephone_no && (
-            <span className={styles.sub_data_title}>
-              전화번호{" "}
-              <span className={styles.sub_data}>{popupValue.telephone_no}</span>
-            </span>
+          {spotData && spotData.telephone && (
+            <div className={styles.sub_data_item}>
+              <p className={styles.sub_data_title}>전화번호</p>
+              <span className={styles.sub_data}>{spotData.telephone}</span>
+            </div>
           )}
-          {popupValue.opening_hours && (
-            <span className={styles.sub_data_title}>
-              영업시간{" "}
-              <span className={styles.sub_data}>
-                {popupValue.opening_hours}
-              </span>
-            </span>
+          {spotData && spotData.business_hours && (
+            <div className={styles.sub_data_item}>
+              <p className={styles.sub_data_title}>영업시간</p>
+              <span className={styles.sub_data}>{spotData.business_hours}</span>
+            </div>
           )}
-          {popupValue.admission_fee && (
-            <span className={styles.sub_data_title}>
-              입장료{" "}
-              <span className={styles.sub_data}>
-                {popupValue.admission_fee}
-              </span>
-            </span>
+          {spotData && spotData.tariff && (
+            <div className={styles.sub_data_item}>
+              <p className={styles.sub_data_title}>입장료</p>
+              <span className={styles.sub_data}>{spotData.tariff}</span>
+            </div>
           )}
         </div>
         <div className={styles.nearby_container}>

@@ -158,11 +158,18 @@
   border-bottom: 1px solid #c4c4c4;
 }
 
+.sub_data_item {
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .sub_data_title {
+  width: 80px;
   font-size: var(--fontsize-bit-big);
   font-weight: 500;
   color: #6b6b6b;
-  margin-bottom: 6px;
 }
 
 .sub_data {
@@ -229,6 +236,7 @@
   }
 
   .sub_data_title {
+    width: 52px;
     font-size: var(--fontsize-small);
     font-weight: 500;
     margin-bottom: 1px;

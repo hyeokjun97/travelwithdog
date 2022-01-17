@@ -8,6 +8,7 @@ import ItemSlickTwo from "../slick/itemSlickTwo/itemSlickTwo";
 import TagButton from "../tagButton/tagButton";
 import styles from "./mainpage.module.css";
 import MapSection from "../mapSection/mapSection";
+import HelmetComponent from "../helmetComponent/helmetComponent";
 
 const Mainpage = ({
   chabak,
@@ -91,6 +92,14 @@ const Mainpage = ({
 
   return (
     <div className={styles.mainpage}>
+      {pageData && (
+        <HelmetComponent
+          title={pageData.html_title}
+          desc={pageData.html_description}
+          url={`https://www.travelwithdog.co.kr`}
+          keyword={pageData.html_keyword}
+        />
+      )}
       <div
         className={styles.top_banner}
         style={
@@ -100,8 +109,8 @@ const Mainpage = ({
         }
       >
         <div className={styles.top_filter}>
-          <p className={styles.title}>{pageData && pageData.title}</p>
-          <p className={styles.subtitle}>{pageData && pageData.subtitle}</p>
+          <h1 className={styles.title}>{pageData && pageData.title}</h1>
+          <h2 className={styles.subtitle}>{pageData && pageData.subtitle}</h2>
           <div className={styles.search_and_tag_container}>
             <div className={styles.search_container}>
               <input

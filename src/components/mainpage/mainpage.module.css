@@ -32,6 +32,7 @@
 }
 
 .subtitle {
+  font-size: var(--fontsize-big);
   margin-top: 20px;
   margin-bottom: 40px;
   font-size: var(--fontsize-mini-title);
