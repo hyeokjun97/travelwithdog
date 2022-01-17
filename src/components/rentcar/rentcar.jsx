@@ -7,6 +7,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
 import ItemSlickFive from "../slick/itemSlickFive/itemSlickFive";
 import ItemList from "../itemList/itemList";
+import axios from "axios";
 
 const Rentcar = ({ chabak, loadPageData }) => {
   const [pageData, setPageData] = useState(null);
@@ -107,6 +108,68 @@ const Rentcar = ({ chabak, loadPageData }) => {
 
   const settingPageData = (data) => {
     setPageData(data);
+  };
+
+  const makeDateFormat = () => {
+    const result = [];
+    const { startDate, endDate } = date[0];
+    const startList = startDate.toString().split(" ");
+    const endList = endDate.toString().split(" ");
+    result.push(
+      startList[3] +
+        "-" +
+        monthTranslator(startList[1]).toString().padStart(2, "0") +
+        "-" +
+        startList[2].padStart(2, "0") +
+        " " +
+        rentTime.slice(0, 2) +
+        ":" +
+        rentTime.slice(4, 6)
+    );
+    result.push(
+      endList[3] +
+        "-" +
+        monthTranslator(endList[1]).toString().padStart(2, "0") +
+        "-" +
+        endList[2].padStart(2, "0") +
+        " " +
+        returnTime.slice(0, 2) +
+        ":" +
+        returnTime.slice(4, 6)
+    );
+    return result;
+  };
+
+  const onSearchHandler = () => {
+    const selectedDateTime = makeDateFormat();
+    if (
+      selectedDateTime[0].length !== 16 ||
+      selectedDateTime[1].length !== 16
+    ) {
+      alert("시간을 선택해주세요");
+      return;
+    }
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/rentcars?pickup_datetime=${selectedDateTime[0]}&dropoff_datetime=${selectedDateTime[1]}`
+      )
+      .then((response) => console.log(response.data))
+      .catch((err) => {
+        if (
+          err.response.data.messages.pickup_datetime &&
+          err.response.data.messages.pickup_datetime[0].includes("tomorrow")
+        ) {
+          alert("당일은 예약이 불가능합니다. 당일 이후로 날짜를 설정해주세요");
+        } else if (
+          err.response.data.messages.dropoff_datetime &&
+          err.response.data.messages.dropoff_datetime[0].includes(
+            "after pickup date"
+          )
+        ) {
+          alert("반납일자는 대여일자 이후여야 합니다.");
+        }
+        console.error(err);
+      });
   };
 
   useEffect(() => {
@@ -210,7 +273,10 @@ const Rentcar = ({ chabak, loadPageData }) => {
                 ))}
               </select>
             </div>
-            <div className={styles.search_icon_container}>
+            <div
+              className={styles.search_icon_container}
+              onClick={onSearchHandler}
+            >
               <i className={`${styles.search_icon} fas fa-search`}></i>
             </div>
           </div>
