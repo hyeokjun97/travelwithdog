@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ButtonSlick from "../../../slick/buttonSlick/buttonSlick";
+import MobileMypageCommunity from "./mobileMypageCommunity/mobileMypageCommunity";
 
 import styles from "./mobileMypageDetail.module.css";
 import MobileMypageEdit from "./mobileMypageEdit/mobileMypageEdit";
@@ -70,6 +71,8 @@ const MobileMypageDetail = (props) => {
         <MobileMypagePayments />
       ) : path === "paymentscancel" ? (
         <MobileMypagePayments />
+      ) : path === "community" ? (
+        <MobileMypageCommunity />
       ) : (
         <></>
       )}

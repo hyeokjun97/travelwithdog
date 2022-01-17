@@ -1,8 +1,9 @@
 .main {
   padding: 30px;
+  padding-top: 10px;
 }
 .title {
-  padding-bottom: 30px;
+  padding-bottom: 16px;
 }
 
 .input_container {
