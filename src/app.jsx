@@ -257,7 +257,7 @@ const App = (props) => {
       .catch((err) => console.error(err));
   };
 
-  const loadPageInfo = (query, settingPageData) => {
+  const loadPageData = (query, settingPageData) => {
     axios
       .get(`${process.env.REACT_APP_BASEURL}/site/pages/${query}`)
       .then((response) => settingPageData(response.data))
@@ -330,7 +330,7 @@ const App = (props) => {
                 hotList={hotList}
                 tagButtonList={tagButtonList}
                 deviceSize={deviceSize}
-                loadPageInfo={loadPageInfo}
+                loadPageData={loadPageData}
               />
             }
           ></Route>
@@ -338,7 +338,12 @@ const App = (props) => {
           {categoryList && (
             <Route
               path="/category/:path"
-              element={<CategoryPage categoryList={categoryList} />}
+              element={
+                <CategoryPage
+                  categoryList={categoryList}
+                  loadPageData={loadPageData}
+                />
+              }
             ></Route>
           )}
           {categoryList && (
@@ -352,7 +357,7 @@ const App = (props) => {
           {chabak && (
             <Route
               path="/rentcar"
-              element={<Rentcar chabak={chabak} />}
+              element={<Rentcar chabak={chabak} loadPageData={loadPageData} />}
             ></Route>
           )}
           {deviceSize ? (

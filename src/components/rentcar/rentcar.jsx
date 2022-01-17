@@ -8,7 +8,8 @@ import { ko } from "react-date-range/dist/locale/index.js";
 import ItemSlickFive from "../slick/itemSlickFive/itemSlickFive";
 import ItemList from "../itemList/itemList";
 
-const Rentcar = ({ chabak }) => {
+const Rentcar = ({ chabak, loadPageData }) => {
+  const [pageData, setPageData] = useState(null);
   const [datePickerOn, setDatePickerOn] = useState(false);
   const [date, setDate] = useState([
     {
@@ -103,6 +104,14 @@ const Rentcar = ({ chabak }) => {
       [name]: value,
     });
   };
+
+  const settingPageData = (data) => {
+    setPageData(data);
+  };
+
+  useEffect(() => {
+    loadPageData("rentcar", settingPageData);
+  }, []);
 
   useEffect(() => {
     if (!date) {

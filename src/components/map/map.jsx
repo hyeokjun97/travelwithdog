@@ -4,6 +4,7 @@ import axios from "axios";
 import MapMenuItem from "./mapMenuItem/mapMenuItem";
 import MapPopup from "./mapPopup/mapPopup";
 import { useGoogleMaps } from "react-hook-google-maps";
+import HelmetComponent from "../helmetComponent/helmetComponent";
 
 const Map = ({ deviceSize }) => {
   const [inputValue, setInputValue] = useState("");
@@ -105,6 +106,7 @@ const Map = ({ deviceSize }) => {
 
   return (
     <div className={styles.body}>
+      <HelmetComponent url={`https://www.travelwithdog.co.kr/map`} />
       {popupOn && (
         <div
           className={styles.filter}

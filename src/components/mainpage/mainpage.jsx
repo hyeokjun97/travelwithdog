@@ -17,7 +17,7 @@ const Mainpage = ({
   tagButtonList,
   spotList,
   deviceSize,
-  loadPageInfo,
+  loadPageData,
 }) => {
   const navigate = useNavigate();
   const listRef = useRef([]);
@@ -63,15 +63,8 @@ const Mainpage = ({
   };
 
   useEffect(() => {
-    loadPageInfo("home", settingPageData);
+    loadPageData("home", settingPageData);
   }, []);
-
-  useEffect(() => {
-    if (!pageData) {
-      return;
-    }
-    console.log(pageData);
-  }, [pageData]);
 
   //<div className={styles.list_container}>
   //        <p className={styles.list_title}>HOT한 여행지 순위</p>

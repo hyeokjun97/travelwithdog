@@ -9,6 +9,7 @@ import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ImageViewSlick from "../slick/imageViewSlick/imageViewSlick";
+import HelmetComponent from "../helmetComponent/helmetComponent";
 
 const ProductDetail = (props) => {
   const { path } = useParams();
@@ -128,6 +129,15 @@ const ProductDetail = (props) => {
 
   return (
     <div className={styles.body}>
+      {product && (
+        <HelmetComponent
+          title={product.html_title}
+          desc={product.html_description}
+          url={`https://www.travelwithdog.co.kr/product/${path}`}
+          keyword={product.html_keyword}
+          image={product.images[0].url}
+        />
+      )}
       {product && (
         <div className={styles.container}>
           {imageViewOn && (

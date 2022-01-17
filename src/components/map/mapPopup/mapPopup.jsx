@@ -3,6 +3,7 @@ import CustomPaging from "../../slick/customPaging/customPaging";
 import styles from "./mapPopup.module.css";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
+import HelmetComponent from "../../helmetComponent/helmetComponent";
 
 const MapPopup = ({ popupValue, onCloseButtonHandler, deviceSize }) => {
   const [instaUrl, setInstaUrl] = useState(null);
@@ -35,6 +36,14 @@ const MapPopup = ({ popupValue, onCloseButtonHandler, deviceSize }) => {
   }, []);
   return (
     <div className={styles.popup}>
+      {spotData && (
+        <HelmetComponent
+          title={spotData.html_title}
+          desc={spotData.html_description}
+          url={`https://www.travelwithdog.co.kr/map`}
+          keyword={spotData.html_keyword}
+        />
+      )}
       <div
         className={styles.close_icon_container}
         onClick={onCloseButtonHandler}

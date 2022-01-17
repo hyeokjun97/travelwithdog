@@ -6,9 +6,14 @@ import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
 import ItemSlickTwo from "../slick/itemSlickTwo/itemSlickTwo";
 import styles from "./categoryPage.module.css";
 
-const CategoryPage = ({ categoryList }) => {
+const CategoryPage = ({ categoryList, loadPageData }) => {
   const [category, setCategory] = useState(null);
+  const [pageData, setPageData] = useState(null);
   const { path } = useParams();
+
+  const settingPageData = (data) => {
+    setPageData(data);
+  };
 
   useEffect(() => {
     categoryList.forEach((cate) => {
@@ -17,7 +22,13 @@ const CategoryPage = ({ categoryList }) => {
         return false;
       }
     });
+    loadPageData(path, settingPageData);
+    //카테고리 페이지는 이걸로 정보 불러오는거 아직 안만들어진 것으로 보임
   }, [path]);
+
+  useEffect(() => {
+    console.log(pageData);
+  }, [pageData]);
 
   return (
     <main className={styles.main}>
