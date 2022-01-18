@@ -1,112 +1,215 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styles from "./carDetail.module.css";
 
 const CarDetail = (props) => {
+  const { carId, businessId, pickupDateTime, dropoffDateTime } = useParams();
+  const [carInfo, setCarInfo] = useState(null);
+  const [korPickupDateTime, setKorPickupDateTime] = useState(null);
+  const [korDropoffDateTime, setKorDropoffDateTime] = useState(null);
+  const [totalTime, setTotalTime] = useState(null);
+  const [selectedInsurance, setSelectedInsurance] = useState(null);
+
+  const loadCarInfo = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/rentcars/${carId}/${businessId}?pickup_datetime=${pickupDateTime}&dropoff_datetime=${dropoffDateTime}`
+      )
+      .then((response) => setCarInfo(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  //영문 요일을 한글로 바꾸어 줌
+  const dayTranslator = (selectedDay) => {
+    const dayList = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const korDayList = ["월", "화", "수", "목", "금", "토", "일"];
+    for (let i = 0; i < dayList.length; i++) {
+      if (dayList[i] === selectedDay) {
+        return korDayList[i];
+      }
+    }
+  };
+
+  const onInsuranceSelectHandler = (e) => {
+    carInfo.insurances.forEach((ins) => {
+      if (ins.name === e.currentTarget.dataset.name) {
+        console.log(ins);
+        setSelectedInsurance(ins);
+        return false;
+      }
+    });
+  };
+
+  useEffect(() => {
+    loadCarInfo();
+  }, []);
+
+  useEffect(() => {
+    const makeDateTimeToKorString = () => {
+      const p = pickupDateTime;
+      const d = dropoffDateTime;
+      const pDate = new Date(p.slice(0, 10));
+      const dDate = new Date(d.slice(0, 10));
+
+      const pResult = `${p.slice(0, 4)}년 ${parseInt(
+        p.slice(5, 7)
+      )}월 ${parseInt(p.slice(8, 10))}일 (${dayTranslator(
+        pDate.toString().split(" ")[0]
+      )}) ${p.slice(11)}`;
+
+      const dResult = `${d.slice(0, 4)}년 ${parseInt(
+        d.slice(5, 7)
+      )}월 ${parseInt(d.slice(8, 10))}일 (${dayTranslator(
+        dDate.toString().split(" ")[0]
+      )}) ${d.slice(11)}`;
+      setKorPickupDateTime(pResult);
+      setKorDropoffDateTime(dResult);
+      setTotalTime((Date.parse(d) - Date.parse(p)) / 3600000);
+    };
+    makeDateTimeToKorString();
+  }, []);
+
   return (
     <div className={styles.body}>
       <div className={styles.container}>
         <main className={styles.main}>
           <div className={styles.top}>
             <p className={styles.top_title}>렌터카 예약</p>
-            <div className={styles.top_data_container}>
-              <div className={styles.image_container}>
-                <img
-                  src="/travelWithDog/images/car_example.png"
-                  alt="car_image"
-                  className={styles.image}
-                />
-              </div>
-              <div className={styles.top_text_data_container}>
-                <div className={styles.top_name_container}>
-                  <p className={styles.name}>LF 쏘나타 뉴라이즈(LPG)</p>
-                  <p className={styles.type}>중형 5인승</p>
-                </div>
-                <div className={styles.top_option_container}>
-                  <div className={styles.top_option}>
-                    <i className={`${styles.check_icon} fas fa-check`}></i>
-                    <p className={styles.option_name}>운전석 에어백</p>
-                  </div>
-                  <div className={styles.top_option}>
-                    <i className={`${styles.check_icon} fas fa-check`}></i>
-                    <p className={styles.option_name}>운전석 에어백</p>
-                  </div>
-                  <div className={styles.top_option}>
-                    <i className={`${styles.check_icon} fas fa-check`}></i>
-                    <p className={styles.option_name}>운전석 에어백</p>
-                  </div>
-                  <div className={styles.top_option}>
-                    <i className={`${styles.check_icon} fas fa-check`}></i>
-                    <p className={styles.option_name}>운전석 에어백</p>
-                  </div>
-                  <div className={styles.top_option}>
-                    <i className={`${styles.check_icon} fas fa-check`}></i>
-                    <p className={styles.option_name}>운전석 에어백</p>
-                  </div>
-                  <div className={styles.top_option}>
-                    <i className={`${styles.check_icon} fas fa-check`}></i>
-                    <p className={styles.option_name}>운전석 에어백</p>
-                  </div>
-                  <div className={styles.top_option}>
-                    <i className={`${styles.check_icon} fas fa-check`}></i>
-                    <p className={styles.option_name}>운전석 에어백</p>
-                  </div>
-                  <div className={styles.top_option}>
-                    <i className={`${styles.check_icon} fas fa-check`}></i>
-                    <p className={styles.option_name}>운전석 에어백</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.part}>
-            <h2 className={styles.part_title}>대여 기간</h2>
-            <div className={styles.range_container}>
-              <div className={styles.range_item}>
-                <p className={styles.range_text}>대여 일시</p>
-                <p className={styles.range}>2021년 12월 15일 (수) 12:30</p>
-              </div>
-              <div className={styles.range_item}>
-                <p className={styles.range_text}>반납 일시</p>
-                <p className={styles.range}>2021년 12월 17일 (금) 10:30</p>
-              </div>
-              <div className={styles.range_item_right}>
-                <p className={styles.range_text}>대여 시간</p>
-                <p className={styles.range}>46시간</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.part}>
-            <h2 className={styles.part_title}>보험 선택</h2>
-            <div className={styles.insurance_container}>
-              <div className={styles.insurance_item}>
-                <div className={styles.insurance_checkbox_container}>
-                  <input
-                    type="checkbox"
-                    className={styles.insurance_checkbox}
+            {carInfo && (
+              <div className={styles.top_data_container}>
+                <div className={styles.image_container}>
+                  <img
+                    src="/travelWithDog/images/car_example.png"
+                    alt="car_image"
+                    className={styles.image}
                   />
                 </div>
-                <p className={styles.insurance_name}>무보험</p>
-                <div className={styles.insurance_option_container}>
-                  <div className={styles.insurance_option}>
-                    <p className={styles.insurance_option_name}>운전자 조건</p>
-                    <p className={styles.insurance_option_desc}>
-                      만 21세 이상, 경력 1년 이상
-                    </p>
+                <div className={styles.top_text_data_container}>
+                  <div className={styles.top_name_container}>
+                    <p className={styles.name}>{carInfo.name}</p>
+                    <p
+                      className={styles.type}
+                    >{`${carInfo.seat_count}인승 ${carInfo.rentcar_class_code.name}`}</p>
                   </div>
-                  <div className={styles.insurance_option}>
-                    <p className={styles.insurance_option_name}>면책 금액</p>
-                    <p className={styles.insurance_option_desc}>300,000원</p>
+                  <div className={styles.top_option_container}>
+                    {carInfo.specifications.map((spe) => (
+                      <div key={spe} className={styles.top_option}>
+                        <i className={`${styles.check_icon} fas fa-check`}></i>
+                        <p className={styles.option_name}>{spe}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <p className={styles.price}>468,000원</p>
+              </div>
+            )}
+          </div>
+          {carInfo && (
+            <div className={styles.part}>
+              <h2 className={styles.part_title}>대여 기간</h2>
+              <div className={styles.range_container}>
+                <div className={styles.range_item}>
+                  <p className={styles.range_text}>대여 일시</p>
+                  <p className={styles.range}>{korPickupDateTime}</p>
+                </div>
+                <div className={styles.range_item}>
+                  <p className={styles.range_text}>반납 일시</p>
+                  <p className={styles.range}>{korDropoffDateTime}</p>
+                </div>
+                <div className={styles.range_item_right}>
+                  <p className={styles.range_text}>대여 시간</p>
+                  <p className={styles.range}>{totalTime}시간</p>
+                </div>
               </div>
             </div>
-          </div>
+          )}
           <div className={styles.part}>
             <h2 className={styles.part_title}>보험 선택</h2>
+            {carInfo && (
+              <div className={styles.insurance_container}>
+                {carInfo.insurances.map((ins) => (
+                  <div
+                    key={ins.id}
+                    className={`${
+                      selectedInsurance && selectedInsurance.name === ins.name
+                        ? `${styles.insurance_item} ${styles.insurance_on}`
+                        : `${styles.insurance_item}`
+                    }`}
+                    onClick={onInsuranceSelectHandler}
+                    data-name={ins.name}
+                  >
+                    <div className={styles.insurance_checkbox_container}>
+                      <input
+                        type="checkbox"
+                        checked={
+                          selectedInsurance &&
+                          selectedInsurance.name === ins.name
+                            ? true
+                            : false
+                        }
+                        className={styles.insurance_checkbox}
+                      />
+                    </div>
+                    <p className={styles.insurance_name}>{ins.name}</p>
+                    <div className={styles.insurance_option_container}>
+                      {ins.driver && (
+                        <div className={styles.insurance_option}>
+                          <p className={styles.insurance_option_name}>
+                            운전자 조건
+                          </p>
+                          <p className={styles.insurance_option_desc}>
+                            {ins.driver}
+                          </p>
+                        </div>
+                      )}
+                      {ins.excess && (
+                        <div className={styles.insurance_option}>
+                          <p className={styles.insurance_option_name}>
+                            면책 금액
+                          </p>
+                          <p className={styles.insurance_option_desc}>
+                            {ins.excess}
+                          </p>
+                        </div>
+                      )}
+                      {ins.coverage && (
+                        <div className={styles.insurance_option}>
+                          <p className={styles.insurance_option_name}>
+                            보상 한도
+                          </p>
+                          <p className={styles.insurance_option_desc}>
+                            {ins.coverage}
+                          </p>
+                        </div>
+                      )}
+                      {ins.liability && (
+                        <div className={styles.insurance_option}>
+                          <p className={styles.insurance_option_name}>
+                            자기부담금
+                          </p>
+                          <p className={styles.insurance_option_desc}>
+                            {ins.liability}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    <p className={styles.price}>{`${ins.price.toLocaleString(
+                      "ko-kr"
+                    )}원`}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className={styles.part}>
+            <h2 className={styles.part_title}>이용 규칙</h2>
+            <div className={styles.note}>{carInfo && carInfo.note}</div>
           </div>
           <div className={styles.bottom}>
-            <h2 className={styles.part_title}>보험 선택</h2>
+            <h2 className={styles.part_title}>환불 규정</h2>
+            <div className={styles.cancellation}>
+              {carInfo && carInfo.cancellation}
+            </div>
           </div>
         </main>
         <aside className={styles.side_menu}>

@@ -48,12 +48,14 @@
 }
 
 .title {
-  font-size: var(--fontsize-bit-small);
+  font-size: var(--fontsize-small);
   color: #292929;
+  white-space: nowrap;
 }
 
 .title_big {
-  font-size: var(--fontsize-bit-big);
+  margin-left: 6px;
+  font-size: var(--fontsize-normal);
   font-weight: 700;
   color: #1a1a1a;
 }

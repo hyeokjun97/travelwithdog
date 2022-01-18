@@ -387,7 +387,10 @@ const App = (props) => {
               element={<MobileCarSearch />}
             ></Route>
           )}
-          <Route path="/cardetail" element={<CarDetail />}></Route>
+          <Route
+            path="/cardetail/:carId/:businessId/:pickupDateTime/:dropoffDateTime"
+            element={<CarDetail />}
+          ></Route>
           <Route path="/testroute" element={<TestPage />}></Route>
           <Route path="/news" element={<NewsView />}></Route>
           <Route path="/introduce/:path" element={<Introduce />}></Route>

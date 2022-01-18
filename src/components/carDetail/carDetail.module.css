@@ -146,7 +146,13 @@
   border: 1px solid #959595;
   border-radius: 7px;
   padding: 15px 15px 6px 15px;
+  margin-bottom: 14px;
   cursor: pointer;
+}
+
+.insurance_on {
+  border: 2px solid var(--color-green);
+  color: var(--color-green);
 }
 
 .insurance_checkbox_container {
@@ -160,6 +166,10 @@
   -webkit-transform: scale(1.3); /* Safari and Chrome */
   -o-transform: scale(1.3); /* Opera */
   transform: scale(1.3);
+}
+
+.insurance_checkbox:checked {
+  background-color: var(--color-green);
 }
 
 .insurance_name {
@@ -283,6 +293,12 @@
   background-color: var(--color-green);
   border-radius: 0 0 10px 10px;
   cursor: pointer;
+}
+
+.note,
+.cancellation {
+  padding: 20px 0;
+  white-space: pre-wrap;
 }
 
 @media screen and (max-width: 1350px) {
@@ -454,5 +470,10 @@
   .side_menu {
     border-radius: 0;
     height: auto;
+  }
+  .note,
+  .cancellation {
+    padding: 10px 0;
+    font-size: var(--fontsize-bit-small);
   }
 }

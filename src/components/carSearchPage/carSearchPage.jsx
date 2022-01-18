@@ -169,7 +169,6 @@ const CarSearchPage = (props) => {
   };
 
   const searchCarList = () => {
-    //catch부분 처리 페이지 이동 전에 처리?
     axios
       .get(
         `${process.env.REACT_APP_BASEURL}/rentcars?pickup_datetime=${pickup}&dropoff_datetime=${dropoff}`
@@ -244,7 +243,31 @@ const CarSearchPage = (props) => {
     }
   };
 
+  const moveToDetail = (carId, businessId) => {
+    const selectedDateTime = makeDateFormat();
+    navigate(
+      `/cardetail/${carId}/${businessId}/${selectedDateTime[0]}/${selectedDateTime[1]}`
+    );
+  };
+
   useEffect(() => {
+    setCarList(null);
+    setResultCarList(null);
+    setDate([
+      {
+        startDate: new Date(pickup.slice(0, 10)),
+        endDate: new Date(dropoff.slice(0, 10)),
+        key: "selection",
+      },
+    ]);
+    setTimeValue({
+      rentTime: `${pickup.slice(11, 13).padStart(2, "0")}시 ${pickup
+        .slice(14)
+        .padStart(2, "0")}분`,
+      returnTime: `${dropoff.slice(11, 13).padStart(2, "0")}시 ${dropoff
+        .slice(14)
+        .padStart(2, "0")}분`,
+    });
     searchCarList();
   }, [pickup, dropoff]);
 
@@ -599,7 +622,10 @@ const CarSearchPage = (props) => {
             <div className={styles.result_list}>
               {resultCarList ? (
                 resultCarList.length > 0 ? (
-                  <CarItemList itemList={resultCarList} />
+                  <CarItemList
+                    itemList={resultCarList}
+                    moveToDetail={moveToDetail}
+                  />
                 ) : (
                   <div className={styles.no_result}>검색 결과가 없습니다.</div>
                 )
