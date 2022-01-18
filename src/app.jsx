@@ -377,9 +377,15 @@ const App = (props) => {
           <Route path="/article/:articleId" element={<ArticleView />}></Route>
           <Route path="/articlew" element={<ArticleWrite />}></Route>
           {deviceSize ? (
-            <Route path="/carsearch" element={<CarSearchPage />}></Route>
+            <Route
+              path="/carsearch/:pickup/:dropoff"
+              element={<CarSearchPage />}
+            ></Route>
           ) : (
-            <Route path="/carsearch" element={<MobileCarSearch />}></Route>
+            <Route
+              path="/carsearch/:pickup/:dropoff"
+              element={<MobileCarSearch />}
+            ></Route>
           )}
           <Route path="/cardetail" element={<CarDetail />}></Route>
           <Route path="/testroute" element={<TestPage />}></Route>

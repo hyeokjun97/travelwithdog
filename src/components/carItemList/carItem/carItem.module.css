@@ -12,6 +12,12 @@
   background-color: rgb(242, 242, 242);
   padding: 35px 10px 35px 20px;
   border-radius: 14px;
+  cursor: pointer;
+  transition: 0.15s all ease-in;
+}
+
+.box:hover {
+  box-shadow: 3px 7px 10px rgba(0, 0, 0, 0.2);
 }
 
 .image_container {
@@ -49,7 +55,6 @@
 .title_big {
   font-size: var(--fontsize-bit-big);
   font-weight: 700;
-  margin-left: 8px;
   color: #1a1a1a;
 }
 

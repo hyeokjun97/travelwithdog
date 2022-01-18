@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CarItemList from "../carItemList/carItemList";
-import ItemList from "../itemList/itemList";
 import styles from "./carSearchPage.module.css";
-import { DateRange, DateRangePicker } from "react-date-range";
+import { DateRange } from "react-date-range";
 import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
+import axios from "axios";
+import LoadingPage from "../loadingPage/loadingPage";
 
 const CarSearchPage = (props) => {
+  const navigate = useNavigate();
+  const { pickup, dropoff, query } = useParams();
+  //날짜로 검색한 차량들의 목록
+  const [carList, setCarList] = useState(null);
+
+  //날짜로 검색한 차량들 중에 사용자가 검색한 이름, 차종, 연료로 검색된 차량들의 목록
+  const [resultCarList, setResultCarList] = useState(null);
+
   const [timeValue, setTimeValue] = useState({
-    rentTime: "",
-    returnTime: "",
+    rentTime: `${pickup.slice(11, 13).padStart(2, "0")}시 ${pickup
+      .slice(14)
+      .padStart(2, "0")}분`,
+    returnTime: `${dropoff.slice(11, 13).padStart(2, "0")}시 ${dropoff
+      .slice(14)
+      .padStart(2, "0")}분`,
   });
 
   const { rentTime, returnTime } = timeValue;
@@ -29,11 +42,12 @@ const CarSearchPage = (props) => {
   const [datePickerOn, setDatePickerOn] = useState(false);
   const [date, setDate] = useState([
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 1),
+      startDate: new Date(pickup.slice(0, 10)),
+      endDate: new Date(dropoff.slice(0, 10)),
       key: "selection",
     },
   ]);
+
   const [dateShow, setDateShow] = useState("");
   const timeList = [
     "시간 선택",
@@ -106,6 +120,83 @@ const CarSearchPage = (props) => {
     setDatePickerOn(!datePickerOn);
   };
 
+  const makeDateFormat = () => {
+    const result = [];
+    const { startDate, endDate } = date[0];
+    const startList = startDate.toString().split(" ");
+    const endList = endDate.toString().split(" ");
+    result.push(
+      startList[3] +
+        "-" +
+        monthTranslator(startList[1]).toString().padStart(2, "0") +
+        "-" +
+        startList[2].padStart(2, "0") +
+        " " +
+        rentTime.slice(0, 2) +
+        ":" +
+        rentTime.slice(4, 6)
+    );
+    result.push(
+      endList[3] +
+        "-" +
+        monthTranslator(endList[1]).toString().padStart(2, "0") +
+        "-" +
+        endList[2].padStart(2, "0") +
+        " " +
+        returnTime.slice(0, 2) +
+        ":" +
+        returnTime.slice(4, 6)
+    );
+    return result;
+  };
+
+  const onSearchHandler = () => {
+    const selectedDateTime = makeDateFormat();
+    if (
+      selectedDateTime[0].length !== 16 ||
+      selectedDateTime[1].length !== 16
+    ) {
+      alert("시간을 선택해주세요");
+      return;
+    }
+    if (selectedDateTime[0] === pickup && selectedDateTime[1] === dropoff) {
+      return;
+    }
+    setResultCarList(null);
+    setCarList(null);
+    navigate(`/carsearch/${selectedDateTime[0]}/${selectedDateTime[1]}`);
+  };
+
+  const searchCarList = () => {
+    //catch부분 처리 페이지 이동 전에 처리?
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/rentcars?pickup_datetime=${pickup}&dropoff_datetime=${dropoff}`
+      )
+      .then((response) => {
+        setCarList(response.data);
+        setResultCarList(response.data);
+      })
+      .catch((err) => {
+        if (
+          err.response.data.messages.pickup_datetime &&
+          err.response.data.messages.pickup_datetime[0].includes("tomorrow")
+        ) {
+          alert(
+            "오늘 당일은 예약이 불가능합니다. 당일 이후로 날짜를 설정해주세요"
+          );
+        } else if (
+          err.response.data.messages.dropoff_datetime &&
+          err.response.data.messages.dropoff_datetime[0].includes(
+            "after pickup date"
+          )
+        ) {
+          alert("반납일자는 대여일자 이후여야 합니다.");
+        }
+        console.error(err);
+      });
+  };
+
   useEffect(() => {
     if (!date) {
       return;
@@ -124,65 +215,6 @@ const CarSearchPage = (props) => {
   }, [date]);
 
   //컴포넌트 마운트 시 마다 서버 요청해서 결과값 받아오고 분류, 정렬 선택 여부로 보여주기
-  const { query } = useParams();
-  const [jejuBest, setJejuBest] = useState([
-    {
-      idx: 0,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/68004/592612_medium_1636105470.jpg?1636105470",
-      title: "스코틀랜드 아일랜드 8일간의 여행",
-      type: "투어패키지",
-      price: 20000,
-    },
-    {
-      idx: 1,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/42185/262013_medium_1536304187.jpg?1536304187",
-      title: "올 오브 피렌체",
-      type: "숙소",
-      price: 20000,
-    },
-    {
-      idx: 2,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/7511/296672_medium_1544173662.jpg?1544173662",
-      title: "바티칸투어",
-      type: "입장권",
-      price: 20000,
-    },
-    {
-      idx: 3,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/70816/595376_medium_1638331669.jpg?1638331669",
-      title: "롯데월드 입장권",
-      type: "교통편",
-      price: 20000,
-    },
-    {
-      idx: 4,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/42185/262013_medium_1536304187.jpg?1536304187",
-      title: "올 오브 피렌체",
-      type: "투어패키지",
-      price: 20000,
-    },
-    {
-      idx: 5,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/68004/592612_medium_1636105470.jpg?1636105470",
-      title: "제주도차박",
-      type: "교통편",
-      price: 20000,
-    },
-    {
-      idx: 6,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/53556/592873_medium_1636329887.jpg?1636329887",
-      title: "제주 아쿠아플라넷 입장권",
-      type: "입장권",
-      price: 20000,
-    },
-  ]);
   const [searchValue, setSearchValue] = useState("");
   const onSearchValueChangeHandler = (e) => {
     setSearchValue(e.target.value);
@@ -212,8 +244,9 @@ const CarSearchPage = (props) => {
   }, [query]);
 
   useEffect(() => {
-    console.log(searchValue);
-  }, [searchValue]);
+    searchCarList();
+  }, [pickup, dropoff]);
+
   return (
     <div className={styles.body}>
       <div className={styles.container}>
@@ -494,15 +527,26 @@ const CarSearchPage = (props) => {
                 ))}
               </select>
             </div>
-            <div className={styles.range_icon_container}>
+            <div
+              className={styles.range_icon_container}
+              onClick={onSearchHandler}
+            >
               <i className={`${styles.range_icon} fas fa-search`}></i>
             </div>
           </div>
           <div className={styles.result_container}>
-            <p className={styles.result}>{`검색결과 총 ${255}건`}</p>
+            {resultCarList && (
+              <p
+                className={styles.result}
+              >{`검색결과 총 ${resultCarList.length}건`}</p>
+            )}
 
             <div className={styles.result_list}>
-              <CarItemList itemList={jejuBest} />
+              {resultCarList ? (
+                <CarItemList itemList={resultCarList} />
+              ) : (
+                <LoadingPage />
+              )}
             </div>
           </div>
         </div>
