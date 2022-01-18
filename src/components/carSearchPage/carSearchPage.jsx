@@ -9,10 +9,11 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
 import axios from "axios";
 import LoadingPage from "../loadingPage/loadingPage";
+import { debounce } from "lodash";
 
 const CarSearchPage = (props) => {
   const navigate = useNavigate();
-  const { pickup, dropoff, query } = useParams();
+  const { pickup, dropoff } = useParams();
   //날짜로 검색한 차량들의 목록
   const [carList, setCarList] = useState(null);
 
@@ -185,6 +186,8 @@ const CarSearchPage = (props) => {
           alert(
             "오늘 당일은 예약이 불가능합니다. 당일 이후로 날짜를 설정해주세요"
           );
+          setCarList([]);
+          setResultCarList([]);
         } else if (
           err.response.data.messages.dropoff_datetime &&
           err.response.data.messages.dropoff_datetime[0].includes(
@@ -192,6 +195,8 @@ const CarSearchPage = (props) => {
           )
         ) {
           alert("반납일자는 대여일자 이후여야 합니다.");
+          setCarList([]);
+          setResultCarList([]);
         }
         console.error(err);
       });
@@ -240,12 +245,47 @@ const CarSearchPage = (props) => {
   };
 
   useEffect(() => {
-    setSearchValue(query);
-  }, [query]);
-
-  useEffect(() => {
     searchCarList();
   }, [pickup, dropoff]);
+
+  useEffect(() => {
+    const sortHandler = debounce(() => {
+      if (!carList) {
+        return;
+      }
+      let searchValueResult = [];
+      if (searchValue === "") {
+        searchValueResult = [...carList];
+      } else {
+        carList.forEach((car) => {
+          if (car.name.includes(searchValue)) searchValueResult.push(car);
+        });
+      }
+      const sortResult = [];
+
+      if (typeSelect === "전체" && fuelSelect === "전체") {
+        setResultCarList(searchValueResult);
+      } else if (typeSelect === "전체" && fuelSelect !== "전체") {
+        searchValueResult.forEach((car) => {
+          car.rentcar_fuel_code.name === fuelSelect && sortResult.push(car);
+        });
+        setResultCarList(sortResult);
+      } else if (typeSelect !== "전체" && fuelSelect === "전체") {
+        searchValueResult.forEach((car) => {
+          car.rentcar_class_code.name === typeSelect && sortResult.push(car);
+        });
+        setResultCarList(sortResult);
+      } else {
+        searchValueResult.forEach((car) => {
+          car.rentcar_fuel_code.name === fuelSelect &&
+            car.rentcar_class_code.name === typeSelect &&
+            sortResult.push(car);
+        });
+        setResultCarList(sortResult);
+      }
+    }, 150);
+    sortHandler();
+  }, [typeSelect, fuelSelect, searchValue]);
 
   return (
     <div className={styles.body}>
@@ -357,6 +397,21 @@ const CarSearchPage = (props) => {
                   onClick={onTypeSelectChangeHandler}
                 >
                   SUV
+                </p>
+              </div>
+              <div className={styles.checkbox_container}>
+                <input
+                  type="checkbox"
+                  name="승합"
+                  checked={typeSelect === "승합" ? true : false}
+                  onChange={onTypeSelectChangeHandler}
+                  className={styles.checkbox}
+                />
+                <p
+                  className={styles.checkbox_text}
+                  onClick={onTypeSelectChangeHandler}
+                >
+                  승합
                 </p>
               </div>
             </div>
@@ -543,7 +598,11 @@ const CarSearchPage = (props) => {
 
             <div className={styles.result_list}>
               {resultCarList ? (
-                <CarItemList itemList={resultCarList} />
+                resultCarList.length > 0 ? (
+                  <CarItemList itemList={resultCarList} />
+                ) : (
+                  <div className={styles.no_result}>검색 결과가 없습니다.</div>
+                )
               ) : (
                 <LoadingPage />
               )}

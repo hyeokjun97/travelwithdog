@@ -1,9 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./carItem.module.css";
 
 const CarItem = ({ item }) => {
+  const navigate = useNavigate();
+  const moveToDetail = () => {
+    navigate(`/cardetail/${item.id}`);
+  };
   return (
-    <div className={styles.item}>
+    <div className={styles.item} onClick={moveToDetail}>
       <div className={styles.box}>
         <div className={styles.image_container}>
           <img
