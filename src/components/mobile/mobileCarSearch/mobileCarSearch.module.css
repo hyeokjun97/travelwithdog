@@ -87,6 +87,7 @@
 }
 
 .main {
+  padding-top: 14px;
   padding-bottom: 100px;
 }
 
@@ -216,4 +217,30 @@
 
 .range_icon {
   color: white;
+}
+
+.result_list {
+  position: relative;
+}
+
+.loading_container {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.result {
+  font-weight: 700;
+  color: #101010;
+  margin-left: 12px;
+  margin-bottom: 4px;
+}
+
+.no_result {
+  margin-top: 30px;
+  text-align: center;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  color: #101010;
 }

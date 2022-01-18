@@ -2,23 +2,35 @@ import React, { useState, useEffect } from "react";
 import CarItemList from "../../carItemList/carItemList";
 import ButtonSlick from "../../slick/buttonSlick/buttonSlick";
 import styles from "./mobileCarSearch.module.css";
-import { DateRange, DateRangePicker } from "react-date-range";
+import { DateRange } from "react-date-range";
 import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import LoadingPage from "../../loadingPage/loadingPage";
 
 const MobileCarSearch = (props) => {
+  const navigate = useNavigate();
+  const { pickup, dropoff } = useParams();
+  //날짜로 검색한 차량들의 목록
+  const [carList, setCarList] = useState(null);
+
+  //날짜로 검색한 차량들 중에 사용자가 검색한 이름, 차종, 연료로 검색된 차량들의 목록
+  const [resultCarList, setResultCarList] = useState(null);
+
   //date-range
   const [dateChangeOn, setDateChangeOn] = useState(false);
   const [datePickerOn, setDatePickerOn] = useState(false);
   const [date, setDate] = useState([
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 1),
+      startDate: new Date(pickup.slice(0, 10)),
+      endDate: new Date(dropoff.slice(0, 10)),
       key: "selection",
     },
   ]);
+
   const [dateShow, setDateShow] = useState("");
   const timeList = [
     "시간 선택",
@@ -91,6 +103,39 @@ const MobileCarSearch = (props) => {
     setDatePickerOn(!datePickerOn);
   };
 
+  const searchCarList = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/rentcars?pickup_datetime=${pickup}&dropoff_datetime=${dropoff}`
+      )
+      .then((response) => {
+        setCarList(response.data);
+        setResultCarList(response.data);
+      })
+      .catch((err) => {
+        if (
+          err.response.data.messages.pickup_datetime &&
+          err.response.data.messages.pickup_datetime[0].includes("tomorrow")
+        ) {
+          alert(
+            "오늘 당일은 예약이 불가능합니다. 당일 이후로 날짜를 설정해주세요"
+          );
+          setCarList([]);
+          setResultCarList([]);
+        } else if (
+          err.response.data.messages.dropoff_datetime &&
+          err.response.data.messages.dropoff_datetime[0].includes(
+            "after pickup date"
+          )
+        ) {
+          alert("반납일자는 대여일자 이후여야 합니다.");
+          setCarList([]);
+          setResultCarList([]);
+        }
+        console.error(err);
+      });
+  };
+
   useEffect(() => {
     if (!date) {
       return;
@@ -112,76 +157,165 @@ const MobileCarSearch = (props) => {
     setDateChangeOn(!dateChangeOn);
   };
 
-  const [kindSelected, setKindSelected] = useState({
-    id: 1,
-    title: "전체",
+  const [typeSelected, setTypeSelected] = useState("전체");
+
+  const [fuelSelected, setFuelSelected] = useState("전체");
+
+  const [timeValue, setTimeValue] = useState({
+    rentTime: `${pickup.slice(11, 13).padStart(2, "0")}시 ${pickup
+      .slice(14)
+      .padStart(2, "0")}분`,
+    returnTime: `${dropoff.slice(11, 13).padStart(2, "0")}시 ${dropoff
+      .slice(14)
+      .padStart(2, "0")}분`,
   });
 
-  const [fuelSelected, setFuelSelected] = useState({
-    id: 1,
-    title: "전체",
-  });
-
-  const [kindButtonList, setKindButtonList] = useState([
-    {
-      id: 1,
-      title: "전체",
-    },
-    {
-      id: 2,
-      title: "소형",
-    },
-    {
-      id: 3,
-      title: "준중형",
-    },
-    {
-      id: 4,
-      title: "중형",
-    },
-    {
-      id: 5,
-      title: "고급",
-    },
-    {
-      id: 6,
-      title: "SUV",
-    },
+  const [typeButtonList, settypeButtonList] = useState([
+    "전체",
+    "소형",
+    "준중형",
+    "중형",
+    "고급",
+    "SUV",
+    "승합",
   ]);
   const [fuelButtonList, setFuelButtonList] = useState([
-    {
-      id: 1,
-      title: "전체",
-    },
-    {
-      id: 2,
-      title: "휘발유",
-    },
-    {
-      id: 3,
-      title: "경유",
-    },
-    {
-      id: 4,
-      title: "LPG",
-    },
-    {
-      id: 5,
-      title: "하이브리드",
-    },
-    {
-      id: 6,
-      title: "전기",
-    },
+    "전체",
+    "휘발유",
+    "경유",
+    "LPG",
+    "하이브리드",
+    "전기",
   ]);
 
-  const onKindSelectChangeHandler = (item) => {
-    setKindSelected(item);
+  const onTypeSelectChangeHandler = (item) => {
+    setTypeSelected(item);
   };
 
   const onFuelSelectChangeHandler = (item) => {
     setFuelSelected(item);
   };
+
+  const { rentTime, returnTime } = timeValue;
+
+  const onTimeChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setTimeValue({
+      ...timeValue,
+      [name]: value,
+    });
+    console.log(name, value);
+  };
+
+  const makeDateFormat = () => {
+    const result = [];
+    const { startDate, endDate } = date[0];
+    const startList = startDate.toString().split(" ");
+    const endList = endDate.toString().split(" ");
+    result.push(
+      startList[3] +
+        "-" +
+        monthTranslator(startList[1]).toString().padStart(2, "0") +
+        "-" +
+        startList[2].padStart(2, "0") +
+        " " +
+        rentTime.slice(0, 2) +
+        ":" +
+        rentTime.slice(4, 6)
+    );
+    result.push(
+      endList[3] +
+        "-" +
+        monthTranslator(endList[1]).toString().padStart(2, "0") +
+        "-" +
+        endList[2].padStart(2, "0") +
+        " " +
+        returnTime.slice(0, 2) +
+        ":" +
+        returnTime.slice(4, 6)
+    );
+    return result;
+  };
+
+  const moveToDetail = (carId, businessId) => {
+    const selectedDateTime = makeDateFormat();
+    navigate(
+      `/cardetail/${carId}/${businessId}/${selectedDateTime[0]}/${selectedDateTime[1]}`
+    );
+  };
+
+  const onSearchHandler = () => {
+    const selectedDateTime = makeDateFormat();
+    if (
+      selectedDateTime[0].length !== 16 ||
+      selectedDateTime[1].length !== 16
+    ) {
+      alert("시간을 선택해주세요");
+      return;
+    }
+    if (selectedDateTime[0] === pickup && selectedDateTime[1] === dropoff) {
+      return;
+    }
+    setDateChangeOn(false);
+    setResultCarList(null);
+    setCarList(null);
+
+    navigate(`/carsearch/${selectedDateTime[0]}/${selectedDateTime[1]}`);
+  };
+
+  useEffect(() => {
+    setCarList(null);
+    setResultCarList(null);
+    setDate([
+      {
+        startDate: new Date(pickup.slice(0, 10)),
+        endDate: new Date(dropoff.slice(0, 10)),
+        key: "selection",
+      },
+    ]);
+    setTimeValue({
+      rentTime: `${pickup.slice(11, 13).padStart(2, "0")}시 ${pickup
+        .slice(14)
+        .padStart(2, "0")}분`,
+      returnTime: `${dropoff.slice(11, 13).padStart(2, "0")}시 ${dropoff
+        .slice(14)
+        .padStart(2, "0")}분`,
+    });
+    setTypeSelected("전체");
+    setFuelSelected("전체");
+    searchCarList();
+  }, [pickup, dropoff]);
+
+  useEffect(() => {
+    const sortHandler = () => {
+      if (!carList) {
+        return;
+      }
+      const sortResult = [];
+
+      if (typeSelected === "전체" && fuelSelected === "전체") {
+        setResultCarList(carList);
+      } else if (typeSelected === "전체" && fuelSelected !== "전체") {
+        carList.forEach((car) => {
+          car.rentcar_fuel_code.name === fuelSelected && sortResult.push(car);
+        });
+        setResultCarList(sortResult);
+      } else if (typeSelected !== "전체" && fuelSelected === "전체") {
+        carList.forEach((car) => {
+          car.rentcar_class_code.name === typeSelected && sortResult.push(car);
+        });
+        setResultCarList(sortResult);
+      } else {
+        carList.forEach((car) => {
+          car.rentcar_fuel_code.name === fuelSelected &&
+            car.rentcar_class_code.name === typeSelected &&
+            sortResult.push(car);
+        });
+        setResultCarList(sortResult);
+      }
+    };
+    sortHandler();
+  }, [typeSelected, fuelSelected]);
 
   return (
     <div className={styles.page}>
@@ -234,9 +368,14 @@ const MobileCarSearch = (props) => {
             </div>
             <div className={styles.range_input_box}>
               <p className={styles.range_text}>대여시각</p>
-              <select className={styles.range_input}>
+              <select
+                name="rentTime"
+                value={rentTime}
+                onChange={onTimeChangeHandler}
+                className={styles.range_input}
+              >
                 {timeList.map((time) => (
-                  <option key={time} value="time">
+                  <option key={time} value={time === "시간 선택" ? "" : time}>
                     {time}
                   </option>
                 ))}
@@ -245,29 +384,37 @@ const MobileCarSearch = (props) => {
 
             <div className={styles.range_input_box}>
               <p className={styles.range_text}>반납시각</p>
-              <select className={styles.range_input}>
+              <select
+                name="returnTime"
+                value={returnTime}
+                onChange={onTimeChangeHandler}
+                className={styles.range_input}
+              >
                 {timeList.map((time) => (
-                  <option key={time} value="time">
+                  <option key={time} value={time === "시간 선택" ? "" : time}>
                     {time}
                   </option>
                 ))}
               </select>
             </div>
-            <div className={styles.range_icon_container}>
+            <div
+              className={styles.range_icon_container}
+              onClick={onSearchHandler}
+            >
               <i className={`${styles.range_icon} fas fa-search`}></i>
             </div>
           </div>
         )}
       </div>
       <div className={styles.button_container}>
-        {kindSelected && fuelSelected && (
+        {typeSelected && fuelSelected && (
           <div className={styles.select_container}>
             <div className={styles.button_slick_container}>
               <p className={styles.select_title}>차종</p>
               <ButtonSlick
-                buttonList={kindButtonList}
-                selected={kindSelected}
-                onSelectChangeHandler={onKindSelectChangeHandler}
+                buttonList={typeButtonList}
+                selected={typeSelected}
+                onSelectChangeHandler={onTypeSelectChangeHandler}
               />
             </div>
             <div className={styles.button_slick_container_bottom}>
@@ -283,7 +430,28 @@ const MobileCarSearch = (props) => {
       </div>
       <div className={styles.divide_line}></div>
       <div className={styles.main}>
-        <CarItemList itemList={kindButtonList} />
+        {resultCarList && (
+          <p
+            className={styles.result}
+          >{`검색결과 총 ${resultCarList.length}건`}</p>
+        )}
+
+        <div className={styles.result_list}>
+          {resultCarList ? (
+            resultCarList.length > 0 ? (
+              <CarItemList
+                itemList={resultCarList}
+                moveToDetail={moveToDetail}
+              />
+            ) : (
+              <div className={styles.no_result}>검색 결과가 없습니다.</div>
+            )
+          ) : (
+            <div className={styles.loading_container}>
+              <LoadingPage />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

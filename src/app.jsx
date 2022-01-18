@@ -18,7 +18,6 @@ import MobileCategory from "./components/mobile/mobileCategory/mobileCategory";
 import axios from "axios";
 import Find from "./components/find/find";
 import SearchPage from "./components/searchPage/searchPage";
-import LoadingPage from "./components/loadingPage/loadingPage";
 import MobileSearchPage from "./components/mobile/mobileSearchPage/mobileSearchPage";
 import ProductDetail from "./components/productDetail/productDetail";
 import ReservationPage from "./components/reservationPage/reservationPage";

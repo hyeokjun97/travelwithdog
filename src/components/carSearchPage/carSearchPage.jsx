@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import CarItemList from "../carItemList/carItemList";
 import styles from "./carSearchPage.module.css";
 import { DateRange } from "react-date-range";
-import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
@@ -268,6 +267,8 @@ const CarSearchPage = (props) => {
         .slice(14)
         .padStart(2, "0")}분`,
     });
+    setTypeSelect("전체");
+    setFuelSelect("전체");
     searchCarList();
   }, [pickup, dropoff]);
 
