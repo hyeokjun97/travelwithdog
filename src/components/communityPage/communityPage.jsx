@@ -1,7 +1,12 @@
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import ArticleItem from "./articleItem/articleItem";
 import styles from "./communityPage.module.css";
 
 const CommunityPage = (props) => {
+  const { board } = useParams();
+  const navigate = useNavigate();
+
   return (
     <div className={styles.body}>
       <div className={styles.top_banner}>
@@ -14,10 +19,54 @@ const CommunityPage = (props) => {
         <div className={styles.main_top}>
           <h2 className={styles.board_title}>여행기 게시판</h2>
           <ul className={styles.select_container}>
-            <li className={styles.select_button}>여행기</li>
-            <li className={styles.select_button}>노하우</li>
-            <li className={styles.select_button}>이벤트</li>
-            <li className={styles.select_button}>뉴스</li>
+            <li
+              onClick={() => {
+                navigate(`/community/travel`);
+              }}
+              className={`${
+                board === "travel"
+                  ? `${styles.select_button} ${styles.select_button_on}`
+                  : `${styles.select_button}`
+              }`}
+            >
+              여행기
+            </li>
+            <li
+              onClick={() => {
+                navigate(`/community/knowhow`);
+              }}
+              className={`${
+                board === "knowhow"
+                  ? `${styles.select_button} ${styles.select_button_on}`
+                  : `${styles.select_button}`
+              }`}
+            >
+              노하우
+            </li>
+            <li
+              onClick={() => {
+                navigate(`/community/event`);
+              }}
+              className={`${
+                board === "event"
+                  ? `${styles.select_button} ${styles.select_button_on}`
+                  : `${styles.select_button}`
+              }`}
+            >
+              이벤트
+            </li>
+            <li
+              onClick={() => {
+                navigate(`/community/news`);
+              }}
+              className={`${
+                board === "news"
+                  ? `${styles.select_button} ${styles.select_button_on}`
+                  : `${styles.select_button}`
+              }`}
+            >
+              뉴스
+            </li>
           </ul>
         </div>
         <div className={styles.search_container}>
@@ -38,7 +87,14 @@ const CommunityPage = (props) => {
             </div>
           </div>
         </div>
-        <div className={styles.list}></div>
+        <div className={styles.list}>
+          <ArticleItem />
+          <ArticleItem />
+          <ArticleItem />
+          <ArticleItem />
+          <ArticleItem />
+          <ArticleItem />
+        </div>
       </main>
     </div>
   );

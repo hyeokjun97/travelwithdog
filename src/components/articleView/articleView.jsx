@@ -74,10 +74,10 @@ const ArticleView = (props) => {
         </div>
       </div>
       <main className={styles.main}>
-        <div
+        <article
           className={styles.article}
           dangerouslySetInnerHTML={{ __html: article && article.content }}
-        ></div>
+        ></article>
         <div className={styles.review_container}>
           <div className={styles.review_input_form}>
             <p className={styles.review_text}>댓글(3)</p>

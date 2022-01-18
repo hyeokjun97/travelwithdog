@@ -97,7 +97,7 @@ const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
               className={styles.menu_item}
               onClick={() => {
                 setToggleOn(false);
-                navigate("/community");
+                navigate("/community/travel");
                 window.scrollTo({ top: 0 });
               }}
             >

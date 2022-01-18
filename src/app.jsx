@@ -360,7 +360,7 @@ const App = (props) => {
               element={<Rentcar chabak={chabak} loadPageData={loadPageData} />}
             ></Route>
           )}
-          <Route path="/community" element={<CommunityPage />}></Route>
+          <Route path="/community/:board" element={<CommunityPage />}></Route>
           {deviceSize ? (
             <Route path="/search/:query" element={<SearchPage />}></Route>
           ) : (
