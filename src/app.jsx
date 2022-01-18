@@ -30,6 +30,7 @@ import TestPage from "./components/testPage/testPage";
 import NewsView from "./components/newsView/newsView";
 import Introduce from "./components/introduce/introduce";
 import ErrorPage from "./components/errorPage/errorPage";
+import CommunityPage from "./components/communityPage/communityPage";
 
 //페이지 리로딩 시 로딩 페이지 띄우기
 const App = (props) => {
@@ -359,6 +360,7 @@ const App = (props) => {
               element={<Rentcar chabak={chabak} loadPageData={loadPageData} />}
             ></Route>
           )}
+          <Route path="/community" element={<CommunityPage />}></Route>
           {deviceSize ? (
             <Route path="/search/:query" element={<SearchPage />}></Route>
           ) : (

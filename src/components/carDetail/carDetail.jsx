@@ -42,6 +42,7 @@ const CarDetail = (props) => {
   };
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     loadCarInfo();
   }, []);
 

@@ -41,6 +41,12 @@ const TestPage = (props) => {
       >
         렌터카상세
       </div>
+      <div
+        style={{ marginTop: "20px", cursor: "pointer" }}
+        onClick={() => nav("/rentcar")}
+      >
+        렌터카
+      </div>
     </div>
   );
 };
