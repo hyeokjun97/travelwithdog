@@ -14,28 +14,28 @@ const MobileMypageDetail = (props) => {
   const [selected, setSelected] = useState(null);
   const [buttonList, setButtonList] = useState([
     {
-      id: 1,
-      title: "정보수정",
+      cd: 1,
+      name: "정보수정",
       route: "edit",
     },
     {
-      id: 2,
-      title: "결제내역",
+      cd: 2,
+      name: "결제내역",
       route: "payments",
     },
     {
-      id: 3,
-      title: "취소내역",
+      cd: 3,
+      name: "취소내역",
       route: "paymentscancel",
     },
     {
-      id: 4,
-      title: "글/댓글",
+      cd: 4,
+      name: "글/댓글",
       route: "community",
     },
     {
-      id: 5,
-      title: "고객문의",
+      cd: 5,
+      name: "고객문의",
       route: "qna",
     },
   ]);
@@ -47,7 +47,7 @@ const MobileMypageDetail = (props) => {
   useEffect(() => {
     buttonList.forEach((button) => {
       if (button.route === path) {
-        setSelected(button);
+        setSelected(button.name);
         return false;
       }
     });
@@ -62,6 +62,7 @@ const MobileMypageDetail = (props) => {
             buttonList={buttonList}
             selected={selected}
             onSelectChangeHandler={onSelectChangeHandler}
+            where="mypage"
           />
         )}
       </div>

@@ -118,7 +118,7 @@ const MobileCarSearch = ({ carCode }) => {
           err.response.data.messages.pickup_datetime[0].includes("tomorrow")
         ) {
           alert(
-            "오늘 당일은 예약이 불가능합니다. 당일 이후로 날짜를 설정해주세요"
+            "금일 이후로만 예약이 가능합니다. 금일 이후로 날짜를 설정해주세요"
           );
           setCarList([]);
           setResultCarList([]);
@@ -170,30 +170,12 @@ const MobileCarSearch = ({ carCode }) => {
       .padStart(2, "0")}분`,
   });
 
-  const [typeButtonList, settypeButtonList] = useState([
-    "전체",
-    "소형",
-    "준중형",
-    "중형",
-    "고급",
-    "SUV",
-    "승합",
-  ]);
-  const [fuelButtonList, setFuelButtonList] = useState([
-    "전체",
-    "휘발유",
-    "경유",
-    "LPG",
-    "하이브리드",
-    "전기",
-  ]);
-
   const onTypeSelectChangeHandler = (item) => {
-    setTypeSelected(item);
+    setTypeSelected(item.name);
   };
 
   const onFuelSelectChangeHandler = (item) => {
-    setFuelSelected(item);
+    setFuelSelected(item.name);
   };
 
   const { rentTime, returnTime } = timeValue;
@@ -204,7 +186,6 @@ const MobileCarSearch = ({ carCode }) => {
       ...timeValue,
       [name]: value,
     });
-    console.log(name, value);
   };
 
   const makeDateFormat = () => {
@@ -414,6 +395,7 @@ const MobileCarSearch = ({ carCode }) => {
                 buttonList={carCode.rentcar_class_codes}
                 selected={typeSelected}
                 onSelectChangeHandler={onTypeSelectChangeHandler}
+                where="carSearch"
               />
             </div>
             <div className={styles.button_slick_container_bottom}>
@@ -422,6 +404,7 @@ const MobileCarSearch = ({ carCode }) => {
                 buttonList={carCode.rentcar_fuel_codes}
                 selected={fuelSelected}
                 onSelectChangeHandler={onFuelSelectChangeHandler}
+                where="carSearch"
               />
             </div>
           </div>

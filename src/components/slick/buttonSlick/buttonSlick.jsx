@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default class ButtonSlick extends Component {
   render() {
-    const { buttonList, selected, onSelectChangeHandler } = this.props;
+    const { buttonList, selected, onSelectChangeHandler, where } = this.props;
     let settings = {
       dots: false,
       infinite: false,
@@ -20,22 +20,27 @@ export default class ButtonSlick extends Component {
     return (
       <div className="button_slick_container">
         <Slider {...settings}>
-          <div>
-            <div
-              className={`${selected === "전체" ? "item on" : "item"}`}
-              onClick={() => {
-                onSelectChangeHandler("전체");
-              }}
-            >
-              <p>전체</p>
+          {where === "carSearch" && (
+            <div>
+              <div
+                className={`${selected === "전체" ? "item on" : "item"}`}
+                onClick={() => {
+                  onSelectChangeHandler({
+                    cd: "all",
+                    name: "전체",
+                  });
+                }}
+              >
+                <p>전체</p>
+              </div>
             </div>
-          </div>
+          )}
           {buttonList.map((item) => (
             <div key={item.cd}>
               <div
                 className={`${item.name === selected ? "item on" : "item"}`}
                 onClick={() => {
-                  onSelectChangeHandler(item.name);
+                  onSelectChangeHandler(item);
                 }}
               >
                 <p>{item.name}</p>
