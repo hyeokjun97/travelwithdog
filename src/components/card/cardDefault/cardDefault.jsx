@@ -14,7 +14,10 @@ const CardDefault = ({ item }) => {
       }}
     >
       <h3 className={styles.title}>{item.title}</h3>
-      <p className={styles.desc}>{item.description}</p>
+      <div
+        className={styles.desc}
+        dangerouslySetInnerHTML={{ __html: item.description }}
+      ></div>
       <div className={styles.detail_button}>자세히보기</div>
     </div>
   );

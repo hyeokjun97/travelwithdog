@@ -20,6 +20,7 @@
   color: white;
   font-size: var(--fontsize-normal);
   font-weight: 600;
+  white-space: pre-wrap;
 }
 
 .detail_button {

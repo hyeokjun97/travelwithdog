@@ -65,25 +65,11 @@ const Mainpage = ({
   };
 
   useEffect(() => {
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
     loadPageData("home", settingPageData);
   }, []);
-
-  //<div className={styles.list_container}>
-  //        <p className={styles.list_title}>HOT한 여행지 순위</p>
-  //        <ItemSlickTwo viewItems={hotList} />
-  //      </div>
-  //      <div className={styles.list_container}>
-  //        <p className={styles.list_title}>현재 인기 있는 숙소</p>
-  //        <ItemSlickThree viewItems={chabak} />
-  //      </div>
-  //      <div className={styles.list_container}>
-  //        <p className={styles.list_title}>현재 인기 있는 숙소</p>
-  //        <ItemSlickFour viewItems={chabak} />
-  //      </div>
-  //      <div className={styles.list_container}>
-  //        <p className={styles.list_title}>양양/속초 반려견 여행 BEST</p>
-  //        <ItemSlickOne viewItems={jejuBest} />
-  //      </div>
 
   return (
     <>
@@ -202,18 +188,23 @@ const Mainpage = ({
                 </div>
               </div>
               <div className={styles.region_select_list}>
-                <div className={styles.list_container}>
-                  <p className={styles.list_title}>HOT한 여행지 순위</p>
-                  <ItemSlickTwo viewItems={hotList} />
-                </div>
-                <div className={styles.list_container}>
-                  <p className={styles.list_title}>현재 인기 있는 숙소</p>
-                  <ItemSlickThree viewItems={chabak} />
-                </div>
-                <div className={styles.list_container}>
-                  <p className={styles.list_title}>현재 인기 있는 숙소</p>
-                  <ItemSlickFour viewItems={chabak} />
-                </div>
+                {pageData.sections.map(
+                  (section) =>
+                    section.items.length > 0 && ( //일단 빈데이터 있어서 이렇게 해둠
+                      <div
+                        key={section.title}
+                        className={styles.list_container}
+                      >
+                        <p className={styles.list_title}>{section.title}</p>
+                        {section.subtitle && (
+                          <p className={styles.list_subtitle}>
+                            {section.subtitle}
+                          </p>
+                        )}
+                        <SlickTemplate sectionInfo={section} />
+                      </div>
+                    )
+                )}
               </div>
             </div>
             <div className={styles.blog_part}>

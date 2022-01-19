@@ -411,7 +411,6 @@ const App = (props) => {
           <Route path="/testroute" element={<TestPage />}></Route>
           <Route path="/news" element={<NewsView />}></Route>
           <Route path="/introduce/:path" element={<Introduce />}></Route>
-          <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
 
         {deviceSize ? <Footer /> : <MobileFooter />}

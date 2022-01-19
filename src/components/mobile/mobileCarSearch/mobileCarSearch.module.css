@@ -15,6 +15,7 @@
 }
 
 .number {
+  margin-left: 12px;
   font-size: var(--fontsize-bit-small);
   color: var(--color-desc);
 }

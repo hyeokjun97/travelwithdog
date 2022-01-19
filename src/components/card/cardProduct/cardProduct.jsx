@@ -1,10 +1,16 @@
 import React from "react";
 import styles from "./cardProduct.module.css";
 import ReactStars from "react-rating-stars-component";
+import { useNavigate } from "react-router-dom";
 
 const CardProduct = ({ item }) => {
+  const navigate = useNavigate();
+  const moveToDetailPage = () => {
+    navigate(`/product/${item.product_id}`);
+    window.scrollTo({ top: 0 });
+  };
   return (
-    <div className={styles.item}>
+    <div className={styles.item} onClick={moveToDetailPage}>
       <img
         src={item.product && item.product.tour.image.url}
         alt="thumbnail"

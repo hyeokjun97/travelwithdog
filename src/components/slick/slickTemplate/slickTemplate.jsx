@@ -89,7 +89,7 @@ export default class SlickTemplate extends Component {
           },
         },
         {
-          breakpoint: 320,
+          breakpoint: 330,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,

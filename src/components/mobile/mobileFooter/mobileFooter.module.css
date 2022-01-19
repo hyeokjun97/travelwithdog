@@ -22,20 +22,20 @@
 }
 
 .icon {
-  color: var(--color-black);
+  color: rgba(113, 113, 113, 0.8);
   font-size: var(--fontsize-bit-big);
 }
 
 .text {
   margin-top: 4px;
   font-size: var(--fontsize-bit-small);
-  color: ;
+  color: rgba(113, 113, 113, 0.8);
 }
 
 .on {
-  color: var(--color-sky-blue);
+  color: rgba(68, 116, 245);
 }
 
 .on > .icon {
-  color: var(--color-sky-blue);
+  color: rgba(68, 116, 245);
 }

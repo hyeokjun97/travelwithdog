@@ -78,6 +78,12 @@
   padding: 0 10px;
 }
 
+@media screen and (max-width: 1100px) {
+  .slick_template .slick-slide {
+    padding: 0 8px;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .slick_template {
     margin-bottom: 40px;

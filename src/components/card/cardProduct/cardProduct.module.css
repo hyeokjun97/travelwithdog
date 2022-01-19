@@ -62,8 +62,20 @@
   border-radius: 4px;
 }
 
-@media screen and (max-width: 765px) {
-  .item {
-    max-height: 254px;
+@media screen and (max-width: 1100px) {
+  .thumbnail {
+    border-radius: 12px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .thumbnail {
+    border-radius: 8px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .thumbnail {
+    border-radius: 6px;
   }
 }

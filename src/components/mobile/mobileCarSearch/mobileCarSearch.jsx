@@ -321,7 +321,6 @@ const MobileCarSearch = ({ carCode }) => {
     <div className={styles.page}>
       <div className={styles.text_container}>
         <p className={styles.title}>렌터카 검색</p>
-        <p className={styles.number}>{`${12}건의 검색결과`}</p>
       </div>
       <div className={styles.range_part}>
         <button className={styles.range_button} onClick={dateChangeOnHandler}>
@@ -432,10 +431,9 @@ const MobileCarSearch = ({ carCode }) => {
       <div className={styles.main}>
         {resultCarList && (
           <p
-            className={styles.result}
-          >{`검색결과 총 ${resultCarList.length}건`}</p>
+            className={styles.number}
+          >{`${resultCarList.length}건의 검색결과`}</p>
         )}
-
         <div className={styles.result_list}>
           {resultCarList ? (
             resultCarList.length > 0 ? (
