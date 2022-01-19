@@ -9,6 +9,7 @@ import { ko } from "react-date-range/dist/locale/index.js";
 import axios from "axios";
 import LoadingPage from "../loadingPage/loadingPage";
 import { debounce } from "lodash";
+import ErrorPage from "../errorPage/errorPage";
 
 const CarSearchPage = ({ carCode }) => {
   const navigate = useNavigate();
@@ -195,6 +196,22 @@ const CarSearchPage = ({ carCode }) => {
           alert("반납일자는 대여일자 이후여야 합니다.");
           setCarList([]);
           setResultCarList([]);
+        } else if (
+          err.response.data.messages.dropoff_datetime &&
+          err.response.data.messages.dropoff_datetime[0].includes(
+            "does not match the format"
+          )
+        ) {
+          setCarList("error");
+          setResultCarList("error");
+        } else if (
+          err.response.data.messages.pickup_datetime &&
+          err.response.data.messages.pickup_datetime[0].includes(
+            "does not match the format"
+          )
+        ) {
+          setCarList("error");
+          setResultCarList("error");
         }
         console.error(err);
       });
@@ -250,6 +267,12 @@ const CarSearchPage = ({ carCode }) => {
   };
 
   useEffect(() => {
+    if (pickup.length !== 16 || dropoff.length < 16) {
+      console.log("DSD");
+      setCarList("error");
+      setResultCarList("error");
+      return;
+    }
     setCarList(null);
     setResultCarList(null);
     setDate([
@@ -313,47 +336,34 @@ const CarSearchPage = ({ carCode }) => {
 
   return (
     <div className={styles.body}>
-      <div className={styles.container}>
-        <aside className={styles.side_menu}>
-          <div className={styles.search_part}>
-            <div className={styles.search_container}>
-              <input
-                value={searchValue}
-                onChange={onSearchValueChangeHandler}
-                type="text"
-                className={styles.search_input}
-                spellCheck="false"
-                placeholder="검색"
-              />
-              <div className={styles.search_icon_container}>
-                <i className={`${styles.search_icon} fas fa-search`}></i>
+      {resultCarList === "error" ? (
+        <ErrorPage />
+      ) : (
+        <div className={styles.container}>
+          <aside className={styles.side_menu}>
+            <div className={styles.search_part}>
+              <div className={styles.search_container}>
+                <input
+                  value={searchValue}
+                  onChange={onSearchValueChangeHandler}
+                  type="text"
+                  className={styles.search_input}
+                  spellCheck="false"
+                  placeholder="검색"
+                />
+                <div className={styles.search_icon_container}>
+                  <i className={`${styles.search_icon} fas fa-search`}></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div className={styles.division_part}>
-            <p className={styles.side_menu_title}>차종</p>
-            <div className={styles.checkbox_list}>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="전체"
-                  checked={typeSelect === "전체" ? true : false}
-                  onChange={onTypeSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onTypeSelectChangeHandler}
-                >
-                  전체
-                </p>
-              </div>
-              {carCode.rentcar_class_codes.map((code) => (
-                <div key={code.cd} className={styles.checkbox_container}>
+            <div className={styles.division_part}>
+              <p className={styles.side_menu_title}>차종</p>
+              <div className={styles.checkbox_list}>
+                <div className={styles.checkbox_container}>
                   <input
                     type="checkbox"
-                    name={code.name}
-                    checked={typeSelect === code.name ? true : false}
+                    name="전체"
+                    checked={typeSelect === "전체" ? true : false}
                     onChange={onTypeSelectChangeHandler}
                     className={styles.checkbox}
                   />
@@ -361,36 +371,36 @@ const CarSearchPage = ({ carCode }) => {
                     className={styles.checkbox_text}
                     onClick={onTypeSelectChangeHandler}
                   >
-                    {code.name}
+                    전체
                   </p>
                 </div>
-              ))}
-            </div>
-          </div>
-          <div className={styles.sort_part}>
-            <p className={styles.side_menu_title}>연료</p>
-            <div className={styles.checkbox_list}>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="전체"
-                  checked={fuelSelect === "전체" ? true : false}
-                  onChange={onFuelSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onFuelSelectChangeHandler}
-                >
-                  전체
-                </p>
+                {carCode.rentcar_class_codes.map((code) => (
+                  <div key={code.cd} className={styles.checkbox_container}>
+                    <input
+                      type="checkbox"
+                      name={code.name}
+                      checked={typeSelect === code.name ? true : false}
+                      onChange={onTypeSelectChangeHandler}
+                      className={styles.checkbox}
+                    />
+                    <p
+                      className={styles.checkbox_text}
+                      onClick={onTypeSelectChangeHandler}
+                    >
+                      {code.name}
+                    </p>
+                  </div>
+                ))}
               </div>
-              {carCode.rentcar_fuel_codes.map((code) => (
-                <div key={code.cd} className={styles.checkbox_container}>
+            </div>
+            <div className={styles.sort_part}>
+              <p className={styles.side_menu_title}>연료</p>
+              <div className={styles.checkbox_list}>
+                <div className={styles.checkbox_container}>
                   <input
                     type="checkbox"
-                    name={code.name}
-                    checked={fuelSelect === code.name ? true : false}
+                    name="전체"
+                    checked={fuelSelect === "전체" ? true : false}
                     onChange={onFuelSelectChangeHandler}
                     className={styles.checkbox}
                   />
@@ -398,114 +408,133 @@ const CarSearchPage = ({ carCode }) => {
                     className={styles.checkbox_text}
                     onClick={onFuelSelectChangeHandler}
                   >
-                    {code.name}
+                    전체
                   </p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </aside>
-        <div className={styles.main}>
-          <div className={styles.range_container}>
-            <div className={styles.range_input_box_date}>
-              <p className={styles.range_text}>대여기간</p>
-              <div
-                className={styles.range_input_date}
-                onClick={datePickerOpenHandler}
-              >
-                <i className={`${styles.date_icon} fas fa-calendar`}></i>
-                {dateShow}
+                {carCode.rentcar_fuel_codes.map((code) => (
+                  <div key={code.cd} className={styles.checkbox_container}>
+                    <input
+                      type="checkbox"
+                      name={code.name}
+                      checked={fuelSelect === code.name ? true : false}
+                      onChange={onFuelSelectChangeHandler}
+                      className={styles.checkbox}
+                    />
+                    <p
+                      className={styles.checkbox_text}
+                      onClick={onFuelSelectChangeHandler}
+                    >
+                      {code.name}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <div
-                className={`${
-                  datePickerOn
-                    ? `${styles.date_picker} ${styles.on}`
-                    : `${styles.date_picker} ${styles.off}`
-                }`}
-              >
-                <DateRange
-                  minDate={new Date()}
-                  editableDateInputs={false}
-                  showSelectionPreview={true}
-                  onChange={(item) => setDate([item.selection])}
-                  moveRangeOnFirstSelection={false}
-                  ranges={date}
-                  months={window.innerWidth > 768 ? 2 : 1}
-                  direction={
-                    window.innerWidth > 768 ? "horizontal" : "vertical"
-                  }
-                  locale={ko}
-                />
-                <button
-                  className={styles.date_picker_button}
-                  onClick={() => setDatePickerOn(false)}
+            </div>
+          </aside>
+          <div className={styles.main}>
+            <div className={styles.range_container}>
+              <div className={styles.range_input_box_date}>
+                <p className={styles.range_text}>대여기간</p>
+                <div
+                  className={styles.range_input_date}
+                  onClick={datePickerOpenHandler}
                 >
-                  선택
-                </button>
+                  <i className={`${styles.date_icon} fas fa-calendar`}></i>
+                  {dateShow}
+                </div>
+                <div
+                  className={`${
+                    datePickerOn
+                      ? `${styles.date_picker} ${styles.on}`
+                      : `${styles.date_picker} ${styles.off}`
+                  }`}
+                >
+                  <DateRange
+                    minDate={new Date()}
+                    editableDateInputs={false}
+                    showSelectionPreview={true}
+                    onChange={(item) => setDate([item.selection])}
+                    moveRangeOnFirstSelection={false}
+                    ranges={date}
+                    months={window.innerWidth > 768 ? 2 : 1}
+                    direction={
+                      window.innerWidth > 768 ? "horizontal" : "vertical"
+                    }
+                    locale={ko}
+                  />
+                  <button
+                    className={styles.date_picker_button}
+                    onClick={() => setDatePickerOn(false)}
+                  >
+                    선택
+                  </button>
+                </div>
+              </div>
+              <div className={styles.range_input_box}>
+                <p className={styles.range_text}>대여시각</p>
+                <select
+                  name="rentTime"
+                  value={rentTime}
+                  onChange={onTimeChangeHandler}
+                  className={styles.range_input}
+                >
+                  {timeList.map((time) => (
+                    <option key={time} value={time === "시간 선택" ? "" : time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className={styles.range_input_box}>
+                <p className={styles.range_text}>반납시각</p>
+                <select
+                  name="returnTime"
+                  value={returnTime}
+                  onChange={onTimeChangeHandler}
+                  className={styles.range_input}
+                >
+                  {timeList.map((time) => (
+                    <option key={time} value={time === "시간 선택" ? "" : time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div
+                className={styles.range_icon_container}
+                onClick={onSearchHandler}
+              >
+                <i className={`${styles.range_icon} fas fa-search`}></i>
               </div>
             </div>
-            <div className={styles.range_input_box}>
-              <p className={styles.range_text}>대여시각</p>
-              <select
-                name="rentTime"
-                value={rentTime}
-                onChange={onTimeChangeHandler}
-                className={styles.range_input}
-              >
-                {timeList.map((time) => (
-                  <option key={time} value={time === "시간 선택" ? "" : time}>
-                    {time}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className={styles.range_input_box}>
-              <p className={styles.range_text}>반납시각</p>
-              <select
-                name="returnTime"
-                value={returnTime}
-                onChange={onTimeChangeHandler}
-                className={styles.range_input}
-              >
-                {timeList.map((time) => (
-                  <option key={time} value={time === "시간 선택" ? "" : time}>
-                    {time}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div
-              className={styles.range_icon_container}
-              onClick={onSearchHandler}
-            >
-              <i className={`${styles.range_icon} fas fa-search`}></i>
-            </div>
-          </div>
-          <div className={styles.result_container}>
-            {resultCarList && (
-              <p
-                className={styles.result}
-              >{`검색결과 총 ${resultCarList.length}건`}</p>
-            )}
-
-            <div className={styles.result_list}>
-              {resultCarList ? (
-                resultCarList.length > 0 ? (
-                  <CarItemList
-                    itemList={resultCarList}
-                    moveToDetail={moveToDetail}
-                  />
-                ) : (
-                  <div className={styles.no_result}>검색 결과가 없습니다.</div>
-                )
-              ) : (
-                <LoadingPage />
+            <div className={styles.result_container}>
+              {resultCarList && (
+                <p
+                  className={styles.result}
+                >{`검색결과 총 ${resultCarList.length}건`}</p>
               )}
+
+              <div className={styles.result_list}>
+                {resultCarList ? (
+                  resultCarList.length > 0 ? (
+                    <CarItemList
+                      itemList={resultCarList}
+                      moveToDetail={moveToDetail}
+                    />
+                  ) : (
+                    <div className={styles.no_result}>
+                      검색 결과가 없습니다.
+                    </div>
+                  )
+                ) : (
+                  <LoadingPage />
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

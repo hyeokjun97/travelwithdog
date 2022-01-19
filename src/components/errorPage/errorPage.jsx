@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./errorPage.module.css";
 
 const ErrorPage = (props) => {
+  const navigate = useNavigate();
   return (
     <div className={styles.error}>
       <div className={styles.error_main}>
@@ -19,8 +21,15 @@ const ErrorPage = (props) => {
             {`페이지가 존재하지 않거나, 사용할 수 없는 페이지입니다.\n입력하신 주소가 정확한지 다시 한 번 확인해주세요.`}
           </p>
           <div className={styles.button_container}>
-            <button className={styles.button_main}>메인으로</button>
-            <button className={styles.button}>이전페이지</button>
+            <button
+              className={styles.button_main}
+              onClick={() => navigate("/")}
+            >
+              메인으로
+            </button>
+            <button className={styles.button} onClick={() => navigate(-1)}>
+              이전페이지
+            </button>
           </div>
         </div>
       </div>

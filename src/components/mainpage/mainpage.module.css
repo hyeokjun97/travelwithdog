@@ -1,5 +1,6 @@
 .mainpage {
   background-color: rgb(250, 250, 250);
+  animation: pageAppear 0.2s;
 }
 .top_banner {
   display: inline-block;
@@ -178,6 +179,14 @@
   background: url("../../background/main_bottom.png") center/cover no-repeat;
 }
 
+.loading {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 1050px) {
   .mainpage {
     background-color: white;
@@ -215,7 +224,7 @@
 
   .list_title {
     font-size: var(--fontsize-big);
-    margin-left: 20px;
+    margin-left: 12.5px;
   }
   .list_part {
     width: 100%;
@@ -307,5 +316,14 @@
 
   .map_main {
     margin-top: 16px;
+  }
+}
+
+@keyframes pageAppear {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
   }
 }
