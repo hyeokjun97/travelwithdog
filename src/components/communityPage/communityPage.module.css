@@ -1,4 +1,5 @@
 .body {
+  width: 100%;
   min-height: 100vh;
 }
 .top_banner {
@@ -60,6 +61,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 .select_button {
@@ -69,6 +74,7 @@
   color: #afafaf;
   cursor: pointer;
   padding-bottom: 7px;
+  flex: 0 0 auto;
 }
 
 .select_button_on {
@@ -122,6 +128,14 @@
   color: #505050;
 }
 
+.no_article {
+  margin: auto;
+  margin-top: 30px;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  color: #101010;
+}
+
 @media screen and (max-width: 1150px) {
   .main {
     width: 800px;
@@ -141,6 +155,7 @@
   }
   .main {
     width: 95%;
+    padding-bottom: 100px;
   }
 
   .main_top {
@@ -179,8 +194,15 @@
     width: 77.5%;
   }
 
+  .select_container {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
   .select_button {
     margin-left: 0;
+    display: inline-block;
     font-size: var(--fontsize-normal);
   }
 

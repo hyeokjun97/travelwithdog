@@ -10,7 +10,7 @@ import axios from "axios";
 import LoadingPage from "../loadingPage/loadingPage";
 import { debounce } from "lodash";
 
-const CarSearchPage = (props) => {
+const CarSearchPage = ({ carCode }) => {
   const navigate = useNavigate();
   const { pickup, dropoff } = useParams();
   //날짜로 검색한 차량들의 목록
@@ -348,96 +348,23 @@ const CarSearchPage = (props) => {
                   전체
                 </p>
               </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="소형"
-                  checked={typeSelect === "소형" ? true : false}
-                  onChange={onTypeSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onTypeSelectChangeHandler}
-                >
-                  소형
-                </p>
-              </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="준중형"
-                  checked={typeSelect === "준중형" ? true : false}
-                  onChange={onTypeSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onTypeSelectChangeHandler}
-                >
-                  준중형
-                </p>
-              </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="중형"
-                  checked={typeSelect === "중형" ? true : false}
-                  onChange={onTypeSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onTypeSelectChangeHandler}
-                >
-                  중형
-                </p>
-              </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="고급"
-                  checked={typeSelect === "고급" ? true : false}
-                  onChange={onTypeSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onTypeSelectChangeHandler}
-                >
-                  고급
-                </p>
-              </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="SUV"
-                  checked={typeSelect === "SUV" ? true : false}
-                  onChange={onTypeSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onTypeSelectChangeHandler}
-                >
-                  SUV
-                </p>
-              </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="승합"
-                  checked={typeSelect === "승합" ? true : false}
-                  onChange={onTypeSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onTypeSelectChangeHandler}
-                >
-                  승합
-                </p>
-              </div>
+              {carCode.rentcar_class_codes.map((code) => (
+                <div key={code.cd} className={styles.checkbox_container}>
+                  <input
+                    type="checkbox"
+                    name={code.name}
+                    checked={typeSelect === code.name ? true : false}
+                    onChange={onTypeSelectChangeHandler}
+                    className={styles.checkbox}
+                  />
+                  <p
+                    className={styles.checkbox_text}
+                    onClick={onTypeSelectChangeHandler}
+                  >
+                    {code.name}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
           <div className={styles.sort_part}>
@@ -458,81 +385,23 @@ const CarSearchPage = (props) => {
                   전체
                 </p>
               </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="휘발유"
-                  checked={fuelSelect === "휘발유" ? true : false}
-                  onChange={onFuelSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onFuelSelectChangeHandler}
-                >
-                  휘발유
-                </p>
-              </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="경유"
-                  checked={fuelSelect === "경유" ? true : false}
-                  onChange={onFuelSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onFuelSelectChangeHandler}
-                >
-                  경유
-                </p>
-              </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="LPG"
-                  checked={fuelSelect === "LPG" ? true : false}
-                  onChange={onFuelSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onFuelSelectChangeHandler}
-                >
-                  LPG
-                </p>
-              </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="하이브리드"
-                  checked={fuelSelect === "하이브리드" ? true : false}
-                  onChange={onFuelSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onFuelSelectChangeHandler}
-                >
-                  하이브리드
-                </p>
-              </div>
-              <div className={styles.checkbox_container}>
-                <input
-                  type="checkbox"
-                  name="전기"
-                  checked={fuelSelect === "전기" ? true : false}
-                  onChange={onFuelSelectChangeHandler}
-                  className={styles.checkbox}
-                />
-                <p
-                  className={styles.checkbox_text}
-                  onClick={onFuelSelectChangeHandler}
-                >
-                  전기
-                </p>
-              </div>
+              {carCode.rentcar_fuel_codes.map((code) => (
+                <div key={code.cd} className={styles.checkbox_container}>
+                  <input
+                    type="checkbox"
+                    name={code.name}
+                    checked={fuelSelect === code.name ? true : false}
+                    onChange={onFuelSelectChangeHandler}
+                    className={styles.checkbox}
+                  />
+                  <p
+                    className={styles.checkbox_text}
+                    onClick={onFuelSelectChangeHandler}
+                  >
+                    {code.name}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </aside>

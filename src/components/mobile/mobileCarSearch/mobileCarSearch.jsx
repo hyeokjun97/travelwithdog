@@ -11,7 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import LoadingPage from "../../loadingPage/loadingPage";
 
-const MobileCarSearch = (props) => {
+const MobileCarSearch = ({ carCode }) => {
   const navigate = useNavigate();
   const { pickup, dropoff } = useParams();
   //날짜로 검색한 차량들의 목록
@@ -412,7 +412,7 @@ const MobileCarSearch = (props) => {
             <div className={styles.button_slick_container}>
               <p className={styles.select_title}>차종</p>
               <ButtonSlick
-                buttonList={typeButtonList}
+                buttonList={carCode.rentcar_class_codes}
                 selected={typeSelected}
                 onSelectChangeHandler={onTypeSelectChangeHandler}
               />
@@ -420,7 +420,7 @@ const MobileCarSearch = (props) => {
             <div className={styles.button_slick_container_bottom}>
               <p className={styles.select_title}>연료</p>
               <ButtonSlick
-                buttonList={fuelButtonList}
+                buttonList={carCode.rentcar_fuel_codes}
                 selected={fuelSelected}
                 onSelectChangeHandler={onFuelSelectChangeHandler}
               />

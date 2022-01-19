@@ -40,6 +40,8 @@ const App = (props) => {
     }
     return false;
   });
+  //차량 구분, 연료 구분 코드
+  const [carCode, setCarCode] = useState(null);
   const [loginPopupOn, setLoginPopupOn] = useState(false);
   const [signupPopupOn, setSignupPopupOn] = useState(false);
   const [findPopupOn, setFindPopupOn] = useState(false);
@@ -264,6 +266,15 @@ const App = (props) => {
       .catch((err) => console.error(err));
   };
 
+  const loadCarCode = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/codes?keys[]=rentcar_class_codes&keys[]=rentcar_fuel_codes`
+      )
+      .then((response) => setCarCode(response.data))
+      .catch((err) => console.error(err));
+  };
+
   const keyHandler = (e) => {
     if (e.key !== "Escape") {
       return;
@@ -285,6 +296,7 @@ const App = (props) => {
   //컴포넌트 마운트 시에 불러오기
   useEffect(() => {
     loadPageList();
+    loadCarCode();
   }, []);
 
   return (
@@ -360,7 +372,7 @@ const App = (props) => {
               element={<Rentcar chabak={chabak} loadPageData={loadPageData} />}
             ></Route>
           )}
-          <Route path="/community/:board" element={<CommunityPage />}></Route>
+          <Route path="/community/:boardId" element={<CommunityPage />}></Route>
           {deviceSize ? (
             <Route path="/search/:query" element={<SearchPage />}></Route>
           ) : (
@@ -377,17 +389,18 @@ const App = (props) => {
           <Route path="/res" element={<ReservationPage />}></Route>
           <Route path="/article/:articleId" element={<ArticleView />}></Route>
           <Route path="/articlew" element={<ArticleWrite />}></Route>
-          {deviceSize ? (
-            <Route
-              path="/carsearch/:pickup/:dropoff"
-              element={<CarSearchPage />}
-            ></Route>
-          ) : (
-            <Route
-              path="/carsearch/:pickup/:dropoff"
-              element={<MobileCarSearch />}
-            ></Route>
-          )}
+          {carCode &&
+            (deviceSize ? (
+              <Route
+                path="/carsearch/:pickup/:dropoff"
+                element={<CarSearchPage carCode={carCode} />}
+              ></Route>
+            ) : (
+              <Route
+                path="/carsearch/:pickup/:dropoff"
+                element={<MobileCarSearch carCode={carCode} />}
+              ></Route>
+            ))}
           <Route
             path="/cardetail/:carId/:businessId/:pickupDateTime/:dropoffDateTime"
             element={<CarDetail />}

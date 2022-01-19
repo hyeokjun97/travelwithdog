@@ -42,7 +42,7 @@
   display: -webkit-box;
   word-wrap: break-word;
   word-break: break-all;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   margin-bottom: 3px;
 }
@@ -109,10 +109,6 @@
 
   .title {
     font-size: var(--fontsize-normal);
-  }
-
-  .content {
-    font-size: var(--fontsize-small);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

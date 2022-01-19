@@ -20,15 +20,25 @@ export default class ButtonSlick extends Component {
     return (
       <div className="button_slick_container">
         <Slider {...settings}>
+          <div>
+            <div
+              className={`${selected === "전체" ? "item on" : "item"}`}
+              onClick={() => {
+                onSelectChangeHandler("전체");
+              }}
+            >
+              <p>전체</p>
+            </div>
+          </div>
           {buttonList.map((item) => (
-            <div key={item.id}>
+            <div key={item.cd}>
               <div
-                className={`${item === selected ? "item on" : "item"}`}
+                className={`${item.name === selected ? "item on" : "item"}`}
                 onClick={() => {
-                  onSelectChangeHandler(item);
+                  onSelectChangeHandler(item.name);
                 }}
               >
-                <p>{item}</p>
+                <p>{item.name}</p>
               </div>
             </div>
           ))}

@@ -63,7 +63,7 @@ const MobileFooter = (props) => {
             : `${styles.button}`
         }`}
         onClick={() => {
-          navigate("/community/travel");
+          navigate("/community/1");
           window.scrollTo({ top: 0 });
         }}
       >
