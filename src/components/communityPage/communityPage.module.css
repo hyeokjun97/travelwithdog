@@ -144,6 +144,7 @@
 .number_list {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
 }
 
@@ -157,6 +158,21 @@
 .number_item_on {
   font-weight: 700;
   color: #111111;
+}
+
+.arrow_left,
+.arrrow_right {
+  font-size: var(--fontsize-bit-small);
+}
+
+.arrow_left_box {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.arrow_right_box {
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1150px) {
@@ -205,6 +221,7 @@
   }
 
   .search_container {
+    margin-top: 24px;
     justify-content: center;
   }
 
@@ -224,6 +241,7 @@
     overflow-y: hidden;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+    margin-top: 16px;
   }
 
   /* Hide scrollbar for Chrome, Safari and Opera */

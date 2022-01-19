@@ -228,7 +228,12 @@
 
 @media screen and (max-width: 765px) {
   .top_banner {
+    height: 600px;
     margin-bottom: 40px;
+  }
+
+  .top_filter {
+    padding-top: 110px;
   }
   .title {
     font-size: var(--fontsize-mini-title);

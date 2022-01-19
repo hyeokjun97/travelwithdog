@@ -300,7 +300,7 @@ const App = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.app}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         {deviceSize ? (
           categoryList && (
@@ -376,7 +376,10 @@ const App = (props) => {
           {deviceSize ? (
             <Route path="/search/:query" element={<SearchPage />}></Route>
           ) : (
-            <Route path="/search/:query" element={<MobileSearchPage />}></Route>
+            <Route
+              path="/search/:query"
+              element={<MobileSearchPage categoryList={categoryList} />}
+            ></Route>
           )}
           <Route path="/map" element={<Map deviceSize={deviceSize} />}></Route>
           <Route path="/mypage/:path" element={<Mypage />}></Route>

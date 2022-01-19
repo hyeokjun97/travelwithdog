@@ -12,6 +12,7 @@ const CommunityPage = (props) => {
   const [boardTitle, setBoardTitle] = useState(null);
   const [pageNumberList, setPageNumberList] = useState(null);
   const [selectedPage, setSelectedPage] = useState(1);
+  const [pageRange, setPageRange] = useState(0);
 
   const loadBoardList = () => {
     axios
@@ -32,7 +33,7 @@ const CommunityPage = (props) => {
   const loadPageLength = () => {
     axios
       .get(
-        `${process.env.REACT_APP_BASEURL}/boards/${boardId}/articles?limit=100000&page=1`
+        `${process.env.REACT_APP_BASEURL}/boards/${boardId}/articles?limit=1000&page=1`
       )
       .then((response) =>
         setPageNumberList(() => {
@@ -55,12 +56,29 @@ const CommunityPage = (props) => {
     setSelectedPage(parseInt(e.currentTarget.innerText));
   };
 
+  const pageRangeToNext = () => {
+    if (pageRange + 5 >= pageNumberList[pageNumberList.length - 1]) {
+      return;
+    }
+    setSelectedPage(pageRange + 6);
+    setPageRange(pageRange + 5);
+  };
+
+  const pageRangeToPrev = () => {
+    if (pageRange - 5 < 0) {
+      return;
+    }
+    setSelectedPage(pageRange);
+    setPageRange(pageRange - 5);
+  };
+
   useEffect(() => {
     loadBoardList();
   }, []);
 
   useEffect(() => {
     setSelectedPage(1);
+    setPageRange(0);
     loadArticleList();
   }, [boardId]);
 
@@ -142,9 +160,14 @@ const CommunityPage = (props) => {
         </div>
         <div className={styles.number_container}>
           <ul className={styles.number_list}>
+            {pageNumberList && pageNumberList.length > 5 && (
+              <li className={styles.arrow_left_box} onClick={pageRangeToPrev}>
+                <i className={`${styles.arrow_left} fas fa-chevron-left`}></i>
+              </li>
+            )}
             {pageNumberList &&
               pageNumberList.length > 0 &&
-              pageNumberList.map((num) => (
+              pageNumberList.slice(pageRange, pageRange + 5).map((num) => (
                 <li
                   key={num}
                   className={`${
@@ -157,6 +180,11 @@ const CommunityPage = (props) => {
                   {num}
                 </li>
               ))}
+            {pageNumberList && pageNumberList.length > 5 && (
+              <li className={styles.arrow_right_box} onClick={pageRangeToNext}>
+                <i className={`${styles.arrow_right} fas fa-chevron-right`}></i>
+              </li>
+            )}
           </ul>
         </div>
       </main>

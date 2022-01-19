@@ -4,7 +4,7 @@ import ItemList from "../../itemList/itemList";
 import ButtonSlick from "../../slick/buttonSlick/buttonSlick";
 import styles from "./mobileSearchPage.module.css";
 
-const MobileSearchPage = (props) => {
+const MobileSearchPage = ({ categoryList }) => {
   const { query } = useParams();
   const [jejuBest, setJejuBest] = useState([
     {
@@ -73,32 +73,8 @@ const MobileSearchPage = (props) => {
       price: 20000,
     },
   ]);
-  const [selected, setSelected] = useState({
-    id: 1,
-    title: "전체",
-  });
-  const [buttonList, setButtonList] = useState([
-    {
-      id: 1,
-      title: "전체",
-    },
-    {
-      id: 2,
-      title: "숙소",
-    },
-    {
-      id: 3,
-      title: "패키지",
-    },
-    {
-      id: 4,
-      title: "교통편",
-    },
-    {
-      id: 5,
-      title: "커뮤니티",
-    },
-  ]);
+  const [selected, setSelected] = useState("전체");
+
   const [sortValue, setSortValue] = useState("최신순");
 
   const onSelectChangeHandler = (item) => {
@@ -116,9 +92,9 @@ const MobileSearchPage = (props) => {
         <p className={styles.number}>{`${12}건의 검색결과`}</p>
       </div>
       <div className={styles.button_container}>
-        {selected && (
+        {selected && categoryList && (
           <ButtonSlick
-            buttonList={buttonList}
+            buttonList={categoryList}
             selected={selected}
             onSelectChangeHandler={onSelectChangeHandler}
           />
