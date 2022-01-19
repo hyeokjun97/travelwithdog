@@ -10,6 +10,8 @@ const CommunityPage = (props) => {
   const [boardList, setBoardList] = useState(null);
   const [articleList, setArticleList] = useState(null);
   const [boardTitle, setBoardTitle] = useState(null);
+  const [pageNumberList, setPageNumberList] = useState(null);
+  const [selectedPage, setSelectedPage] = useState(1);
 
   const loadBoardList = () => {
     axios
@@ -21,10 +23,36 @@ const CommunityPage = (props) => {
   const loadArticleList = () => {
     axios
       .get(
-        `${process.env.REACT_APP_BASEURL}/boards/${boardId}/articles?limit=8&page=1`
+        `${process.env.REACT_APP_BASEURL}/boards/${boardId}/articles?limit=8&page=${selectedPage}`
       )
       .then((response) => setArticleList(response.data.data))
       .catch((err) => console.err(err));
+  };
+
+  const loadPageLength = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/boards/${boardId}/articles?limit=100000&page=1`
+      )
+      .then((response) =>
+        setPageNumberList(() => {
+          const len = response.data.data.length;
+          let pageLength;
+          const result = [];
+          if (len % 8 === 0) pageLength = len / 8;
+          else pageLength = parseInt(len / 8) + 1;
+
+          for (let i = 1; i <= pageLength; i++) {
+            result.push(i);
+          }
+          return result;
+        })
+      )
+      .catch((err) => console.err(err));
+  };
+
+  const onPageChangeHandler = (e) => {
+    setSelectedPage(parseInt(e.currentTarget.innerText));
   };
 
   useEffect(() => {
@@ -32,13 +60,19 @@ const CommunityPage = (props) => {
   }, []);
 
   useEffect(() => {
+    setSelectedPage(1);
     loadArticleList();
   }, [boardId]);
+
+  useEffect(() => {
+    loadArticleList();
+  }, [selectedPage]);
 
   useEffect(() => {
     if (!boardList) {
       return;
     }
+    loadPageLength();
     boardList.forEach((board) => {
       if (board.id === parseInt(boardId)) {
         setBoardTitle(board.name);
@@ -105,6 +139,25 @@ const CommunityPage = (props) => {
           ) : (
             <p className={styles.no_article}>게시물이 없습니다</p>
           )}
+        </div>
+        <div className={styles.number_container}>
+          <ul className={styles.number_list}>
+            {pageNumberList &&
+              pageNumberList.length > 0 &&
+              pageNumberList.map((num) => (
+                <li
+                  key={num}
+                  className={`${
+                    num === selectedPage
+                      ? `${styles.number_item} ${styles.number_item_on}`
+                      : `${styles.number_item}`
+                  }`}
+                  onClick={onPageChangeHandler}
+                >
+                  {num}
+                </li>
+              ))}
+          </ul>
         </div>
       </main>
     </div>

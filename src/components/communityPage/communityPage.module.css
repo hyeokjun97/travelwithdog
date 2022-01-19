@@ -38,7 +38,7 @@
 .main {
   width: 1100px;
   margin: auto;
-  padding-bottom: 50px;
+  padding-bottom: 90px;
 }
 
 .main_top {
@@ -136,6 +136,29 @@
   color: #101010;
 }
 
+.number_container {
+  width: 100%;
+  margin-top: 53px;
+}
+
+.number_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.number_item {
+  margin: 0 10px;
+  font-size: var(--fontsize-normal);
+  color: #525252;
+  cursor: pointer;
+}
+
+.number_item_on {
+  font-weight: 700;
+  color: #111111;
+}
+
 @media screen and (max-width: 1150px) {
   .main {
     width: 800px;
@@ -195,9 +218,17 @@
   }
 
   .select_container {
-    overflow-x: scroll;
-    overflow-y: hidden;
+    width: 100%;
     white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .select_container::-webkit-scrollbar {
+    display: none;
   }
 
   .select_button {
