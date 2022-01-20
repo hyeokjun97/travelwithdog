@@ -5,8 +5,6 @@ import "react-summernote/lang/summernote-ko-KR"; // you can import any other loc
 import "bootstrap/js/modal";
 import "bootstrap/js/dropdown";
 import "bootstrap/js/tooltip";
-//import "bootstrap/dist/css/bootstrap.css";
-
 import axios from "axios";
 
 const SummerNote = ({ where, onContentChangeHandler, initial }) => {
@@ -16,7 +14,7 @@ const SummerNote = ({ where, onContentChangeHandler, initial }) => {
         children={<div dangerouslySetInnerHTML={{ __html: initial }}></div>}
         options={{
           lang: "ko-KR",
-          height: 350,
+          height: 250,
           dialogsInBody: true,
           toolbar: [
             ["Font Style", ["fontname"]],

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import LoadingPage from "../loadingPage/loadingPage";
 import ArticleItem from "./articleItem/articleItem";
 import styles from "./communityPage.module.css";
 
@@ -155,7 +156,11 @@ const CommunityPage = (props) => {
           </div>
         </div>
         <div className={styles.list}>
-          {articleList && articleList.length > 0 ? (
+          {!articleList ? (
+            <div className={styles.loading_container}>
+              <LoadingPage />
+            </div>
+          ) : articleList.length > 0 ? (
             articleList.map((article) => (
               <ArticleItem key={article.id} article={article} />
             ))

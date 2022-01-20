@@ -200,7 +200,13 @@
 .write_button:hover {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
-
+.loading_container {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @media screen and (max-width: 1150px) {
   .main {
     width: 800px;

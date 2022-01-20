@@ -76,3 +76,18 @@
     font-size: var(--fontsize-normal);
   }
 }
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: var(--fontsize-normal);
+  }
+
+  .desc {
+    font-size: var(--fontsize-bit-small);
+    margin-bottom: 10px;
+  }
+
+  .summernote_container {
+    height: 30%;
+  }
+}
