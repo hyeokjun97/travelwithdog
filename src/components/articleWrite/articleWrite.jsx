@@ -26,6 +26,7 @@ const ArticleWrite = (props) => {
           spellCheck="false"
           placeholder="제목"
         />
+        <SummerNote />
         <div className={styles.button_container}>
           <button className={styles.button}>업로드</button>
         </div>

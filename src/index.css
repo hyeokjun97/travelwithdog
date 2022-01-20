@@ -1,4 +1,10 @@
 @import "/src/constant.css";
+
+/*bootstrap 충돌 피하기위함*/
+html {
+  font-size: 16px;
+  line-height: normal;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -6,6 +12,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: normal;
 }
 
 input,
@@ -38,4 +46,14 @@ textarea {
 
 select {
   background-color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: normal;
 }

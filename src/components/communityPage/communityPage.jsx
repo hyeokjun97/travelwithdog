@@ -72,6 +72,11 @@ const CommunityPage = (props) => {
     setPageRange(pageRange - 5);
   };
 
+  const moveToWritePage = () => {
+    navigate("/articlew");
+    window.scrollTo({ top: 0 });
+  };
+
   useEffect(() => {
     loadBoardList();
   }, []);
@@ -159,7 +164,9 @@ const CommunityPage = (props) => {
           )}
         </div>
         <div className={styles.write_button_container}>
-          <button className={styles.write_button}>글쓰기</button>
+          <button className={styles.write_button} onClick={moveToWritePage}>
+            글쓰기
+          </button>
         </div>
         <div className={styles.number_container}>
           <ul className={styles.number_list}>

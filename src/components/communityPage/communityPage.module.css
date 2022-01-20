@@ -193,6 +193,12 @@
   font-size: var(--fontsize-bit-small);
   border-radius: 7px;
   margin-right: 25px;
+  cursor: pointer;
+  transition: 0.2s all ease-in;
+}
+
+.write_button:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (max-width: 1150px) {
