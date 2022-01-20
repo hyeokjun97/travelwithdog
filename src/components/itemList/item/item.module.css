@@ -55,25 +55,25 @@
   width: 100%;
   padding: 14px 0 0 0;
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 800px) {
   .item {
-    width: 30%;
-    margin: 1.667%;
+    width: 32%;
+    margin: 0.667%;
   }
 }
 
-@media screen and (max-width: 1000px) {
-  .item {
-    width: 46%;
-    margin: 2%;
-  }
-}
-
-@media screen and (max-width: 765px) {
+@media screen and (max-width: 600px) {
   .item {
     width: 48%;
-    height: auto;
     margin: 1%;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .item {
+    width: 97%;
+    height: auto;
+    margin: 1.5%;
     margin-bottom: 30px;
   }
 

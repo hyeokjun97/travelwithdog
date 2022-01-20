@@ -266,7 +266,9 @@ const Rentcar = ({ chabak, loadPageData }) => {
         </div>
       </div>
       <div className={styles.bottom_part}>
-        <p className={styles.title}>트래블위드독 렌터카를 선택해야하는 이유</p>
+        <p className={`${styles.title} ${styles.title_first}`}>
+          트래블위드독 렌터카를 선택해야하는 이유
+        </p>
         <div className={styles.intro_container}>
           <div className={styles.intro_item}>
             <img

@@ -13,6 +13,7 @@
 }
 
 .button_container {
+  height: 31px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -30,5 +31,6 @@
 }
 
 .selected_on {
+  height: 30px;
   border-bottom: 3px solid var(--color-sky-blue);
 }

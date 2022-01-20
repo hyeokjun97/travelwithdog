@@ -189,6 +189,10 @@
 }
 
 @media screen and (max-width: 1100px) {
+  .top_banner,
+  .top_filter {
+    height: 100vh;
+  }
   .title_container {
     right: 5%;
   }
@@ -259,9 +263,7 @@
   .top_title_two {
     font-size: var(--fontsize-big);
   }
-  .title {
-    margin-left: 22px;
-  }
+
   .search_container {
     padding: 20px;
     left: 5%;
@@ -270,6 +272,14 @@
   .search_input_date,
   .search_input {
     font-size: var(--fontsize-bit-small);
+  }
+  .title {
+    font-size: var(--fontsize-bit-big);
+  }
+
+  .title_first {
+    margin-left: 0;
+    text-align: center;
   }
   .date_picker {
     left: 0;
