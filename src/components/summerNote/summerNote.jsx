@@ -1,4 +1,5 @@
 import React from "react";
+//import "bootstrap/dist/css/bootstrap.css";
 import ReactSummernote from "react-summernote";
 import "react-summernote/dist/react-summernote.css"; // import styles
 import "react-summernote/lang/summernote-ko-KR"; // you can import any other locale
@@ -6,7 +7,6 @@ import "bootstrap/js/modal";
 import "bootstrap/js/dropdown";
 import "bootstrap/js/tooltip";
 import "./summerNote.css";
-//import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 
 const SummerNote = ({ where, onContentChangeHandler, initial }) => {

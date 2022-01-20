@@ -139,7 +139,7 @@
 
 .number_container {
   width: 100%;
-  margin-top: 53px;
+  margin-top: 36px;
 }
 
 .number_list {
@@ -176,12 +176,34 @@
   cursor: pointer;
 }
 
+.write_button_container {
+  width: 100%;
+  text-align: end;
+}
+
+.write_button {
+  width: 66px;
+  height: 30px;
+  line-height: 29px;
+  outline: none;
+  border: none;
+  background-color: var(--color-green);
+  color: white;
+  font-weight: 700;
+  font-size: var(--fontsize-bit-small);
+  border-radius: 7px;
+  margin-right: 25px;
+}
+
 @media screen and (max-width: 1150px) {
   .main {
     width: 800px;
   }
   .board_title {
     font-size: var(--fontsize-mini-title);
+  }
+  .write_button {
+    margin-right: 16px;
   }
 }
 
@@ -215,6 +237,10 @@
     margin-left: 0;
     display: inline-block;
     font-size: var(--fontsize-normal);
+  }
+
+  .write_button {
+    margin-right: 25px;
   }
 }
 
@@ -262,5 +288,8 @@
 
   .board_title {
     font-size: var(--fontsize-mini-title);
+  }
+  .write_button {
+    margin-right: 1%;
   }
 }

@@ -158,6 +158,9 @@ const CommunityPage = (props) => {
             <p className={styles.no_article}>게시물이 없습니다</p>
           )}
         </div>
+        <div className={styles.write_button_container}>
+          <button className={styles.write_button}>글쓰기</button>
+        </div>
         <div className={styles.number_container}>
           <ul className={styles.number_list}>
             {pageNumberList && pageNumberList.length > 5 && (

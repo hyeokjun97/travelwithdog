@@ -100,6 +100,16 @@
   cursor: pointer;
 }
 
+img,
+iframe {
+  width: 100%;
+}
+
+iframe {
+  height: auto;
+  min-height: 300px;
+}
+
 @media screen and (max-width: 1000px) {
   .body {
     padding: 0 0 60px 0;
