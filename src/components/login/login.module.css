@@ -152,6 +152,7 @@
   .login_popup {
     width: 90%;
     height: auto;
+    transform: translateY(-30px);
   }
 
   .logo {

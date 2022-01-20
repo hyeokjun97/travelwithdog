@@ -383,7 +383,15 @@ const App = (props) => {
           )}
           <Route path="/map" element={<Map deviceSize={deviceSize} />}></Route>
           <Route path="/mypage/:path" element={<Mypage />}></Route>
-          <Route path="/mobile/mypage" element={<MobileMypage />}></Route>
+          <Route
+            path="/mobile/mypage"
+            element={
+              <MobileMypage
+                loginPopupHandler={loginPopupHandler}
+                signupPopupHandler={signupPopupHandler}
+              />
+            }
+          ></Route>
           <Route
             path="/mobile/mypage/:path"
             element={<MobileMypageDetail />}
