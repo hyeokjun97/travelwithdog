@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import styles from "./login.module.css";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 const Login = ({
   onCloseButtonHandler,
   signupPopupHandler,
   findPopupHandler,
 }) => {
-  const { Kakao } = window;
+  const { FB, Kakao } = window;
 
   const [inputValue, setInputValue] = useState({
     id: "",
@@ -75,6 +76,11 @@ const Login = ({
         console.log("fail");
       },
     });
+  };
+
+  const loginWithFacebook = (response) => {
+    console.log(response);
+    //추후 추가
   };
 
   return (
@@ -174,11 +180,21 @@ const Login = ({
           <p className={styles.social_text}>Kakao</p>
         </div>
         <div className={styles.social_button}>
-          <img
-            src="/travelWithDog/images/facebook_round.png"
-            alt="facebook_login"
-            className={styles.social_image}
-          />
+          <FacebookLogin
+            appId={process.env.REACT_APP_FACEBOOK_KEY}
+            autoLoad={false}
+            fields="name,first_name,last_name,email"
+            callback={loginWithFacebook}
+            disableMobileRedirect={true}
+            render={(renderProps) => (
+              <img
+                src="/travelWithDog/images/facebook_round.png"
+                alt="facebook_login"
+                className={styles.social_image}
+                onClick={renderProps.onClick}
+              />
+            )}
+          ></FacebookLogin>
           <p className={styles.social_text}>Facebook</p>
         </div>
       </div>
