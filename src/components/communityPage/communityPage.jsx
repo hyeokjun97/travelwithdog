@@ -27,30 +27,20 @@ const CommunityPage = (props) => {
       .get(
         `${process.env.REACT_APP_BASEURL}/boards/${boardId}/articles?limit=8&page=${selectedPage}`
       )
-      .then((response) => setArticleList(response.data.data))
+      .then((response) => {
+        setArticleList(response.data.data);
+        const tmpList = [];
+        const len = response.data.total;
+        let pageLength;
+        if (len % 8 === 0) pageLength = len / 8;
+        else pageLength = parseInt(len / 8) + 1;
+
+        for (let i = 1; i <= pageLength; i++) {
+          tmpList.push(i);
+        }
+        setPageNumberList(tmpList);
+      })
       .catch((err) => console.error(err));
-  };
-
-  const loadPageLength = () => {
-    axios
-      .get(
-        `${process.env.REACT_APP_BASEURL}/boards/${boardId}/articles?limit=1000&page=1`
-      )
-      .then((response) =>
-        setPageNumberList(() => {
-          const len = response.data.data.length;
-          let pageLength;
-          const result = [];
-          if (len % 8 === 0) pageLength = len / 8;
-          else pageLength = parseInt(len / 8) + 1;
-
-          for (let i = 1; i <= pageLength; i++) {
-            result.push(i);
-          }
-          return result;
-        })
-      )
-      .catch((err) => console.err(err));
   };
 
   const onPageChangeHandler = (e) => {
@@ -96,7 +86,6 @@ const CommunityPage = (props) => {
     if (!boardList) {
       return;
     }
-    loadPageLength();
     boardList.forEach((board) => {
       if (board.id === parseInt(boardId)) {
         setBoardTitle(board.name);
