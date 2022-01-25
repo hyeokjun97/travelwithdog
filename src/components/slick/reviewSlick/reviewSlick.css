@@ -79,7 +79,7 @@
   .review_slick_container .slick-list,
   .review_slick_container .slick-track {
     transform: translateX(-16px);
-    width: calc(100vw);
+    width: calc(100vw - 16px);
     overflow: hidden;
   }
 

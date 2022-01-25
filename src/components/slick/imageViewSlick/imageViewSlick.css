@@ -13,6 +13,9 @@
   height: 600px;
   margin: auto;
   margin-top: 137px;
+  padding: 0 !important;
+  background-color: transparent !important;
+  border: 0 !important;
 }
 
 .image_view_slick_container .arrow_right {
@@ -67,6 +70,7 @@
 
 @media screen and (max-width: 768px) {
   .image_view_slick_container .thumbnail {
+    width: 90%;
     margin-top: 110px;
   }
   .image_view_slick_container .slick-dots {

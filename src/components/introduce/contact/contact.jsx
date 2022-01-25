@@ -3,7 +3,7 @@ import styles from "./contact.module.css";
 import { useGoogleMaps } from "react-hook-google-maps";
 
 const Contact = (props) => {
-  const { ref, map, google } = useGoogleMaps(process.env.REACT_APP_MAP_KEY, {
+  const { ref, map, google } = useGoogleMaps(process.env.REACT_APP_GOOGLE_KEY, {
     center: { lat: 37.55438841337693, lng: 126.93111696915291 },
     zoom: 15,
   });

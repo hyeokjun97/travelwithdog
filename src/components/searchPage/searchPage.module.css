@@ -84,7 +84,7 @@
 }
 
 .checkbox {
-  margin-right: 8px;
+  margin-right: 8px !important;
   -ms-transform: scale(1.2); /* IE */
   -moz-transform: scale(1.2); /* FF */
   -webkit-transform: scale(1.2); /* Safari and Chrome */

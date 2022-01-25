@@ -182,9 +182,7 @@ const CarSearchPage = ({ carCode }) => {
           err.response.data.messages.pickup_datetime &&
           err.response.data.messages.pickup_datetime[0].includes("tomorrow")
         ) {
-          alert(
-            "오늘 당일은 예약이 불가능합니다. 당일 이후로 날짜를 설정해주세요"
-          );
+          alert("오늘 이후로 날짜를 설정해주세요");
           setCarList([]);
           setResultCarList([]);
         } else if (

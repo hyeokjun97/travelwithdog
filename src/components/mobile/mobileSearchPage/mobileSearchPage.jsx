@@ -78,7 +78,7 @@ const MobileSearchPage = ({ categoryList }) => {
   const [sortValue, setSortValue] = useState("최신순");
 
   const onSelectChangeHandler = (item) => {
-    setSelected(item);
+    setSelected(item.name);
   };
 
   const onSortValueChangeHandler = (value) => {
@@ -97,6 +97,7 @@ const MobileSearchPage = ({ categoryList }) => {
             buttonList={categoryList}
             selected={selected}
             onSelectChangeHandler={onSelectChangeHandler}
+            where="search"
           />
         )}
       </div>

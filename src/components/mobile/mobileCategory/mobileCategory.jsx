@@ -8,7 +8,6 @@ import ItemSlickTwo from "../../slick/itemSlickTwo/itemSlickTwo";
 import { useNavigate, useParams } from "react-router-dom";
 
 const MobileCategory = ({ categoryList }) => {
-  console.log(categoryList);
   const navigate = useNavigate();
   const { path } = useParams();
   const [category, setCategory] = useState(null);
@@ -37,34 +36,7 @@ const MobileCategory = ({ categoryList }) => {
           />
         )}
       </div>
-      <div className={styles.list_part}>
-        {category &&
-          category.cardList.map((item) =>
-            item.type === 1 ? (
-              <div key={item.id} className={styles.list_container}>
-                <p className={styles.list_title}>{item.title}</p>
-                <ItemSlickOne viewItems={item.data} />
-              </div>
-            ) : item.type === 2 ? (
-              <div key={item.id} className={styles.list_container}>
-                <p className={styles.list_title}>{item.title}</p>
-                <ItemSlickTwo viewItems={item.data} />
-              </div>
-            ) : item.type === 3 ? (
-              <div key={item.id} className={styles.list_container}>
-                <p className={styles.list_title}>{item.title}</p>
-                <ItemSlickThree viewItems={item.data} />
-              </div>
-            ) : item.type === 4 ? (
-              <div key={item.id} className={styles.list_container}>
-                <p className={styles.list_title}>{item.title}</p>
-                <ItemSlickFour viewItems={item.data} />
-              </div>
-            ) : (
-              <></>
-            )
-          )}
-      </div>
+      <div className={styles.list_part}>{/*여기에 상품 목록을 보여준다*/}</div>
     </div>
   );
 };

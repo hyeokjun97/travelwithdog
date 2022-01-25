@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ItemList from "../itemList/itemList";
 import styles from "./searchPage.module.css";
 
 const SearchPage = (props) => {
   //컴포넌트 마운트 시 마다 서버 요청해서 결과값 받아오고 분류, 정렬 선택 여부로 보여주기
+  const navigate = useNavigate();
   const { query } = useParams();
   const [jejuBest, setJejuBest] = useState([
     {
@@ -97,6 +98,31 @@ const SearchPage = (props) => {
     }
   };
 
+  const onSearchSubmitHandler = () => {
+    if (searchValue === "") {
+      alert("검색어를 입력해주세요.");
+      return;
+    }
+    navigate(`/search/${searchValue}`);
+    window.scrollTo({ top: 0 });
+  };
+
+  const keyHandler = (e) => {
+    if (e.key !== "Enter") {
+      return;
+    }
+    //모바일에서 헤더 검색창과 중복 이벤트 발생 막기
+    if (e.target.dataset.name === "search_input") {
+      onSearchSubmitHandler();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", keyHandler);
+
+    return () => window.removeEventListener("keydown", keyHandler);
+  }, [keyHandler]);
+
   useEffect(() => {
     setSearchValue(query);
   }, [query]);
@@ -112,10 +138,14 @@ const SearchPage = (props) => {
                 onChange={onSearchValueChangeHandler}
                 type="text"
                 className={styles.search_input}
+                data-name="search_input"
                 spellCheck="false"
                 placeholder="검색"
               />
-              <div className={styles.search_icon_container}>
+              <div
+                className={styles.search_icon_container}
+                onClick={onSearchSubmitHandler}
+              >
                 <i className={`${styles.search_icon} fas fa-search`}></i>
               </div>
             </div>

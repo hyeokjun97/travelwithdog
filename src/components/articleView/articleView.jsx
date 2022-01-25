@@ -69,7 +69,7 @@ const ArticleView = (props) => {
       >
         <div className={styles.top_data_container}>
           <p className={styles.title}>{article && article.title}</p>
-          <p className={styles.name}>작성자데이터없음 회원님</p>
+          <p className={styles.name}>이종혁 회원님</p>
           <p className={styles.date}>{date && date}</p>
         </div>
       </div>

@@ -17,7 +17,6 @@ export default class MenuSlick extends Component {
       slidesToShow: 4,
       slidesToScroll: 1,
     };
-    console.log(viewItems, category);
     return (
       <div className="menu_slick_container">
         <Slider {...settings}>

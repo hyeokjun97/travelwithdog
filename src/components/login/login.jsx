@@ -7,6 +7,8 @@ const Login = ({
   signupPopupHandler,
   findPopupHandler,
 }) => {
+  const { Kakao } = window;
+
   const [inputValue, setInputValue] = useState({
     id: "",
     password: "",
@@ -41,10 +43,11 @@ const Login = ({
       })
       .then((response) => {
         console.log(response);
-        localStorage.setItem("token", response.data.access_token);
-        localStorage.setItem("refreshToken", response.data.refresh_token);
+        //여기서 axios header에 access token값 넣기 + setTimeout으로 토큰 시간 만료 시에
+        //refresh 토큰 보내서 access 토큰을 갱신할 수 있도록 한다.
+        //localStorage.setItem("token", response.data.access_token);
+        //localStorage.setItem("refreshToken", response.data.refresh_token);
         onCloseButtonHandler();
-        console.log(localStorage);
       })
       .catch((err) => {
         console.error(err);
@@ -57,6 +60,21 @@ const Login = ({
           alert("이메일 형식에 맞지 않습니다.");
         }
       });
+  };
+
+  const loginWithKakao = () => {
+    if (!Kakao) {
+      return;
+    }
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.Auth.setAccessToken(response.access_token);
+        //여기에 성공 시 처리 방법 넣어야하는데 이것은 업체측의 회원 관리 방식에 따라 달라질 수 있으니 그 때 추가한다.
+      },
+      fail: function (response) {
+        console.log("fail");
+      },
+    });
   };
 
   return (
@@ -142,11 +160,17 @@ const Login = ({
       </div>
       <div className={styles.social_container}>
         <div className={styles.social_button}>
-          <img
-            src="/travelWithDog/images/kakao_round.png"
-            alt="kakao_login"
-            className={styles.social_image}
-          />
+          <a
+            id="custom-login-btn"
+            onClick={loginWithKakao}
+            className={styles.kakao}
+          >
+            <img
+              src="/travelWithDog/images/kakao_round.png"
+              alt="kakao_login"
+              className={styles.social_image}
+            />
+          </a>
           <p className={styles.social_text}>Kakao</p>
         </div>
         <div className={styles.social_button}>

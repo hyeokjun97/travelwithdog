@@ -14,7 +14,7 @@ const Map = ({ deviceSize }) => {
   const [popupValue, setPopupValue] = useState(null);
 
   const { ref, map, google } = useGoogleMaps(
-    process.env.REACT_APP_MAP_KEY,
+    process.env.REACT_APP_GOOGLE_KEY,
 
     {
       center: { lat: 33.41133915114478, lng: 126.33676192021225 },

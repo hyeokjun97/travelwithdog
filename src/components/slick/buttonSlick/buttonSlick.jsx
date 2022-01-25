@@ -20,7 +20,7 @@ export default class ButtonSlick extends Component {
     return (
       <div className="button_slick_container">
         <Slider {...settings}>
-          {where === "carSearch" && (
+          {(where === "carSearch" || where === "search") && (
             <div>
               <div
                 className={`${selected === "전체" ? "item on" : "item"}`}

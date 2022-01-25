@@ -27,7 +27,8 @@ const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
       className={`${
         !toggleOn
           ? scrollValue < 80 &&
-            (pathList[2] === "" ||
+            (pathList.length < 3 ||
+              pathList[2] === "" ||
               pathList[2] === "rentcar" ||
               pathList[2] === "category" ||
               pathList[2] === "community")

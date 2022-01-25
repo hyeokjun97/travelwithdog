@@ -28,7 +28,7 @@ const CommunityPage = (props) => {
         `${process.env.REACT_APP_BASEURL}/boards/${boardId}/articles?limit=8&page=${selectedPage}`
       )
       .then((response) => setArticleList(response.data.data))
-      .catch((err) => console.err(err));
+      .catch((err) => console.error(err));
   };
 
   const loadPageLength = () => {

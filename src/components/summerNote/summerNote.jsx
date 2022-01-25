@@ -1,7 +1,7 @@
 import React from "react";
 import ReactSummernote from "react-summernote";
-import "react-summernote/dist/react-summernote.css"; // import styles
-import "react-summernote/lang/summernote-ko-KR"; // you can import any other locale
+import "react-summernote/dist/react-summernote.css";
+import "react-summernote/lang/summernote-ko-KR";
 import "bootstrap/js/modal";
 import "bootstrap/js/dropdown";
 import "bootstrap/js/tooltip";
@@ -14,7 +14,7 @@ const SummerNote = ({ where, onContentChangeHandler, initial }) => {
         children={<div dangerouslySetInnerHTML={{ __html: initial }}></div>}
         options={{
           lang: "ko-KR",
-          height: 250,
+          height: 500,
           dialogsInBody: true,
           toolbar: [
             ["Font Style", ["fontname"]],

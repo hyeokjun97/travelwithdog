@@ -87,6 +87,8 @@ export default class CarSlick extends Component {
       };
     }
 
+    console.log(viewItems);
+
     return (
       <div className="car_slick_container">
         <Slider {...settings}>

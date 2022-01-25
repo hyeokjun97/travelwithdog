@@ -20,7 +20,7 @@ const ArticleItem = ({ article }) => {
       <div className={styles.text_container}>
         <p className={styles.title}>{article.title}</p>
         <div className={styles.bottom}>
-          <p className={styles.date}>{article.updated_at.slice(0, 10)}</p>
+          <p className={styles.date}>{article.created_at.slice(0, 10)}</p>
         </div>
       </div>
     </div>

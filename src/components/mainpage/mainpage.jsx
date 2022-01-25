@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CarSlick from "../slick/carSlick/carSlick";
-import ItemSlickFour from "../slick/itemSlickFour/itemSlickFour";
-import ItemSlickOne from "../slick/itemSlickOne/itemSlickOne";
-import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
 import ItemSlickTwo from "../slick/itemSlickTwo/itemSlickTwo";
 import TagButton from "../tagButton/tagButton";
 import styles from "./mainpage.module.css";
@@ -12,15 +9,7 @@ import HelmetComponent from "../helmetComponent/helmetComponent";
 import SlickTemplate from "../slick/slickTemplate/slickTemplate";
 import LoadingPage from "../loadingPage/loadingPage";
 
-const Mainpage = ({
-  chabak,
-  jejuBest,
-  hotList,
-  tagButtonList,
-  spotList,
-  deviceSize,
-  loadPageData,
-}) => {
+const Mainpage = ({ chabak, jejuBest, tagButtonList, loadPageData }) => {
   const navigate = useNavigate();
   const listRef = useRef([]);
   const [pageData, setPageData] = useState(null);

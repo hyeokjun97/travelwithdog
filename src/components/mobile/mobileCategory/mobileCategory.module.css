@@ -18,26 +18,3 @@
   font-weight: 700;
   color: rgb(72, 72, 72);
 }
-
-@media screen and (max-width: 1050px) {
-  .top_filter {
-    padding-top: 20vh;
-  }
-  .title {
-    font-size: var(--fontsize-title);
-  }
-
-  .subtitle {
-    font-size: var(--fontsize-big);
-  }
-
-  .list_title {
-    font-size: var(--fontsize-big);
-    margin-left: 24px;
-    margin-bottom: 8px;
-  }
-  .list_part {
-    width: 100%;
-    overflow: hidden;
-  }
-}

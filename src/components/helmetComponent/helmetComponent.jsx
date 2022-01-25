@@ -1,7 +1,17 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
+//필요한 페이지
+//pages에 담겨있는 페이지들 (API는 있는데 아직 데이터가 없음)
+//상품 정보 페이지 O
+//지도 팝업 O
+
 const HelmetComponent = ({ desc, title, url, keyword, image }) => {
+  console.log(desc);
+  console.log(title);
+  console.log(url);
+  console.log(keyword);
+  console.log(image);
   return (
     <Helmet>
       {desc && <meta name="description" content={desc} />}
