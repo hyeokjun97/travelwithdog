@@ -8,14 +8,16 @@ const Login = ({
   signupPopupHandler,
   findPopupHandler,
 }) => {
-  const { FB, Kakao } = window;
+  const { Kakao } = window;
 
   const [inputValue, setInputValue] = useState({
-    id: "",
+    id: localStorage.getItem("savedId") || "",
     password: "",
   });
 
-  const [idSave, setIdSave] = useState(false);
+  const [idSave, setIdSave] = useState(
+    localStorage.getItem("savedId") ? true : false
+  );
 
   const { id, password } = inputValue;
 
@@ -36,6 +38,11 @@ const Login = ({
     if (id === "" || password === "") {
       alert("이메일과 비밀번호를 입력해주세요.");
       return;
+    }
+    if (idSave) {
+      localStorage.setItem("savedId", id);
+    } else {
+      localStorage.removeItem("savedId");
     }
     axios
       .patch(`${process.env.REACT_APP_BASEURL}/auth/login`, {
@@ -143,6 +150,7 @@ const Login = ({
 
         <div className={styles.save_id_container}>
           <input
+            checked={idSave ? true : false}
             value={idSave}
             onChange={onIdSaveChangeHandler}
             type="checkbox"
