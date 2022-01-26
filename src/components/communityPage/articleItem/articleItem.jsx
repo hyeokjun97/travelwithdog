@@ -12,7 +12,11 @@ const ArticleItem = ({ article }) => {
     <div className={styles.item} onClick={moveToArticleView}>
       <div className={styles.image_container}>
         <img
-          src="/travelWithDog/images/example.png"
+          src={
+            article.images.length > 0
+              ? article.images[0].url
+              : "/travelWithDog/images/no_image.jpeg"
+          }
           alt="article_image"
           className={styles.image}
         />

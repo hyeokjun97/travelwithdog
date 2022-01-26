@@ -34,12 +34,14 @@
   font-weight: 700;
   color: #f9f9f9;
   margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
 .name {
   font-size: var(--fontsize-mini-title);
   font-weight: 700;
   color: #f9f9f9;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
 }
 
 .main {

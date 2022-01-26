@@ -7,7 +7,6 @@ import ReivewItem from "./reivewItem/reivewItem";
 const ArticleView = (props) => {
   const { articleId } = useParams();
   const [article, setArticle] = useState(null);
-  const [topImage, setTopImage] = useState(null);
   const [date, setDate] = useState(null);
 
   useEffect(() => {
@@ -20,51 +19,17 @@ const ArticleView = (props) => {
     loadArticle();
   }, []);
 
-  useEffect(() => {
-    //상단 이미지를 content의 html 내부에서 찾는 함수 (가장 처음으로 등장한 img태그의 src)
-    const findFirstImage = () => {
-      let url;
-      const { content } = article;
-      const contentList = content.split("");
-
-      for (let i = 0; i < contentList.length - 7; i++) {
-        if (contentList.slice(i, i + 3).join("") === "src") {
-          for (let j = i + 5; j < contentList.length; j++) {
-            if (contentList[j] === '"') {
-              url = contentList.slice(i + 5, j).join("");
-              break;
-            }
-          }
-          break;
-        }
-      }
-
-      setTopImage(url);
-    };
-
-    const dateParser = () => {
-      const datePart = article.updated_at.slice(0, 10);
-      setDate(
-        datePart.slice(0, 4) +
-          "/" +
-          datePart.slice(5, 7) +
-          "/" +
-          datePart.slice(8)
-      );
-    };
-
-    if (article) {
-      findFirstImage();
-      dateParser();
-    }
-  }, [article]);
-
   return (
     <div className={styles.body}>
       <div
         className={styles.top_banner}
         style={{
-          background: `url("${topImage && topImage}") center/cover no-repeat`,
+          background: `url("${
+            article &&
+            (article.images.length > 0
+              ? article.images[0].url
+              : "/travelWithDog/images/no_image.jpeg")
+          }") center/cover no-repeat`,
         }}
       >
         <div className={styles.top_data_container}>

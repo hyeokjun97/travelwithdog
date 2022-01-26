@@ -49,9 +49,7 @@ export default class CustomPaging extends Component {
         return (
           <a>
             <img
-              src={`https://public.travelforest.co.kr/${
-                imageList[i - 1 + 1].url
-              }`}
+              src={imageList[i - 1 + 1].url}
               alt="select_image"
               className="dot_image"
             />
@@ -76,11 +74,7 @@ export default class CustomPaging extends Component {
         <Slider {...settings}>
           {imageList.map((item) => (
             <div key={item}>
-              <img
-                src={`https://public.travelforest.co.kr/${item.url}`}
-                alt="slide_image"
-                className="image"
-              />
+              <img src={item.url} alt="slide_image" className="image" />
             </div>
           ))}
         </Slider>

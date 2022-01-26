@@ -10,7 +10,11 @@ const CarItem = ({ item, moveToDetail }) => {
       <div className={styles.box}>
         <div className={styles.image_container}>
           <img
-            src="/travelWithDog/images/car_example.png"
+            src={
+              item.images.length > 0
+                ? item.images[0].url
+                : "/travelWithDog/images/no_image.jpeg"
+            }
             alt="thumbnail"
             className={styles.thumbnail}
           />

@@ -79,8 +79,8 @@
 @media screen and (max-width: 1050px) {
   .side_bar {
     width: 100vw;
-    height: 35vh;
-    top: calc(65vh - 49px);
+    height: 40vh;
+    top: calc(60vh);
   }
   .input_container {
     height: 55px;

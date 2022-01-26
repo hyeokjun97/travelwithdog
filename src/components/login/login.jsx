@@ -63,6 +63,20 @@ const Login = ({
       });
   };
 
+  const getUserData = async () => {
+    Kakao.API.request({
+      url: "/v2/user/me",
+      success: function (res) {
+        console.log(res);
+        //여기에 성공 시 처리 방법 넣어야하는데 이것은 업체측의 회원 관리 방식에 따라 달라질 수 있으니 그 때 추가한다.
+      },
+      fail: function (error) {
+        //
+        window.alert("에러 발생");
+      },
+    });
+  };
+
   const loginWithKakao = () => {
     if (!Kakao) {
       return;
@@ -70,7 +84,7 @@ const Login = ({
     Kakao.Auth.login({
       success: function (response) {
         Kakao.Auth.setAccessToken(response.access_token);
-        //여기에 성공 시 처리 방법 넣어야하는데 이것은 업체측의 회원 관리 방식에 따라 달라질 수 있으니 그 때 추가한다.
+        getUserData();
       },
       fail: function (response) {
         console.log("fail");

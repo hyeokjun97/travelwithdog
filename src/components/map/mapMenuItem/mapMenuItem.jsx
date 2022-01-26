@@ -6,10 +6,11 @@ const MapMenuItem = ({ item, onItemClickHandler }) => {
   return (
     <div className={styles.item} onClick={onItemClickHandler}>
       <img
-        src={`${
-          item.images &&
-          `https://public.travelforest.co.kr/${item.images[0].url}`
-        }`}
+        src={
+          item.images.length > 0
+            ? item.images[0].url
+            : "/travelWithDog/images/no_image.jpeg"
+        }
         alt={item.name_ko}
         className={styles.image}
       />
