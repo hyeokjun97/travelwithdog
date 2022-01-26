@@ -36,7 +36,7 @@ export default class ButtonSlick extends Component {
             </div>
           )}
           {buttonList.map((item) => (
-            <div key={item.cd}>
+            <div key={item.cd || item.id}>
               <div
                 className={`${item.name === selected ? "item on" : "item"}`}
                 onClick={() => {

@@ -1,13 +1,19 @@
 import React from "react";
 import styles from "./item.module.css";
 import ReactStars from "react-rating-stars-component";
+import { useNavigate } from "react-router-dom";
 
 const Item = ({ item }) => {
+  console.log(item);
+  const navigate = useNavigate();
+  const moveToDetailPage = () => {
+    navigate(`/product/${item.id}`);
+  };
   return (
-    <div className={styles.item}>
-      <img src={item.image} alt="thumbnail" className={styles.thumbnail} />
+    <div className={styles.item} onClick={moveToDetailPage}>
+      <img src={item.image.url} alt="thumbnail" className={styles.thumbnail} />
       <div className={styles.data_container}>
-        <p className={styles.title}>{item.title}</p>
+        <p className={styles.title}>{item.name_en}</p>
         <div className={styles.star_container}>
           <ReactStars
             count={5}

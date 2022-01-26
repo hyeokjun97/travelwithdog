@@ -6,7 +6,7 @@
 
 .button_slick_container .item {
   width: auto;
-  margin: auto;
+
   height: 29px;
   line-height: 28px;
   text-align: center;
@@ -16,6 +16,7 @@
   border-radius: 6px;
   transition: 150ms all ease;
   white-space: nowrap;
+  margin: 0 4px;
 }
 
 .slick-slide div {

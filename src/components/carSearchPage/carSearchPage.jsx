@@ -338,46 +338,31 @@ const CarSearchPage = ({ carCode }) => {
         <ErrorPage />
       ) : (
         <div className={styles.container}>
-          <aside className={styles.side_menu}>
-            <div className={styles.search_part}>
-              <div className={styles.search_container}>
-                <input
-                  value={searchValue}
-                  onChange={onSearchValueChangeHandler}
-                  type="text"
-                  className={styles.search_input}
-                  spellCheck="false"
-                  placeholder="검색"
-                />
-                <div className={styles.search_icon_container}>
-                  <i className={`${styles.search_icon} fas fa-search`}></i>
+          <div className="">
+            <aside className={styles.side_menu}>
+              <div className={styles.search_part}>
+                <div className={styles.search_container}>
+                  <input
+                    value={searchValue}
+                    onChange={onSearchValueChangeHandler}
+                    type="text"
+                    className={styles.search_input}
+                    spellCheck="false"
+                    placeholder="검색"
+                  />
+                  <div className={styles.search_icon_container}>
+                    <i className={`${styles.search_icon} fas fa-search`}></i>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.division_part}>
-              <p className={styles.side_menu_title}>차종</p>
-              <div className={styles.checkbox_list}>
-                <div className={styles.checkbox_container}>
-                  <input
-                    type="checkbox"
-                    name="전체"
-                    checked={typeSelect === "전체" ? true : false}
-                    onChange={onTypeSelectChangeHandler}
-                    className={styles.checkbox}
-                  />
-                  <p
-                    className={styles.checkbox_text}
-                    onClick={onTypeSelectChangeHandler}
-                  >
-                    전체
-                  </p>
-                </div>
-                {carCode.rentcar_class_codes.map((code) => (
-                  <div key={code.cd} className={styles.checkbox_container}>
+              <div className={styles.division_part}>
+                <p className={styles.side_menu_title}>차종</p>
+                <div className={styles.checkbox_list}>
+                  <div className={styles.checkbox_container}>
                     <input
                       type="checkbox"
-                      name={code.name}
-                      checked={typeSelect === code.name ? true : false}
+                      name="전체"
+                      checked={typeSelect === "전체" ? true : false}
                       onChange={onTypeSelectChangeHandler}
                       className={styles.checkbox}
                     />
@@ -385,36 +370,36 @@ const CarSearchPage = ({ carCode }) => {
                       className={styles.checkbox_text}
                       onClick={onTypeSelectChangeHandler}
                     >
-                      {code.name}
+                      전체
                     </p>
                   </div>
-                ))}
-              </div>
-            </div>
-            <div className={styles.sort_part}>
-              <p className={styles.side_menu_title}>연료</p>
-              <div className={styles.checkbox_list}>
-                <div className={styles.checkbox_container}>
-                  <input
-                    type="checkbox"
-                    name="전체"
-                    checked={fuelSelect === "전체" ? true : false}
-                    onChange={onFuelSelectChangeHandler}
-                    className={styles.checkbox}
-                  />
-                  <p
-                    className={styles.checkbox_text}
-                    onClick={onFuelSelectChangeHandler}
-                  >
-                    전체
-                  </p>
+                  {carCode.rentcar_class_codes.map((code) => (
+                    <div key={code.cd} className={styles.checkbox_container}>
+                      <input
+                        type="checkbox"
+                        name={code.name}
+                        checked={typeSelect === code.name ? true : false}
+                        onChange={onTypeSelectChangeHandler}
+                        className={styles.checkbox}
+                      />
+                      <p
+                        className={styles.checkbox_text}
+                        onClick={onTypeSelectChangeHandler}
+                      >
+                        {code.name}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-                {carCode.rentcar_fuel_codes.map((code) => (
-                  <div key={code.cd} className={styles.checkbox_container}>
+              </div>
+              <div className={styles.sort_part}>
+                <p className={styles.side_menu_title}>연료</p>
+                <div className={styles.checkbox_list}>
+                  <div className={styles.checkbox_container}>
                     <input
                       type="checkbox"
-                      name={code.name}
-                      checked={fuelSelect === code.name ? true : false}
+                      name="전체"
+                      checked={fuelSelect === "전체" ? true : false}
                       onChange={onFuelSelectChangeHandler}
                       className={styles.checkbox}
                     />
@@ -422,13 +407,30 @@ const CarSearchPage = ({ carCode }) => {
                       className={styles.checkbox_text}
                       onClick={onFuelSelectChangeHandler}
                     >
-                      {code.name}
+                      전체
                     </p>
                   </div>
-                ))}
+                  {carCode.rentcar_fuel_codes.map((code) => (
+                    <div key={code.cd} className={styles.checkbox_container}>
+                      <input
+                        type="checkbox"
+                        name={code.name}
+                        checked={fuelSelect === code.name ? true : false}
+                        onChange={onFuelSelectChangeHandler}
+                        className={styles.checkbox}
+                      />
+                      <p
+                        className={styles.checkbox_text}
+                        onClick={onFuelSelectChangeHandler}
+                      >
+                        {code.name}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </aside>
+            </aside>
+          </div>
           <div className={styles.main}>
             <div className={styles.range_container}>
               <div className={styles.range_input_box_date}>
