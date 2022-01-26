@@ -275,6 +275,51 @@ const App = (props) => {
       .catch((err) => console.error(err));
   };
 
+  const checkLoginState = () => {
+    if (!localStorage.getItem("AK")) {
+      console.log("NO ACCESS TOKEN");
+      return false;
+    } else {
+      const now = new Date().getTime();
+      const expiredTime = localStorage.getItem("exp");
+      if (Number(expiredTime) - now <= 30 * 1000) {
+        console.log("REMOVE");
+        localStorage.removeItem("AK");
+        localStorage.removeItem("RK");
+        localStorage.removeItem("exp");
+        return false;
+      } else if (Number(expiredTime) - now < 10 * 60 * 1000) {
+        console.log("REFRESH");
+        axios
+          .patch(`${process.env.REACT_APP_BASEURL}/refresh`, {
+            refresh_token: localStorage.getItem("RK"),
+          })
+          .then((response) => {
+            console.log("REFRESH SUCCESS");
+            localStorage.setItem("AK", `Bearer ${response.data.access_token}`);
+            localStorage.setItem("RK", `Bearer ${response.data.refresh_token}`);
+            localStorage.setItem(
+              "exp",
+              new Date().getTime() + response.data.expires_in
+            );
+            return true;
+          })
+          .catch((err) => {
+            console.log("REFRESH FAILED");
+            console.error(err);
+            return false;
+          });
+      } else {
+        console.log("LOGGED IN !!");
+        return true;
+      }
+    }
+  };
+
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return checkLoginState();
+  });
+
   const keyHandler = (e) => {
     if (e.key !== "Escape") {
       return;
@@ -295,6 +340,7 @@ const App = (props) => {
 
   //컴포넌트 마운트 시에 불러오기
   useEffect(() => {
+    setIsLoggedIn(checkLoginState());
     loadPageList();
     loadCarCode();
   }, []);
@@ -305,6 +351,7 @@ const App = (props) => {
         {deviceSize ? (
           categoryList && (
             <Header
+              isLoggedIn={isLoggedIn}
               categoryList={categoryList}
               loginPopupHandler={loginPopupHandler}
               signupPopupHandler={signupPopupHandler}

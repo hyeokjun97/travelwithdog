@@ -7,11 +7,11 @@ import { Helmet } from "react-helmet";
 //지도 팝업 O
 
 const HelmetComponent = ({ desc, title, url, keyword, image }) => {
-  console.log(desc);
-  console.log(title);
-  console.log(url);
-  console.log(keyword);
-  console.log(image);
+  // console.log(desc);
+  // console.log(title);
+  // console.log(url);
+  // console.log(keyword);
+  // console.log(image);
   return (
     <Helmet>
       {desc && <meta name="description" content={desc} />}

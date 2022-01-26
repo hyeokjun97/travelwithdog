@@ -118,11 +118,39 @@ const ProductDetail = (props) => {
     };
   }, [keyHandler]);
 
+  //영문 달을 숫자로 바꾸어 줌
+  const monthTranslator = (selectedMonth) => {
+    const monthList = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    for (let i = 0; i < monthList.length; i++) {
+      if (monthList[i] === selectedMonth) {
+        return i + 1;
+      }
+    }
+  };
+
   useEffect(() => {
     const loadProductInfo = () => {
       axios
         .get(`${process.env.REACT_APP_BASEURL}/products/${path}`)
-        .then((response) => setProduct(response.data.tour))
+        .then((response) => {
+          //product_cd === "transfer" 인 경우 보류
+          if (response.data.product_cd === "tour") {
+            setProduct(response.data.tour);
+          }
+        })
         .catch((err) => console.error(err));
     };
     loadProductInfo();
@@ -311,7 +339,11 @@ const ProductDetail = (props) => {
                 </div>
                 <div className={styles.option_main}>
                   {product.items.map((item) => (
-                    <ProductOption key={item.id} item={item} />
+                    <ProductOption
+                      key={item.id}
+                      item={item}
+                      productId={product.id}
+                    />
                   ))}
                 </div>
               </div>

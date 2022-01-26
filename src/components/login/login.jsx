@@ -44,10 +44,17 @@ const Login = ({
       })
       .then((response) => {
         console.log(response);
-        //여기서 axios header에 access token값 넣기 + setTimeout으로 토큰 시간 만료 시에
-        //refresh 토큰 보내서 access 토큰을 갱신할 수 있도록 한다.
-        //localStorage.setItem("token", response.data.access_token);
-        //localStorage.setItem("refreshToken", response.data.refresh_token);
+        localStorage.setItem("AK", `Bearer ${response.data.access_token}`);
+        localStorage.setItem("RK", `Bearer ${response.data.refresh_token}`);
+        localStorage.setItem(
+          "exp",
+          new Date().getTime() + response.data.expires_in
+        );
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${response.data.access_token}`; //새로고침 하면 사라짐 => 해결방법 찾기
+
+        window.location.reload();
         onCloseButtonHandler();
       })
       .catch((err) => {

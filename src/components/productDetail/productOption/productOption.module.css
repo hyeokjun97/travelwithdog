@@ -221,11 +221,20 @@
   font-size: var(--fontsize-bit-small);
 }
 
+.custom_input {
+  text-align: start;
+  width: 100%;
+  outline: none;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+}
+
 .date_select {
   width: 100%;
   cursor: pointer;
   padding: 0 6px;
-  line-height: 35px;
+  line-height: 33px;
 }
 
 .select {
@@ -322,6 +331,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.nothing {
+  font-weight: 700;
+  color: var(--color-green);
 }
 
 @media screen and (max-width: 768px) {

@@ -7,10 +7,11 @@ const MapSectionItem = ({ item }) => {
     <div className={styles.item}>
       <div className={styles.image_container}>
         <img
-          src={`${
-            item.images &&
-            `https://public.travelforest.co.kr/${item.images[0].url}`
-          }`}
+          src={
+            item.images.length > 0
+              ? item.images[0].url
+              : "/travelWithDog/images/no_image.jpeg"
+          }
           alt="spot_image"
           className={styles.image}
         />

@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, forwardRef, useEffect } from "react";
 import styles from "./productOption.module.css";
-import { DateRange, DateRangePicker } from "react-date-range";
-import { addDays } from "date-fns";
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
-import { ko } from "react-date-range/dist/locale/index.js";
+import DatePicker from "react-datepicker";
+import { ko } from "date-fns/esm/locale";
+import "react-datepicker/dist/react-datepicker.css";
+import { subDays } from "date-fns";
+import axios from "axios";
+import LoadingPage from "../../loadingPage/loadingPage";
 
-const ProductOption = ({ item }) => {
+const ProductOption = ({ item, productId }) => {
   const [menuSelected, setMenuSelected] = useState("포함사항");
 
-  //date-range
-  const [datePickerOn, setDatePickerOn] = useState(false);
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 1),
-      key: "selection",
-    },
-  ]);
-  const [dateShow, setDateShow] = useState("");
+  const [price, setPrice] = useState(null);
+
+  const [startDate, setStartDate] = useState(
+    new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000) //임시
+  );
+
   //영문 달을 숫자로 바꾸어 줌
   const monthTranslator = (selectedMonth) => {
     const monthList = [
@@ -53,13 +50,14 @@ const ProductOption = ({ item }) => {
     }
   };
 
-  const datePickerOpenHandler = (e) => {
-    if (e.target !== e.currentTarget) {
-      return;
-    }
-    setDatePickerOn(!datePickerOn);
-  };
-  //
+  const [dateShow, setDateShow] = useState(() => {
+    const now = new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000); //임시
+    const nowSplit = now.toString().split(" ");
+    return `${nowSplit[3]}년 ${monthTranslator(nowSplit[1])}월 ${
+      nowSplit[2]
+    }일 (${dayTranslator(nowSplit[0])})`;
+  });
+
   const [openValue, setOpenValue] = useState(false);
   const changeOpenValueHandler = (value) => {
     if (openValue === value) {
@@ -77,22 +75,47 @@ const ProductOption = ({ item }) => {
     setMenuSelected(e.target.innerText);
   };
 
-  useEffect(() => {
-    if (!date) {
-      return;
-    }
-    const { startDate, endDate } = date[0];
+  const loadPriceList = (date) => {
+    setPrice(null);
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/tours/${productId}/items?date=${date}`
+      )
+      .then((response) => {
+        response.data.forEach((option) => {
+          if (option.id === item.id) {
+            setPrice(option);
+            console.log(option);
+            return false;
+          }
+        });
+      })
+      .catch((err) => console.error(err));
+  };
 
-    const startList = startDate.toString().split(" ");
-    const endList = endDate.toString().split(" ");
+  const CustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button className={styles.custom_input} onClick={onClick} ref={ref}>
+      {dateShow}
+    </button>
+  ));
+
+  const dateShowChangeHandler = (date) => {
+    const dateSplit = date.toString().split(" ");
     setDateShow(
-      `${monthTranslator(startList[1])}월 ${startList[2]}일 (${dayTranslator(
-        startList[0]
-      )}) - ${monthTranslator(endList[1])}월 ${endList[2]}일 (${dayTranslator(
-        endList[0]
-      )})`
+      `${dateSplit[3]}년 ${monthTranslator(dateSplit[1])}월 ${
+        dateSplit[2]
+      }일 (${dayTranslator(dateSplit[0])})`
     );
-  }, [date]);
+  };
+
+  useEffect(() => {
+    const dateSplit = startDate.toString().split(" ");
+    const translatedDate = `${dateSplit[3]}-${monthTranslator(dateSplit[1])
+      .toString()
+      .padStart(2, "0")}-${dateSplit[2].toString().padStart(2, "0")}`;
+    loadPriceList(translatedDate);
+    dateShowChangeHandler(startDate);
+  }, [startDate]);
 
   return (
     <div className={styles.item}>
@@ -115,14 +138,24 @@ const ProductOption = ({ item }) => {
           <div className={styles.title_and_price}>
             <p className={styles.title}>{item.name}</p>
             <div className={styles.price_container}>
-              {item.supplier.prices.map((price) => (
-                <div key={price.id} className={styles.price_box}>
-                  <p className={styles.price_title}>{price.unit.name}</p>
-                  <p className={styles.price}>{`${price.price.toLocaleString(
-                    "ko-kr"
-                  )}원`}</p>
-                </div>
-              ))}
+              {price ? (
+                price.supplier.prices.length > 0 ? (
+                  price.supplier.prices.map((price) => (
+                    <div key={price.id} className={styles.price_box}>
+                      <p className={styles.price_title}>{price.unit.name}</p>
+                      <p
+                        className={styles.price}
+                      >{`${price.price.toLocaleString("ko-kr")}원`}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className={styles.nothing}>
+                    선택하신 날짜에 예약 가능한 상품이 없습니다.
+                  </p>
+                )
+              ) : (
+                <LoadingPage />
+              )}
             </div>
           </div>
           <div
@@ -226,38 +259,14 @@ const ProductOption = ({ item }) => {
               <div className={styles.date_and_number_container}>
                 <div className={styles.date}>
                   <p className={styles.option_detail_title}>날짜 선택</p>
-                  <div
-                    className={styles.date_select}
-                    onClick={datePickerOpenHandler}
-                  >
-                    {dateShow}
-                    <div
-                      className={`${
-                        datePickerOn
-                          ? `${styles.date_picker} ${styles.on}`
-                          : `${styles.date_picker} ${styles.off}`
-                      }`}
-                    >
-                      <DateRange
-                        minDate={new Date()}
-                        editableDateInputs={false}
-                        showSelectionPreview={true}
-                        onChange={(item) => setDate([item.selection])}
-                        moveRangeOnFirstSelection={false}
-                        ranges={date}
-                        months={window.innerWidth > 768 ? 2 : 1}
-                        direction={
-                          window.innerWidth > 768 ? "horizontal" : "vertical"
-                        }
-                        locale={ko}
-                      />
-                      <button
-                        className={styles.date_picker_button}
-                        onClick={() => setDatePickerOn(false)}
-                      >
-                        선택
-                      </button>
-                    </div>
+                  <div className={styles.date_select}>
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                      minDate={subDays(new Date(), 0)}
+                      customInput={<CustomInput />}
+                      locale={ko}
+                    />
                   </div>
                 </div>
                 <div className={styles.number}>

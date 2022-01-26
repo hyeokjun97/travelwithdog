@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CardDefault from "../card/cardDefault/cardDefault";
 import sha256 from "js-sha256";
 import qs from "qs";
+import axios from "axios";
 
 const TestPage = (props) => {
   const nav = useNavigate();
@@ -37,6 +38,17 @@ const TestPage = (props) => {
     console.log(timestamp, signature);
     window.INIStdPay.pay("SendPayForm_id");
   }, [signature]);
+
+  const tourReviewTest = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASEURL}/tours/120/reviews`, {
+        tour_id: 120,
+        rating: 4,
+        content: "좋네용",
+      })
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div style={{ marginTop: "200px" }}>
@@ -83,6 +95,8 @@ const TestPage = (props) => {
       >
         렌터카
       </div>
+
+      <button onClick={tourReviewTest}>리뷰 테스트</button>
 
       <form id="SendPayForm_id" name="" method="POST">
         <input type="text" name="goodname" value="테스트" />

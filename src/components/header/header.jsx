@@ -3,7 +3,12 @@ import { useNavigate } from "react-router";
 import styles from "./header.module.css";
 import { debounce } from "lodash";
 
-const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
+const Header = ({
+  isLoggedIn,
+  categoryList,
+  loginPopupHandler,
+  signupPopupHandler,
+}) => {
   const headerRef = useRef();
   const navigate = useNavigate();
   const [toggleOn, setToggleOn] = useState(false);
@@ -11,6 +16,14 @@ const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
 
   const { pathname } = window.location;
   const pathList = pathname.split("/");
+
+  const logoutHandler = () => {
+    localStorage.removeItem("AK");
+    localStorage.removeItem("RK");
+    localStorage.removeItem("exp");
+    alert("로그아웃 되었습니다.");
+    window.location.reload();
+  };
 
   useEffect(() => {
     window.addEventListener(
@@ -128,19 +141,19 @@ const Header = ({ categoryList, loginPopupHandler, signupPopupHandler }) => {
               className={styles.sub_button_item}
               onClick={() => {
                 setToggleOn(false);
-                loginPopupHandler();
+                isLoggedIn ? logoutHandler() : loginPopupHandler();
               }}
             >
-              로그인
+              {isLoggedIn ? "로그아웃" : "로그인"}
             </li>
             <li
               className={styles.sub_button_item}
               onClick={() => {
                 setToggleOn(false);
-                signupPopupHandler();
+                isLoggedIn ? navigate("/mypage/edit") : signupPopupHandler();
               }}
             >
-              회원가입
+              {isLoggedIn ? "마이페이지" : "회원가입"}
             </li>
           </ul>
         </div>
