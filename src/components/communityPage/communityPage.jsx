@@ -10,15 +10,38 @@ const CommunityPage = (props) => {
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState(null);
   const [articleList, setArticleList] = useState(null);
-  const [boardTitle, setBoardTitle] = useState(null);
+  const [board, setBoard] = useState(null);
   const [pageNumberList, setPageNumberList] = useState(null);
   const [selectedPage, setSelectedPage] = useState(1);
   const [pageRange, setPageRange] = useState(0);
+  const [child, setChild] = useState(null);
+  const [childOpen, setChildOpen] = useState(false);
+  const [allBoardList, setAllBoardList] = useState(null);
 
   const loadBoardList = () => {
     axios
       .get(`${process.env.REACT_APP_BASEURL}/boards`)
-      .then((response) => setBoardList(response.data))
+      .then((response) => {
+        setBoardList(response.data);
+        const boardResult = [];
+        //1단계
+        response.data.forEach((board) => {
+          boardResult.push(board);
+          //2단계
+          if (board.children && board.children.length > 0) {
+            board.children.forEach((child) => {
+              boardResult.push(child);
+              //3단계 (최대)
+              if (child.children && child.children.length > 0) {
+                child.children.forEach((ch) => {
+                  boardResult.push(ch);
+                });
+              }
+            });
+          }
+        });
+        setAllBoardList(boardResult);
+      })
       .catch((err) => console.error(err));
   };
 
@@ -68,11 +91,16 @@ const CommunityPage = (props) => {
     window.scrollTo({ top: 0 });
   };
 
+  const onChildOpenHandler = () => {
+    setChildOpen(!childOpen);
+  };
+
   useEffect(() => {
     loadBoardList();
   }, []);
 
   useEffect(() => {
+    setChildOpen(false);
     setSelectedPage(1);
     setPageRange(0);
     loadArticleList();
@@ -83,16 +111,29 @@ const CommunityPage = (props) => {
   }, [selectedPage]);
 
   useEffect(() => {
-    if (!boardList) {
+    if (!allBoardList) {
       return;
     }
-    boardList.forEach((board) => {
-      if (board.id === parseInt(boardId)) {
-        setBoardTitle(board.name);
+    allBoardList.forEach((boardItem) => {
+      if (boardItem.id === parseInt(boardId)) {
+        setBoard(boardItem);
         return false;
       }
     });
-  }, [boardList, boardId]);
+  }, [allBoardList, boardList, boardId]);
+
+  useEffect(() => {
+    if (!board) {
+      return;
+    }
+    const childTmp = [];
+    if (board.children.length > 0) {
+      board.children.forEach((ch) => {
+        childTmp.push(ch);
+      });
+    }
+    setChild(childTmp);
+  }, [board]);
 
   return (
     <div className={styles.body}>
@@ -104,8 +145,8 @@ const CommunityPage = (props) => {
       </div>
       <main className={styles.main}>
         <div className={styles.main_top}>
-          {boardTitle && (
-            <h2 className={styles.board_title}>{`${boardTitle} 게시판`}</h2>
+          {board && (
+            <h2 className={styles.board_title}>{`${board.name} 게시판`}</h2>
           )}
           <ul className={styles.select_container}>
             {boardList &&
@@ -127,24 +168,56 @@ const CommunityPage = (props) => {
           </ul>
         </div>
         <div className={styles.search_container}>
-          <select className={styles.select}>
-            <option value="제목">제목</option>
-            <option value="글쓴이">글쓴이</option>
-            <option value="내용">내용</option>
-          </select>
-          <div className={styles.search_box}>
-            <input
-              type="text"
-              className={styles.search_input}
-              placeholder="검색"
-              spellCheck="false"
-            />
-            <div className={styles.search_icon_container}>
-              <i className={`${styles.search_icon} fas fa-search`}></i>
+          <div className={styles.search_left}>
+            <select className={styles.select}>
+              <option value="제목">제목</option>
+              <option value="글쓴이">글쓴이</option>
+              <option value="내용">내용</option>
+            </select>
+            <div className={styles.search_box}>
+              <input
+                type="text"
+                className={styles.search_input}
+                placeholder="검색"
+                spellCheck="false"
+              />
+              <div className={styles.search_icon_container}>
+                <i className={`${styles.search_icon} fas fa-search`}></i>
+              </div>
             </div>
           </div>
+          {child && child.length > 0 && (
+            <button
+              className={styles.open_child_button}
+              onClick={onChildOpenHandler}
+            >
+              서브게시판
+            </button>
+          )}
         </div>
         <div className={styles.list}>
+          {childOpen && child && child.length > 0 && (
+            <div className={styles.child_container}>
+              {child.map((ch) => (
+                <div className={styles.child}>
+                  <h3
+                    className={styles.child_title}
+                    onClick={() => navigate(`/community/${ch.id}`)}
+                  >
+                    {ch.name}
+                  </h3>
+                  <div className={styles.child_of_child_container}>
+                    <ul>
+                      {ch.children.length > 0 &&
+                        child.children.map((chch) => (
+                          <li className={styles.child_of_child}>{chch.name}</li>
+                        ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
           {!articleList ? (
             <div className={styles.loading_container}>
               <LoadingPage />
