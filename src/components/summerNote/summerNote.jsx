@@ -7,11 +7,10 @@ import "bootstrap/js/dropdown";
 import "bootstrap/js/tooltip";
 import axios from "axios";
 
-const SummerNote = ({ where, onContentChangeHandler, initial }) => {
+const SummerNote = ({ where, onContentChangeHandler }) => {
   return (
     <section className="summer">
       <ReactSummernote
-        children={<div dangerouslySetInnerHTML={{ __html: initial }}></div>}
         options={{
           lang: "ko-KR",
           height: 500,
@@ -28,6 +27,7 @@ const SummerNote = ({ where, onContentChangeHandler, initial }) => {
             ["Insert", ["link"]],
           ],
         }}
+        onChange={onContentChangeHandler}
       />
     </section>
   );
