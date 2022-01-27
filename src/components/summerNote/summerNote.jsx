@@ -5,9 +5,16 @@ import "react-summernote/lang/summernote-ko-KR";
 import "bootstrap/js/modal";
 import "bootstrap/js/dropdown";
 import "bootstrap/js/tooltip";
-import axios from "axios";
 
 const SummerNote = ({ where, onContentChangeHandler }) => {
+  const onImageUpload = (fileList) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      ReactSummernote.insertImage(reader.result);
+    };
+    reader.readAsDataURL(fileList[0]);
+  };
+
   return (
     <section className="summer">
       <ReactSummernote
@@ -28,6 +35,7 @@ const SummerNote = ({ where, onContentChangeHandler }) => {
           ],
         }}
         onChange={onContentChangeHandler}
+        onImageUpload={onImageUpload}
       />
     </section>
   );

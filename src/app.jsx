@@ -252,8 +252,8 @@ const App = (props) => {
       } else if (Number(expiredTime) - now < 10 * 60 * 1000) {
         console.log("REFRESH");
         axios
-          .patch(`${process.env.REACT_APP_BASEURL}/refresh`, {
-            refresh_token: localStorage.getItem("RK"),
+          .patch(`${process.env.REACT_APP_BASEURL}/auth/refresh`, {
+            refresh_token: localStorage.getItem("RK").slice(7),
           })
           .then((response) => {
             console.log("REFRESH SUCCESS");
@@ -344,18 +344,21 @@ const App = (props) => {
           </div>
         )}
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Mainpage
-                chabak={chabak}
-                jejuBest={jejuBest}
-                tagButtonList={tagButtonList}
-                deviceSize={deviceSize}
-                loadPageData={loadPageData}
-              />
-            }
-          ></Route>
+          {categoryList && (
+            <Route
+              path="/"
+              element={
+                <Mainpage
+                  chabak={chabak}
+                  jejuBest={jejuBest}
+                  tagButtonList={tagButtonList}
+                  deviceSize={deviceSize}
+                  loadPageData={loadPageData}
+                  categoryList={categoryList}
+                />
+              }
+            ></Route>
+          )}
 
           <Route
             path="/category/:path"

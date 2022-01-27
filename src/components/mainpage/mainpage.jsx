@@ -9,12 +9,19 @@ import HelmetComponent from "../helmetComponent/helmetComponent";
 import SlickTemplate from "../slick/slickTemplate/slickTemplate";
 import LoadingPage from "../loadingPage/loadingPage";
 
-const Mainpage = ({ chabak, jejuBest, tagButtonList, loadPageData }) => {
+const Mainpage = ({
+  chabak,
+  jejuBest,
+  tagButtonList,
+  loadPageData,
+  categoryList,
+}) => {
   const navigate = useNavigate();
   const listRef = useRef([]);
   const [pageData, setPageData] = useState(null);
-  const [regionSelect, setRegionSelect] = useState("제주");
+  const [regionSelect, setRegionSelect] = useState(categoryList[0]);
   const [searchInput, setSearchInput] = useState("");
+  const [regionPageData, setRegionPageData] = useState(null);
 
   const onSearchInputChangeHandler = (e) => {
     setSearchInput(e.target.value);
@@ -30,7 +37,12 @@ const Mainpage = ({ chabak, jejuBest, tagButtonList, loadPageData }) => {
   };
 
   const onRegionChangeHandler = (e) => {
-    setRegionSelect(e.target.innerText);
+    console.log(e.target.innerText);
+    const { innerText, dataset } = e.target;
+    setRegionSelect({
+      id: dataset.id,
+      name: innerText,
+    });
   };
 
   const keyHandler = (e) => {
@@ -53,12 +65,21 @@ const Mainpage = ({ chabak, jejuBest, tagButtonList, loadPageData }) => {
     setPageData(data);
   };
 
+  const settingRegionPageData = (data) => {
+    setRegionPageData(data);
+  };
+
   useEffect(() => {
     window.onbeforeunload = function () {
       window.scrollTo(0, 0);
     };
     loadPageData("home", settingPageData);
+    loadPageData(categoryList[0].id, settingRegionPageData);
   }, []);
+
+  useEffect(() => {
+    loadPageData(regionSelect.id, settingRegionPageData);
+  }, [regionSelect]);
 
   return (
     <>
@@ -145,55 +166,41 @@ const Mainpage = ({ chabak, jejuBest, tagButtonList, loadPageData }) => {
             </div>
             <div className={styles.region_select_container}>
               <div className={styles.region_select_bar}>
-                <div
-                  className={`${
-                    regionSelect === "제주"
-                      ? `${styles.region_select_button} ${styles.region_select_on}`
-                      : `${styles.region_select_button}`
-                  }`}
-                  onClick={onRegionChangeHandler}
-                >
-                  제주
-                </div>
-                <div
-                  className={`${
-                    regionSelect === "강원"
-                      ? `${styles.region_select_button} ${styles.region_select_on}`
-                      : `${styles.region_select_button}`
-                  }`}
-                  onClick={onRegionChangeHandler}
-                >
-                  강원
-                </div>
-                <div
-                  className={`${
-                    regionSelect === "부산/남해"
-                      ? `${styles.region_select_button} ${styles.region_select_on}`
-                      : `${styles.region_select_button}`
-                  }`}
-                  onClick={onRegionChangeHandler}
-                >
-                  부산/남해
-                </div>
+                {categoryList &&
+                  categoryList.map((cat) => (
+                    <div
+                      key={cat.id}
+                      className={`${
+                        regionSelect.name === cat.name
+                          ? `${styles.region_select_button} ${styles.region_select_on}`
+                          : `${styles.region_select_button}`
+                      }`}
+                      data-id={cat.id}
+                      onClick={onRegionChangeHandler}
+                    >
+                      {cat.name}
+                    </div>
+                  ))}
               </div>
               <div className={styles.region_select_list}>
-                {pageData.sections.map(
-                  (section) =>
-                    section.items.length > 0 && ( //일단 빈데이터 있어서 이렇게 해둠
-                      <div
-                        key={section.title}
-                        className={styles.list_container}
-                      >
-                        <p className={styles.list_title}>{section.title}</p>
-                        {section.subtitle && (
-                          <p className={styles.list_subtitle}>
-                            {section.subtitle}
-                          </p>
-                        )}
-                        <SlickTemplate sectionInfo={section} />
-                      </div>
-                    )
-                )}
+                {regionPageData &&
+                  regionPageData.sections.map(
+                    (section) =>
+                      section.items.length > 0 && ( //일단 빈데이터 있어서 이렇게 해둠
+                        <div
+                          key={section.title}
+                          className={styles.list_container}
+                        >
+                          <p className={styles.list_title}>{section.title}</p>
+                          {section.subtitle && (
+                            <p className={styles.list_subtitle}>
+                              {section.subtitle}
+                            </p>
+                          )}
+                          <SlickTemplate sectionInfo={section} />
+                        </div>
+                      )
+                  )}
               </div>
             </div>
             <div className={styles.blog_part}>
