@@ -85,14 +85,13 @@ const Mainpage = ({
     <>
       {pageData ? (
         <div className={styles.mainpage}>
-          {pageData && (
-            <HelmetComponent
-              title={pageData.html_title}
-              desc={pageData.html_description}
-              url={`https://www.travelwithdog.co.kr`}
-              keyword={pageData.html_keyword}
-            />
-          )}
+          <HelmetComponent
+            title={pageData.html_title}
+            desc={pageData.html_description}
+            url={`https://www.travelwithdog.co.kr`}
+            keyword={pageData.html_keyword}
+          />
+
           <div
             className={styles.top_banner}
             style={

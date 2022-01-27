@@ -5,8 +5,10 @@ import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
-import ItemSlickFive from "../slick/itemSlickFive/itemSlickFive";
 import { useNavigate } from "react-router-dom";
+import SlickTemplate from "../slick/slickTemplate/slickTemplate";
+import LoadingPage from "../loadingPage/loadingPage";
+import HelmetComponent from "../helmetComponent/helmetComponent";
 
 const Rentcar = ({ loadPageData }) => {
   const navigate = useNavigate();
@@ -175,96 +177,123 @@ const Rentcar = ({ loadPageData }) => {
   }, [date]);
 
   return (
-    <div className={styles.mainpage}>
-      <div className={styles.top_banner}>
-        <div className={styles.top_filter}>
-          <div className={styles.title_container}>
-            <p className={styles.top_title}>제주펫렌터카에서</p>
-            <p className={styles.top_title_two}>
-              반려견과 함께 타는 렌터카를 예약하세요.
-            </p>
-          </div>
-
-          <div className={styles.search_container}>
-            <div className={styles.search_input_box_date}>
-              <p className={styles.search_text}>대여기간</p>
-              <div
-                className={styles.search_input_date}
-                onClick={datePickerOpenHandler}
-              >
-                <i className={`${styles.date_icon} fas fa-calendar`}></i>
-                {dateShow}
+    <>
+      {pageData ? (
+        <div className={styles.mainpage}>
+          <HelmetComponent
+            title={pageData.html_title}
+            desc={pageData.html_description}
+            url={`https://www.travelwithdog.co.kr`}
+            keyword={pageData.html_keyword}
+          />
+          <div className={styles.top_banner}>
+            <div className={styles.top_filter}>
+              <div className={styles.title_container}>
+                <p className={styles.top_title}>제주펫렌터카에서</p>
+                <p className={styles.top_title_two}>
+                  반려견과 함께 타는 렌터카를 예약하세요.
+                </p>
               </div>
-              <div
-                className={`${
-                  datePickerOn
-                    ? `${styles.date_picker} ${styles.on}`
-                    : `${styles.date_picker} ${styles.off}`
-                }`}
-              >
-                <DateRange
-                  minDate={new Date()}
-                  editableDateInputs={false}
-                  showSelectionPreview={true}
-                  onChange={(item) => setDate([item.selection])}
-                  moveRangeOnFirstSelection={false}
-                  ranges={date}
-                  months={window.innerWidth > 768 ? 2 : 1}
-                  direction={
-                    window.innerWidth > 768 ? "horizontal" : "vertical"
-                  }
-                  locale={ko}
-                />
-                <button
-                  className={styles.date_picker_button}
-                  onClick={() => setDatePickerOn(false)}
+
+              <div className={styles.search_container}>
+                <div className={styles.search_input_box_date}>
+                  <p className={styles.search_text}>대여기간</p>
+                  <div
+                    className={styles.search_input_date}
+                    onClick={datePickerOpenHandler}
+                  >
+                    <i className={`${styles.date_icon} fas fa-calendar`}></i>
+                    {dateShow}
+                  </div>
+                  <div
+                    className={`${
+                      datePickerOn
+                        ? `${styles.date_picker} ${styles.on}`
+                        : `${styles.date_picker} ${styles.off}`
+                    }`}
+                  >
+                    <DateRange
+                      minDate={new Date()}
+                      editableDateInputs={false}
+                      showSelectionPreview={true}
+                      onChange={(item) => setDate([item.selection])}
+                      moveRangeOnFirstSelection={false}
+                      ranges={date}
+                      months={window.innerWidth > 768 ? 2 : 1}
+                      direction={
+                        window.innerWidth > 768 ? "horizontal" : "vertical"
+                      }
+                      locale={ko}
+                    />
+                    <button
+                      className={styles.date_picker_button}
+                      onClick={() => setDatePickerOn(false)}
+                    >
+                      선택
+                    </button>
+                  </div>
+                </div>
+                <div className={styles.search_input_box}>
+                  <p className={styles.search_text}>대여시각</p>
+                  <select
+                    name="rentTime"
+                    value={rentTime}
+                    onChange={onTimeChangeHandler}
+                    className={styles.search_input}
+                  >
+                    {timeList.map((time) => (
+                      <option
+                        key={time}
+                        value={time === "시간 선택" ? "" : time}
+                      >
+                        {time}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className={styles.search_input_box}>
+                  <p className={styles.search_text}>반납시각</p>
+                  <select
+                    name="returnTime"
+                    value={returnTime}
+                    onChange={onTimeChangeHandler}
+                    className={styles.search_input}
+                  >
+                    {timeList.map((time) => (
+                      <option
+                        key={time}
+                        value={time === "시간 선택" ? "" : time}
+                      >
+                        {time}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div
+                  className={styles.search_icon_container}
+                  onClick={onSearchHandler}
                 >
-                  선택
-                </button>
+                  <i className={`${styles.search_icon} fas fa-search`}></i>
+                </div>
               </div>
             </div>
-            <div className={styles.search_input_box}>
-              <p className={styles.search_text}>대여시각</p>
-              <select
-                name="rentTime"
-                value={rentTime}
-                onChange={onTimeChangeHandler}
-                className={styles.search_input}
-              >
-                {timeList.map((time) => (
-                  <option key={time} value={time === "시간 선택" ? "" : time}>
-                    {time}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className={styles.search_input_box}>
-              <p className={styles.search_text}>반납시각</p>
-              <select
-                name="returnTime"
-                value={returnTime}
-                onChange={onTimeChangeHandler}
-                className={styles.search_input}
-              >
-                {timeList.map((time) => (
-                  <option key={time} value={time === "시간 선택" ? "" : time}>
-                    {time}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div
-              className={styles.search_icon_container}
-              onClick={onSearchHandler}
-            >
-              <i className={`${styles.search_icon} fas fa-search`}></i>
-            </div>
           </div>
-        </div>
-      </div>
-      <div className={styles.bottom_part}>
-        <p className={`${styles.title} ${styles.title_first}`}>
+          <div className={styles.bottom_part}>
+            {pageData.sections.map(
+              (section) =>
+                section.items.length > 0 && ( //일단 빈데이터 있어서 이렇게 해둠
+                  <div key={section.title} className={styles.list_container}>
+                    <p className={styles.list_title}>{section.title}</p>
+                    {section.subtitle && (
+                      <p className={styles.list_subtitle}>{section.subtitle}</p>
+                    )}
+                    <SlickTemplate sectionInfo={section} />
+                  </div>
+                )
+            )}
+
+            {/* <p className={`${styles.title} ${styles.title_first}`}>
           트래블위드독 렌터카를 선택해야하는 이유
         </p>
         <div className={styles.intro_container}>
@@ -306,14 +335,20 @@ const Rentcar = ({ loadPageData }) => {
         </div>
         <div className={styles.recommend_part}>
           <p className={styles.title}>트래블위드독의 또 다른 추천 상품</p>
-          <div className={styles.recommend_container}>{/* 보류 */}</div>
+          <div className={styles.recommend_container}></div>
         </div>
         <div className={styles.knowhow_part}>
           <p className={styles.title}>트래블위드독 렌터카 100% 이용 노하우</p>
-          <div className={styles.knowhow_container}>{/* 보류 */}</div>
+          <div className={styles.knowhow_container}></div>
+        </div> */}
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className={styles.loading}>
+          <LoadingPage />
+        </div>
+      )}
+    </>
   );
 };
 
