@@ -26,10 +26,6 @@ const CategoryPage = ({ categoryList, loadPageData }) => {
     //카테고리 페이지는 이걸로 정보 불러오는거 아직 안만들어진 것으로 보임
   }, [path]);
 
-  useEffect(() => {
-    console.log(pageData);
-  }, [pageData]);
-
   return (
     <main className={styles.main}>
       <div className={styles.top_banner}>

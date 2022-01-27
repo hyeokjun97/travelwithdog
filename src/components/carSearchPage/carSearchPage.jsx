@@ -266,7 +266,6 @@ const CarSearchPage = ({ carCode }) => {
 
   useEffect(() => {
     if (pickup.length !== 16 || dropoff.length < 16) {
-      console.log("DSD");
       setCarList("error");
       setResultCarList("error");
       return;

@@ -295,8 +295,19 @@ img {
   margin-bottom: 8px;
 }
 
-.all_review_container {
-  padding-top: 14px;
+.show_more_button {
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: #eeeeee;
+  border-radius: 0 0 10px 10px;
+  font-weight: 500;
+  color: rgba(112, 112, 112, 1);
+  cursor: pointer;
+}
+.show_more_icon {
+  margin-left: 10px;
 }
 
 .part_title_container_bottom {
@@ -332,6 +343,13 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.no_review {
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  text-align: center;
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 1100px) {

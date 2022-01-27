@@ -4,6 +4,7 @@ import CardDefault from "../card/cardDefault/cardDefault";
 import sha256 from "js-sha256";
 import qs from "qs";
 import axios from "axios";
+import ReviewUploadPopup from "../reviewUploadPopup/reviewUploadPopup";
 
 const TestPage = (props) => {
   const nav = useNavigate();
@@ -41,17 +42,37 @@ const TestPage = (props) => {
 
   const tourReviewTest = () => {
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/tours/120/reviews`, {
-        tour_id: 120,
-        rating: 4,
-        content: "좋네용",
+      .post(`${process.env.REACT_APP_BASEURL}/tours/118/reviews`, {
+        rating: 5,
+        content:
+          "신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 ",
       })
       .then((response) => console.log(response))
       .catch((err) => console.error(err));
   };
 
+  const [reviewUploadPopupOn, setReviewUploadPopupOn] = useState(false);
+
+  const reviewPopupOnChangeHandler = () => {
+    setReviewUploadPopupOn(!reviewUploadPopupOn);
+  };
+
   return (
     <div style={{ marginTop: "200px" }}>
+      <button
+        style={{ marginBottom: "100px" }}
+        onClick={reviewPopupOnChangeHandler}
+      >
+        리뷰팝업
+      </button>
+      {reviewUploadPopupOn && (
+        <ReviewUploadPopup
+          where="tours"
+          id="115"
+          name="속초 오션투유 리조트 반려견여행 1박2일"
+          reviewPopupOnChangeHandler={reviewPopupOnChangeHandler}
+        />
+      )}
       <CardDefault item={a} />
       <div
         style={{ marginTop: "20px", cursor: "pointer" }}

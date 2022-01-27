@@ -1,11 +1,14 @@
 .item {
+  border-top: 1px solid var(--color-green);
+  border-bottom: 1px solid var(--color-green);
+}
+.pre {
   display: flex;
   flex-direction: row;
   height: 188px;
-  border-top: 1px solid var(--color-green);
-  border-bottom: 1px solid var(--color-green);
   padding: 20px 0;
   position: relative;
+  cursor: pointer;
 }
 
 .image_container {
@@ -70,4 +73,55 @@
 
 .open_button {
   font-size: var(--fontsize-big);
+}
+
+.price_and_review {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.review {
+  margin-left: 20px;
+  outline: none;
+  background-color: var(--color-green);
+  border: none;
+  color: white;
+  padding: 4px 20px;
+  font-size: var(--fontsize-normal);
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  padding: 36px 0 40px 0;
+}
+
+.detail_data_container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.detail_title {
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  color: var(--color-green);
+  margin-bottom: 18px;
+}
+
+.detail_item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.detail_item_text {
+  margin-right: 27px;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 500;
+  color: #131313;
 }

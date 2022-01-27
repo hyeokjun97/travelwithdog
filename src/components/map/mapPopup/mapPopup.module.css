@@ -61,6 +61,18 @@
   margin-right: 8px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+.go_review {
+  margin-top: 2px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.2s all ease-in;
+}
+
+.go_review:hover {
+  color: var(--color-green);
 }
 
 .sns_container {

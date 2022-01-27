@@ -5,7 +5,12 @@ import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import HelmetComponent from "../../helmetComponent/helmetComponent";
 
-const MapPopup = ({ popupValue, onCloseButtonHandler, deviceSize }) => {
+const MapPopup = ({
+  popupValue,
+  onCloseButtonHandler,
+  deviceSize,
+  reviewPopupOnChangeHandler,
+}) => {
   const [instaUrl, setInstaUrl] = useState(null);
   const [blogUrl, setBlogUrl] = useState(null);
   const [spotData, setSpotData] = useState(null);
@@ -44,6 +49,7 @@ const MapPopup = ({ popupValue, onCloseButtonHandler, deviceSize }) => {
           keyword={spotData.html_keyword}
         />
       )}
+
       <div
         className={styles.close_icon_container}
         onClick={onCloseButtonHandler}
@@ -95,6 +101,12 @@ const MapPopup = ({ popupValue, onCloseButtonHandler, deviceSize }) => {
                 halfIcon={<i className="fas fa-paw"></i>}
                 filledIcon={<i className="fas fa-paw"></i>}
               />
+              <p
+                className={styles.go_review}
+                onClick={() => reviewPopupOnChangeHandler(popupValue)}
+              >
+                리뷰 작성
+              </p>
             </div>
           </div>
           <p className={styles.desc}>{popupValue.description}</p>

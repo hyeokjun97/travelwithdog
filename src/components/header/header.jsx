@@ -22,7 +22,7 @@ const Header = ({
     localStorage.removeItem("RK");
     localStorage.removeItem("exp");
     alert("로그아웃 되었습니다.");
-    window.location.reload();
+    // window.location.reload();
   };
 
   useEffect(() => {

@@ -4,7 +4,6 @@ import ReactStars from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
 
 const Item = ({ item }) => {
-  console.log(item);
   const navigate = useNavigate();
   const moveToDetailPage = () => {
     navigate(`/product/${item.id}`);

@@ -85,7 +85,6 @@ const ProductOption = ({ item, productId }) => {
         response.data.forEach((option) => {
           if (option.id === item.id) {
             setPrice(option);
-            console.log(option);
             return false;
           }
         });

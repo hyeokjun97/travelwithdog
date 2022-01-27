@@ -19,6 +19,10 @@ const ProductDetail = (props) => {
   const optionRef = useRef();
   const articleRef = useRef();
   const reviewRef = useRef();
+  const [reviewList, setReviewList] = useState(null);
+  const [reviewTotal, setReviewTotal] = useState(null);
+  const [bestReview, setBestReview] = useState(null);
+  const [reviewShowCount, setReviewShowCount] = useState(1);
 
   const [viewDetailOn, setViewDetailOn] = useState(false);
 
@@ -141,6 +145,48 @@ const ProductDetail = (props) => {
     }
   };
 
+  const loadReviewList = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/tours/${product.id}/reviews?limit=10&page=1`
+      )
+      .then((response) => {
+        setReviewList(response.data.data);
+        setReviewTotal(response.data.total);
+        const result = response.data.data.slice(0);
+        result.sort((a, b) => {
+          return b.rating - a.rating;
+        });
+        setBestReview(result.slice(0, 6));
+        if (response.data.total <= 10) {
+          setReviewShowCount(-1);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const loadMoreReview = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/tours/${product.id}/reviews?limit=10&page=${reviewShowCount}`
+      )
+      .then((response) => {
+        const newList = [...reviewList, ...response.data.data];
+        setReviewList(newList);
+        if (newList.length === reviewTotal) {
+          setReviewShowCount(-1);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const onReviewShowCountChangeHandler = () => {
+    if (reviewShowCount === -1) {
+      return;
+    }
+    setReviewShowCount(reviewShowCount + 1);
+  };
+
   useEffect(() => {
     const loadProductInfo = () => {
       axios
@@ -155,6 +201,20 @@ const ProductDetail = (props) => {
     };
     loadProductInfo();
   }, []);
+
+  useEffect(() => {
+    if (!product) {
+      return;
+    }
+    loadReviewList();
+  }, [product]);
+
+  useEffect(() => {
+    if (reviewShowCount < 2) {
+      return;
+    }
+    loadMoreReview();
+  }, [reviewShowCount]);
 
   return (
     <>
@@ -256,7 +316,9 @@ const ProductDetail = (props) => {
                       />
                       <p className={styles.rating_text}>4.0점</p>
                     </div>
-                    <p className={styles.rating_review_number}>32개의 리뷰</p>
+                    <p className={styles.rating_review_number}>{`${
+                      reviewTotal || 0
+                    }개의 리뷰`}</p>
                   </div>
                 </div>
               </div>
@@ -295,7 +357,7 @@ const ProductDetail = (props) => {
                       reviewRef.current.scrollIntoView({ behavior: "smooth" })
                     }
                   >
-                    리뷰(32)
+                    {`리뷰(${reviewTotal || 0})`}
                   </li>
                 </ul>
               </nav>
@@ -401,17 +463,44 @@ const ProductDetail = (props) => {
 
               <div ref={reviewRef} className={styles.review_part}>
                 <div className={styles.part_title_container}>
-                  <p className={styles.part_title}>리뷰(32)</p>
+                  <p className={styles.part_title}>{`리뷰(${
+                    reviewTotal || 0
+                  })`}</p>
                 </div>
                 <div className={styles.review_main}>
-                  <p className={styles.slick_title}>BEST 리뷰</p>
-                  <ReviewSlick viewItems={jejuBest} />
-                  <div className={styles.part_title_container}>
-                    <p className={styles.part_title}>32개의 리뷰</p>
-                  </div>
+                  {bestReview && bestReview.length > 2 && (
+                    <div>
+                      <p className={styles.slick_title}>BEST 리뷰</p>
+                      <ReviewSlick viewItems={bestReview} />
+                    </div>
+                  )}
+                  {reviewList && reviewList.length > 0 && (
+                    <div className={styles.part_title_container}>
+                      <p className={styles.part_title}>{`${
+                        reviewTotal || 0
+                      }개의 리뷰`}</p>
+                    </div>
+                  )}
                   <div className={styles.all_review_container}>
-                    <ProductReview />
-                    <ProductReview />
+                    {reviewList &&
+                      (reviewList.length > 0 ? (
+                        reviewList.map((review) => (
+                          <ProductReview key={review.id} review={review} />
+                        ))
+                      ) : (
+                        <p className={styles.no_review}>리뷰가 없습니다.</p>
+                      ))}
+                    {reviewShowCount !== -1 && (
+                      <div
+                        className={styles.show_more_button}
+                        onClick={onReviewShowCountChangeHandler}
+                      >
+                        <span>더보기</span>
+                        <i
+                          className={`${styles.show_more_icon} fas fa-chevron-down`}
+                        ></i>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className={styles.part_title_container_bottom}>

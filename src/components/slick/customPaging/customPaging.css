@@ -33,7 +33,7 @@
 }
 
 .custom_paging_container .slick-dots {
-  transform: translateY(-4vh);
+  transform: translateY(-35px);
 }
 
 @media screen and (max-width: 765px) {
@@ -41,17 +41,17 @@
   .custom_paging_container .slick-list,
   .custom_paging_container .slick-track {
     width: 100%;
-    height: 40vh;
+    height: 267px;
   }
 
   .custom_paging_container .slick-active .slick-current {
     width: 100%;
-    height: 40vh;
+    height: 267px;
   }
 
   .custom_paging_container .slick-slide .image {
     width: 100%;
-    height: 40vh;
+    height: 267px;
   }
 
   .custom_paging_container .slick-dots .dot_image,
@@ -60,6 +60,5 @@
     height: 50px;
   }
   .custom_paging_container .slick-dots {
-    transform: translateY(-5vh);
   }
 }

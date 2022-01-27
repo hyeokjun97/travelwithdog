@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./mobileMypage.module.css";
 
-const MobileMypage = ({ loginPopupHandler, signupPopupHandler }) => {
+const MobileMypage = ({
+  isLoggedIn,
+  loginPopupHandler,
+  signupPopupHandler,
+}) => {
   const navigate = useNavigate();
 
-  //로그인 여부 구분 용으로 임시로 만듬
-  const [user, setUser] = useState(null);
+  const logoutHandler = () => {
+    localStorage.removeItem("AK");
+    localStorage.removeItem("RK");
+    localStorage.removeItem("exp");
+    alert("로그아웃 되었습니다.");
+    // window.location.reload();
+  };
 
   return (
     <div className={styles.main}>
-      {user ? (
+      {isLoggedIn ? (
         <div className={styles.top}>
           <div className={styles.top_image_container}>
             <img
@@ -31,7 +40,9 @@ const MobileMypage = ({ loginPopupHandler, signupPopupHandler }) => {
               >
                 정보수정
               </p>
-              <p className={styles.top_text_two}>로그아웃</p>
+              <p className={styles.top_text_two} onClick={logoutHandler}>
+                로그아웃
+              </p>
             </div>
           </div>
         </div>
@@ -48,7 +59,7 @@ const MobileMypage = ({ loginPopupHandler, signupPopupHandler }) => {
           </div>
         </div>
       )}
-      {user && (
+      {isLoggedIn && (
         <div className={styles.payments_container}>
           <div className={styles.title_part}>결제 정보</div>
           <div
@@ -71,7 +82,7 @@ const MobileMypage = ({ loginPopupHandler, signupPopupHandler }) => {
           </div>
         </div>
       )}
-      {user && (
+      {isLoggedIn && (
         <div className={styles.customer_and_community_container}>
           <div className={styles.title_part}>고객센터/커뮤니티</div>
           <div

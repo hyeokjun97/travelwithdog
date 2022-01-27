@@ -5,6 +5,7 @@ import MapMenuItem from "./mapMenuItem/mapMenuItem";
 import MapPopup from "./mapPopup/mapPopup";
 import { useGoogleMaps } from "react-hook-google-maps";
 import HelmetComponent from "../helmetComponent/helmetComponent";
+import ReviewUploadPopup from "../reviewUploadPopup/reviewUploadPopup";
 
 const Map = ({ deviceSize }) => {
   const [inputValue, setInputValue] = useState("");
@@ -12,6 +13,15 @@ const Map = ({ deviceSize }) => {
   const [resultSpotList, setResultSpotList] = useState(null);
   const [popupOn, setPopupOn] = useState(false);
   const [popupValue, setPopupValue] = useState(null);
+  const [reviewUploadPopupOn, setReviewUploadPopupOn] = useState(false);
+
+  const reviewPopupOnChangeHandler = (data) => {
+    setReviewUploadPopupOn(data);
+  };
+
+  const closeReviewPopupOnHandler = () => {
+    setReviewUploadPopupOn(false);
+  };
 
   const { ref, map, google } = useGoogleMaps(
     process.env.REACT_APP_GOOGLE_KEY,
@@ -107,6 +117,14 @@ const Map = ({ deviceSize }) => {
   return (
     <div className={styles.body}>
       <HelmetComponent url={`https://www.travelwithdog.co.kr/map`} />
+      {reviewUploadPopupOn && (
+        <ReviewUploadPopup
+          where="spots"
+          id={reviewUploadPopupOn.id}
+          name={reviewUploadPopupOn.name}
+          reviewPopupOnChangeHandler={closeReviewPopupOnHandler}
+        />
+      )}
       {popupOn && (
         <div
           className={styles.filter}
@@ -117,6 +135,7 @@ const Map = ({ deviceSize }) => {
             popupValue={popupValue}
             onCloseButtonHandler={onCloseButtonHandler}
             deviceSize={deviceSize}
+            reviewPopupOnChangeHandler={reviewPopupOnChangeHandler}
           />
         </div>
       )}

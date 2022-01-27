@@ -7,13 +7,18 @@ import MypagePayments from "./mypagePayments/mypagePayments";
 import MypageQna from "./mypageQna/mypageQna";
 import MypageWithdrawal from "./mypageWithdrawal/mypageWithdrawal";
 
-const Mypage = (props) => {
+const Mypage = ({ isLoggedIn }) => {
   const { path } = useParams();
   const navigate = useNavigate();
   const [communitySelect, setCommunitySelect] = useState("글");
 
   const [pageName, setPageName] = useState(null);
   useEffect(() => {
+    if (!isLoggedIn) {
+      alert("로그인 후에 사용 가능합니다.");
+      window.location.href = "/travelWithDog";
+      return;
+    }
     const pageNameSetting = () => {
       if (path === "edit") {
         return "회원정보수정";

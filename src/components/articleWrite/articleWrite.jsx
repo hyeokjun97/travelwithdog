@@ -39,7 +39,6 @@ const ArticleWrite = (props) => {
       .then((response) => {
         //1단계
         response.data.forEach((board) => {
-          console.log(boardResult);
           boardResult.push({ id: board.id, name: board.name });
           //2단계
           if (board.children && board.children.length > 0) {
@@ -66,10 +65,6 @@ const ArticleWrite = (props) => {
   useEffect(() => {
     loadBoardList();
   }, []);
-
-  useEffect(() => {
-    console.log(content);
-  }, [content]);
 
   //<SummerNote onContentChangeHandler={onContentChangeHandler} />
   return (

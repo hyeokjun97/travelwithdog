@@ -57,62 +57,57 @@ export default class ReviewSlick extends Component {
   render() {
     const { viewItems } = this.props;
     const width = window.innerWidth;
-    let settings;
-    if (width > 1050) {
-      settings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        swipeToSlide: true,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        arrows: true,
-        variableWIdth: true,
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
-      };
-    } else {
-      settings = {
-        accessibility: false,
-        dots: false,
-        infinite: false,
-        centerMode: true,
-        centerPadding: "25px",
-        swipeToSlide: true,
-        slidesToShow: 1,
-        arrows: false,
-        variableWIdth: true,
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
-      };
-    }
+    let settings = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      swipeToSlide: true,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      arrows: true,
+      variableWIdth: true,
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
+      responsive: [
+        {
+          breakpoint: 850,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          },
+        },
+        {
+          breakpoint: 560,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
+        },
+      ],
+    };
 
     return (
       <div className="review_slick_container">
         <Slider {...settings}>
           {viewItems.map((item) => (
-            <div key={item.idx} className="item">
+            <div key={item.id} className="item">
               <div className="container">
-                <p className="desc">
-                  이 호텔은 정말 강력 추천합니다! 제가 본 호텔 중 최고였어요 이
-                  호텔은 정말 강력 추천합니다! 제가 본 호텔 중 최고였어요 이
-                  호텔은 정말 강력 추천합니다! 제가 본 호텔 중 최고였어요
-                </p>
+                <p className="desc">{item.content}</p>
                 <div className="data_container">
-                  <p className="name">김**</p>
+                  <p className="name">{item.user.email.slice(0, 3) + "***"}</p>
                   <div className="star_container">
                     <ReactStars
                       count={5}
                       edit={false}
                       size={20}
-                      value={4}
+                      value={item.rating}
                       activeColor="#000000"
                       isHalf={true}
                       emptyIcon={<i className="fas fa-paw"></i>}
                       halfIcon={<i className="fas fa-paw"></i>}
                       filledIcon={<i className="fas fa-paw"></i>}
                     />
-                    <p className="rating_text">4.0</p>
+                    <p className="rating_text">{item.rating}</p>
                     <p className="rating_text_sub">점</p>
                   </div>
                 </div>

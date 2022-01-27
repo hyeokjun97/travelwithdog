@@ -35,7 +35,6 @@ const CarDetail = (props) => {
   const onInsuranceSelectHandler = (e) => {
     carInfo.insurances.forEach((ins) => {
       if (ins.name === e.currentTarget.dataset.name) {
-        console.log(ins);
         setSelectedInsurance(ins);
         return false;
       }

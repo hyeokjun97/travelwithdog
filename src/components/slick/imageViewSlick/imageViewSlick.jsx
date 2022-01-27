@@ -70,7 +70,7 @@ export default class ImageViewSlick extends Component {
         },
       ],
     };
-    console.log(imageList);
+
     return (
       <div className="image_view_slick_container">
         <div className="close_icon_container" onClick={onCloseHandler}>

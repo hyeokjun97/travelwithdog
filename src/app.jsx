@@ -340,10 +340,13 @@ const App = (props) => {
 
   //컴포넌트 마운트 시에 불러오기
   useEffect(() => {
-    setIsLoggedIn(checkLoginState());
     loadPageList();
     loadCarCode();
   }, []);
+
+  useEffect(() => {
+    setIsLoggedIn(checkLoginState());
+  }, [localStorage.getItem("AK")]); //임시 (gh page 404 막기위함)
 
   return (
     <div className={styles.app}>
@@ -429,11 +432,15 @@ const App = (props) => {
             ></Route>
           )}
           <Route path="/map" element={<Map deviceSize={deviceSize} />}></Route>
-          <Route path="/mypage/:path" element={<Mypage />}></Route>
+          <Route
+            path="/mypage/:path"
+            element={<Mypage isLoggedIn={isLoggedIn} />}
+          ></Route>
           <Route
             path="/mobile/mypage"
             element={
               <MobileMypage
+                isLoggedIn={isLoggedIn}
                 loginPopupHandler={loginPopupHandler}
                 signupPopupHandler={signupPopupHandler}
               />

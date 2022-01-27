@@ -14,7 +14,6 @@ const ReservationPage = (props) => {
   const { one, two, three, four } = agreeValue;
 
   const onAgreeChangeHandler = (e) => {
-    console.log(e.target.name);
     const target = e.target.name;
     if (target === "four" && e.target.checked) {
       setAgreeValue({

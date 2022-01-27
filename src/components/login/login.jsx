@@ -61,7 +61,7 @@ const Login = ({
           "Authorization"
         ] = `Bearer ${response.data.access_token}`; //새로고침 하면 사라짐 => 해결방법 찾기
 
-        window.location.reload();
+        // window.location.reload();
         onCloseButtonHandler();
       })
       .catch((err) => {
