@@ -12,7 +12,7 @@ import ImageViewSlick from "../slick/imageViewSlick/imageViewSlick";
 import HelmetComponent from "../helmetComponent/helmetComponent";
 import LoadingPage from "../loadingPage/loadingPage";
 
-const ProductDetail = (props) => {
+const ProductDetail = ({ deviceSize }) => {
   const { path } = useParams();
   const introRef = useRef();
   const mapRef = useRef();
@@ -295,7 +295,9 @@ const ProductDetail = (props) => {
                   </div>
                   {product.images.length > 5 && (
                     <div className={styles.image_container_button}>{`+${
-                      product.images.length - 5
+                      deviceSize
+                        ? product.images.length - 5
+                        : product.images.length
                     }개 더 보기`}</div>
                   )}
                 </div>

@@ -10,7 +10,7 @@ const MobileCategory = ({ categoryList, loadPageData }) => {
   const [category, setCategory] = useState(null);
 
   const onCategoryChangeHandler = (data) => {
-    navigate(`/mobile/category/${data.id}`);
+    navigate(`/category/${data.id}`);
   };
 
   useEffect(() => {

@@ -183,45 +183,6 @@ const App = (props) => {
     },
   ]);
 
-  const [hotList, setHotList] = useState([
-    {
-      idx: 0,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/68004/592612_medium_1636105470.jpg?1636105470",
-      title: "걷기 좋은 제주도, 신촌 미로마을",
-    },
-    {
-      idx: 1,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/42185/262013_medium_1536304187.jpg?1536304187",
-      title: "마음 속 쉼터가 되어줄, 신촌리",
-    },
-    {
-      idx: 2,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/7511/296672_medium_1544173662.jpg?1544173662",
-      title: "역사를 품은 바닷길 '제주올레19코스'",
-    },
-    {
-      idx: 3,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/70816/595376_medium_1638331669.jpg?1638331669",
-      title: "걷기 좋은 제주도, 신촌 미로마을",
-    },
-    {
-      idx: 4,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/42185/262013_medium_1536304187.jpg?1536304187",
-      title: "역사를 품은 바닷길 '제주올레19코스'",
-    },
-    {
-      idx: 5,
-      image:
-        "https://d2ur7st6jjikze.cloudfront.net/offer_photos/68004/592612_medium_1636105470.jpg?1636105470",
-      title: "마음 속 쉼터가 되어줄, 신촌리",
-    },
-  ]);
-
   const [tagButtonList, setTagButtonList] = useState([
     "렌터카",
     "당일치기",
@@ -389,7 +350,6 @@ const App = (props) => {
               <Mainpage
                 chabak={chabak}
                 jejuBest={jejuBest}
-                hotList={hotList}
                 tagButtonList={tagButtonList}
                 deviceSize={deviceSize}
                 loadPageData={loadPageData}
@@ -399,26 +359,25 @@ const App = (props) => {
 
           <Route
             path="/category/:path"
-            element={<CategoryPage loadPageData={loadPageData} />}
+            element={
+              deviceSize ? (
+                <CategoryPage loadPageData={loadPageData} />
+              ) : (
+                categoryList && (
+                  <MobileCategory
+                    categoryList={categoryList}
+                    loadPageData={loadPageData}
+                  />
+                )
+              )
+            }
           ></Route>
 
-          {categoryList && (
-            <Route
-              path="/mobile/category/:path"
-              element={
-                <MobileCategory
-                  categoryList={categoryList}
-                  loadPageData={loadPageData}
-                />
-              }
-            ></Route>
-          )}
-          {chabak && (
-            <Route
-              path="/rentcar"
-              element={<Rentcar chabak={chabak} loadPageData={loadPageData} />}
-            ></Route>
-          )}
+          <Route
+            path="/rentcar"
+            element={<Rentcar loadPageData={loadPageData} />}
+          ></Route>
+
           <Route path="/community/:boardId" element={<CommunityPage />}></Route>
           {deviceSize ? (
             <Route path="/search/:query" element={<SearchPage />}></Route>
@@ -447,7 +406,10 @@ const App = (props) => {
             path="/mobile/mypage/:path"
             element={<MobileMypageDetail />}
           ></Route>
-          <Route path="/product/:path" element={<ProductDetail />}></Route>
+          <Route
+            path="/product/:path"
+            element={<ProductDetail deviceSize={deviceSize} />}
+          ></Route>
           <Route path="/res" element={<ReservationPage />}></Route>
           <Route path="/article/:articleId" element={<ArticleView />}></Route>
           <Route path="/articlew" element={<ArticleWrite />}></Route>

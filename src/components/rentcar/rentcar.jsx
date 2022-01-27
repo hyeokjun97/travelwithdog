@@ -6,11 +6,9 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
 import ItemSlickFive from "../slick/itemSlickFive/itemSlickFive";
-import ItemList from "../itemList/itemList";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Rentcar = ({ chabak, loadPageData }) => {
+const Rentcar = ({ loadPageData }) => {
   const navigate = useNavigate();
   const [pageData, setPageData] = useState(null);
   const [datePickerOn, setDatePickerOn] = useState(false);
@@ -308,15 +306,11 @@ const Rentcar = ({ chabak, loadPageData }) => {
         </div>
         <div className={styles.recommend_part}>
           <p className={styles.title}>트래블위드독의 또 다른 추천 상품</p>
-          <div className={styles.recommend_container}>
-            <ItemSlickFive viewItems={chabak} />
-          </div>
+          <div className={styles.recommend_container}>{/* 보류 */}</div>
         </div>
         <div className={styles.knowhow_part}>
           <p className={styles.title}>트래블위드독 렌터카 100% 이용 노하우</p>
-          <div className={styles.knowhow_container}>
-            <ItemList itemList={chabak} />
-          </div>
+          <div className={styles.knowhow_container}>{/* 보류 */}</div>
         </div>
       </div>
     </div>

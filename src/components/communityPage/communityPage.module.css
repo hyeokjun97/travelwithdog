@@ -359,18 +359,22 @@
 
   .open_child_button {
     width: 98%;
+    height: 37px;
     margin-left: 1%;
     margin-top: 10px;
   }
 
   .child_container {
+    border: none;
+    width: 98%;
     right: 50%;
     transform: translateX(50%);
-    flex-direction: column;
+    flex-direction: fow;
+    animation: none;
   }
 
   .child {
-    border: 0;
+    width: 50%;
   }
 
   .child_title {

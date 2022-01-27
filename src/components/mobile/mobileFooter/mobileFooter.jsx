@@ -36,7 +36,7 @@ const MobileFooter = ({ categoryList }) => {
             : `${styles.button}`
         }`}
         onClick={() => {
-          navigate(`/mobile/category/${categoryList[0].id}`);
+          navigate(`/category/${categoryList[0].id}`);
           window.scrollTo({ top: 0 });
         }}
       >

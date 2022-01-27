@@ -107,4 +107,9 @@
   .list_part {
     overflow: hidden;
   }
+  .loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
 }

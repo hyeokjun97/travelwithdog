@@ -37,3 +37,9 @@
   background-color: rgba(15, 15, 15, 0.8);
   border-radius: 0 0 12px 12px;
 }
+
+@media screen and (max-width: 380px) {
+  .desc {
+    font-size: var(--fontsize-bit-small);
+  }
+}

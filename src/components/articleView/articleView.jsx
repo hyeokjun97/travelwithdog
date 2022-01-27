@@ -34,7 +34,11 @@ const ArticleView = (props) => {
       >
         <div className={styles.top_data_container}>
           <p className={styles.title}>{article && article.title}</p>
-          <p className={styles.name}>이종혁 회원님</p>
+          <p className={styles.name}>
+            {article && article.user
+              ? `${article.user.email.split("@")[0]}회원님`
+              : "관리자"}
+          </p>
           <p className={styles.date}>{date && date}</p>
         </div>
       </div>

@@ -297,4 +297,7 @@
   .blog {
     height: 30px;
   }
+  .go_review {
+    font-size: var(--fontsize-small);
+  }
 }

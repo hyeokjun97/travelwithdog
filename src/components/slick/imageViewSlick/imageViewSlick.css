@@ -70,8 +70,10 @@
 
 @media screen and (max-width: 768px) {
   .image_view_slick_container .thumbnail {
-    width: 90%;
+    width: 100%;
+    height: 35vh;
     margin-top: 110px;
+    border-radius: 0;
   }
   .image_view_slick_container .slick-dots {
     transform: translateY(0);

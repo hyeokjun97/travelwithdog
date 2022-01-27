@@ -360,10 +360,15 @@ img {
     width: 100%;
     border-radius: 0;
   }
+  .menu_list > li:hover {
+    margin-bottom: 0;
+    border-bottom: 0;
+  }
   .top {
     border-radius: 0;
     padding: 0;
   }
+
   .product_title {
     font-size: var(--fontsize-mini-title);
     margin-bottom: 10px;
