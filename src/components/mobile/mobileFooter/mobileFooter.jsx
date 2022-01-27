@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./mobileFooter.module.css";
 
-const MobileFooter = (props) => {
+const MobileFooter = ({ categoryList }) => {
   const navigate = useNavigate();
   const { pathname } = window.location;
 
@@ -36,7 +36,7 @@ const MobileFooter = (props) => {
             : `${styles.button}`
         }`}
         onClick={() => {
-          navigate("/mobile/category/jeju");
+          navigate(`/mobile/category/${categoryList[0].id}`);
           window.scrollTo({ top: 0 });
         }}
       >

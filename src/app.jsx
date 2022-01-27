@@ -397,22 +397,19 @@ const App = (props) => {
             }
           ></Route>
 
-          {categoryList && (
-            <Route
-              path="/category/:path"
-              element={
-                <CategoryPage
-                  categoryList={categoryList}
-                  loadPageData={loadPageData}
-                />
-              }
-            ></Route>
-          )}
+          <Route
+            path="/category/:path"
+            element={<CategoryPage loadPageData={loadPageData} />}
+          ></Route>
+
           {categoryList && (
             <Route
               path="/mobile/category/:path"
               element={
-                <MobileCategory categoryList={categoryList} chabak={chabak} />
+                <MobileCategory
+                  categoryList={categoryList}
+                  loadPageData={loadPageData}
+                />
               }
             ></Route>
           )}
@@ -475,7 +472,11 @@ const App = (props) => {
           <Route path="/introduce/:path" element={<Introduce />}></Route>
         </Routes>
 
-        {deviceSize ? <Footer /> : <MobileFooter />}
+        {deviceSize ? (
+          <Footer />
+        ) : (
+          categoryList && <MobileFooter categoryList={categoryList} />
+        )}
       </BrowserRouter>
     </div>
   );

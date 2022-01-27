@@ -30,7 +30,7 @@ export default class MenuSlick extends Component {
             >
               <p
                 className={`${
-                  category.name === item.name ? "title selected" : "title"
+                  category.id === item.id ? "title selected" : "title"
                 }`}
               >
                 {item.name}

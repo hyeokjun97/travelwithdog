@@ -2,13 +2,18 @@
   margin-top: 80px;
 }
 
+.top {
+  margin-top: 80px;
+  padding-top: 20px;
+}
+
 .top_title {
   font-size: var(--fontsize-big);
   padding: 30px 0 10px 20px;
 }
 
 .list_part {
-  padding: 34px 0;
+  padding-bottom: 34px;
 }
 
 .list_title {

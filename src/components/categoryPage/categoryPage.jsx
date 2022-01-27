@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ItemSlickFour from "../slick/itemSlickFour/itemSlickFour";
-import ItemSlickOne from "../slick/itemSlickOne/itemSlickOne";
-import ItemSlickThree from "../slick/itemSlickThree/itemSlickThree";
-import ItemSlickTwo from "../slick/itemSlickTwo/itemSlickTwo";
+import HelmetComponent from "../helmetComponent/helmetComponent";
+import LoadingPage from "../loadingPage/loadingPage";
+import SlickTemplate from "../slick/slickTemplate/slickTemplate";
 import styles from "./categoryPage.module.css";
 
-const CategoryPage = ({ categoryList, loadPageData }) => {
-  const [category, setCategory] = useState(null);
+const CategoryPage = ({ loadPageData }) => {
   const [pageData, setPageData] = useState(null);
   const { path } = useParams();
 
@@ -16,53 +14,52 @@ const CategoryPage = ({ categoryList, loadPageData }) => {
   };
 
   useEffect(() => {
-    categoryList.forEach((cate) => {
-      if (cate.route === path) {
-        setCategory(cate);
-        return false;
-      }
-    });
+    setPageData(null);
     loadPageData(path, settingPageData);
-    //카테고리 페이지는 이걸로 정보 불러오는거 아직 안만들어진 것으로 보임
   }, [path]);
 
   return (
-    <main className={styles.main}>
-      <div className={styles.top_banner}>
-        <div className={styles.top_filter}>
-          <p className={styles.title}>{category && category.title}</p>
-          <p className={styles.subtitle}>{category && category.subtitle}</p>
+    <>
+      {pageData ? (
+        <main className={styles.main}>
+          <HelmetComponent
+            title={pageData.html_title}
+            desc={pageData.html_description}
+            url={`https://www.travelwithdog.co.kr/category/${path}`}
+            keyword={pageData.html_keyword}
+          />
+          <div
+            className={styles.top_banner}
+            style={{
+              background: `url("${pageData.image_url}") center/cover no-repeat`,
+            }}
+          >
+            <div className={styles.top_filter}>
+              <p className={styles.title}>{pageData && pageData.title}</p>
+              <p className={styles.subtitle}>{pageData && pageData.subtitle}</p>
+            </div>
+          </div>
+          <div className={styles.list_part}>
+            {pageData.sections.map(
+              (section) =>
+                section.items.length > 0 && ( //일단 빈데이터 있어서 이렇게 해둠
+                  <div key={section.title} className={styles.list_container}>
+                    <p className={styles.list_title}>{section.title}</p>
+                    {section.subtitle && (
+                      <p className={styles.list_subtitle}>{section.subtitle}</p>
+                    )}
+                    <SlickTemplate sectionInfo={section} />
+                  </div>
+                )
+            )}
+          </div>
+        </main>
+      ) : (
+        <div className={styles.loading}>
+          <LoadingPage />
         </div>
-      </div>
-      <div className={styles.list_part}>
-        {category &&
-          category.cardList.map((item) =>
-            item.type === 1 ? (
-              <div key={item.id} className={styles.list_container}>
-                <p className={styles.list_title}>{item.title}</p>
-                <ItemSlickOne viewItems={item.data} />
-              </div>
-            ) : item.type === 2 ? (
-              <div key={item.id} className={styles.list_container}>
-                <p className={styles.list_title}>{item.title}</p>
-                <ItemSlickTwo viewItems={item.data} />
-              </div>
-            ) : item.type === 3 ? (
-              <div key={item.id} className={styles.list_container}>
-                <p className={styles.list_title}>{item.title}</p>
-                <ItemSlickThree viewItems={item.data} />
-              </div>
-            ) : item.type === 4 ? (
-              <div key={item.id} className={styles.list_container}>
-                <p className={styles.list_title}>{item.title}</p>
-                <ItemSlickFour viewItems={item.data} />
-              </div>
-            ) : (
-              <></>
-            )
-          )}
-      </div>
-    </main>
+      )}
+    </>
   );
 };
 
