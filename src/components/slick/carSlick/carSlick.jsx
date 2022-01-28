@@ -56,36 +56,32 @@ export default class CarSlick extends Component {
   render() {
     const { viewItems } = this.props;
     const width = window.innerWidth;
-    let settings;
-    if (width > 1050) {
-      settings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        swipeToSlide: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: true,
-        variableWIdth: true,
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
-        rows: 2,
-        slidesPerRow: 2,
-      };
-    } else {
-      settings = {
-        accessibility: false,
-        dots: false,
-        infinite: false,
-        centerMode: true,
-        centerPadding: "40px",
-        swipeToSlide: true,
-        arrows: true,
-        variableWIdth: true,
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
-      };
-    }
+    let settings = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      swipeToSlide: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      variableWIdth: true,
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
+      rows: 2,
+      slidesPerRow: 2,
+      responsive: [
+        {
+          breakpoint: 800,
+          settings: {
+            accessibility: false,
+            centerMode: true,
+            centerPadding: "40px",
+            rows: 1,
+            slidesPerRow: 1,
+          },
+        },
+      ],
+    };
 
     return (
       <div className="car_slick_container">
@@ -103,7 +99,7 @@ export default class CarSlick extends Component {
                 <div className="data_container">
                   <div className="title_container">
                     <p className="title">5인승 중형</p>
-                    <p className="title_big">올뉴 말리부(휘)</p>
+                    <p className="title_big">벤츠C200 오픈카 4인승 (휘)</p>
                   </div>
                   <div className="option_container">
                     <div className="option">

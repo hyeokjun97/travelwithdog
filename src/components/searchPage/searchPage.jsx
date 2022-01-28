@@ -9,6 +9,7 @@ const SearchPage = (props) => {
   //컴포넌트 마운트 시 마다 서버 요청해서 결과값 받아오고 분류, 정렬 선택 여부로 보여주기
   const navigate = useNavigate();
   const { query } = useParams();
+
   const [searchResult, setSearchResult] = useState(null);
   const [sortResult, setSortResult] = useState(null);
   const [searchValue, setSearchValue] = useState("");

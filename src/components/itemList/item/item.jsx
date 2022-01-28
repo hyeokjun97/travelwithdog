@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "./item.module.css";
 import ReactStars from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
 
 const Item = ({ item }) => {
   const navigate = useNavigate();
+  const ref = useRef();
+
   const moveToDetailPage = () => {
     navigate(`/product/${item.id}`);
   };
+
+  useEffect(() => {
+    if (!ref) {
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio > 0) {
+          const target = entry.target;
+          target.setAttribute("src", target.dataset.src);
+          io.unobserve(target);
+        }
+      });
+    });
+
+    io.observe(ref.current);
+  }, [ref]);
+
   return (
     <div className={styles.item} onClick={moveToDetailPage}>
-      <img src={item.image.url} alt="thumbnail" className={styles.thumbnail} />
+      <img
+        ref={ref}
+        data-src={item.image.url}
+        alt="thumbnail"
+        className={styles.thumbnail}
+      />
       <div className={styles.data_container}>
         <p className={styles.title}>{item.name_en}</p>
         <div className={styles.star_container}>

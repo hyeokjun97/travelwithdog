@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "./carItem.module.css";
 
 const CarItem = ({ item, moveToDetail }) => {
+  const ref = useRef();
+
   const navigateHandler = () => {
     moveToDetail(item.id, item.insurances[0].business_id);
   };
+
+  useEffect(() => {
+    if (!ref) {
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio > 0) {
+          const target = entry.target;
+          target.setAttribute("src", target.dataset.src);
+          io.unobserve(target);
+        }
+      });
+    });
+
+    io.observe(ref.current);
+  }, [ref]);
+
   return (
     <div className={styles.item} onClick={navigateHandler}>
       <div className={styles.box}>
         <div className={styles.image_container}>
           <img
-            src={
+            ref={ref}
+            data-src={
               item.images.length > 0
                 ? item.images[0].url
                 : "/travelWithDog/images/no_image.jpeg"

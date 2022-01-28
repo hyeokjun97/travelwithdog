@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "./mapMenuItem.module.css";
 import ReactStars from "react-rating-stars-component";
 
 const MapMenuItem = ({ item, onItemClickHandler }) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    if (!ref) {
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio > 0) {
+          const target = entry.target;
+          target.setAttribute("src", target.dataset.src);
+          io.unobserve(target);
+        }
+      });
+    });
+
+    io.observe(ref.current);
+  }, [ref]);
+
   return (
     <div className={styles.item} onClick={onItemClickHandler}>
       <img
-        src={
+        ref={ref}
+        data-src={
           item.images.length > 0
             ? item.images[0].url
             : "/travelWithDog/images/no_image.jpeg"
