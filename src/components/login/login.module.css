@@ -21,7 +21,7 @@
 }
 
 .logo {
-  width: 130px;
+  width: 150px;
   margin-bottom: 20px;
 }
 
@@ -156,6 +156,7 @@
   }
 
   .logo {
+    width: 130px;
     margin-bottom: 0;
   }
 

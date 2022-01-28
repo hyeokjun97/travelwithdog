@@ -12,7 +12,7 @@ const Find = ({
         <i className={`${styles.close_icon} fas fa-times`}></i>
       </div>
       <img
-        src="/travelWithDog/images/logo.svg"
+        src="/travelWithDog/images/logo.png"
         alt="logo"
         className={styles.logo}
       />

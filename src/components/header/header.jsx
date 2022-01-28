@@ -61,7 +61,7 @@ const Header = ({
       <div className={styles.body}>
         <div className={styles.logo_container}>
           <img
-            src="/travelWithDog/images/logo.svg"
+            src="/travelWithDog/images/logo.png"
             alt="travel_with_dog"
             className={styles.logo}
             onClick={() => {

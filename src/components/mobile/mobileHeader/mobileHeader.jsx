@@ -20,7 +20,7 @@ const MobileHeader = (props) => {
   return (
     <header className={styles.header}>
       <img
-        src="/travelWithDog/images/logo.svg"
+        src="/travelWithDog/images/logo.png"
         alt="logo"
         className={styles.logo}
         onClick={() => {

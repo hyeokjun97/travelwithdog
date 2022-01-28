@@ -85,6 +85,7 @@
   transition: 100ms all ease;
   display: flex;
   flex-direction: column;
+  z-index: 999;
 }
 
 .date_picker_button {

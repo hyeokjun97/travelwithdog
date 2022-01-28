@@ -49,7 +49,7 @@ const ArticleView = (props) => {
         ></article>
         <div className={styles.review_container}>
           <div className={styles.review_input_form}>
-            <p className={styles.review_text}>댓글(3)</p>
+            <p className={styles.review_text}>댓글(1)</p>
             <div className={styles.review_input_container}>
               <textarea
                 className={styles.review_input}

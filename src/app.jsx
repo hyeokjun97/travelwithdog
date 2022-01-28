@@ -301,6 +301,9 @@ const App = (props) => {
 
   //컴포넌트 마운트 시에 불러오기
   useEffect(() => {
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
     loadPageList();
     loadCarCode();
   }, []);

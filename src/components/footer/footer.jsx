@@ -10,7 +10,7 @@ const Footer = (props) => {
         <ul className={styles.top_menu}>
           <li>
             <img
-              src="/travelWithDog/images/logo.svg"
+              src="/travelWithDog/images/logo.png"
               alt="logo"
               className={styles.logo}
             />
