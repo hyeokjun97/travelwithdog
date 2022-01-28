@@ -7,7 +7,7 @@ import { useGoogleMaps } from "react-hook-google-maps";
 import HelmetComponent from "../helmetComponent/helmetComponent";
 import ReviewUploadPopup from "../reviewUploadPopup/reviewUploadPopup";
 
-const Map = ({ deviceSize }) => {
+const Map = ({ deviceSize, isLoggedIn }) => {
   const [inputValue, setInputValue] = useState("");
   const [spotList, setSpotList] = useState(null);
   const [resultSpotList, setResultSpotList] = useState(null);
@@ -123,6 +123,7 @@ const Map = ({ deviceSize }) => {
           id={reviewUploadPopupOn.id}
           name={reviewUploadPopupOn.name}
           reviewPopupOnChangeHandler={closeReviewPopupOnHandler}
+          isLoggedIn={isLoggedIn}
         />
       )}
       {popupOn && (

@@ -102,9 +102,9 @@
   cursor: pointer;
 }
 
-img,
-iframe {
-  width: 100%;
+.main img,
+.main iframe {
+  max-width: 100% !important;
 }
 
 iframe {

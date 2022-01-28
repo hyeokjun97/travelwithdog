@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SummerNote from "../summerNote/summerNote";
 import styles from "./articleWrite.module.css";
 
-const ArticleWrite = (props) => {
+const ArticleWrite = ({ isLoggedIn }) => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [boardSelect, setBoardSelect] = useState("");
@@ -22,13 +24,26 @@ const ArticleWrite = (props) => {
       alert("모든 정보를 입력해주세요");
       return;
     }
+
+    if (!isLoggedIn) {
+      alert("로그인 후에 글 작성이 가능합니다.");
+      return;
+    }
+
     axios
       .post(`${process.env.REACT_APP_BASEURL}/boards/${boardSelect}/articles`, {
         board_id: boardSelect,
         title: title,
         content: content,
       })
-      .then((response) => console.log(response))
+      .then((response) => {
+        if (response.status === 204) {
+          navigate(`/community/${boardSelect}`);
+          window.scrollTo({ top: 0 });
+        } else {
+          alert("에러가 발생했습니다. 잠시 후에 다시 시도해주세요");
+        }
+      })
       .catch((err) => console.error(err));
   };
 

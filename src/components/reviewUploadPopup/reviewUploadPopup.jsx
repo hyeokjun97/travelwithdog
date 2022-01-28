@@ -3,7 +3,13 @@ import styles from "./reviewUploadPopup.module.css";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 
-const ReviewUploadPopup = ({ where, id, name, reviewPopupOnChangeHandler }) => {
+const ReviewUploadPopup = ({
+  where,
+  id,
+  name,
+  reviewPopupOnChangeHandler,
+  isLoggedIn,
+}) => {
   const [rating, setRating] = useState(5);
   const [content, setContent] = useState("");
   const onRatingChangeHandler = (data) => {
@@ -16,6 +22,10 @@ const ReviewUploadPopup = ({ where, id, name, reviewPopupOnChangeHandler }) => {
   const onReviewSubmitHandler = () => {
     if (content === "") {
       alert("내용을 입력해주세요");
+      return;
+    }
+    if (!isLoggedIn) {
+      alert("로그인 후에 리뷰 작성이 가능합니다.");
       return;
     }
     axios

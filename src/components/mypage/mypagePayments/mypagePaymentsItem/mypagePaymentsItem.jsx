@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReviewUploadPopup from "../../../reviewUploadPopup/reviewUploadPopup";
 import styles from "./mypagePaymentsItem.module.css";
 
-const MypagePaymentsItem = (props) => {
+const MypagePaymentsItem = ({ isLoggedIn }) => {
   const [detailOn, setDetailOn] = useState(false);
   const [reviewUploadPopupOn, setReviewUploadPopupOn] = useState(false);
 
@@ -77,6 +77,7 @@ const MypagePaymentsItem = (props) => {
           id="115"
           name="[디럭스트윈 펫룸]강릉 씨베이 호텔 반려견 여행 1박 2일"
           reviewPopupOnChangeHandler={reviewPopupOnChangeHandler}
+          isLoggedIn={isLoggedIn}
         />
       )}
     </div>

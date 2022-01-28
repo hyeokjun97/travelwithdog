@@ -393,7 +393,10 @@ const App = (props) => {
               element={<MobileSearchPage categoryList={categoryList} />}
             ></Route>
           )}
-          <Route path="/map" element={<Map deviceSize={deviceSize} />}></Route>
+          <Route
+            path="/map"
+            element={<Map deviceSize={deviceSize} isLoggedIn={isLoggedIn} />}
+          ></Route>
           <Route
             path="/mypage/:path"
             element={<Mypage isLoggedIn={isLoggedIn} />}
@@ -418,7 +421,10 @@ const App = (props) => {
           ></Route>
           <Route path="/res" element={<ReservationPage />}></Route>
           <Route path="/article/:articleId" element={<ArticleView />}></Route>
-          <Route path="/articlew" element={<ArticleWrite />}></Route>
+          <Route
+            path="/articlew"
+            element={<ArticleWrite isLoggedIn={isLoggedIn} />}
+          ></Route>
           {carCode &&
             (deviceSize ? (
               <Route

@@ -155,7 +155,7 @@ const Mypage = ({ isLoggedIn }) => {
           ) : path === "withdrawal" ? (
             <MypageWithdrawal />
           ) : path === "payments" ? (
-            <MypagePayments />
+            <MypagePayments isLoggedIn={isLoggedIn} />
           ) : path === "qna" ? (
             <MypageQna />
           ) : path === "community" ? (
