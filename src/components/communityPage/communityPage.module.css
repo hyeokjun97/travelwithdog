@@ -122,6 +122,7 @@
 .list {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
   flex-wrap: wrap;
   animation: pageAppear 1s;
   position: relative;
@@ -369,7 +370,7 @@
     width: 98%;
     right: 50%;
     transform: translateX(50%);
-    flex-direction: fow;
+    flex-direction: row;
     animation: none;
   }
 

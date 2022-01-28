@@ -96,10 +96,9 @@
 
 @media screen and (max-width: 600px) {
   .item {
-    width: 48%;
+    width: 48.4%;
+    margin: 6px 0.8%;
     height: 220px;
-    margin: auto;
-    margin-bottom: 10px;
   }
   .image_container,
   .image {
