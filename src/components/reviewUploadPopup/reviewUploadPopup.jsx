@@ -10,6 +10,7 @@ const ReviewUploadPopup = ({
   reviewPopupOnChangeHandler,
   isLoggedIn,
 }) => {
+  console.log(isLoggedIn);
   const [rating, setRating] = useState(5);
   const [content, setContent] = useState("");
   const onRatingChangeHandler = (data) => {

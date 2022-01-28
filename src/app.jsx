@@ -413,7 +413,7 @@ const App = (props) => {
           ></Route>
           <Route
             path="/mobile/mypage/:path"
-            element={<MobileMypageDetail />}
+            element={<MobileMypageDetail isLoggedIn={isLoggedIn} />}
           ></Route>
           <Route
             path="/product/:path"

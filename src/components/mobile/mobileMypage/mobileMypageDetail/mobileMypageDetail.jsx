@@ -8,7 +8,7 @@ import MobileMypageEdit from "./mobileMypageEdit/mobileMypageEdit";
 import MobileMypagePayments from "./mobileMypagePayments/mobileMypagePayments";
 import MobileMypageQna from "./mobileMypageQna/mobileMypageQna";
 
-const MobileMypageDetail = (props) => {
+const MobileMypageDetail = ({ isLoggedIn }) => {
   const navigate = useNavigate();
   const { path } = useParams();
   const [selected, setSelected] = useState(null);
@@ -70,7 +70,7 @@ const MobileMypageDetail = (props) => {
       {path === "edit" ? (
         <MobileMypageEdit />
       ) : path === "payments" ? (
-        <MobileMypagePayments />
+        <MobileMypagePayments isLoggedIn={isLoggedIn} />
       ) : path === "paymentscancel" ? (
         <MobileMypagePayments />
       ) : path === "community" ? (

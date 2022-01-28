@@ -4,7 +4,7 @@ import styles from "./mobileMypagePayments.module.css";
 import MobileMypagePaymentsCancelItem from "./mobileMypagePaymentsCancelItem/mobileMypagePaymentsCancelItem";
 import MobileMypagePaymentsItem from "./mobileMypagePaymentsItem/mobileMypagePaymentsItem";
 
-const MobileMypagePayments = (props) => {
+const MobileMypagePayments = ({ isLoggedIn }) => {
   const { path } = useParams();
 
   return (
@@ -17,7 +17,7 @@ const MobileMypagePayments = (props) => {
           : ""}
       </h3>
       {path === "payments" ? (
-        <MobileMypagePaymentsItem />
+        <MobileMypagePaymentsItem isLoggedIn={isLoggedIn} />
       ) : path === "paymentscancel" ? (
         <MobileMypagePaymentsCancelItem />
       ) : (

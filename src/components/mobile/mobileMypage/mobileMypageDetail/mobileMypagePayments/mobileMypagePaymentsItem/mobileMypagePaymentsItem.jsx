@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import ReviewUploadPopup from "../../../../../reviewUploadPopup/reviewUploadPopup";
 import styles from "./mobileMypagePaymentsItem.module.css";
 
-const MobileMypagePaymentsItem = (props) => {
+const MobileMypagePaymentsItem = ({ isLoggedIn }) => {
   const [open, setOpen] = useState(false);
 
   const onOpenHandler = () => {
     setOpen(!open);
+  };
+
+  const [reviewUploadPopupOn, setReviewUploadPopupOn] = useState(false);
+
+  const reviewPopupOnChangeHandler = () => {
+    setReviewUploadPopupOn(!reviewUploadPopupOn);
   };
 
   return (
@@ -32,7 +39,15 @@ const MobileMypagePaymentsItem = (props) => {
               <p className={styles.number_text}>2인</p>
             </div>
           </div>
-          <p className={styles.price}>20,000원</p>
+          <div className={styles.price_and_review_container}>
+            <p className={styles.price}>20,000원</p>
+            <button
+              className={styles.review_button}
+              onClick={reviewPopupOnChangeHandler}
+            >
+              리뷰 작성
+            </button>
+          </div>
         </div>
       </div>
 
@@ -45,6 +60,15 @@ const MobileMypagePaymentsItem = (props) => {
             </p>
           </div>
         </div>
+      )}
+      {reviewUploadPopupOn && (
+        <ReviewUploadPopup
+          where="tours"
+          id="115"
+          name="[디럭스트윈 펫룸]강릉 씨베이 호텔 반려견 여행 1박 2일"
+          reviewPopupOnChangeHandler={reviewPopupOnChangeHandler}
+          isLoggedIn={isLoggedIn}
+        />
       )}
     </div>
   );
