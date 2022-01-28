@@ -18,9 +18,6 @@
 }
 
 .tag {
-  position: absolute;
-  top: 15px;
-  left: -5px;
   background-color: #3c9413;
   padding: 6px 24px;
   color: white;
@@ -28,32 +25,41 @@
   border-radius: 8px;
 }
 
-.image {
-  width: 40%;
-  border-radius: 12px 0 0 12px;
-}
-
 .image_on {
   border-radius: 12px 0 0 0;
 }
 
 .data_container {
-  width: 60%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.title_and_price {
-  height: 203px;
-  padding: 15px 24px;
+.title_and_tag {
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 12px;
+  padding-right: 20px;
+}
+
+.tag {
+  transform: translateX(-5px);
+  white-space: nowrap;
 }
 
 .title {
   font-size: var(--fontsize-big);
   font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .button_container {
@@ -107,20 +113,42 @@
 .price_container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   padding: 20px 0;
 }
 
 .price_box {
-  width: 150px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 16px;
+}
+
+.price_title {
+  padding: 1px 11px;
+  background-color: #3c9413;
+  color: white;
   font-size: var(--fontsize-bit-big);
-  margin-right: 36px;
+  font-weight: 700;
+  border-radius: 8px;
+  text-align: center;
 }
 
 .price {
-  font-weight: 500;
-  margin-left: 10px;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #050505;
+  margin: 9px 0 14px 0;
+  text-align: center;
+}
+
+.price_remark {
+  font-size: var(--fontsize-bit-big);
+  color: #050505;
+  padding: 1px 12px;
+  background-color: #d7d7d7;
+  border-radius: 8px;
+  text-align: center;
 }
 
 .option_detail_container {
@@ -357,24 +385,28 @@
     width: 100%;
   }
 
-  .title_and_price {
-    padding: 12px 16px;
-    height: auto;
+  .title_and_tag {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 0;
   }
 
   .title {
     font-size: var(--fontsize-bit-big);
+    -webkit-line-clamp: 10;
+    padding: 10px 14px;
   }
 
   .price_box {
-    font-size: var(--fontsize-normal);
+    margin: 20px 0 20px 0;
+  }
+  .price {
+    margin: 4px 0 8px 0;
   }
 
   .price_container {
     flex-direction: column;
-  }
-  .price_box {
-    margin-bottom: 10px;
+    padding: 15px 10px;
   }
   .button_container {
     width: 100%;
@@ -428,9 +460,6 @@
     font-size: var(--fontsize-mini-title);
   }
 
-  .price_title {
-    font-weight: 500;
-  }
   .price {
     font-weight: 700;
     color: var(--color-green);

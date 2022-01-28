@@ -123,40 +123,40 @@ const ProductOption = ({ item, productId }) => {
           openValue ? `${styles.main} ${styles.main_on}` : `${styles.main}`
         }`}
       >
-        <div className={styles.tag}>
-          {item.supplier.product_confirmation_code.name}
-        </div>
-        <img
-          src="/travelWithDog/images/example.png"
-          alt="option_image"
-          className={`${
-            openValue ? `${styles.image} ${styles.image_on}` : `${styles.image}`
-          }`}
-        />
         <div className={styles.data_container}>
-          <div className={styles.title_and_price}>
-            <p className={styles.title}>{item.name}</p>
-            <div className={styles.price_container}>
-              {price ? (
-                price.supplier.prices.length > 0 ? (
-                  price.supplier.prices.map((price) => (
-                    <div key={price.id} className={styles.price_box}>
-                      <p className={styles.price_title}>{price.unit.name}</p>
-                      <p
-                        className={styles.price}
-                      >{`${price.price.toLocaleString("ko-kr")}원`}</p>
-                    </div>
-                  ))
-                ) : (
-                  <p className={styles.nothing}>
-                    선택하신 날짜에 예약 가능한 상품이 없습니다.
-                  </p>
-                )
-              ) : (
-                <LoadingPage />
-              )}
+          <div className={styles.title_and_tag}>
+            <div className={styles.tag}>
+              {item.supplier.product_confirmation_code.name}
             </div>
+            <p className={styles.title}>{item.name}</p>
           </div>
+
+          <div className={styles.price_container}>
+            {price ? (
+              price.supplier.prices.length > 0 ? (
+                price.supplier.prices.map((price) => (
+                  <div key={price.id} className={styles.price_box}>
+                    <div className={styles.price_title}>{price.unit.name}</div>
+                    <p className={styles.price}>{`${price.price.toLocaleString(
+                      "ko-kr"
+                    )}원`}</p>
+                    {price.unit.remark && (
+                      <div className={styles.price_remark}>
+                        {price.unit.remark}
+                      </div>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <p className={styles.nothing}>
+                  선택하신 날짜에 예약 가능한 상품이 없습니다.
+                </p>
+              )
+            ) : (
+              <LoadingPage />
+            )}
+          </div>
+
           <div
             className={`${
               openValue
