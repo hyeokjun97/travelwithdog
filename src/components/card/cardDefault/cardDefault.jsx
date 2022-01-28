@@ -20,6 +20,7 @@ const CardDefault = ({ item }) => {
             rgba(0, 0, 0, 0.208) 100%
           ),url("${item.image_url}") center/cover no-repeat`
           );
+          io.unobserve(target);
         }
       });
     });

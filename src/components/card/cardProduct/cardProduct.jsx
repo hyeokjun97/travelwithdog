@@ -20,6 +20,7 @@ const CardProduct = ({ item }) => {
         if (entry.intersectionRatio > 0) {
           const target = entry.target;
           target.setAttribute("src", target.dataset.src);
+          io.unobserve(target);
         }
       });
     });
