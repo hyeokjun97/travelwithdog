@@ -59,7 +59,6 @@ export default class SlickTemplate extends Component {
     const itemList = sectionInfo.items;
     const sectionCode = sectionInfo.section_template_cd;
 
-    const width = window.innerWidth;
     let settings = {
       dots: false,
       infinite: false,

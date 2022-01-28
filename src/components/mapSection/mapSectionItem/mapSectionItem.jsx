@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "./mapSectionItem.module.css";
 import ReactStars from "react-rating-stars-component";
 
 const MapSectionItem = ({ item }) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    if (!ref) {
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio > 0) {
+          const target = entry.target;
+          target.setAttribute("src", target.dataset.src);
+        }
+      });
+    });
+
+    io.observe(ref.current);
+  }, [ref]);
   return (
     <div className={styles.item}>
       <div className={styles.image_container}>
         <img
-          src={
+          ref={ref}
+          data-src={
             item.images.length > 0
               ? item.images[0].url
               : "/travelWithDog/images/no_image.jpeg"
           }
-          alt="spot_image"
           className={styles.image}
         />
       </div>
