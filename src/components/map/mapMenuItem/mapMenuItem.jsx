@@ -2,8 +2,23 @@ import React, { useRef, useEffect } from "react";
 import styles from "./mapMenuItem.module.css";
 import ReactStars from "react-rating-stars-component";
 
-const MapMenuItem = ({ item, onItemClickHandler }) => {
+const MapMenuItem = ({
+  item,
+  marker,
+  onItemClickHandler,
+  itemMouseEnterHandler,
+}) => {
   const ref = useRef();
+
+  const changeIconToSelected = () => {
+    marker.setIcon({ url: "/travelWithDog/images/kakao.png" });
+  };
+
+  const changeIconToDefault = () => {
+    marker.setIcon({
+      url: "/travelWithDog/images/dog_face.svg",
+    });
+  };
 
   useEffect(() => {
     if (!ref) {
@@ -23,7 +38,12 @@ const MapMenuItem = ({ item, onItemClickHandler }) => {
   }, [ref]);
 
   return (
-    <div className={styles.item} onClick={onItemClickHandler}>
+    <div
+      className={styles.item}
+      onClick={onItemClickHandler}
+      onMouseEnter={changeIconToSelected}
+      onMouseLeave={changeIconToDefault}
+    >
       <img
         ref={ref}
         data-src={

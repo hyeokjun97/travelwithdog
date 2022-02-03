@@ -13,6 +13,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
   const [resultSpotList, setResultSpotList] = useState(null);
   const [popupOn, setPopupOn] = useState(false);
   const [popupValue, setPopupValue] = useState(null);
+  const [markerList, setMarkerList] = useState(null);
   const [reviewUploadPopupOn, setReviewUploadPopupOn] = useState(false);
 
   const reviewPopupOnChangeHandler = (data) => {
@@ -39,6 +40,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
     if (!spotList) {
       return;
     }
+    const tmpMarkerList = [];
     spotList.forEach((spot) => {
       const marker = new google.maps.Marker({
         position: {
@@ -46,14 +48,16 @@ const Map = ({ deviceSize, isLoggedIn }) => {
           lng: spot.position.coordinates[0],
         },
         map: map,
-        //icon: "/travelWithDog/images/icons.svg#rentcar",
+        // icon: "/travelWithDog/images/dog_face.svg",
       });
+      tmpMarkerList.push(marker);
 
       google.maps.event.addListener(marker, "click", () => {
         setPopupValue(spot);
         setPopupOn(true);
       });
     });
+    setMarkerList(tmpMarkerList);
   }, [map, spotList]);
 
   const inputValueChangeHandler = (e) => {
@@ -156,10 +160,12 @@ const Map = ({ deviceSize, isLoggedIn }) => {
         </div>
         <div className={styles.list}>
           {resultSpotList &&
-            resultSpotList.map((item) => (
+            markerList &&
+            resultSpotList.map((item, index) => (
               <MapMenuItem
                 key={item.id}
                 item={item}
+                marker={markerList[index]}
                 onItemClickHandler={() => onItemClickHandler(item)}
               />
             ))}
