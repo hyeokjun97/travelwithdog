@@ -220,7 +220,7 @@
   position: sticky;
   top: 130px;
   width: 222px;
-  height: 380px;
+  height: 400px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 10px lightgray;
@@ -282,6 +282,12 @@
   font-size: 1.375rem;
   font-weight: 700;
   color: var(--color-green);
+}
+
+.warning {
+  font-size: 0.6rem;
+  color: #747171;
+  margin-bottom: 5px;
 }
 
 .reservation_button {

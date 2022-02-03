@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CarSlick from "../slick/carSlick/carSlick";
 import ItemSlickTwo from "../slick/itemSlickTwo/itemSlickTwo";
@@ -17,7 +17,6 @@ const Mainpage = ({
   categoryList,
 }) => {
   const navigate = useNavigate();
-  const listRef = useRef([]);
   const [pageData, setPageData] = useState(null);
   const [regionSelect, setRegionSelect] = useState(categoryList[0]);
   const [searchInput, setSearchInput] = useState("");
@@ -37,7 +36,6 @@ const Mainpage = ({
   };
 
   const onRegionChangeHandler = (e) => {
-    console.log(e.target.innerText);
     const { innerText, dataset } = e.target;
     setRegionSelect({
       id: dataset.id,
@@ -94,6 +92,7 @@ const Mainpage = ({
 
           <div
             className={styles.top_banner}
+            onClick={() => navigate("/testroute")}
             style={
               pageData && {
                 background: `url("${pageData.image_url}") center/cover no-repeat`,

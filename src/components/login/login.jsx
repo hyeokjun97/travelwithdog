@@ -77,7 +77,7 @@ const Login = ({
       });
   };
 
-  const getUserData = async () => {
+  const getUserData = () => {
     Kakao.API.request({
       url: "/v2/user/me",
       success: function (res) {

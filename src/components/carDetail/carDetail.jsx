@@ -11,6 +11,14 @@ const CarDetail = (props) => {
   const [korDropoffDateTime, setKorDropoffDateTime] = useState(null);
   const [totalTime, setTotalTime] = useState(null);
   const [selectedInsurance, setSelectedInsurance] = useState(null);
+  const [count, setCount] = useState({
+    personCount: 1,
+    dogCount: 1,
+  });
+  const [basePrice, setBasePrice] = useState();
+  const [finalPrice, setFinalPrice] = useState();
+
+  const { personCount, dogCount } = count;
 
   const loadCarInfo = () => {
     axios
@@ -41,11 +49,54 @@ const CarDetail = (props) => {
     });
   };
 
+  const onCountChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setCount({
+      ...count,
+      [name]: Number(value),
+    });
+  };
+
+  //결제
+  function onClickPayment() {
+    /* 1. 가맹점 식별하기 */
+    const { IMP } = window;
+    IMP.init("imp44949692");
+
+    /* 2. 결제 데이터 정의하기 */
+    const data = {
+      pg: "html5_inicis", // PG사
+      pay_method: "card", // 결제수단
+      merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+      amount: finalPrice, // 결제금액
+      name: `트래블위드독 렌터카 - ${carInfo.name}`, // 주문명
+      buyer_name: "홍길동", // 구매자 이름 (보류)
+      buyer_tel: "01012341234", // 구매자 전화번호 (보류)
+      buyer_email: "example@example", // 구매자 이메일 (보류)
+    };
+
+    /* 4. 결제 창 호출하기 */
+    IMP.request_pay(data, callback);
+  }
+
+  /* 3. 콜백 함수 정의하기 */
+  function callback(response) {
+    const { success, merchant_uid, error_msg } = response;
+
+    if (success) {
+      alert("결제 성공");
+    } else {
+      alert(`결제 실패: ${error_msg}`);
+    }
+  }
+
+  //렌트카 정보 불러오기
   useEffect(() => {
     window.scrollTo({ top: 0 });
     loadCarInfo();
   }, []);
 
+  //uri parameter에 따라 렌트카 검색 부분 날짜와 시간 초기설정
   useEffect(() => {
     const makeDateTimeToKorString = () => {
       const p = pickupDateTime;
@@ -70,6 +121,32 @@ const CarDetail = (props) => {
     };
     makeDateTimeToKorString();
   }, []);
+
+  //렌터카 정보 받아왔으면 첫 보험을 자동 선택
+  useEffect(() => {
+    if (!carInfo) {
+      return;
+    }
+    setSelectedInsurance(carInfo.insurances[0]);
+  }, [carInfo]);
+
+  // 보험 선택 변경될 때 마다 base price 변경
+  useEffect(() => {
+    if (!selectedInsurance) {
+      return;
+    }
+    setBasePrice(selectedInsurance.price);
+  }, [selectedInsurance]);
+
+  //base price 또는 반려견 수 변경될 때 마다 반려견 수에 맞추어 base price + 추가요금 = final price 설정
+  useEffect(() => {
+    if (!basePrice) {
+      return;
+    }
+    console.log(basePrice);
+    //finalPrice 반려견수로 추가요금 계산 로직
+    setFinalPrice(basePrice + 30000 * (dogCount - 1));
+  }, [basePrice, dogCount]);
 
   return (
     <>
@@ -220,7 +297,12 @@ const CarDetail = (props) => {
               <div className={styles.number_container}>
                 <div className={styles.select_form}>
                   <p className={styles.select_title}>탑승 인원 (운전자 포함)</p>
-                  <select className={styles.select}>
+                  <select
+                    name="personCount"
+                    value={personCount}
+                    onChange={onCountChangeHandler}
+                    className={styles.select}
+                  >
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -230,7 +312,12 @@ const CarDetail = (props) => {
                 </div>
                 <div className={styles.select_form}>
                   <p className={styles.select_title}>동반 반려견 수</p>
-                  <select className={styles.select}>
+                  <select
+                    name="dogCount"
+                    value={dogCount}
+                    onChange={onCountChangeHandler}
+                    className={styles.select}
+                  >
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -238,18 +325,38 @@ const CarDetail = (props) => {
                     <option value="5">5</option>
                   </select>
                 </div>
+                <p className={styles.warning}>
+                  반려견 1마리 당 추가요금 3만원입니다.
+                </p>
+                {personCount + dogCount >= 5 && (
+                  <div>
+                    <p className={styles.warning}>
+                      탑승인원과 반려견수가 많을 경우 미팅서비스의 제한이 있을
+                      수 있습니다.
+                    </p>
+                  </div>
+                )}
               </div>
               <div className={styles.side_menu_price_container}>
                 <div className={styles.side_menu_price_item}>
                   <p className={styles.side_menu_price_text}>기본 요금</p>
-                  <p className={styles.side_menu_price}>468,000원</p>
+                  <p className={styles.side_menu_price}>{`${
+                    basePrice && basePrice.toLocaleString("ko-kr")
+                  }원`}</p>
                 </div>
                 <div className={styles.side_menu_price_item_total}>
                   <p className={styles.side_menu_price_text}>총 요금</p>
-                  <p className={styles.side_menu_price_total}>542,000원</p>
+                  <p className={styles.side_menu_price_total}>{`${
+                    finalPrice && finalPrice.toLocaleString("ko-kr")
+                  }원`}</p>
                 </div>
               </div>
-              <button className={styles.reservation_button}>예약하기</button>
+              <button
+                className={styles.reservation_button}
+                onClick={onClickPayment}
+              >
+                예약하기
+              </button>
             </aside>
           </div>
         </div>

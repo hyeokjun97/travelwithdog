@@ -1,15 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardDefault from "../card/cardDefault/cardDefault";
-import sha256 from "js-sha256";
-import qs from "qs";
 import axios from "axios";
 import ReviewUploadPopup from "../reviewUploadPopup/reviewUploadPopup";
 
 const TestPage = (props) => {
+  function onClickPayment() {
+    /* 1. 가맹점 식별하기 */
+    const { IMP } = window;
+    IMP.init("imp44949692");
+
+    /* 2. 결제 데이터 정의하기 */
+    const data = {
+      pg: "html5_inicis", // PG사
+      pay_method: "card", // 결제수단
+      merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+      amount: 1000, // 결제금액
+      name: "아임포트 결제 데이터 분석", // 주문명
+      buyer_name: "홍길동", // 구매자 이름
+      buyer_tel: "01012341234", // 구매자 전화번호
+      buyer_email: "example@example", // 구매자 이메일
+    };
+
+    /* 4. 결제 창 호출하기 */
+    IMP.request_pay(data, callback);
+  }
+
+  /* 3. 콜백 함수 정의하기 */
+  function callback(response) {
+    const { success, merchant_uid, error_msg } = response;
+
+    if (success) {
+      alert("결제 성공");
+    } else {
+      alert(`결제 실패: ${error_msg}`);
+    }
+  }
+
   const nav = useNavigate();
-  const [signature, setSignature] = useState("");
-  const [timestamp, setTimestamp] = useState("");
 
   //테스트데이터
   const [a, setA] = useState({
@@ -21,24 +49,6 @@ const TestPage = (props) => {
     link_url: "https://www.travelwithdog.co.kr/korea/jeju%20tours/tour/17326",
     link_target_cd: "self",
   });
-
-  const onPaymentHandler = () => {
-    const now = new Date().getTime().toString();
-    const tmpNVM = `oid=INIpayTest_1643092662593&price=1000&timestamp=${now}`;
-    const tmpSignature = sha256(qs.stringify(tmpNVM));
-    console.log(tmpNVM);
-    console.log(tmpSignature);
-    setTimestamp(now);
-    setSignature(tmpSignature);
-  };
-
-  useEffect(() => {
-    if (!signature) {
-      return;
-    }
-    console.log(timestamp, signature);
-    window.INIStdPay.pay("SendPayForm_id");
-  }, [signature]);
 
   const tourReviewTest = () => {
     axios
@@ -118,39 +128,8 @@ const TestPage = (props) => {
       </div>
 
       <button onClick={tourReviewTest}>리뷰 테스트</button>
-
-      <form id="SendPayForm_id" name="" method="POST">
-        <input type="text" name="goodname" value="테스트" />
-        <input type="text" name="buyername" value="홍길동" />
-        <input type="text" name="buyertel" value="010-1234-5678" />
-        <input type="text" name="buyeremail" value="test@inicis.com" />
-        <input type="text" name="price" value="1000" />
-        <input type="hidden" name="mid" value="INIpayTest" />
-        <input type="hidden" name="gopaymethod" value="Card" />
-        <input
-          type="hidden"
-          name="mKey"
-          value="3a9503069192f207491d4b19bd743fc249a761ed94246c8c42fed06c3cd15a33"
-        />
-        <input type="hidden" name="signature" value={signature} />
-        <input type="hidden" name="oid" value="INIpayTest_1643092662593" />
-        <input type="hidden" name="timestamp" value={timestamp} />
-        <input type="hidden" name="version" value="1.0" />
-        <input type="hidden" name="currency" value="WON" />
-        <input type="hidden" name="acceptmethod" value="below1000" />
-        <input
-          type="hidden"
-          name="returnUrl"
-          value="https://localhost:3000/travelWithDog/"
-        />
-        <input
-          type="hidden"
-          name="closeUrl"
-          value="https://localhost:3000/travelWithDog/"
-        />
-      </form>
-      <button onClick={onPaymentHandler} style={{ marginBottom: "300px" }}>
-        결제요청
+      <button onClick={onClickPayment} style={{ marginBottom: 200 }}>
+        결제하기
       </button>
     </div>
   );
