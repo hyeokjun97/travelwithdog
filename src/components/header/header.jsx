@@ -89,7 +89,7 @@ const Header = ({
                   className={styles.menu_item}
                   onClick={() => {
                     setToggleOn(false);
-                    navigate(`/category/${category.id}`);
+                    navigate(`/category${category.url}`);
                     window.scrollTo({ top: 0 });
                   }}
                 >

@@ -366,15 +366,16 @@ const App = (props) => {
           <Route
             path="/category/:path"
             element={
-              deviceSize ? (
-                <CategoryPage loadPageData={loadPageData} />
+              categoryList && deviceSize ? (
+                <CategoryPage
+                  categoryList={categoryList}
+                  loadPageData={loadPageData}
+                />
               ) : (
-                categoryList && (
-                  <MobileCategory
-                    categoryList={categoryList}
-                    loadPageData={loadPageData}
-                  />
-                )
+                <MobileCategory
+                  categoryList={categoryList}
+                  loadPageData={loadPageData}
+                />
               )
             }
           ></Route>

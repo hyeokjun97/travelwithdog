@@ -57,60 +57,6 @@ const CarDetail = (props) => {
     });
   };
 
-  //결제
-  function onClickPayment() {
-    const userCode = process.env.REACT_APP_IAMPORT_KEY;
-
-    /* 2. 결제 데이터 정의하기 */
-    const data = {
-      pg: "html5_inicis", // PG사
-      pay_method: "card", // 결제수단
-      merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: `1000`, // 결제금액
-      name: `트래블위드독 렌터카 - ${carInfo.name}`, // 주문명
-      buyer_name: "홍길동", // 구매자 이름 (보류)
-      buyer_tel: "01012341234", // 구매자 전화번호 (보류)
-      buyer_email: "example@example", // 구매자 이메일 (보류)
-    };
-
-    if (isReactNative()) {
-      /* 5. 리액트 네이티브 환경에 대응하기 */
-      const params = {
-        userCode, // 가맹점 식별코드
-        data, // 결제 데이터
-        type: "payment", // 결제와 본인인증 구분을 위한 필드
-      };
-      const paramsToString = JSON.stringify(params);
-      window.ReactNativeWebView.postMessage(paramsToString);
-    } else {
-      /* 1. 가맹점 식별하기 */
-      const { IMP } = window;
-      IMP.init(userCode);
-      /* 4. 결제 창 호출하기 */
-      IMP.request_pay(data, callback);
-    }
-    function isReactNative() {
-      if (
-        window.navigator.userAgent ===
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-      ) {
-        return true;
-      }
-      return false;
-    }
-  }
-
-  /* 3. 콜백 함수 정의하기 */
-  function callback(response) {
-    const { success, merchant_uid, error_msg } = response;
-
-    if (success) {
-      alert("결제 성공");
-    } else {
-      alert(`결제 실패: ${error_msg}`);
-    }
-  }
-
   //렌트카 정보 불러오기
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -372,12 +318,7 @@ const CarDetail = (props) => {
                   }원`}</p>
                 </div>
               </div>
-              <button
-                className={styles.reservation_button}
-                onClick={onClickPayment}
-              >
-                예약하기
-              </button>
+              <button className={styles.reservation_button}>예약하기</button>
             </aside>
           </div>
         </div>

@@ -5,7 +5,7 @@ import LoadingPage from "../loadingPage/loadingPage";
 import SlickTemplate from "../slick/slickTemplate/slickTemplate";
 import styles from "./categoryPage.module.css";
 
-const CategoryPage = ({ loadPageData }) => {
+const CategoryPage = ({ loadPageData, categoryList }) => {
   const [pageData, setPageData] = useState(null);
   const { path } = useParams();
 
@@ -15,7 +15,12 @@ const CategoryPage = ({ loadPageData }) => {
 
   useEffect(() => {
     setPageData(null);
-    loadPageData(path, settingPageData);
+    categoryList.forEach((cat) => {
+      if (cat.url === `/${path}`) {
+        loadPageData(cat.id, settingPageData);
+        return false;
+      }
+    });
   }, [path]);
 
   return (
