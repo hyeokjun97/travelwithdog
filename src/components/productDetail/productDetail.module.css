@@ -117,7 +117,7 @@
   position: sticky;
   top: 101px;
   background-color: white;
-  z-index: 999;
+  z-index: 998;
 }
 
 .menu_list {
@@ -351,6 +351,23 @@ img {
   text-align: center;
   margin-top: 30px;
 }
+.nothing {
+  text-align: center;
+  font-weight: 700;
+  color: var(--color-green);
+}
+.date_select_button {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  color: black;
+  font-size: var(--fontsize-bit-big);
+  font-weight: 700;
+  outline: none;
+  border: 1px solid var(--color-light-border);
+  border-radius: 8px;
+  margin-top: 20px;
+}
 
 @media screen and (max-width: 1100px) {
   .body {
@@ -461,9 +478,5 @@ img {
   .review_part,
   .part_intro {
     scroll-margin-top: 120px;
-  }
-
-  .option_main {
-    padding-bottom: 120px;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, forwardRef, useEffect } from "react";
 import styles from "./productDetail.module.css";
 import ReactStars from "react-rating-stars-component";
 import ProductOption from "./productOption/productOption";
@@ -11,6 +11,10 @@ import { useParams } from "react-router-dom";
 import ImageViewSlick from "../slick/imageViewSlick/imageViewSlick";
 import HelmetComponent from "../helmetComponent/helmetComponent";
 import LoadingPage from "../loadingPage/loadingPage";
+import DatePicker from "react-datepicker";
+import { ko } from "date-fns/esm/locale";
+import "react-datepicker/dist/react-datepicker.css";
+import { subDays } from "date-fns";
 
 const ProductDetail = ({ deviceSize }) => {
   const { path } = useParams();
@@ -23,6 +27,9 @@ const ProductDetail = ({ deviceSize }) => {
   const [reviewTotal, setReviewTotal] = useState(null);
   const [bestReview, setBestReview] = useState(null);
   const [reviewShowCount, setReviewShowCount] = useState(1);
+  const [startDate, setStartDate] = useState(null);
+  const [dateShow, setDateShow] = useState(null);
+  const [priceList, setPriceList] = useState([]);
 
   const [viewDetailOn, setViewDetailOn] = useState(false);
 
@@ -145,6 +152,17 @@ const ProductDetail = ({ deviceSize }) => {
     }
   };
 
+  //영문 요일을 한글로 바꾸어 줌
+  const dayTranslator = (selectedDay) => {
+    const dayList = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const korDayList = ["월", "화", "수", "목", "금", "토", "일"];
+    for (let i = 0; i < dayList.length; i++) {
+      if (dayList[i] === selectedDay) {
+        return korDayList[i];
+      }
+    }
+  };
+
   const loadReviewList = () => {
     axios
       .get(
@@ -177,6 +195,16 @@ const ProductDetail = ({ deviceSize }) => {
           setReviewShowCount(-1);
         }
       })
+      .catch((err) => console.error(err));
+  };
+
+  const loadPriceList = (date) => {
+    setPriceList(null);
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/tours/${product.id}/items?date=${date}`
+      )
+      .then((response) => setPriceList(response.data))
       .catch((err) => console.error(err));
   };
 
@@ -215,6 +243,33 @@ const ProductDetail = ({ deviceSize }) => {
     }
     loadMoreReview();
   }, [reviewShowCount]);
+
+  const CustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button className={styles.date_select_button} onClick={onClick} ref={ref}>
+      {dateShow || "날짜 선택"}
+    </button>
+  ));
+
+  const dateShowChangeHandler = (date) => {
+    const dateSplit = date.toString().split(" ");
+    setDateShow(
+      `${dateSplit[3]}년 ${monthTranslator(dateSplit[1])}월 ${
+        dateSplit[2]
+      }일 (${dayTranslator(dateSplit[0])})`
+    );
+  };
+
+  useEffect(() => {
+    if (!product) {
+      return;
+    }
+    const dateSplit = startDate.toString().split(" ");
+    const translatedDate = `${dateSplit[3]}-${monthTranslator(dateSplit[1])
+      .toString()
+      .padStart(2, "0")}-${dateSplit[2].toString().padStart(2, "0")}`;
+    loadPriceList(translatedDate);
+    dateShowChangeHandler(startDate);
+  }, [startDate]);
 
   return (
     <>
@@ -401,14 +456,35 @@ const ProductDetail = ({ deviceSize }) => {
                 <div className={styles.part_title_container}>
                   <p className={styles.part_title}>옵션 선택</p>
                 </div>
+
+                <div className={styles.date_select}>
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    minDate={subDays(new Date(), 0)}
+                    customInput={<CustomInput />}
+                    locale={ko}
+                  />
+                </div>
+
                 <div className={styles.option_main}>
-                  {product.items.map((item) => (
-                    <ProductOption
-                      key={item.id}
-                      item={item}
-                      productId={product.id}
-                    />
-                  ))}
+                  {priceList ? (
+                    priceList.length > 0 ? (
+                      priceList.map((item) => (
+                        <ProductOption
+                          key={item.id}
+                          item={item}
+                          productId={item.id}
+                        />
+                      ))
+                    ) : (
+                      <p className={styles.nothing}>
+                        선택하신 날짜에 예약 가능한 상품이 없습니다.
+                      </p>
+                    )
+                  ) : (
+                    <LoadingPage />
+                  )}
                 </div>
               </div>
               <div ref={mapRef} className={styles.part}>
