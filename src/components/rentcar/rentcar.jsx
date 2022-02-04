@@ -186,13 +186,17 @@ const Rentcar = ({ loadPageData }) => {
             url={`https://www.travelwithdog.co.kr`}
             keyword={pageData.html_keyword}
           />
-          <div className={styles.top_banner}>
+          <div
+            className={styles.top_banner}
+            style={
+              pageData && {
+                background: `url("${pageData.image_url}") center/cover no-repeat`,
+              }
+            }
+          >
             <div className={styles.top_filter}>
               <div className={styles.title_container}>
-                <p className={styles.top_title}>제주펫렌터카에서</p>
-                <p className={styles.top_title_two}>
-                  반려견과 함께 타는 렌터카를 예약하세요.
-                </p>
+                <p className={styles.top_title}>{pageData.title}</p>
               </div>
 
               <div className={styles.search_container}>

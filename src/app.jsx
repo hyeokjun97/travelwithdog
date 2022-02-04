@@ -310,7 +310,7 @@ const App = (props) => {
 
   useEffect(() => {
     setIsLoggedIn(checkLoginState());
-  }, [localStorage.getItem("AK")]); //임시 (gh page 404 막기위함)
+  }, [localStorage.getItem("AK")]);
 
   return (
     <div className={styles.app}>
