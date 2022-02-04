@@ -185,6 +185,10 @@
     padding: 16px;
   }
 
+  .social_button {
+    margin: 0 15px;
+  }
+
   .social_image {
     width: 45px;
     height: 45px;

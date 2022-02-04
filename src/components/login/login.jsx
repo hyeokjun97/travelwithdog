@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./login.module.css";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
@@ -8,7 +8,8 @@ const Login = ({
   signupPopupHandler,
   findPopupHandler,
 }) => {
-  const { Kakao } = window;
+  const naverRef = useRef();
+  const { Kakao, naver } = window;
 
   const [inputValue, setInputValue] = useState({
     id: localStorage.getItem("savedId") || "",
@@ -110,6 +111,21 @@ const Login = ({
     console.log(response);
     //추후 추가
   };
+
+  const initializeNaverLogin = () => {
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: "WQY_hzT89jZ0OFfKWApd",
+      callbackUrl: "https://localhost:3000/travelWithDog", //임시
+      isPopup: true, // popup 형식으로 띄울것인지 설정
+      loginButton: { display: "none" }, //버튼의 스타일, 타입, 크기를 지정
+    });
+    naverLogin.init();
+    //로그인하면 access token 나오는데 이걸로 서버랑 통신해서 유효 검사하고 로그인 처리
+  };
+
+  useEffect(() => {
+    initializeNaverLogin();
+  }, []);
 
   return (
     <div className={styles.login_popup}>
@@ -225,6 +241,18 @@ const Login = ({
             )}
           ></FacebookLogin>
           <p className={styles.social_text}>Facebook</p>
+        </div>
+        <div
+          className={styles.social_button}
+          onClick={() => naverRef.current.children[0].click()}
+        >
+          <img
+            src="/travelWithDog/images/naver.png"
+            alt="네이버로그인"
+            className={styles.social_image}
+          />
+          <p className={styles.social_text}>Naver</p>
+          <div ref={naverRef} id="naverIdLogin" />
         </div>
       </div>
     </div>
