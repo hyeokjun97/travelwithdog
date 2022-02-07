@@ -149,6 +149,14 @@
   border: 1px solid var(--color-sky-blue);
 }
 
+.range_input_box_date {
+  width: 42%;
+}
+
+.range_input_box {
+  width: 25%;
+}
+
 .date_icon {
   margin-right: 10px;
   margin-bottom: 1px;
@@ -187,7 +195,7 @@
 
 .range_input,
 .range_input_date {
-  width: 200px;
+  width: 100%;
   height: 35px;
   border: 1px solid #999999;
   outline: none;
@@ -199,7 +207,6 @@
   padding: 0 6px;
 }
 .range_input_date {
-  width: 350px;
   line-height: 35px;
   padding: 0 12px;
   font-weight: 500;

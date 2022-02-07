@@ -102,3 +102,13 @@
     width: 700px;
   }
 }
+
+@media screen and (max-width: 736px) {
+  .container {
+    width: 95%;
+  }
+
+  .search_container {
+    width: 50%;
+  }
+}

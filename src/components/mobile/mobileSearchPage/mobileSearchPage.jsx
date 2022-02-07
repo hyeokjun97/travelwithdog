@@ -47,52 +47,8 @@ const MobileSearchPage = ({ categoryList }) => {
           sortResult ? sortResult.length : " "
         }건의 검색결과`}</p>
       </div>
-      <div className={styles.button_container}>
-        {selected && categoryList && (
-          <ButtonSlick
-            buttonList={categoryList}
-            selected={selected}
-            onSelectChangeHandler={onSelectChangeHandler}
-            where="search"
-          />
-        )}
-      </div>
       <div className={styles.divide_line}></div>
       <div className={styles.main}>
-        <div className={styles.sort_container}>
-          <ul className={styles.sort_list}>
-            <li
-              className={`${
-                sortValue === "최신순"
-                  ? `${styles.sort_button} ${styles.sort_on}`
-                  : `${styles.sort_button}`
-              }`}
-              onClick={() => onSortValueChangeHandler("최신순")}
-            >
-              최신순
-            </li>
-            <li
-              className={`${
-                sortValue === "리뷰많은순"
-                  ? `${styles.sort_button_mid} ${styles.sort_on}`
-                  : `${styles.sort_button_mid}`
-              }`}
-              onClick={() => onSortValueChangeHandler("리뷰많은순")}
-            >
-              리뷰많은순
-            </li>
-            <li
-              className={`${
-                sortValue === "평점높은순"
-                  ? `${styles.sort_button} ${styles.sort_on}`
-                  : `${styles.sort_button}`
-              }`}
-              onClick={() => onSortValueChangeHandler("평점높은순")}
-            >
-              평점높은순
-            </li>
-          </ul>
-        </div>
         <div className={styles.item_list}>
           {sortResult ? (
             sortResult.length > 0 ? (

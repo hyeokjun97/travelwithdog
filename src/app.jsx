@@ -31,6 +31,7 @@ import NewsView from "./components/newsView/newsView";
 import Introduce from "./components/introduce/introduce";
 // import ErrorPage from "./components/errorPage/errorPage";
 import CommunityPage from "./components/communityPage/communityPage";
+import { debounce } from "lodash";
 
 //페이지 리로딩 시 로딩 페이지 띄우기
 const App = (props) => {
@@ -290,12 +291,21 @@ const App = (props) => {
     setFindPopupOn(false);
   };
 
+  const onDeviceSizeChangeHandler = debounce(() => {
+    console.log("DD");
+    if (window.innerWidth > 1100) {
+      setDeviceSize(true);
+    } else {
+      setDeviceSize(false);
+    }
+  }, 200);
+
   useEffect(() => {
-    //window.addEventListener("resize", onDeviceSizeChangeHandler);
+    window.addEventListener("resize", onDeviceSizeChangeHandler);
     window.addEventListener("keydown", keyHandler);
     return () => {
       window.removeEventListener("keydown", keyHandler);
-      //window.removeEventListener("resize", onDeviceSizeChangeHandler);
+      window.removeEventListener("resize", onDeviceSizeChangeHandler);
     };
   }, [keyHandler]);
 

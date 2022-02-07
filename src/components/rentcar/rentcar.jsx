@@ -110,6 +110,7 @@ const Rentcar = ({ loadPageData }) => {
 
   const settingPageData = (data) => {
     setPageData(data);
+    console.log(data);
   };
 
   const makeDateFormat = () => {
@@ -197,6 +198,7 @@ const Rentcar = ({ loadPageData }) => {
             <div className={styles.top_filter}>
               <div className={styles.title_container}>
                 <p className={styles.top_title}>{pageData.title}</p>
+                <p className={styles.top_subtitle}>{pageData.subtitle}</p>
               </div>
 
               <div className={styles.search_container}>
