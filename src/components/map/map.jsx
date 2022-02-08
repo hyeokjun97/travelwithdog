@@ -16,6 +16,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
   const [markerList, setMarkerList] = useState(null);
   const [reviewUploadPopupOn, setReviewUploadPopupOn] = useState(false);
   const [reviewList, setReviewList] = useState(null);
+  const [totalReviewCount, setTotalReviewCount] = useState(null);
 
   const reviewPopupOnChangeHandler = (data) => {
     setReviewUploadPopupOn(data);
@@ -94,12 +95,16 @@ const Map = ({ deviceSize, isLoggedIn }) => {
   // 2. '더보기' 버튼 클릭 시 10개를 더 불러와서 reviewList에 합침
   // 3. popupOn이 false가 되면 이 state도 false로 만듬
   // 여기에 둔 이유 => loadSpotList가 리뷰 업로드 시에도 작동되도록 해야하는데 그러려면 부모 컴포넌트에서 이 함수를 주어야 하기 때문
+  // 리뷰 작성 시 '더보기' 초기화 되어야 하는가
   const loadSpotReview = (id) => {
     axios
       .get(
         `${process.env.REACT_APP_BASEURL}/spots/${id}/reviews?limit=10&page=1`
       )
-      .then((response) => setReviewList(response.data.data))
+      .then((response) => {
+        setReviewList(response.data.data);
+        setTotalReviewCount(response.data.total);
+      })
       .catch((err) => console.error(err));
   };
 
@@ -159,6 +164,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
             reviewPopupOnChangeHandler={reviewPopupOnChangeHandler}
             loadSpotReview={loadSpotReview}
             reviewList={reviewList}
+            totalReviewCount={totalReviewCount}
           />
         </div>
       )}

@@ -13,6 +13,7 @@ const MapPopup = ({
   reviewPopupOnChangeHandler,
   loadSpotReview,
   reviewList,
+  totalReviewCount,
 }) => {
   const [instaUrl, setInstaUrl] = useState(null);
   const [blogUrl, setBlogUrl] = useState(null);
@@ -222,7 +223,9 @@ const MapPopup = ({
           <p className={styles.nearby_title}>주변 관광지</p>
         </div>
         <div className={styles.review_container}>
-          <p className={styles.review_title}>리뷰 (12)</p>
+          <p className={styles.review_title}>{`리뷰 (${
+            totalReviewCount || 0
+          })`}</p>
           <div className={styles.review_main}>
             {reviewList &&
               reviewList.map((review) => (

@@ -14,6 +14,7 @@ import LoadingPage from "../loadingPage/loadingPage";
 import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
+import "./datepicker.css";
 import { subDays } from "date-fns";
 
 const ProductDetail = ({ deviceSize }) => {
