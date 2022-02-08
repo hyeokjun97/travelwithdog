@@ -228,19 +228,19 @@
 }
 
 .nearby_main .item {
-  width: 200px !important;
-  height: 260px;
+  width: 150px !important;
+  height: 200px;
   outline: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 14px;
+  margin-right: 8px;
 }
 
 .nearby_main .thumbnail {
-  width: 200px !important;
-  height: 150px;
+  width: 150px !important;
+  height: 100px;
   outline: none;
-  border-radius: 16px;
+  border-radius: 10px;
   margin: auto;
   padding: 0 !important;
   transition: 150ms all ease;
@@ -252,7 +252,7 @@
 
 .nearby_main .name {
   margin: 0;
-  font-size: var(--fontsize-normal);
+  font-size: var(--fontsize-bit-small);
   font-weight: 700;
   color: var(--color-light-gray);
   overflow: hidden;
@@ -275,17 +275,19 @@
 .nearby_main .rating_text {
   margin-left: 8px;
   font-weight: 700;
+  font-size: var(--fontsize-bit-small);
 }
 
 .nearby_main .price {
+  font-size: var(--fontsize-bit-small);
   color: rgb(13, 13, 13);
   font-weight: 600;
   padding-left: 6px;
 }
 
 .nearby_main .data_container {
-  width: 200px;
-  padding: 14px 0 0 0;
+  width: 150px;
+  padding: 10px 0 0 0;
 }
 
 @media screen and (max-width: 765px) {
@@ -390,5 +392,16 @@
   }
   .go_review {
     font-size: var(--fontsize-small);
+  }
+  .nearby_main .item {
+    width: 130px;
+    height: 190px;
+  }
+  .nearby_main .thumbnail {
+    width: 130px;
+    height: 90px;
+  }
+  .nearby_main .data_container {
+    width: 130px;
   }
 }

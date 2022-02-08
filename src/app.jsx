@@ -395,7 +395,10 @@ const App = (props) => {
             element={<Rentcar loadPageData={loadPageData} />}
           ></Route>
 
-          <Route path="/community/:boardId" element={<CommunityPage />}></Route>
+          <Route
+            path="/community/:boardId"
+            element={<CommunityPage isLoggedIn={isLoggedIn} />}
+          ></Route>
           {deviceSize ? (
             <Route path="/search/:query" element={<SearchPage />}></Route>
           ) : (

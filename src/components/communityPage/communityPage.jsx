@@ -5,7 +5,7 @@ import LoadingPage from "../loadingPage/loadingPage";
 import ArticleItem from "./articleItem/articleItem";
 import styles from "./communityPage.module.css";
 
-const CommunityPage = (props) => {
+const CommunityPage = ({ isLoggedIn }) => {
   const { boardId } = useParams();
   const navigate = useNavigate();
   const [boardList, setBoardList] = useState(null);
@@ -87,6 +87,10 @@ const CommunityPage = (props) => {
   };
 
   const moveToWritePage = () => {
+    if (!isLoggedIn) {
+      alert("로그인 후에 사용 가능합니다.");
+      return;
+    }
     navigate("/articlew");
     window.scrollTo({ top: 0 });
   };

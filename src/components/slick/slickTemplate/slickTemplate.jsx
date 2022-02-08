@@ -62,12 +62,11 @@ export default class SlickTemplate extends Component {
     let settings = {
       dots: false,
       infinite: false,
-      speed: 500,
+      speed: 20,
       swipeToSlide: true,
       slidesToShow: 4,
       slidesToScroll: 4,
       arrows: true,
-
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />,
       responsive: [

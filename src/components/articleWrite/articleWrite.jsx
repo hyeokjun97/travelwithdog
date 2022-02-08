@@ -78,6 +78,11 @@ const ArticleWrite = ({ isLoggedIn }) => {
   };
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      alert("글 작성 권한이 없습니다. 로그인 후에 다시 사용해주세요");
+      window.location.href = "/travelWithDog";
+      return;
+    }
     loadBoardList();
   }, []);
 
@@ -109,7 +114,10 @@ const ArticleWrite = ({ isLoggedIn }) => {
           placeholder="제목"
         />
         <div className={styles.summernote_container}>
-          <SummerNote onContentChangeHandler={onContentChangeHandler} />
+          <SummerNote
+            onContentChangeHandler={onContentChangeHandler}
+            boardSelect={boardSelect}
+          />
         </div>
         <div className={styles.button_container}>
           <button onClick={submitArticle} className={styles.button}>

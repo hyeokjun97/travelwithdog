@@ -5,14 +5,25 @@ import "react-summernote/lang/summernote-ko-KR";
 import "bootstrap/js/modal";
 import "bootstrap/js/dropdown";
 import "bootstrap/js/tooltip";
+import axios from "axios";
 
-const SummerNote = ({ where, onContentChangeHandler }) => {
+//reader.result
+const SummerNote = ({ onContentChangeHandler, boardSelect }) => {
   const onImageUpload = (fileList) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      ReactSummernote.insertImage(reader.result);
-    };
-    reader.readAsDataURL(fileList[0]);
+    if (!boardSelect) {
+      alert("게시판을 먼저 선택해주세요");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("board_id", boardSelect);
+    formData.append("image", fileList[0]);
+    console.log(formData.get("image"));
+    axios
+      .post(
+        `${process.env.REACT_APP_BASEURL}/boards/${boardSelect}/images`,
+        formData
+      )
+      .then((response) => ReactSummernote.insertImage(response.data.url));
   };
 
   return (
