@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./map.module.css";
 import axios from "axios";
 import MapMenuItem from "./mapMenuItem/mapMenuItem";
@@ -15,6 +15,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
   const [popupValue, setPopupValue] = useState(null);
   const [markerList, setMarkerList] = useState(null);
   const [reviewUploadPopupOn, setReviewUploadPopupOn] = useState(false);
+  const [reviewList, setReviewList] = useState(null);
 
   const reviewPopupOnChangeHandler = (data) => {
     setReviewUploadPopupOn(data);
@@ -88,6 +89,20 @@ const Map = ({ deviceSize, isLoggedIn }) => {
     setPopupOn(false);
   };
 
+  // popupData 변경될 때 동작 (mapPopup.jsx에서 작동하도록 함)
+  // 1. popupData 변경되면 가장 처음의 10개를 불러옴
+  // 2. '더보기' 버튼 클릭 시 10개를 더 불러와서 reviewList에 합침
+  // 3. popupOn이 false가 되면 이 state도 false로 만듬
+  // 여기에 둔 이유 => loadSpotList가 리뷰 업로드 시에도 작동되도록 해야하는데 그러려면 부모 컴포넌트에서 이 함수를 주어야 하기 때문
+  const loadSpotReview = (id) => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/spots/${id}/reviews?limit=10&page=1`
+      )
+      .then((response) => setReviewList(response.data.data))
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     loadSpotList();
   }, []);
@@ -128,6 +143,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
           name={reviewUploadPopupOn.name}
           reviewPopupOnChangeHandler={closeReviewPopupOnHandler}
           isLoggedIn={isLoggedIn}
+          loadSpotReview={loadSpotReview}
         />
       )}
       {popupOn && (
@@ -141,6 +157,8 @@ const Map = ({ deviceSize, isLoggedIn }) => {
             onCloseButtonHandler={onCloseButtonHandler}
             deviceSize={deviceSize}
             reviewPopupOnChangeHandler={reviewPopupOnChangeHandler}
+            loadSpotReview={loadSpotReview}
+            reviewList={reviewList}
           />
         </div>
       )}

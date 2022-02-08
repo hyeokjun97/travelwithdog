@@ -108,10 +108,7 @@ const Rentcar = ({ loadPageData }) => {
     });
   };
 
-  const settingPageData = (data) => {
-    setPageData(data);
-    console.log(data);
-  };
+  const settingPageData = (data) => setPageData(data);
 
   const makeDateFormat = () => {
     const result = [];

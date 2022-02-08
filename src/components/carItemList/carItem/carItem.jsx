@@ -31,6 +31,7 @@ const CarItem = ({ item, moveToDetail }) => {
         <div className={styles.image_container}>
           <img
             ref={ref}
+            src="/travelWithDog/images/default_image.png"
             data-src={
               item.images.length > 0
                 ? item.images[0].url

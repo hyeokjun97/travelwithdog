@@ -190,11 +190,18 @@
   color: #282828;
 }
 
-.nearby_container {
+.nearby_container,
+.review_container {
   padding: 18px 19px;
+
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.nearby_title,
+.review_title {
   font-size: var(--fontsize-bit-big);
   font-weight: 700;
-  column-rule: #232323;
+  color: #232323;
 }
 
 @media screen and (max-width: 765px) {

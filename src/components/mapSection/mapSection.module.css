@@ -210,7 +210,7 @@
   padding: 18px 19px;
   font-size: var(--fontsize-bit-big);
   font-weight: 700;
-  column-rule: #232323;
+  color: #232323;
 }
 
 @media screen and (max-width: 765px) {

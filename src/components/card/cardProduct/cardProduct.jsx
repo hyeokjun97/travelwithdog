@@ -32,6 +32,7 @@ const CardProduct = ({ item }) => {
     <div className={styles.item} onClick={moveToDetailPage}>
       <img
         ref={ref}
+        src="/travelWithDog/images/default_image.png"
         data-src={item.product && item.product.tour.image.url}
         alt="thumbnail"
         className={styles.thumbnail}

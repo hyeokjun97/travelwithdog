@@ -69,7 +69,6 @@ const Signup = ({ onCloseButtonHandler }) => {
       .then((response) => {
         alert("인증이 완료되었습니다.");
         setConfirmedId(response.data);
-        console.log(response.data);
       })
       .catch((err) => {
         console.error(err);

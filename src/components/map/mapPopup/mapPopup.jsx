@@ -4,12 +4,15 @@ import styles from "./mapPopup.module.css";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import HelmetComponent from "../../helmetComponent/helmetComponent";
+import MapPopupReviewItem from "./mapPopupReviewItem/mapPopupReviewItem";
 
 const MapPopup = ({
   popupValue,
   onCloseButtonHandler,
   deviceSize,
   reviewPopupOnChangeHandler,
+  loadSpotReview,
+  reviewList,
 }) => {
   const [instaUrl, setInstaUrl] = useState(null);
   const [blogUrl, setBlogUrl] = useState(null);
@@ -39,6 +42,11 @@ const MapPopup = ({
       }
     });
   }, []);
+
+  useEffect(() => {
+    loadSpotReview(popupValue.id);
+  }, [spotData]);
+
   return (
     <div className={styles.popup}>
       {spotData && (
@@ -212,6 +220,15 @@ const MapPopup = ({
         </div>
         <div className={styles.nearby_container}>
           <p className={styles.nearby_title}>주변 관광지</p>
+        </div>
+        <div className={styles.review_container}>
+          <p className={styles.review_title}>리뷰 (12)</p>
+          <div className={styles.review_main}>
+            {reviewList &&
+              reviewList.map((review) => (
+                <MapPopupReviewItem review={review} />
+              ))}
+          </div>
         </div>
       </div>
     </div>

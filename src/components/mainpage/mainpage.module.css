@@ -194,6 +194,10 @@
   align-items: center;
 }
 
+.car_search_input_box_date {
+  position: relative;
+}
+
 .car_search_input_date:hover,
 .car_search_input:hover {
   border: 1px solid var(--color-sky-blue);
@@ -208,7 +212,7 @@
 
 .date_picker {
   position: absolute;
-  top: 110px;
+  top: 57px;
   left: 0;
   border: 1px solid lightgray;
   visibility: hidden;
@@ -286,6 +290,7 @@
     background-color: white;
   }
   .top_banner {
+    margin-top: 80px;
     margin-bottom: 50px;
     padding: 60px 0;
     height: auto;
@@ -357,10 +362,6 @@
     width: 100%;
   }
 
-  .date_picker {
-    left: 0;
-    top: 100px;
-  }
   .car_search_icon_container {
     background-color: rgba(29, 94, 36, 0.9);
     width: 100%;
@@ -471,11 +472,6 @@
   .car_search_input_date,
   .car_search_input {
     font-size: var(--fontsize-bit-small);
-  }
-
-  .date_picker {
-    left: 0;
-    top: 100px;
   }
 }
 

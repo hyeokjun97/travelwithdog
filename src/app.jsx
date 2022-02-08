@@ -292,7 +292,6 @@ const App = (props) => {
   };
 
   const onDeviceSizeChangeHandler = debounce(() => {
-    console.log("DD");
     if (window.innerWidth > 1100) {
       setDeviceSize(true);
     } else {
@@ -376,7 +375,8 @@ const App = (props) => {
           <Route
             path="/category/:path"
             element={
-              categoryList && deviceSize ? (
+              categoryList &&
+              (deviceSize ? (
                 <CategoryPage
                   categoryList={categoryList}
                   loadPageData={loadPageData}
@@ -386,7 +386,7 @@ const App = (props) => {
                   categoryList={categoryList}
                   loadPageData={loadPageData}
                 />
-              )
+              ))
             }
           ></Route>
 

@@ -10,12 +10,12 @@ const MobileCategory = ({ categoryList, loadPageData }) => {
   const [category, setCategory] = useState(null);
 
   const onCategoryChangeHandler = (data) => {
-    navigate(`/category/${data.id}`);
+    navigate(`/category${data.url}`);
   };
 
   useEffect(() => {
     categoryList.forEach((cat) => {
-      if (cat.id === Number(path)) {
+      if (cat.url === "/" + path) {
         setCategory(cat);
       }
     });
@@ -33,7 +33,7 @@ const MobileCategory = ({ categoryList, loadPageData }) => {
         )}
       </div>
       <div className={styles.list_part}>
-        <CategoryPage loadPageData={loadPageData} />
+        <CategoryPage loadPageData={loadPageData} categoryList={categoryList} />
       </div>
     </div>
   );

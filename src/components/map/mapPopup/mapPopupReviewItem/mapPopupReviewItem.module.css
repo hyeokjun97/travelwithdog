@@ -1,11 +1,10 @@
 .item {
   width: 100%;
-
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   border-bottom: 1px solid #c7c7c7;
-  padding: 16px 0 16px 0;
+  padding: 14px 0 14px 0;
 }
 
 .star_container {
@@ -14,20 +13,18 @@
   align-items: center;
 }
 
-.rating_text {
-  margin: 0 20px 0 10px;
-  font-size: var(--fontsize-bit-big);
-  font-weight: 700;
+.star {
+  width: 92px;
 }
 
 .name {
-  font-size: var(--fontsize-bit-big);
+  font-size: var(--fontsize-normal);
   color: #525252;
 }
 
 .content {
   max-width: 75%;
-  padding: 0 30px 0 36px;
+  padding: 0 10px 0 25px;
 }
 
 @media screen and (max-width: 1100px) {
@@ -37,7 +34,11 @@
   }
 
   .name {
-    font-size: var(--fontsize-normal);
+    font-size: var(--fontsize-bit-small);
+  }
+
+  .star {
+    width: 90px;
   }
 
   .content {

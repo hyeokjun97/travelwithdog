@@ -17,9 +17,15 @@ const MobileFooter = ({ categoryList }) => {
         return "rentcar";
       } else if (pathList.find((item) => item === "mypage")) {
         return "mypage";
-      } else if (pathList.find((item) => item === "category")) {
+      } else if (
+        pathList.find((item) => item === "category") ||
+        pathList.find((item) => item === "product")
+      ) {
         return "category";
-      } else if (pathList.find((item) => item === "community")) {
+      } else if (
+        pathList.find((item) => item === "community") ||
+        pathList.find((item) => item === "article")
+      ) {
         return "community";
       } else if (pathList.find((item) => item === "map")) {
         return "map";
@@ -36,7 +42,7 @@ const MobileFooter = ({ categoryList }) => {
             : `${styles.button}`
         }`}
         onClick={() => {
-          navigate(`/category/${categoryList[0].id}`);
+          navigate(`/category${categoryList[0].url}`);
           window.scrollTo({ top: 0 });
         }}
       >

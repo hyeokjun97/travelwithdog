@@ -110,7 +110,6 @@ const CarDetail = (props) => {
     if (!basePrice) {
       return;
     }
-    console.log(basePrice);
     //finalPrice 반려견수로 추가요금 계산 로직
     setFinalPrice(basePrice + 30000 * (dogCount - 1));
   }, [basePrice, dogCount]);
