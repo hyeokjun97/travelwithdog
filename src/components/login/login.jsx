@@ -102,6 +102,7 @@ const Login = ({
         getUserData();
       },
       fail: function (response) {
+        console.log(response);
         console.log("fail");
       },
     });

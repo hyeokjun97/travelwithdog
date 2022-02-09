@@ -36,12 +36,10 @@ const Map = ({ deviceSize, isLoggedIn }) => {
   );
 
   useEffect(() => {
-    if (!map) {
-      return;
-    }
-    if (!spotList) {
-      return;
-    }
+    if (!map) return;
+
+    if (!spotList) return;
+
     const tmpMarkerList = [];
     spotList.forEach((spot) => {
       const marker = new google.maps.Marker({

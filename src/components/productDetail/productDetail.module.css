@@ -224,8 +224,9 @@ img {
   flex-direction: row;
 }
 
-.map_image {
+.map {
   width: 63%;
+  height: 400px;
   border-radius: 14px;
 }
 
@@ -435,7 +436,7 @@ img {
     font-size: var(--fontsize-normal);
   }
 
-  .map_image {
+  .map {
     width: 100%;
     margin-bottom: 20px;
   }

@@ -7,9 +7,9 @@ const ItemList = ({ itemList }) => {
     <div className={styles.main}>
       {itemList.map((item) =>
         item.tour ? (
-          <Item key={item.id} item={item.tour} />
+          <Item key={item.id} item={item.tour} moveTo={item.id} />
         ) : item.transfer ? (
-          <Item key={item.id} item={item.transfer} />
+          <Item key={item.id} item={item.transfer} moveTo={item.id} />
         ) : (
           <></>
         )

@@ -3,12 +3,13 @@ import styles from "./item.module.css";
 import ReactStars from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
 
-const Item = ({ item }) => {
+const Item = ({ item, moveTo }) => {
   const navigate = useNavigate();
   const ref = useRef();
 
   const moveToDetailPage = () => {
-    navigate(`/product/${item.id}`);
+    navigate(`/product/${moveTo}`);
+    window.scrollTo({ top: 0 });
   };
 
   useEffect(() => {
