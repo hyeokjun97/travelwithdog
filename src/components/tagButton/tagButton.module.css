@@ -10,6 +10,7 @@
 
 .text {
   color: rgb(87, 87, 87);
+  font-size: var(--fontsize-normal);
   font-weight: 700;
   padding-top: 2px;
 }

@@ -546,34 +546,15 @@ const ProductDetail = ({ deviceSize }) => {
             <div className={styles.map_main}>
               <div className={styles.map_top}>
                 <div ref={ref} className={styles.map}></div>
-                <div className={styles.map_attraction_list}>
-                  <p className={styles.map_attraction_title}>주변 관광지</p>
-                  <div className={styles.map_attraction_item}>
-                    <p className={styles.map_attraction_name}>
-                      주문진 수산시장
-                    </p>
-                    <p className={styles.map_attraction_dist}>270m</p>
-                  </div>
-                  <div className={styles.map_attraction_item}>
-                    <p className={styles.map_attraction_name}>
-                      주문진 수산시장
-                    </p>
-                    <p className={styles.map_attraction_dist}>270m</p>
-                  </div>
-                  <div className={styles.map_attraction_item}>
-                    <p className={styles.map_attraction_name}>
-                      주문진 수산시장
-                    </p>
-                    <p className={styles.map_attraction_dist}>270m</p>
-                  </div>
+              </div>
+              {product && product.locations.length > 0 && (
+                <div className={styles.map_bottom}>
+                  <i className={`${styles.map_icon} fas fa-map-marker-alt`}></i>
+                  <p className={styles.map_location}>
+                    {product.locations[0].name}
+                  </p>
                 </div>
-              </div>
-              <div className={styles.map_bottom}>
-                <i className={`${styles.map_icon} fas fa-map-marker-alt`}></i>
-                <p className={styles.map_location}>
-                  부산 해운대구 해운대해변로296
-                </p>
-              </div>
+              )}
             </div>
           </div>
           <div ref={articleRef} className={styles.part}>

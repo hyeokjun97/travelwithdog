@@ -39,6 +39,7 @@
 }
 
 .text {
+  font-size: var(--fontsize-normal);
   color: rgb(28, 28, 28);
   margin-bottom: 4px;
 }
@@ -68,6 +69,7 @@
 .save_id_text {
   margin-top: 2px;
   margin-left: 2px;
+  font-size: var(--fontsize-normal);
   color: rgb(149, 149, 149);
 }
 

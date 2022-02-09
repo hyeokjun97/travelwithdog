@@ -58,6 +58,7 @@
 .menu_item {
   height: 100px;
   line-height: 116px;
+  font-size: var(--fontsize-normal);
   padding: 0 15px;
   margin: 0 15px;
   text-align: center;

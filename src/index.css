@@ -1,9 +1,8 @@
 @import "/src/constant.css";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
 
-/*bootstrap 충돌 피하기위함*/
 html {
-  font-size: 16px;
+  font-size: 100%;
   line-height: normal;
 }
 body {

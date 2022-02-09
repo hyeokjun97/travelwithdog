@@ -26,7 +26,7 @@
 }
 
 .title {
-  font-size: 42px;
+  font-size: 2.625rem;
   font-weight: 700;
   padding-left: 10%;
   padding-right: 10%;
@@ -129,6 +129,7 @@
 }
 
 .map_subtitle {
+  font-size: var(--fontsize-normal);
   margin-bottom: 2px;
 }
 

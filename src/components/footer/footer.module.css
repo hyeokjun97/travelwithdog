@@ -22,6 +22,7 @@
 
 .top_menu > li {
   margin: 0 22px;
+  font-size: var(--fontsize-normal);
   font-weight: 500;
   cursor: pointer;
 }

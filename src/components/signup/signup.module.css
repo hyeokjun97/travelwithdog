@@ -47,6 +47,7 @@
 }
 
 .text {
+  font-size: var(--fontsize-normal);
   color: rgb(28, 28, 28);
   margin-bottom: 4px;
 }

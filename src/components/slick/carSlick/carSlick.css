@@ -95,6 +95,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
+  font-size: var(--fontsize-normal);
   font-weight: 700;
 }
 

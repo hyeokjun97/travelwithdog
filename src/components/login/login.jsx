@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./login.module.css";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import { GoogleLogin } from "react-google-login";
 
 const Login = ({
   onCloseButtonHandler,
@@ -263,14 +264,28 @@ const Login = ({
           />
           <p className={styles.social_text}>Apple</p>
         </div>
-        <div className={styles.social_button}>
-          <img
-            src="/travelWithDog/images/google.png"
-            alt="구글 로그인"
-            className={styles.social_image}
-          />
-          <p className={styles.social_text}>Google</p>
-        </div>
+        {/* 키 내꺼임 */}
+        <GoogleLogin
+          clientId="943509625186-817bqpmg3r7taoc231b3a06jp7ifo5tk.apps.googleusercontent.com"
+          render={(renderProps) => (
+            <div
+              className={styles.social_button}
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+            >
+              <img
+                src="/travelWithDog/images/google.png"
+                alt="구글 로그인"
+                className={styles.social_image}
+              />
+              <p className={styles.social_text}>Google</p>
+            </div>
+          )}
+          buttonText="Login"
+          onSuccess={() => console.log("success")}
+          onFailure={(response) => console.log(response)}
+          cookiePolicy={"single_host_origin"}
+        />
       </div>
     </div>
   );

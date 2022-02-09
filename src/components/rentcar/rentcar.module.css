@@ -26,7 +26,7 @@
 .top_title {
   margin: 0;
   color: white;
-  font-size: 36px;
+  font-size: 2.25rem;
   font-weight: 700;
 }
 
@@ -54,6 +54,7 @@
 }
 
 .search_text {
+  font-size: var(--fontsize-normal);
   margin-bottom: 2px;
 }
 
