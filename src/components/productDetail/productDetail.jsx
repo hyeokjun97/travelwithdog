@@ -216,7 +216,6 @@ const ProductDetail = ({ deviceSize }) => {
         .get(`${process.env.REACT_APP_BASEURL}/products/${path}`)
         .then((response) => {
           //product_cd === "transfer" 인 경우 보류
-          console.log(response.data.tour);
           if (response.data.product_cd === "tour") {
             setProduct(response.data.tour);
           }

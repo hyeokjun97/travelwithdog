@@ -114,7 +114,7 @@ const Login = ({
 
   const initializeNaverLogin = () => {
     const naverLogin = new naver.LoginWithNaverId({
-      clientId: "WQY_hzT89jZ0OFfKWApd",
+      clientId: process.env.REACT_APP_NAVER_KEY,
       callbackUrl: "https://localhost:3000/travelWithDog", //임시
       isPopup: true, // popup 형식으로 띄울것인지 설정
       loginButton: { display: "none" }, //버튼의 스타일, 타입, 크기를 지정
@@ -253,6 +253,22 @@ const Login = ({
           />
           <p className={styles.social_text}>Naver</p>
           <div ref={naverRef} id="naverIdLogin" />
+        </div>
+        <div className={styles.social_button}>
+          <img
+            src="/travelWithDog/images/apple.png"
+            alt="애플 로그인"
+            className={styles.social_image}
+          />
+          <p className={styles.social_text}>Apple</p>
+        </div>
+        <div className={styles.social_button}>
+          <img
+            src="/travelWithDog/images/google.png"
+            alt="구글 로그인"
+            className={styles.social_image}
+          />
+          <p className={styles.social_text}>Google</p>
         </div>
       </div>
     </div>
