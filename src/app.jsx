@@ -29,7 +29,6 @@ import MobileCarSearch from "./components/mobile/mobileCarSearch/mobileCarSearch
 import TestPage from "./components/testPage/testPage";
 import NewsView from "./components/newsView/newsView";
 import Introduce from "./components/introduce/introduce";
-// import ErrorPage from "./components/errorPage/errorPage";
 import CommunityPage from "./components/communityPage/communityPage";
 import { debounce } from "lodash";
 

@@ -13,6 +13,9 @@ import ErrorPage from "../errorPage/errorPage";
 
 const CarSearchPage = ({ carCode }) => {
   const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState("");
+  const [typeSelect, setTypeSelect] = useState("전체");
+  const [fuelSelect, setFuelSelect] = useState("전체");
   const { pickup, dropoff } = useParams();
   //날짜로 검색한 차량들의 목록
   const [carList, setCarList] = useState(null);
@@ -233,13 +236,9 @@ const CarSearchPage = ({ carCode }) => {
   }, [date]);
 
   //컴포넌트 마운트 시 마다 서버 요청해서 결과값 받아오고 분류, 정렬 선택 여부로 보여주기
-  const [searchValue, setSearchValue] = useState("");
   const onSearchValueChangeHandler = (e) => {
     setSearchValue(e.target.value);
   };
-
-  const [typeSelect, setTypeSelect] = useState("전체");
-  const [fuelSelect, setFuelSelect] = useState("전체");
 
   const onTypeSelectChangeHandler = (e) => {
     if (e.target.tagName === "P") {

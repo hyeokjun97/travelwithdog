@@ -116,20 +116,6 @@ const ProductDetail = ({ deviceSize }) => {
     setViewDetailOn(true);
   };
 
-  const keyHandler = (e) => {
-    if (e.key !== "Escape") {
-      return;
-    }
-    setImageViewOn(false);
-  };
-
-  useEffect(() => {
-    window.addEventListener("keydown", keyHandler);
-    return () => {
-      window.removeEventListener("keydown", keyHandler);
-    };
-  }, [keyHandler]);
-
   //영문 달을 숫자로 바꾸어 줌
   const monthTranslator = (selectedMonth) => {
     const monthList = [
@@ -176,7 +162,6 @@ const ProductDetail = ({ deviceSize }) => {
         result.sort((a, b) => {
           return b.rating - a.rating;
         });
-        setBestReview(result.slice(0, 6));
         if (response.data.total <= 10) {
           setReviewShowCount(-1);
         }
@@ -196,6 +181,15 @@ const ProductDetail = ({ deviceSize }) => {
           setReviewShowCount(-1);
         }
       })
+      .catch((err) => console.error(err));
+  };
+
+  const loadBestReview = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/tours/${product.id}/reviews?limit=6&page=1&order=rating`
+      )
+      .then((response) => setBestReview(response.data.data))
       .catch((err) => console.error(err));
   };
 
@@ -222,6 +216,7 @@ const ProductDetail = ({ deviceSize }) => {
         .get(`${process.env.REACT_APP_BASEURL}/products/${path}`)
         .then((response) => {
           //product_cd === "transfer" 인 경우 보류
+          console.log(response.data.tour);
           if (response.data.product_cd === "tour") {
             setProduct(response.data.tour);
           }
@@ -236,6 +231,7 @@ const ProductDetail = ({ deviceSize }) => {
       return;
     }
     loadReviewList();
+    loadBestReview();
   }, [product]);
 
   useEffect(() => {
@@ -271,6 +267,20 @@ const ProductDetail = ({ deviceSize }) => {
     loadPriceList(translatedDate);
     dateShowChangeHandler(startDate);
   }, [startDate]);
+
+  const keyHandler = (e) => {
+    if (e.key !== "Escape") {
+      return;
+    }
+    setImageViewOn(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", keyHandler);
+    return () => {
+      window.removeEventListener("keydown", keyHandler);
+    };
+  }, [keyHandler]);
 
   return (
     <>
@@ -365,14 +375,16 @@ const ProductDetail = ({ deviceSize }) => {
                         count={5}
                         edit={false}
                         size={20}
-                        value={4}
+                        value={product.rating}
                         activeColor="#000000"
                         isHalf={true}
                         emptyIcon={<i className="fas fa-paw"></i>}
                         halfIcon={<i className="fas fa-paw"></i>}
                         filledIcon={<i className="fas fa-paw"></i>}
                       />
-                      <p className={styles.rating_text}>4.0점</p>
+                      <p
+                        className={styles.rating_text}
+                      >{`${product.rating}점`}</p>
                     </div>
                     <p className={styles.rating_review_number}>{`${
                       reviewTotal || 0

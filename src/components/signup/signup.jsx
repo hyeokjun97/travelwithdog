@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./signup.module.css";
 
 const Signup = ({ onCloseButtonHandler }) => {
@@ -104,6 +104,7 @@ const Signup = ({ onCloseButtonHandler }) => {
         email: confirmedId.email,
         password: password,
         password_confirmation: passwordConfirm,
+        letter: recieve,
       })
       .then((response) => {
         alert("회원가입이 완료되었습니다.");

@@ -20,10 +20,9 @@ const TestPage = (props) => {
 
   const tourReviewTest = () => {
     axios
-      .post(`${process.env.REACT_APP_BASEURL}/tours/118/reviews`, {
-        rating: 5,
-        content:
-          "신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 신비밀보호법 등 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 ",
+      .post(`${process.env.REACT_APP_BASEURL}/tours/120/reviews`, {
+        rating: 1,
+        content: "신d자가dsadas",
       })
       .then((response) => console.log(response))
       .catch((err) => console.error(err));

@@ -62,7 +62,7 @@ export default class SlickTemplate extends Component {
     let settings = {
       dots: false,
       infinite: false,
-      speed: 20,
+      speed: 500,
       swipeToSlide: true,
       slidesToShow: 4,
       slidesToScroll: 4,
@@ -77,6 +77,7 @@ export default class SlickTemplate extends Component {
             arrows: false,
             slidesToShow: 3,
             slidesToScroll: 1,
+            speed: 20,
           },
         },
         {

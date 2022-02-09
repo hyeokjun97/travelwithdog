@@ -287,7 +287,7 @@ const Mainpage = ({
                       </div>
                     </div>
                     <div className={styles.tag_container}>
-                      {tagButtonList.map((tag) => (
+                      {pageData.keywords.map((tag) => (
                         <TagButton key={tag} value={tag} />
                       ))}
                     </div>
