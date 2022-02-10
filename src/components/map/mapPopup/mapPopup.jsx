@@ -15,6 +15,8 @@ const MapPopup = ({
   loadSpotReview,
   reviewList,
   totalReviewCount,
+  reviewShowCount,
+  onReviewShowCountChangeHandler,
 }) => {
   // 주변 관광지 임시데이터
   const [chabak, setChabak] = useState([
@@ -335,6 +337,17 @@ const MapPopup = ({
               reviewList.map((review) => (
                 <MapPopupReviewItem review={review} />
               ))}
+            {reviewShowCount !== -1 && (
+              <div
+                className={styles.show_more_button}
+                onClick={onReviewShowCountChangeHandler}
+              >
+                <span>더보기</span>
+                <i
+                  className={`${styles.show_more_icon} fas fa-chevron-down`}
+                ></i>
+              </div>
+            )}
           </div>
         </div>
       </div>

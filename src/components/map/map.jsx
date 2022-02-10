@@ -17,6 +17,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
   const [reviewUploadPopupOn, setReviewUploadPopupOn] = useState(false);
   const [reviewList, setReviewList] = useState(null);
   const [totalReviewCount, setTotalReviewCount] = useState(null);
+  const [reviewShowCount, setReviewShowCount] = useState(1);
 
   const reviewPopupOnChangeHandler = (data) => {
     setReviewUploadPopupOn(data);
@@ -86,6 +87,10 @@ const Map = ({ deviceSize, isLoggedIn }) => {
 
   const onCloseButtonHandler = () => {
     setPopupOn(false);
+    setPopupValue(false);
+    setReviewList(null);
+    setReviewShowCount(1);
+    setTotalReviewCount(0);
   };
 
   // popupData 변경될 때 동작 (mapPopup.jsx에서 작동하도록 함)
@@ -102,9 +107,49 @@ const Map = ({ deviceSize, isLoggedIn }) => {
       .then((response) => {
         setReviewList(response.data.data);
         setTotalReviewCount(response.data.total);
+        if (response.data.total <= 10) {
+          setReviewShowCount(-1);
+        }
       })
       .catch((err) => console.error(err));
   };
+
+  // 추가 리뷰 불러오기 (최초 10개 이후)
+  const loadMoreReview = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BASEURL}/spots/${popupValue.id}/reviews?limit=10&page=${reviewShowCount}`
+      )
+      .then((response) => {
+        const newList = [...reviewList, ...response.data.data];
+        console.log(reviewList);
+        console.log(response.data.data);
+        setReviewList(newList);
+        console.log(newList);
+        if (newList.length === totalReviewCount) {
+          setReviewShowCount(-1);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const onReviewShowCountChangeHandler = () => {
+    if (reviewShowCount === -1) {
+      return;
+    }
+    setReviewShowCount(reviewShowCount + 1);
+  };
+
+  const setReviewShowCountToInitial = () => {
+    setReviewShowCount(1);
+  };
+
+  useEffect(() => {
+    if (reviewShowCount < 2) {
+      return;
+    }
+    loadMoreReview();
+  }, [reviewShowCount]);
 
   useEffect(() => {
     loadSpotList();
@@ -126,7 +171,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
     if (e.key !== "Escape") {
       return;
     }
-    setPopupOn(false);
+    onCloseButtonHandler();
   };
 
   useEffect(() => {
@@ -147,6 +192,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
           reviewPopupOnChangeHandler={closeReviewPopupOnHandler}
           isLoggedIn={isLoggedIn}
           loadSpotReview={loadSpotReview}
+          setReviewShowCountToInitial={setReviewShowCountToInitial}
         />
       )}
       {popupOn && (
@@ -163,6 +209,9 @@ const Map = ({ deviceSize, isLoggedIn }) => {
             loadSpotReview={loadSpotReview}
             reviewList={reviewList}
             totalReviewCount={totalReviewCount}
+            loadMoreReview={loadMoreReview}
+            reviewShowCount={reviewShowCount}
+            onReviewShowCountChangeHandler={onReviewShowCountChangeHandler}
           />
         </div>
       )}

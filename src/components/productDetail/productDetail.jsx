@@ -156,10 +156,6 @@ const ProductDetail = ({ deviceSize }) => {
       .then((response) => {
         setReviewList(response.data.data);
         setReviewTotal(response.data.total);
-        const result = response.data.data.slice(0);
-        result.sort((a, b) => {
-          return b.rating - a.rating;
-        });
         if (response.data.total <= 10) {
           setReviewShowCount(-1);
         }

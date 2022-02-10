@@ -10,6 +10,7 @@ const ReviewUploadPopup = ({
   reviewPopupOnChangeHandler,
   isLoggedIn,
   loadSpotReview,
+  setReviewShowCountToInitial,
 }) => {
   const [rating, setRating] = useState(5);
   const [content, setContent] = useState("");
@@ -37,6 +38,7 @@ const ReviewUploadPopup = ({
       .then((response) => {
         alert("리뷰 작성이 완료되었습니다.");
         reviewPopupOnChangeHandler();
+        setReviewShowCountToInitial();
         loadSpotReview(id);
       })
       .catch((err) => console.error(err));
