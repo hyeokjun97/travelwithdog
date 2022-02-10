@@ -334,8 +334,12 @@ const MapPopup = ({
           </p>
           <div className={styles.review_main}>
             {reviewList &&
-              reviewList.map((review) => (
-                <MapPopupReviewItem review={review} />
+              (reviewList.length > 0 ? (
+                reviewList.map((review) => (
+                  <MapPopupReviewItem review={review} />
+                ))
+              ) : (
+                <p className={styles.no_review}>리뷰가 없습니다.</p>
               ))}
             {reviewShowCount !== -1 && (
               <div

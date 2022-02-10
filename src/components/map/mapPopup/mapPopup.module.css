@@ -305,6 +305,13 @@
   margin-left: 10px;
 }
 
+.no_review {
+  text-align: center;
+  font-weight: 700;
+  color: var(--color-green);
+  padding: 20px 0;
+}
+
 @media screen and (max-width: 765px) {
   .popup {
     width: 90%;

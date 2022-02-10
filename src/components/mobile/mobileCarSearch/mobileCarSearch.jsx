@@ -145,11 +145,11 @@ const MobileCarSearch = ({ carCode }) => {
     const startList = startDate.toString().split(" ");
     const endList = endDate.toString().split(" ");
     setDateShow(
-      `${monthTranslator(startList[1])}월 ${startList[2]}일 (${dayTranslator(
-        startList[0]
-      )}) - ${monthTranslator(endList[1])}월 ${endList[2]}일 (${dayTranslator(
-        endList[0]
-      )})`
+      `${monthTranslator(startList[1])}월 ${Number(
+        startList[2]
+      )}일 (${dayTranslator(startList[0])}) - ${monthTranslator(
+        endList[1]
+      )}월 ${Number(endList[2])}일 (${dayTranslator(endList[0])})`
     );
   }, [date]);
 

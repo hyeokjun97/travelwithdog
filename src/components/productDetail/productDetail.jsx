@@ -247,9 +247,9 @@ const ProductDetail = ({ deviceSize }) => {
   const dateShowChangeHandler = (date) => {
     const dateSplit = date.toString().split(" ");
     setDateShow(
-      `${dateSplit[3]}년 ${monthTranslator(dateSplit[1])}월 ${
+      `${dateSplit[3]}년 ${monthTranslator(dateSplit[1])}월 ${Number(
         dateSplit[2]
-      }일 (${dayTranslator(dateSplit[0])})`
+      )}일 (${dayTranslator(dateSplit[0])})`
     );
   };
 

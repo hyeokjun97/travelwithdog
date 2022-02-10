@@ -14,16 +14,9 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
 
-const Mainpage = ({
-  chabak,
-  jejuBest,
-  tagButtonList,
-  loadPageData,
-  categoryList,
-}) => {
+const Mainpage = ({ chabak, jejuBest, loadPageData, categoryList }) => {
   const navigate = useNavigate();
   const [pageData, setPageData] = useState(null);
-  const [regionSelect, setRegionSelect] = useState(categoryList[0]);
   const [searchInput, setSearchInput] = useState("");
   const [topSelect, setTopSelect] = useState("키워드");
 
@@ -207,6 +200,7 @@ const Mainpage = ({
   };
 
   const onTopSelectChangeHandler = (e) => {
+    console.log(e.target.innerText);
     setTopSelect(e.target.innerText);
   };
 
@@ -219,11 +213,11 @@ const Mainpage = ({
     const startList = startDate.toString().split(" ");
     const endList = endDate.toString().split(" ");
     setDateShow(
-      `${monthTranslator(startList[1])}월 ${startList[2]}일 (${dayTranslator(
-        startList[0]
-      )}) - ${monthTranslator(endList[1])}월 ${endList[2]}일 (${dayTranslator(
-        endList[0]
-      )})`
+      `${monthTranslator(startList[1])}월 ${Number(
+        startList[2]
+      )}일 (${dayTranslator(startList[0])}) - ${monthTranslator(
+        endList[1]
+      )}월 ${Number(endList[2])}일 (${dayTranslator(endList[0])})`
     );
   }, [date]);
 
@@ -287,8 +281,8 @@ const Mainpage = ({
                       </div>
                     </div>
                     <div className={styles.tag_container}>
-                      {pageData.keywords.map((tag) => (
-                        <TagButton key={tag} value={tag} />
+                      {pageData.keywords.map((tag, index) => (
+                        <TagButton key={index} value={tag} />
                       ))}
                     </div>
                   </div>

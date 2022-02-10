@@ -183,13 +183,6 @@ const App = (props) => {
     },
   ]);
 
-  const [tagButtonList, setTagButtonList] = useState([
-    "렌터카",
-    "당일치기",
-    "대형견",
-    "제주도",
-  ]);
-
   //카테고리 리스트 - 메뉴의 구성 요소 그리고 그것을 클릭했을 때 어떤 페이지로 이동하는지 그리고 그 페이지에 어떤 것을 표시할 것인지 필요
   //현재 상태에서 어떤 타입의 섹션으로 어떤 상품들 나오게 할 것인지 추가해야함
   //배경 이미지도 경로 넣어야함
@@ -362,7 +355,6 @@ const App = (props) => {
                 <Mainpage
                   chabak={chabak}
                   jejuBest={jejuBest}
-                  tagButtonList={tagButtonList}
                   deviceSize={deviceSize}
                   loadPageData={loadPageData}
                   categoryList={categoryList}
