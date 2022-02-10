@@ -13,7 +13,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
   const [resultSpotList, setResultSpotList] = useState(null);
   const [popupOn, setPopupOn] = useState(false);
   const [popupValue, setPopupValue] = useState(null);
-  const [markerList, setMarkerList] = useState(null);
+  const [markerObject, setMarkerObject] = useState(null);
   const [reviewUploadPopupOn, setReviewUploadPopupOn] = useState(false);
   const [reviewList, setReviewList] = useState(null);
   const [totalReviewCount, setTotalReviewCount] = useState(null);
@@ -41,24 +41,32 @@ const Map = ({ deviceSize, isLoggedIn }) => {
 
     if (!spotList) return;
 
-    const tmpMarkerList = [];
+    const tmpMarkerObject = {};
     spotList.forEach((spot) => {
+      const icon = {
+        url: `/travelWithDog/images/marker/${spot.categories[0].cd}.png`,
+        scaledSize: new google.maps.Size(30, 40), // scaled size
+        origin: new google.maps.Point(0, 0), // origin
+        anchor: new google.maps.Point(15, 40), // anchor
+      };
+
       const marker = new google.maps.Marker({
         position: {
           lat: spot.position.coordinates[1],
           lng: spot.position.coordinates[0],
         },
         map: map,
-        // icon: "/travelWithDog/images/dog_face.svg",
+        icon,
       });
-      tmpMarkerList.push(marker);
+      tmpMarkerObject[spot.id] = marker;
 
       google.maps.event.addListener(marker, "click", () => {
         setPopupValue(spot);
         setPopupOn(true);
       });
     });
-    setMarkerList(tmpMarkerList);
+    console.log(tmpMarkerObject);
+    setMarkerObject(tmpMarkerObject);
   }, [map, spotList]);
 
   const inputValueChangeHandler = (e) => {
@@ -93,12 +101,6 @@ const Map = ({ deviceSize, isLoggedIn }) => {
     setTotalReviewCount(0);
   };
 
-  // popupData 변경될 때 동작 (mapPopup.jsx에서 작동하도록 함)
-  // 1. popupData 변경되면 가장 처음의 10개를 불러옴
-  // 2. '더보기' 버튼 클릭 시 10개를 더 불러와서 reviewList에 합침
-  // 3. popupOn이 false가 되면 이 state도 false로 만듬
-  // 여기에 둔 이유 => loadSpotList가 리뷰 업로드 시에도 작동되도록 해야하는데 그러려면 부모 컴포넌트에서 이 함수를 주어야 하기 때문
-  // 리뷰 작성 시 '더보기' 초기화 되어야 하는가
   const loadSpotReview = (id) => {
     axios
       .get(
@@ -122,10 +124,7 @@ const Map = ({ deviceSize, isLoggedIn }) => {
       )
       .then((response) => {
         const newList = [...reviewList, ...response.data.data];
-        console.log(reviewList);
-        console.log(response.data.data);
         setReviewList(newList);
-        console.log(newList);
         if (newList.length === totalReviewCount) {
           setReviewShowCount(-1);
         }
@@ -231,13 +230,14 @@ const Map = ({ deviceSize, isLoggedIn }) => {
         </div>
         <div className={styles.list}>
           {resultSpotList &&
-            markerList &&
+            markerObject &&
             resultSpotList.map((item, index) => (
               <MapMenuItem
                 key={item.id}
                 item={item}
-                marker={markerList[index]}
+                marker={markerObject[item.id]} //문제 발생 => 인덱스로 넣으니 검색했을 때 오류가 남
                 onItemClickHandler={() => onItemClickHandler(item)}
+                google={google}
               />
             ))}
         </div>

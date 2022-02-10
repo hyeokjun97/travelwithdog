@@ -2,22 +2,29 @@ import React, { useRef, useEffect } from "react";
 import styles from "./mapMenuItem.module.css";
 import ReactStars from "react-rating-stars-component";
 
-const MapMenuItem = ({
-  item,
-  marker,
-  onItemClickHandler,
-  itemMouseEnterHandler,
-}) => {
+const MapMenuItem = ({ item, marker, onItemClickHandler, google }) => {
   const ref = useRef();
 
   const changeIconToSelected = () => {
-    marker.setIcon({ url: "/travelWithDog/images/kakao.png" });
+    const icon = {
+      url: `/travelWithDog/images/marker/${item.categories[0].cd}-on.png`,
+      scaledSize: new google.maps.Size(30, 40), // scaled size
+      origin: new google.maps.Point(0, 0), // origin
+      anchor: new google.maps.Point(15, 40), // anchor
+    };
+
+    marker.setIcon(icon);
   };
 
   const changeIconToDefault = () => {
-    marker.setIcon({
-      url: "/travelWithDog/images/dog_face.svg",
-    });
+    const icon = {
+      url: `/travelWithDog/images/marker/${item.categories[0].cd}.png`,
+      scaledSize: new google.maps.Size(30, 40), // scaled size
+      origin: new google.maps.Point(0, 0), // origin
+      anchor: new google.maps.Point(15, 40), // anchor
+    };
+
+    marker.setIcon(icon);
   };
 
   useEffect(() => {
