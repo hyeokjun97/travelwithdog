@@ -220,7 +220,7 @@
   position: sticky;
   top: 130px;
   width: 222px;
-  height: 400px;
+  height: fit-content;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 10px lightgray;
@@ -235,7 +235,8 @@
   margin-bottom: 13px;
 }
 
-.select_title {
+.select_title,
+.count_title {
   font-weight: 700;
   color: #0e0e0e;
   margin-bottom: 6px;
@@ -250,6 +251,47 @@
   font-size: var(--fontsize-normal);
   font-weight: 700;
   padding: 0 4px;
+}
+
+.count_form {
+  margin: 16px 0;
+}
+
+.count_number_and_price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.count_number_container {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid lightgray;
+}
+
+.number_button,
+.number {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 26px;
+  font-weight: 700;
+  color: var(--color-black);
+  cursor: default;
+}
+
+.number_button {
+  cursor: pointer;
+}
+
+.number {
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+}
+
+.count_price {
+  font-weight: 500;
 }
 
 .side_menu_price_container {
@@ -285,7 +327,7 @@
 }
 
 .warning {
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   color: #747171;
   margin-bottom: 5px;
 }

@@ -102,7 +102,9 @@ const ArticleWrite = ({ isLoggedIn }) => {
           <option value="">게시판선택</option>
           {boardList &&
             boardList.map((board) => (
-              <option value={board.id}>{board.name}</option>
+              <option key={board.id} value={board.id}>
+                {board.name}
+              </option>
             ))}
         </select>
         <input

@@ -11,14 +11,11 @@ const CarDetail = (props) => {
   const [korDropoffDateTime, setKorDropoffDateTime] = useState(null);
   const [totalTime, setTotalTime] = useState(null);
   const [selectedInsurance, setSelectedInsurance] = useState(null);
-  const [count, setCount] = useState({
-    personCount: 1,
-    dogCount: 1,
-  });
+  const [count, setCount] = useState(null);
+  const [countListPrice, setCountListPrice] = useState(null);
+  const [countCounterPrice, setCountCounterPrice] = useState(null);
   const [basePrice, setBasePrice] = useState();
   const [finalPrice, setFinalPrice] = useState();
-
-  const { personCount, dogCount } = count;
 
   const loadCarInfo = () => {
     axios
@@ -47,6 +44,19 @@ const CarDetail = (props) => {
         return false;
       }
     });
+  };
+
+  const onCounterChangeHandler = (e) => {
+    const name = e.target.getAttribute("name");
+    const end = e.target.dataset.end; // 최대, 최소 한도
+    const tmpCount = { ...count };
+    if (e.target.innerText === "+" && count[name] + 1 <= end) {
+      tmpCount[name] = count[name] + 1;
+    } else if (e.target.innerText === "-" && count[name] - 1 >= end) {
+      tmpCount[name] = count[name] - 1;
+    }
+
+    setCount(tmpCount);
   };
 
   const onCountChangeHandler = (e) => {
@@ -89,30 +99,58 @@ const CarDetail = (props) => {
     makeDateTimeToKorString();
   }, []);
 
-  //렌터카 정보 받아왔으면 첫 보험을 자동 선택
   useEffect(() => {
-    if (!carInfo) {
-      return;
-    }
+    if (!carInfo) return;
+    setBasePrice(carInfo.insurances[0].price);
+    setFinalPrice(carInfo.insurances[0].price);
+
     setSelectedInsurance(carInfo.insurances[0]);
+
+    const tmp = {};
+    const tmpCountListPrice = {};
+    const tmpCountCounterPrice = {};
+    carInfo.options.forEach((option) => {
+      if (option.items) {
+        tmpCountListPrice[`${option.name}-0`] = 0;
+        option.items.forEach((item) => {
+          tmpCountListPrice[`${option.name}-${item.value}`] = item.price;
+        });
+        tmp[option.name] = 1;
+      } else if (option.counter) {
+        tmpCountCounterPrice[option.name] = option.counter.price;
+        tmp[option.name] = 0;
+      }
+    });
+    setCountListPrice(tmpCountListPrice);
+    setCountCounterPrice(tmpCountCounterPrice);
+    setCount(tmp);
   }, [carInfo]);
 
-  // 보험 선택 변경될 때 마다 base price 변경
   useEffect(() => {
-    if (!selectedInsurance) {
-      return;
-    }
+    console.log(finalPrice);
+  }, [finalPrice]);
+
+  useEffect(() => {
+    if (!selectedInsurance) return;
     setBasePrice(selectedInsurance.price);
   }, [selectedInsurance]);
 
-  //base price 또는 반려견 수 변경될 때 마다 반려견 수에 맞추어 base price + 추가요금 = final price 설정
   useEffect(() => {
-    if (!basePrice) {
-      return;
-    }
-    //finalPrice 반려견수로 추가요금 계산 로직
-    setFinalPrice(basePrice + 30000 * (dogCount - 1));
-  }, [basePrice, dogCount]);
+    if (!count) return;
+    if (!basePrice) return;
+
+    let tmp = basePrice;
+    const keyList = Object.keys(count);
+    keyList.forEach((key) => {
+      //countCounterPrice에 key있는지 확인 => 있으면 counter속성
+      if (countCounterPrice[key]) {
+        tmp += count[key] * countCounterPrice[key];
+      } else {
+        tmp += countListPrice[`${key}-${count[key]}`];
+      }
+    });
+    setFinalPrice(tmp);
+  }, [count, basePrice]);
 
   return (
     <>
@@ -260,49 +298,63 @@ const CarDetail = (props) => {
               </div>
             </main>
             <aside className={styles.side_menu}>
-              <div className={styles.number_container}>
-                <div className={styles.select_form}>
-                  <p className={styles.select_title}>탑승 인원 (운전자 포함)</p>
-                  <select
-                    name="personCount"
-                    value={personCount}
-                    onChange={onCountChangeHandler}
-                    className={styles.select}
-                  >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
+              {count && countListPrice && countCounterPrice && (
+                <div className={styles.number_container}>
+                  {carInfo.options.map((option) =>
+                    option.field_cd === "list" ? (
+                      <div className={styles.select_form}>
+                        <p className={styles.select_title}>{option.label}</p>
+                        <select
+                          name={option.name}
+                          value={count[option.name]}
+                          onChange={onCountChangeHandler}
+                          className={styles.select}
+                        >
+                          {option.items.map((item) => (
+                            <option data-price={item.price} value={item.value}>
+                              {item.text}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    ) : (
+                      <div className={styles.count_form}>
+                        <p className={styles.count_title}>{option.label}</p>
+                        <div className={styles.count_number_and_price}>
+                          <div className={styles.count_number_container}>
+                            <div
+                              className={styles.number_button}
+                              name={option.name}
+                              data-end={option.counter.from}
+                              onClick={onCounterChangeHandler}
+                            >
+                              -
+                            </div>
+                            <div className={styles.number}>
+                              {count[option.name]}
+                            </div>
+                            <div
+                              className={styles.number_button}
+                              name={option.name}
+                              data-end={option.counter.to}
+                              onClick={onCounterChangeHandler}
+                            >
+                              +
+                            </div>
+                          </div>
+                          <p className={styles.count_price}>{`${
+                            countCounterPrice[option.name] * count[option.name]
+                          }원`}</p>
+                        </div>
+                      </div>
+                    )
+                  )}
+                  <p className={styles.warning}>
+                    탑승인원과 반려견수가 많을 경우 미팅서비스의 제한이 있을 수
+                    있습니다.
+                  </p>
                 </div>
-                <div className={styles.select_form}>
-                  <p className={styles.select_title}>동반 반려견 수</p>
-                  <select
-                    name="dogCount"
-                    value={dogCount}
-                    onChange={onCountChangeHandler}
-                    className={styles.select}
-                  >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                </div>
-                <p className={styles.warning}>
-                  반려견 1마리 당 추가요금 3만원입니다.
-                </p>
-                {personCount + dogCount >= 5 && (
-                  <div>
-                    <p className={styles.warning}>
-                      탑승인원과 반려견수가 많을 경우 미팅서비스의 제한이 있을
-                      수 있습니다.
-                    </p>
-                  </div>
-                )}
-              </div>
+              )}
               <div className={styles.side_menu_price_container}>
                 <div className={styles.side_menu_price_item}>
                   <p className={styles.side_menu_price_text}>기본 요금</p>
