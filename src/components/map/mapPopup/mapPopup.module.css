@@ -299,8 +299,14 @@
   border-radius: 0 0 10px 10px;
   font-weight: 500;
   color: rgba(112, 112, 112, 1);
+  opacity: 0.8;
   cursor: pointer;
 }
+
+.show_more_button:active {
+  opacity: 1;
+}
+
 .show_more_icon {
   margin-left: 10px;
 }

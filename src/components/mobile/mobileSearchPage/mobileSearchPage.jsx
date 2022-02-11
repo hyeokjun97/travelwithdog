@@ -11,26 +11,26 @@ const MobileSearchPage = ({ categoryList }) => {
   const [searchResult, setSearchResult] = useState(null);
   const [sortResult, setSortResult] = useState(null);
 
-  const [selected, setSelected] = useState("전체");
-
-  const [sortValue, setSortValue] = useState("최신순");
-
-  const onSelectChangeHandler = (item) => {
-    setSelected(item.name);
-  };
-
-  const onSortValueChangeHandler = (value) => {
-    setSortValue(value);
-  };
-
-  const loadSearchResult = () => {
-    axios
-      .get(`${process.env.REACT_APP_BASEURL}/products?keyword=${query}`)
-      .then((response) => {
-        setSearchResult(response.data);
-        setSortResult(response.data);
-      })
-      .catch((err) => console.error(err));
+  const loadSearchResult = async () => {
+    let tmp = [];
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/products?keyword=${query}`
+      );
+      const boardList = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/boards`
+      );
+      response.data.forEach((data) => tmp.push(data));
+      for (const board of boardList.data) {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASEURL}/boards/${board.id}/articles?limit=1000&page=1&keyword=${query}`
+        );
+        tmp = tmp.concat(response.data);
+      }
+      setSearchResult(tmp);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -44,15 +44,15 @@ const MobileSearchPage = ({ categoryList }) => {
       <div className={styles.text_container}>
         <p className={styles.title}>{`${query} 검색결과`}</p>
         <p className={styles.number}>{`${
-          sortResult ? sortResult.length : " "
+          searchResult ? searchResult.length : " "
         }건의 검색결과`}</p>
       </div>
       <div className={styles.divide_line}></div>
       <div className={styles.main}>
         <div className={styles.item_list}>
-          {sortResult ? (
-            sortResult.length > 0 ? (
-              <ItemList itemList={sortResult} />
+          {searchResult ? (
+            searchResult.length > 0 ? (
+              <ItemList itemList={searchResult} />
             ) : (
               <p className={styles.nothing}>검색 결과가 없습니다</p>
             )

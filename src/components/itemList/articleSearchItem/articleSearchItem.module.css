@@ -3,20 +3,25 @@
   height: 250px;
   margin: 1%;
   cursor: pointer;
+  cursor: pointer;
+  transition: all ease-in 0.2s;
+  animation: pageAppear 1s;
 }
 
-.thumbnail {
+.image_container {
+  height: 150px;
+}
+
+.image {
   width: 100%;
   height: 150px;
-  outline: none;
   border-radius: 16px;
-  margin: auto;
-  padding: 0 !important;
-  transition: 150ms all ease;
 }
 
-.thumbnail:hover {
-  box-shadow: 2px 5px 10px lightgray;
+.text_container {
+  padding: 14px 0 0 0;
+  height: 100px;
+  position: relative;
 }
 
 .title {
@@ -32,34 +37,26 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   padding-left: 6px;
-  margin-bottom: 4px;
 }
 
-.star_container {
-  padding: 4px 0 6px 4px;
+.bottom {
+  width: calc(100% - 20px);
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  bottom: 12px;
 }
 
-.rating_text {
-  margin-left: 8px;
-  font-weight: 700;
-}
-
-.price {
+.date {
   color: rgb(13, 13, 13);
   font-weight: 600;
+  font-size: var(--fontsize-bit-small);
   padding-left: 6px;
-  position: absolute;
-  bottom: 10px;
-  left: 0;
 }
 
-.data_container {
-  height: 100px;
-  padding: 14px 0 0 0;
-  position: relative;
-}
 @media screen and (max-width: 900px) {
   .item {
     width: 32%;
@@ -94,5 +91,21 @@
   }
   .price {
     padding-left: 4px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .item {
+    width: 97%;
+    margin: 10px 1.5%;
+  }
+}
+
+@keyframes pageAppear {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
   }
 }

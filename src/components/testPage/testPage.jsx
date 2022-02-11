@@ -34,6 +34,17 @@ const TestPage = (props) => {
     setReviewUploadPopupOn(!reviewUploadPopupOn);
   };
 
+  const loadProductFieldSet = () => {
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/tours/120/fieldsets`)
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    loadProductFieldSet();
+  }, []);
+
   return (
     <div style={{ marginTop: "200px" }}>
       <button

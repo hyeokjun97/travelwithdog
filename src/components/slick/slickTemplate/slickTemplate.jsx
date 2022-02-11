@@ -22,7 +22,7 @@ function NextArrow(props) {
         display: "block",
         width: 20,
         height: 20,
-        top: 120,
+        top: 95,
         right: -30,
         zIndex: 2,
       }}
@@ -43,7 +43,7 @@ function PrevArrow(props) {
         display: "block",
         width: 20,
         height: 20,
-        top: 120,
+        top: 95,
         left: -30,
         zIndex: 2,
         backgroundColor: "transparent",

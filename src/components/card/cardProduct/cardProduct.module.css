@@ -34,24 +34,12 @@
   padding-left: 6px;
 }
 
-.star_container {
-  padding: 4px 0 6px 4px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.rating_text {
-  margin-left: 8px;
-  font-size: var(--fontsize-normal);
-  font-weight: 700;
-}
-
 .price {
   color: rgb(13, 13, 13);
   font-size: var(--fontsize-normal);
   font-weight: 600;
   padding-left: 6px;
+  padding-top: 4px;
 }
 
 .data_container {

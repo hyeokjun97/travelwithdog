@@ -196,7 +196,6 @@
 }
 
 .checkbox {
-  margin-right: 6px;
   -ms-transform: scale(1.1); /* IE */
   -moz-transform: scale(1.1); /* FF */
   -webkit-transform: scale(1.1); /* Safari and Chrome */
@@ -206,6 +205,7 @@
 
 .checkbox_text {
   font-weight: 500;
+  margin-left: 6px;
 }
 
 .requirement {
@@ -396,6 +396,7 @@
   }
 
   .checkbox_text {
+    margin-left: 4px;
     font-size: var(--fontsize-bit-small);
   }
 }

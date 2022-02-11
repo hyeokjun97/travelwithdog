@@ -314,6 +314,19 @@ const ProductDetail = ({ deviceSize }) => {
     );
   }, [map, product]);
 
+  const loadProductFieldSet = () => {
+    console.log(product.id);
+    axios
+      .get(`${process.env.REACT_APP_BASEURL}/tours/${product.id}/fieldsets`)
+      .then((response) => console.log(response.data))
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    if (!product) return;
+    loadProductFieldSet();
+  }, [product]);
+
   return (
     <>
       <div className={styles.body}>
