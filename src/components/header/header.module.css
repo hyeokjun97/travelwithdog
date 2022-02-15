@@ -63,7 +63,7 @@
   margin: 0 15px;
   text-align: center;
   font-weight: 500;
-  color: var(--color-light-black);
+  color: #0e0e0e;
   cursor: pointer;
 }
 
@@ -90,7 +90,7 @@
   margin: 0 5px;
   font-size: var(--fontsize-bit-small);
   text-align: center;
-  color: var(--color-desc);
+  color: #0e0e0e;
   cursor: pointer;
 }
 

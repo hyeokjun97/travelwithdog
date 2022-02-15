@@ -127,10 +127,6 @@ const CarDetail = (props) => {
   }, [carInfo]);
 
   useEffect(() => {
-    console.log(finalPrice);
-  }, [finalPrice]);
-
-  useEffect(() => {
     if (!selectedInsurance) return;
     setBasePrice(selectedInsurance.price);
   }, [selectedInsurance]);

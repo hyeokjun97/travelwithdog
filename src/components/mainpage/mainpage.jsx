@@ -200,7 +200,6 @@ const Mainpage = ({ chabak, jejuBest, loadPageData, categoryList }) => {
   };
 
   const onTopSelectChangeHandler = (e) => {
-    console.log(e.target.innerText);
     setTopSelect(e.target.innerText);
   };
 
@@ -220,6 +219,10 @@ const Mainpage = ({ chabak, jejuBest, loadPageData, categoryList }) => {
       )}월 ${Number(endList[2])}일 (${dayTranslator(endList[0])})`
     );
   }, [date]);
+
+  useEffect(() => {
+    console.log(pageData);
+  }, [pageData]);
 
   return (
     <>
@@ -247,18 +250,26 @@ const Mainpage = ({ chabak, jejuBest, loadPageData, categoryList }) => {
               </h2>
               <div className={styles.top_main}>
                 <div className={styles.top_select_button_container}>
-                  <p
-                    className={styles.top_select_button}
+                  <div
+                    className={`${
+                      topSelect === "키워드"
+                        ? `${styles.top_select_button} ${styles.top_select_on}`
+                        : `${styles.top_select_button}`
+                    }`}
                     onClick={onTopSelectChangeHandler}
                   >
                     키워드
-                  </p>
-                  <p
-                    className={styles.top_select_button}
+                  </div>
+                  <div
+                    className={`${
+                      topSelect === "렌터카"
+                        ? `${styles.top_select_button} ${styles.top_select_on}`
+                        : `${styles.top_select_button}`
+                    }`}
                     onClick={onTopSelectChangeHandler}
                   >
                     렌터카
-                  </p>
+                  </div>
                 </div>
                 {topSelect === "키워드" ? (
                   <div className={styles.search_and_tag_container}>
@@ -381,6 +392,7 @@ const Mainpage = ({ chabak, jejuBest, loadPageData, categoryList }) => {
           <div className={styles.list_part}>
             {pageData.sections.map(
               (section) =>
+                section.items &&
                 section.items.length > 0 && ( //일단 빈데이터 있어서 이렇게 해둠
                   <div key={section.title} className={styles.list_container}>
                     <p className={styles.list_title}>{section.title}</p>

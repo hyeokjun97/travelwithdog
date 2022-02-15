@@ -17,7 +17,6 @@ const SummerNote = ({ onContentChangeHandler, boardSelect }) => {
     const formData = new FormData();
     formData.append("board_id", boardSelect);
     formData.append("image", fileList[0]);
-    console.log(formData.get("image"));
     axios
       .post(
         `${process.env.REACT_APP_BASEURL}/boards/${boardSelect}/images`,

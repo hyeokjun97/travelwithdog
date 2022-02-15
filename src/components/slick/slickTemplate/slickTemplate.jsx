@@ -109,7 +109,7 @@ export default class SlickTemplate extends Component {
             : sectionCode === "showroom-b"
             ? itemList.map((item) => <div className="">s</div>) //
             : sectionCode === "showroom-c"
-            ? itemList.map((item) => <div className="">s</div>) //
+            ? itemList.map((item) => <div className="">s</div>) // showroom에 들어갈 것들 위해 남겨놓음 (아직 데이터 없음)
             : //
               itemList.map((item) =>
                 item.item_template_cd ? (

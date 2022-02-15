@@ -314,6 +314,7 @@ const ProductDetail = ({ deviceSize }) => {
     );
   }, [map, product]);
 
+  //임시
   const loadProductFieldSet = () => {
     console.log(product.id);
     axios

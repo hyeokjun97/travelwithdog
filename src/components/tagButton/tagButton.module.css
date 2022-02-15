@@ -6,13 +6,15 @@
   border-radius: 16px;
   padding: 6px 14px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .text {
   color: rgb(87, 87, 87);
   font-size: var(--fontsize-normal);
   font-weight: 700;
-  padding-top: 2px;
 }
 
 @media screen and (max-width: 1050px) {

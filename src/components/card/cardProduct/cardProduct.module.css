@@ -34,17 +34,20 @@
   padding-left: 6px;
 }
 
+.data_container {
+  width: 100%;
+  height: 100px;
+  padding: 14px 0 0 0;
+  position: relative;
+}
+
 .price {
   color: rgb(13, 13, 13);
   font-size: var(--fontsize-normal);
   font-weight: 600;
-  padding-left: 6px;
-  padding-top: 4px;
-}
-
-.data_container {
-  width: 100%;
-  padding: 14px 0 0 0;
+  position: absolute;
+  bottom: 10px;
+  left: 6px;
 }
 
 .arrow {

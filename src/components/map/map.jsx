@@ -65,7 +65,6 @@ const Map = ({ deviceSize, isLoggedIn }) => {
         setPopupOn(true);
       });
     });
-    console.log(tmpMarkerObject);
     setMarkerObject(tmpMarkerObject);
   }, [map, spotList]);
 

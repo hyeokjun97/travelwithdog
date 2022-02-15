@@ -36,8 +36,10 @@ const CardProduct = ({ item }) => {
         alt="thumbnail"
         className={styles.thumbnail}
       />
-      <div className="data_container">
-        <p className="title">{item.product && item.product.tour.name_en}</p>
+      <div className={styles.data_container}>
+        <p className={styles.title}>
+          {item.product && item.product.tour.name_en}
+        </p>
 
         <p className={styles.price}>{`${
           item.product && item.product.tour.price.toLocaleString("ko-KR")
