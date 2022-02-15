@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CarSlick from "../slick/carSlick/carSlick";
-import ItemSlickTwo from "../slick/itemSlickTwo/itemSlickTwo";
 import TagButton from "../tagButton/tagButton";
 import styles from "./mainpage.module.css";
-import MapSection from "../mapSection/mapSection";
 import HelmetComponent from "../helmetComponent/helmetComponent";
 import SlickTemplate from "../slick/slickTemplate/slickTemplate";
 import LoadingPage from "../loadingPage/loadingPage";
@@ -390,9 +388,10 @@ const Mainpage = ({ chabak, jejuBest, loadPageData, categoryList }) => {
           </div>
 
           <div className={styles.list_part}>
-            {pageData.sections.map(
-              (section) =>
-                section.items &&
+            {pageData.sections.map((section) =>
+              section.section_template_cd === "default" ||
+              section.section_template_cd === "spot" ||
+              section.section_template_cd === "board" ? (
                 section.items.length > 0 && ( //일단 빈데이터 있어서 이렇게 해둠
                   <div key={section.title} className={styles.list_container}>
                     <p className={styles.list_title}>{section.title}</p>
@@ -402,33 +401,24 @@ const Mainpage = ({ chabak, jejuBest, loadPageData, categoryList }) => {
                     <SlickTemplate sectionInfo={section} />
                   </div>
                 )
+              ) : section.section_template_cd === "spot_banner" ? (
+                <div className="">
+                  스팟배너(완성되면 이미지 넣고 버튼, 문구 추가)
+                </div>
+              ) : section.section_template_cd === "rentcar_banner" ? (
+                <div className="">
+                  렌터카배너(완성되면 이미지 넣고 버튼, 문구 추가)
+                </div>
+              ) : section.section_template_cd === "rentcar" ? (
+                <div className={styles.list_container}>
+                  <p className={styles.list_title}>가장 인기있는 펫 렌터카</p>
+                  <CarSlick viewItems={section.items} />
+                </div>
+              ) : (
+                <></>
+              )
             )}
 
-            <div className={styles.map_part}>
-              <img
-                src="/travelWithDog/images/map_logo.png"
-                alt="meongji_logo"
-                className={styles.map_logo}
-              />
-              <p className={styles.map_title}>반려여행을 위한 공공지도</p>
-              <p className={styles.map_subtitle}>반려견과 어디를 가야할까?</p>
-
-              <p className={styles.map_subtitle}>
-                <b>반려견 동반</b>이 가능한 <b>식당, 카페, 여행지, 숙소</b>가
-                모두 지도 안에!
-              </p>
-              <MapSection />
-            </div>
-            <div className={styles.list_container}>
-              <p className={styles.list_title}>가장 인기있는 펫 렌터카</p>
-              <CarSlick viewItems={jejuBest} />
-            </div>
-            <div className={styles.blog_part}>
-              <div className={styles.list_container}>
-                <p className={styles.list_title}>여행 정보 블로그</p>
-                <ItemSlickTwo viewItems={chabak} />
-              </div>
-            </div>
             <div className={styles.bottom_part}></div>
           </div>
         </div>

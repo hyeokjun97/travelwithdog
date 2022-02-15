@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import SlickTemplate from "../slick/slickTemplate/slickTemplate";
 import LoadingPage from "../loadingPage/loadingPage";
 import HelmetComponent from "../helmetComponent/helmetComponent";
+import CarSlick from "../slick/carSlick/carSlick";
 
 const Rentcar = ({ loadPageData }) => {
   const navigate = useNavigate();
@@ -283,8 +284,10 @@ const Rentcar = ({ loadPageData }) => {
             </div>
           </div>
           <div className={styles.bottom_part}>
-            {pageData.sections.map(
-              (section) =>
+            {pageData.sections.map((section) =>
+              section.section_template_cd === "default" ||
+              section.section_template_cd === "spot" ||
+              section.section_template_cd === "board" ? (
                 section.items.length > 0 && ( //일단 빈데이터 있어서 이렇게 해둠
                   <div key={section.title} className={styles.list_container}>
                     <p className={styles.list_title}>{section.title}</p>
@@ -294,56 +297,23 @@ const Rentcar = ({ loadPageData }) => {
                     <SlickTemplate sectionInfo={section} />
                   </div>
                 )
+              ) : section.section_template_cd === "spot_banner" ? (
+                <div className="">
+                  스팟배너(완성되면 이미지 넣고 버튼, 문구 추가)
+                </div>
+              ) : section.section_template_cd === "rentcar_banner" ? (
+                <div className="">
+                  렌터카배너(완성되면 이미지 넣고 버튼, 문구 추가)
+                </div>
+              ) : section.section_template_cd === "rentcar" ? (
+                <div className={styles.list_container}>
+                  <p className={styles.list_title}>가장 인기있는 펫 렌터카</p>
+                  <CarSlick viewItems={section.items} />
+                </div>
+              ) : (
+                <></>
+              )
             )}
-
-            {/* <p className={`${styles.title} ${styles.title_first}`}>
-          트래블위드독 렌터카를 선택해야하는 이유
-        </p>
-        <div className={styles.intro_container}>
-          <div className={styles.intro_item}>
-            <img
-              src="/travelWithDog/images/facebook_round.png"
-              alt="intro_image"
-              className={styles.intro_image}
-            />
-            <p className={styles.intro_title}>당당하고 떳떳하게</p>
-            <p className={styles.intro_desc}>
-              반려견 거부? 추가요금?<br></br>그런 것 없는 서비스를 제공합니다.
-            </p>
-          </div>
-          <div className={styles.intro_item}>
-            <img
-              src="/travelWithDog/images/facebook_round.png"
-              alt="intro_image"
-              className={styles.intro_image}
-            />
-            <p className={styles.intro_title}>프라이빗 미팅 서비스</p>
-            <p className={styles.intro_desc}>
-              공항 미팅부터 렌터카하우스까지<br></br>반려인 가족을 전용차량으로
-              맞이합니다.
-            </p>
-          </div>
-          <div className={styles.intro_item}>
-            <img
-              src="/travelWithDog/images/facebook_round.png"
-              alt="intro_image"
-              className={styles.intro_image}
-            />
-            <p className={styles.intro_title}>트래블키트 10종</p>
-            <p className={styles.intro_desc}>
-              반려견을 위한 트래블키트 9종과<br></br>삼다수 물을 여행 선물로
-              증정합니다.
-            </p>
-          </div>
-        </div>
-        <div className={styles.recommend_part}>
-          <p className={styles.title}>트래블위드독의 또 다른 추천 상품</p>
-          <div className={styles.recommend_container}></div>
-        </div>
-        <div className={styles.knowhow_part}>
-          <p className={styles.title}>트래블위드독 렌터카 100% 이용 노하우</p>
-          <div className={styles.knowhow_container}></div>
-        </div> */}
           </div>
         </div>
       ) : (

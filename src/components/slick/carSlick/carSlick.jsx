@@ -55,6 +55,7 @@ function PrevArrow(props) {
 export default class CarSlick extends Component {
   render() {
     const { viewItems } = this.props;
+    console.log(viewItems);
     const width = window.innerWidth;
     let settings = {
       dots: false,
@@ -87,42 +88,36 @@ export default class CarSlick extends Component {
       <div className="car_slick_container">
         <Slider {...settings}>
           {viewItems.map((item) => (
-            <div key={item.idx} className="item">
+            <div key={item.rentcar.id} className="item">
               <div className="box">
                 <div className="image_container">
                   <img
-                    src="/travelWithDog/images/car_example.png"
+                    src={
+                      item.rentcar.images.length > 0
+                        ? item.rentcar.images[0].url
+                        : "/travelWithDog/images/no_image.jpeg"
+                    }
                     alt="thumbnail"
                     className="thumbnail"
                   />
                 </div>
                 <div className="data_container">
                   <div className="title_container">
-                    <p className="title">5인승 중형</p>
-                    <p className="title_big">벤츠C200 오픈카 4인승 (휘)</p>
+                    <p className="title">{`${item.rentcar.seat_count}인승 ${item.rentcar.rentcar_class_code.name}`}</p>
+                    <p className="title_big">{item.rentcar.name}</p>
                   </div>
                   <div className="option_container">
-                    <div className="option">
-                      <p className="option_title">무보험</p>
-                      <div className="price_container">
-                        <p className="price_number">96,000</p>
-                        <p className="price_unit">원</p>
+                    {item.rentcar.insurances.map((ins) => (
+                      <div key={ins.id} className="option">
+                        <p className="option_title">{ins.name}</p>
+                        <div className="price_container">
+                          <p className="price_number">
+                            {ins.price.toLocaleString("ko-kr")}
+                          </p>
+                          <p className="price_unit">원</p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="option">
-                      <p className="option_title">일반자차</p>
-                      <div className="price_container">
-                        <p className="price_number">125,000</p>
-                        <p className="price_unit">원</p>
-                      </div>
-                    </div>
-                    <div className="option">
-                      <p className="option_title">완전자차</p>
-                      <div className="price_container">
-                        <p className="price_number">147,000</p>
-                        <p className="price_unit">원</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>

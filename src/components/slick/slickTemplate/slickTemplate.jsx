@@ -5,6 +5,8 @@ import "./slickTemplate.css";
 import "slick-carousel/slick/slick-theme.css";
 import CardDefault from "../../card/cardDefault/cardDefault";
 import CardProduct from "../../card/cardProduct/cardProduct";
+import CardSpot from "../../card/cardSpot/cardSpot";
+import CardArticle from "../../card/cardArticle/cardArticle";
 
 //모바일되면 arrow 없애고 슬라이드 형식으로 전환
 //모바일에서 원하는 곳에 멈추지 않고 항상 두 엘리먼트 사이에서 강제로 멈추게 됨
@@ -96,28 +98,24 @@ export default class SlickTemplate extends Component {
         },
       ],
     };
+    console.log(itemList);
 
     //각각의 디자인에 맞는 카드 컴포넌트들을 만들어서 이곳에 끼워넣는 방식, 만약 style에
     //어려움이 있다면 그냥 여기에 직접 하기
     return (
       <div className="slick_template">
         <Slider {...settings}>
-          {sectionCode === "rentcar" //
-            ? itemList.map((item) => <div className="">s</div>) //
-            : sectionCode === "showroom-a" //
-            ? itemList.map((item) => <div className="">s</div>) //
-            : sectionCode === "showroom-b"
-            ? itemList.map((item) => <div className="">s</div>) //
-            : sectionCode === "showroom-c"
-            ? itemList.map((item) => <div className="">s</div>) // showroom에 들어갈 것들 위해 남겨놓음 (아직 데이터 없음)
-            : //
-              itemList.map((item) =>
-                item.item_template_cd ? (
-                  <CardProduct key={item.product_id} item={item} />
-                ) : (
-                  <CardDefault key={item.title} item={item} />
-                )
-              )}
+          {itemList.map((item) =>
+            item.item_template_cd ? (
+              <CardProduct key={item.product_id} item={item} />
+            ) : item.spot ? (
+              <CardSpot key={item.spot.id} item={item.spot} />
+            ) : item.article ? (
+              <CardArticle key={item.article.id} item={item.article} />
+            ) : (
+              <CardDefault key={item.title} item={item} />
+            )
+          )}
         </Slider>
       </div>
     );

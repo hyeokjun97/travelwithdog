@@ -264,9 +264,9 @@ const Login = ({
           />
           <p className={styles.social_text}>Apple</p>
         </div>
-        {/* 키 내꺼임 */}
+
         <GoogleLogin
-          clientId="943509625186-817bqpmg3r7taoc231b3a06jp7ifo5tk.apps.googleusercontent.com"
+          clientId=""
           render={(renderProps) => (
             <div
               className={styles.social_button}
