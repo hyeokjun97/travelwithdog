@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/travelwithdog/static/css/main.da607341.css",
+    "main.js": "/travelwithdog/static/js/main.284459d5.js",
+    "static/media/top_banner.png": "/travelwithdog/static/media/top_banner.bf80bcecf8f52945173a.png",
+    "static/media/main_bottom.png": "/travelwithdog/static/media/main_bottom.e46f946945e6b15eaeda.png",
+    "static/media/glyphicons-halflings-regular.svg": "/travelwithdog/static/media/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg",
+    "static/media/main_bottom_mobile.png": "/travelwithdog/static/media/main_bottom_mobile.e10a9bc05df4a05c18a0.png",
+    "static/media/glyphicons-halflings-regular.ttf": "/travelwithdog/static/media/glyphicons-halflings-regular.4692b9ec53fd5972caa2.ttf",
+    "static/media/glyphicons-halflings-regular.woff": "/travelwithdog/static/media/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff",
+    "static/media/glyphicons-halflings-regular.eot": "/travelwithdog/static/media/glyphicons-halflings-regular.5be1347c682810f199c7.eot",
+    "static/media/glyphicons-halflings-regular.woff2": "/travelwithdog/static/media/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2",
+    "static/media/summernote.eot": "/travelwithdog/static/media/summernote.bd0d8be1fbad3612dfe1.eot",
+    "static/media/summernote.ttf": "/travelwithdog/static/media/summernote.b293d601cf1cddd1a1b4.ttf",
+    "static/media/summernote.woff": "/travelwithdog/static/media/summernote.08c343ff91f188dfc1a7.woff",
+    "static/media/summernote.woff2": "/travelwithdog/static/media/summernote.7c9436ed8d2deac04e37.woff2",
+    "static/media/slick.svg": "/travelwithdog/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/travelwithdog/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/travelwithdog/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "index.html": "/travelwithdog/index.html",
+    "static/media/slick.woff": "/travelwithdog/static/media/slick.295183786cd8a1389865.woff",
+    "static/media/index.cjs": "/travelwithdog/static/media/index.06ad11ea3e32fd3e4303.cjs",
+    "main.da607341.css.map": "/travelwithdog/static/css/main.da607341.css.map",
+    "main.284459d5.js.map": "/travelwithdog/static/js/main.284459d5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.da607341.css",
+    "static/js/main.284459d5.js"
+  ]
+}
