@@ -315,9 +315,7 @@ const App = (props) => {
 
   return (
     <div className={styles.app}>
-      <BrowserRouter basename={window.location.pathname || ''}>
-        <Route exact path="/" component={Index} />
-        {/*process.env.PUBLIC_URL}>*/}
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         {deviceSize ? (
           categoryList && (
             <Header
