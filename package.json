@@ -2,7 +2,7 @@
   "homepage": "http://hyeokjun97.github.io/travelwithdog",
   "name": "travelwithdog",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.5",
@@ -87,7 +87,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -b master -d build"
   },
   "eslintConfig": {
     "extends": [
