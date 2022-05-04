@@ -352,13 +352,7 @@ const App = (props) => {
             <Route
               path="/"
               element={
-                <Mainpage
-                  chabak={chabak}
-                  jejuBest={jejuBest}
-                  deviceSize={deviceSize}
-                  loadPageData={loadPageData}
-                  categoryList={categoryList}
-                />
+                <Mainpage deviceSize={deviceSize} loadPageData={loadPageData} />
               }
             ></Route>
           )}

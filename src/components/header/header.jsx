@@ -14,6 +14,8 @@ const Header = ({
   const [toggleOn, setToggleOn] = useState(false);
   const [scrollValue, setScrollValue] = useState(0);
 
+  const bodyRef = useRef(); //
+
   const { pathname } = window.location;
   const pathList = pathname.split("/");
 
@@ -39,7 +41,7 @@ const Header = ({
       ref={headerRef}
       className={`${
         !toggleOn
-          ? scrollValue < 80 &&
+          ? scrollValue < 50 && //<-- 이 부부분에서 Header메뉴를 숨김표시 할 수 있습니다. 
             (pathList.length < 3 ||
               pathList[2] === "" ||
               pathList[2] === "rentcar" ||
@@ -58,10 +60,20 @@ const Header = ({
         <i className={`${styles.close} fas fa-bars`}></i>
       </div>
 
-      <div className={styles.body}>
+      <div 
+        ref = {bodyRef}
+        
+        className={`${
+          !toggleOn
+            ? scrollValue < 50 ? `${styles.body} ${styles.body_on}`
+            : `${styles.body} ${styles.body_off}`
+          : `${styles.body} ${styles.body_off}`
+        }`}
+        >
+          {/*   className={styles.body}>  FOR RETURNING BACK */} 
         <div className={styles.logo_container}>
           <img
-            src="/travelWithDog/images/logo.png"
+            src='/travelWithDog/images/logo.png'
             alt="travel_with_dog"
             className={styles.logo}
             onClick={() => {

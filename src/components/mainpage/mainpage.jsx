@@ -12,7 +12,7 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
 
-const Mainpage = ({ chabak, jejuBest, loadPageData, categoryList }) => {
+const Mainpage = ({ loadPageData }) => {
   const navigate = useNavigate();
   const [pageData, setPageData] = useState(null);
   const [searchInput, setSearchInput] = useState("");

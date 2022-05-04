@@ -23,6 +23,9 @@
   margin: 0;
   color: white;
   white-space: pre-wrap;
+
+  text-shadow: -1px 1px 10px rgba(80, 80, 80, 0.75); 
+  /* 가시성을 위해 그림자 추가*/
 }
 
 .title {
@@ -30,6 +33,7 @@
   font-weight: 700;
   padding-left: 10%;
   padding-right: 10%;
+
 }
 
 .subtitle {

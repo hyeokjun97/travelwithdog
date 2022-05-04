@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { ReactElement, useRef, useEffect, useState } from "react";
 import styles from "./cardDefault.module.css";
 
 const CardDefault = ({ item }) => {
   const ref = useRef();
+
 
   useEffect(() => {
     if (!ref) {
@@ -12,12 +13,12 @@ const CardDefault = ({ item }) => {
       entries.forEach((entry) => {
         if (entry.intersectionRatio > 0) {
           const target = entry.target;
-          target.setAttribute(
+          target.setAttribute( //Image Gradient holds here
             "style",
             `background: linear-gradient(
-            180deg,
+            0deg,
             rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.208) 100%
+            rgba(0, 0, 0, 0.008) 60%
           ),url("${item.image_url}") center/cover no-repeat`
           );
           io.unobserve(target);
@@ -34,7 +35,9 @@ const CardDefault = ({ item }) => {
         className={styles.desc}
         dangerouslySetInnerHTML={{ __html: item.description }}
       ></div>
-      <div className={styles.detail_button}>자세히보기</div>
+
+      <div 
+        className={styles.detail_button}>자세히보기</div>
     </div>
   );
 };

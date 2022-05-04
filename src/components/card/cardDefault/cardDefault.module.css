@@ -10,6 +10,8 @@
 }
 
 .title {
+  position: absolute;
+  top: 60%;
   color: rgba(255, 255, 255, 0.95);
   margin: 0 0 16px 0;
   font-size: var(--fontsize-big);
@@ -17,6 +19,8 @@
 }
 
 .desc {
+  position: absolute;
+  bottom: 20%;
   color: white;
   font-size: var(--fontsize-normal);
   font-weight: 600;
@@ -36,8 +40,11 @@
   text-align: center;
   background-color: rgba(15, 15, 15, 0.8);
   border-radius: 0 0 12px 12px;
+  opacity: 0.0;
 }
-
+.detail_button:hover { /* HERE FOR BUTTON IN MAIN */ 
+  opacity: 1.0;
+}
 @media screen and (max-width: 380px) {
   .desc {
     font-size: var(--fontsize-bit-small);

@@ -10,13 +10,17 @@
   overflow-x: hidden;
   transition: 150ms all ease;
   white-space: nowrap;
+  height: 100px;
 }
 
 .header_on {
   background-color: transparent;
   border-bottom: none;
 }
+.body_on {
+  visibility: hidden;
 
+}
 .body {
   margin: auto;
   width: 1000px;
@@ -58,7 +62,8 @@
 .menu_item {
   height: 100px;
   line-height: 116px;
-  font-size: var(--fontsize-normal);
+  /*font-size: var(--fontsize-normal);*/
+  font-size: var(--fontsize-bit-big);
   padding: 0 15px;
   margin: 0 15px;
   text-align: center;

@@ -148,126 +148,144 @@ const CommunityPage = ({ isLoggedIn }) => {
         </div>
       </div>
       <main className={styles.main}>
-        <div className={styles.main_top}>
-          {board && (
+      {/*board && (
             <h2 className={styles.board_title}>{`${board.name} 게시판`}</h2>
-          )}
-          <ul className={styles.select_container}>
-            {boardList &&
-              boardList.map((board) => (
-                <li
-                  key={board.id}
-                  onClick={() => {
-                    navigate(`/community/${board.id}`);
-                  }}
-                  className={`${
-                    boardId === board.id.toString()
-                      ? `${styles.select_button} ${styles.select_button_on}`
-                      : `${styles.select_button}`
-                  }`}
-                >
-                  {board.name}
-                </li>
-              ))}
-          </ul>
-        </div>
-        <div className={styles.search_container}>
-          <div className={styles.search_left}>
-            <select className={styles.select}>
-              <option value="제목">제목</option>
-              <option value="글쓴이">글쓴이</option>
-              <option value="내용">내용</option>
-            </select>
-            <div className={styles.search_box}>
-              <input
-                type="text"
-                className={styles.search_input}
-                placeholder="검색"
-                spellCheck="false"
-              />
-              <div className={styles.search_icon_container}>
-                <i className={`${styles.search_icon} fas fa-search`}></i>
+      )*/}
+        {/* From here we change to tree node. */}
+        <div className={styles.main_top}>
+            {board && (
+              <h2 className={styles.board_title}>{`${board.name} 게시판`}</h2>
+            )}
+            
+            <div className={styles.search_container}>
+            <div className={styles.search_left}>
+              <select className={styles.select}>
+                <option value="제목">제목</option>
+                <option value="글쓴이">글쓴이</option>
+                <option value="내용">내용</option>
+              </select>
+              <div className={styles.search_box}>
+                <input
+                  type="text"
+                  className={styles.search_input}
+                  placeholder="검색"
+                  spellCheck="false"
+                />
+                
+                <div className={styles.search_icon_container}>
+                  <i className={`${styles.search_icon} fas fa-search`}></i>
+                </div>
               </div>
             </div>
+            {/*child && child.length > 0 && (
+              <button
+                className={styles.open_child_button}
+                onClick={onChildOpenHandler}
+              >
+                서브게시판
+              </button>
+            )*/}
           </div>
-          {child && child.length > 0 && (
-            <button
-              className={styles.open_child_button}
-              onClick={onChildOpenHandler}
-            >
-              서브게시판
-            </button>
-          )}
+
         </div>
-        <div className={styles.list}>
-          {childOpen && child && child.length > 0 && (
-            <div className={styles.child_container}>
-              {child.map((ch) => (
-                <div className={styles.child}>
-                  <h3
-                    className={styles.child_title}
-                    onClick={() => navigate(`/community/${ch.id}`)}
+        
+        <div className={styles.sidebar}>
+            <ul className={styles.select_container}>
+              {boardList &&
+                boardList.map((board) => (
+                  <li
+                    key={board.id}
+                    onClick={() => {
+                      navigate(`/community/${board.id}`);
+                    }}
+                    className={`${
+                      boardId === board.id.toString()
+                        ? `${styles.select_button} ${styles.select_button_on}`
+                        : `${styles.select_button}`
+                    }`}
                   >
-                    {ch.name}
-                  </h3>
-                  <div className={styles.child_of_child_container}>
-                    <ul>
-                      {ch.children.length > 0 &&
-                        child.children.map((chch) => (
-                          <li className={styles.child_of_child}>{chch.name}</li>
-                        ))}
-                    </ul>
-                  </div>
+                    {board.name}
+                  </li>
+                ))}
+            </ul>
+
+
+
+
+        </div>
+        <div className={styles.main_contents}>
+            <div className={styles.list}>
+              {childOpen && child && child.length > 0 && (
+                <div className={styles.child_container}>
+                  {child.map((ch) => (
+                    <div className={styles.child}>
+                      <h3
+                        className={styles.child_title}
+                        onClick={() => navigate(`/community/${ch.id}`)}
+                      >
+                        {ch.name}
+                      </h3>
+                      <div className={styles.child_of_child_container}>
+                        <ul>
+                          {ch.children.length > 0 &&
+                            child.children.map((chch) => (
+                              <li className={styles.child_of_child}>{chch.name}</li>
+                            ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
+              {!articleList ? (
+                <div className={styles.loading_container}>
+                  <LoadingPage />
+                </div>
+              ) : articleList.length > 0 ? (
+                articleList.map((article) => (
+                  <ArticleItem key={article.id} article={article} />
+                ))
+              ) : (
+                <p className={styles.no_article}>게시물이 없습니다</p>
+              )}
             </div>
-          )}
-          {!articleList ? (
-            <div className={styles.loading_container}>
-              <LoadingPage />
+            <div className={styles.write_button_container}>
+              <button className={styles.write_button} onClick={moveToWritePage}>
+                글쓰기
+              </button>
             </div>
-          ) : articleList.length > 0 ? (
-            articleList.map((article) => (
-              <ArticleItem key={article.id} article={article} />
-            ))
-          ) : (
-            <p className={styles.no_article}>게시물이 없습니다</p>
-          )}
+            <div className={styles.number_container}>
+              <ul className={styles.number_list}>
+                {pageNumberList && pageNumberList.length > 5 && (
+                  <li className={styles.arrow_left_box} onClick={pageRangeToPrev}>
+                    <i className={`${styles.arrow_left} fas fa-chevron-left`}></i>
+                  </li>
+                )}
+                {pageNumberList &&
+                  pageNumberList.length > 0 &&
+                  pageNumberList.slice(pageRange, pageRange + 5).map((num) => (
+                    <li
+                      key={num}
+                      className={`${
+                        num === selectedPage
+                          ? `${styles.number_item} ${styles.number_item_on}`
+                          : `${styles.number_item}`
+                      }`}
+                      onClick={onPageChangeHandler}
+                    >
+                      {num}
+                    </li>
+                  ))}
+                {pageNumberList && pageNumberList.length > 5 && (
+                  <li className={styles.arrow_right_box} onClick={pageRangeToNext}>
+                    <i className={`${styles.arrow_right} fas fa-chevron-right`}></i>
+                  </li>
+                )}
+              </ul>
+            </div>
         </div>
-        <div className={styles.write_button_container}>
-          <button className={styles.write_button} onClick={moveToWritePage}>
-            글쓰기
-          </button>
-        </div>
-        <div className={styles.number_container}>
-          <ul className={styles.number_list}>
-            {pageNumberList && pageNumberList.length > 5 && (
-              <li className={styles.arrow_left_box} onClick={pageRangeToPrev}>
-                <i className={`${styles.arrow_left} fas fa-chevron-left`}></i>
-              </li>
-            )}
-            {pageNumberList &&
-              pageNumberList.length > 0 &&
-              pageNumberList.slice(pageRange, pageRange + 5).map((num) => (
-                <li
-                  key={num}
-                  className={`${
-                    num === selectedPage
-                      ? `${styles.number_item} ${styles.number_item_on}`
-                      : `${styles.number_item}`
-                  }`}
-                  onClick={onPageChangeHandler}
-                >
-                  {num}
-                </li>
-              ))}
-            {pageNumberList && pageNumberList.length > 5 && (
-              <li className={styles.arrow_right_box} onClick={pageRangeToNext}>
-                <i className={`${styles.arrow_right} fas fa-chevron-right`}></i>
-              </li>
-            )}
-          </ul>
-        </div>
+        
+        
       </main>
     </div>
   );
