@@ -35,6 +35,7 @@
 
 .bottom {
   padding: 30px 0;
+  background-color: rgb(70, 70, 70);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,7 +62,9 @@
 }
 
 .text {
+
   margin-top: 8px;
+
 }
 
 .text_two {
@@ -69,9 +72,48 @@
 }
 
 .right {
-  margin-top: 24px;
+  margin-top: 20px;
   font-weight: 700;
 }
+.contact_container {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}
+.contact_info1{
+  flex: 2;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.text1 {
+  margin-top: 8px;
+  text-align: left;
+
+}
+.contact_info2{
+  flex: 2;
+  flex-direction: column;
+}
+.text2 {
+  margin-top: 3px;
+  text-align: left;
+}
+.contact_space{
+  flex:1;
+}
+/* THESE ARE PREVIOUS CODE justincase - remove when it is published
+          <p className={styles.text}>
+            대표: 김신철 사업자등록번호: 822-87-00041 [확인] | 관광사업등록: 제
+            2016-000007호 | 통신판매업신고: 제 2016-서울마포-0343호 [확인]
+          </p>
+          <p className={styles.text}>
+            서울특별시 마포구 서강로9길 48, 4층 | Tel: +82-2-6053-7272~3 | Fax:
+            +82-2-6053-7270 | Email: info@travelforest.co.kr | 10:00 am ~ 17:00 pm
+            (Mon~Fri)
+          </p>
+*/
 
 @media screen and (max-width: 970px) {
   .top {
@@ -93,3 +135,4 @@
     font-size: var(--fontsize-small);
   }
 }
+

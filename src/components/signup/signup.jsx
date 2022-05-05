@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "./signup.module.css";
 
+
 const Signup = ({ onCloseButtonHandler }) => {
   const [confirmedId, setConfirmedId] = useState(null);
   const [inputValue, setInputValue] = useState({
@@ -80,6 +81,7 @@ const Signup = ({ onCloseButtonHandler }) => {
     e.preventDefault();
     if (!confirmedId) {
       alert("이메일 인증을 완료해주세요");
+
       return;
     }
     if (password.length < 8) {
@@ -116,6 +118,7 @@ const Signup = ({ onCloseButtonHandler }) => {
       });
   };
 
+
   return (
     <div className={styles.signup_popup}>
       <div onClick={onCloseButtonHandler}>
@@ -141,6 +144,7 @@ const Signup = ({ onCloseButtonHandler }) => {
               spellCheck="false"
               disabled={confirmedId ? true : false}
             />
+
             <button
               type="button"
               className={styles.confirm_button}

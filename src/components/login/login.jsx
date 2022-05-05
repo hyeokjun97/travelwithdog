@@ -4,6 +4,7 @@ import styles from "./login.module.css";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { GoogleLogin } from "react-google-login";
 
+
 const Login = ({
   onCloseButtonHandler,
   signupPopupHandler,
@@ -74,6 +75,7 @@ const Login = ({
         } else if (err.response.data.messages.password) {
           alert("비밀번호는 최소 8자리 이상이어야 합니다.");
         } else if (err.response.data.messages.email) {
+
           alert("이메일 형식에 맞지 않습니다.");
         }
       });
