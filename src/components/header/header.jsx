@@ -15,6 +15,8 @@ const Header = ({
   const [scrollValue, setScrollValue] = useState(0);
 
   const bodyRef = useRef(); //
+  const itemRef = useRef(); //
+  const subRef = useRef(); //
 
   const { pathname } = window.location;
   const pathList = pathname.split("/");
@@ -98,7 +100,12 @@ const Header = ({
               ) => (
                 <li
                   key={category.id}
-                  className={styles.menu_item}
+                  //
+                  className={
+                    (scrollValue < 50) ? `${styles.menu_item_on}`:`${styles.menu_item}`  
+                }
+                  
+                  
                   onClick={() => {
                     setToggleOn(false);
                     navigate(`/category${category.url}`);
@@ -110,7 +117,10 @@ const Header = ({
               )
             )}
             <li
-              className={styles.menu_item}
+              className={
+                  (scrollValue < 50) ? `${styles.menu_item_on}`:`${styles.menu_item}`  
+              }
+              //{styles.menu_item}
               onClick={() => {
                 setToggleOn(false);
                 navigate("/rentcar");
@@ -120,7 +130,9 @@ const Header = ({
               렌터카
             </li>
             <li
-              className={styles.menu_item}
+              className={
+                (scrollValue < 50) ? `${styles.menu_item_on}`:`${styles.menu_item}`  
+              }
               onClick={() => {
                 setToggleOn(false);
                 navigate("/community/1");
@@ -140,7 +152,9 @@ const Header = ({
         >
           <ul className={styles.sub_button_list}>
             <li
-              className={styles.sub_button_item}
+              className={
+                (scrollValue > 50) ? `${styles.sub_button_item}`:`${styles.sub_button_item_on}`  
+            }
               onClick={() => {
                 setToggleOn(false);
                 navigate("/map");
@@ -150,7 +164,9 @@ const Header = ({
               멍:지
             </li>
             <li
-              className={styles.sub_button_item}
+              className={
+                (scrollValue > 50) ? `${styles.sub_button_item}`:`${styles.sub_button_item_on}`  
+            }
               onClick={() => {
                 setToggleOn(false);
                 isLoggedIn ? logoutHandler() : loginPopupHandler();
@@ -159,7 +175,9 @@ const Header = ({
               {isLoggedIn ? "로그아웃" : "로그인"}
             </li>
             <li
-              className={styles.sub_button_item}
+              className={
+                (scrollValue > 50) ? `${styles.sub_button_item}`:`${styles.sub_button_item_on}`  
+            }
               onClick={() => {
                 setToggleOn(false);
                 isLoggedIn ? navigate("/mypage/edit") : signupPopupHandler();

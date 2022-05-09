@@ -5,13 +5,33 @@ import { useParams } from "react-router-dom";
 import styles from "./articleView.module.css";
 import ReivewItem from "./reivewItem/reivewItem";
 import Heart from "react-animated-heart";
+import Popup2 from '../alert/modal.jsx';
+import { Button } from "react-bootstrap";
 
 const ArticleView = (props) => {
   const { articleId } = useParams();
   const [article, setArticle] = useState(null);
   const [date, setDate] = useState(null);
   const [isClick, setClick] = useState(false);
+  {/*HERE for Several Buttons*/}
+  const [popup, setPopup] = useState({open: false, title: "", message: "", callback: false});
+  
+  
+  const modalHandler = () => {
+    console.log("YOU CLICKED M21E");
+      
+    setPopup({
+      open: true,
+      title: "Confirm",
+      message: "Join Success!", 
+    });
+    console.log("YOU CLICKED ME");
 
+    console.log("SHOULD NOT YOU CLICKED ME");
+    
+  }
+  
+  {/*HERE for Several Buttons*/}
   useEffect(() => {
     const loadArticle = () => {
       axios
@@ -23,8 +43,8 @@ const ArticleView = (props) => {
   }, []);
   // article.like_cnt <-int
   // article 
-  console.log("FROM HERE\n");
-  console.log(article);
+  //console.log("FROM HERE\n");
+  //console.log(article);
   //
   return (
     <div className={styles.body}>
@@ -68,6 +88,18 @@ const ArticleView = (props) => {
               <button className={styles.article_navigate_btn}> 다음글 </button>
             </div>
         </div>
+        {/*HERE for Several Buttons*/}
+        
+        
+        <Button onclick={modalHandler}>
+          CLICK ME HERE!
+        </Button>
+        <Popup2 open = {popup.open} setPopup = {setPopup} message = {popup.message} title = {popup.title} />
+        
+        
+        
+        
+        
         {/*HERE for Several Buttons*/}
         <div className={styles.review_container}>
           <div className={styles.review_input_form}>

@@ -18,13 +18,39 @@
   border-bottom: none;
 }
 .body_on {
-  visibility: hidden;
+
+  /*background-color: pink;*/
+  background-color: transparent;
+}
+.menu_item_on {
+  height: 100px;
+  line-height: 100px;
+  /*font-size: var(--fontsize-normal);*/
+  font-size: var(--fontsize-bit-big);
+  padding: 0 15px;
+  margin: 0 15px;
+  text-align: center;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  text-shadow: -1px 1px 10px rgba(80, 80, 80, 0.75); 
+
+}
+.sub_button_item_on {
+  min-width: 60px;
+  margin: 0 5px;
+  font-size: var(--fontsize-bit-big);
+  /* --fontsize-bit-small*/
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  text-shadow: -2px 2px 30px rgba(80, 80, 80, 0.75); 
 
 }
 .body {
   margin: auto;
   width: 1000px;
-  height: 100px;
+  height: 90px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -40,30 +66,32 @@
 }
 
 .logo {
-  padding-top: 6px;
+  padding-top: 1px;
   width: 175px;
   cursor: pointer;
 }
 
 .navbar {
   width: 540px;
+
 }
 
 .menu_list {
-  margin: 0;
+  margin-top: 5px;
   padding: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   list-style: none;
+
 }
 
 .menu_item {
-  height: 100px;
-  line-height: 116px;
-  /*font-size: var(--fontsize-normal);*/
-  font-size: var(--fontsize-bit-big);
+  height: 100%;
+  line-height: 100px;
+  font-size: var(--fontsize-normal);
+  /*font-size: var(--fontsize-bit-big);*/
   padding: 0 15px;
   margin: 0 15px;
   text-align: center;
@@ -78,12 +106,13 @@
 
 .sub_button_container {
   width: 230px;
+  padding-bottom: 6px;
 }
 
 .sub_button_list {
   margin: 0;
   padding: 0;
-  margin-top: 18px;
+  margin-top: 14px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
