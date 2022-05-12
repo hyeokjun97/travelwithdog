@@ -9,7 +9,7 @@ const AboutUs = (props) => {
       <h2 className={styles.title}>Welcome To Travel Forest!</h2>
       <p className={styles.desc}>{desc}</p>
       <img
-        src="/travelWithDog/images/aboutus.jpeg"
+        src="./images/aboutus.jpeg"
         alt="aboutus"
         className={styles.image}
       />

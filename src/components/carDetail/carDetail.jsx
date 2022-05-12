@@ -162,7 +162,7 @@ const CarDetail = (props) => {
                       src={
                         carInfo.images.length > 0
                           ? carInfo.images[0].url
-                          : "/travelWithDog/images/no_image.jpeg"
+                          : "./images/no_image.jpeg"
                       }
                       alt="car_image"
                       className={styles.image}

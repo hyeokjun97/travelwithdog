@@ -137,7 +137,7 @@ const Login = ({
         <i className={`${styles.close_icon} fas fa-times`}></i>
       </div>
       <img
-        src="/travelWithDog/images/logo.png"
+        src="./images/logo.png"
         alt="logo"
         className={styles.logo}
       />
@@ -221,7 +221,7 @@ const Login = ({
             className={styles.kakao}
           >
             <img
-              src="/travelWithDog/images/kakao_round.png"
+              src="./images/kakao_round.png"
               alt="kakao_login"
               className={styles.social_image}
             />
@@ -237,7 +237,7 @@ const Login = ({
             disableMobileRedirect={true}
             render={(renderProps) => (
               <img
-                src="/travelWithDog/images/facebook_round.png"
+                src="./images/facebook_round.png"
                 alt="facebook_login"
                 className={styles.social_image}
                 onClick={renderProps.onClick}
@@ -251,7 +251,7 @@ const Login = ({
           onClick={() => naverRef.current.children[0].click()}
         >
           <img
-            src="/travelWithDog/images/naver.png"
+            src="./images/naver.png"
             alt="네이버로그인"
             className={styles.social_image}
           />
@@ -260,7 +260,7 @@ const Login = ({
         </div>
         <div className={styles.social_button}>
           <img
-            src="/travelWithDog/images/apple.png"
+            src="./images/apple.png"
             alt="애플 로그인"
             className={styles.social_image}
           />
@@ -276,7 +276,7 @@ const Login = ({
               disabled={renderProps.disabled}
             >
               <img
-                src="/travelWithDog/images/google.png"
+                src="./images/google.png"
                 alt="구글 로그인"
                 className={styles.social_image}
               />

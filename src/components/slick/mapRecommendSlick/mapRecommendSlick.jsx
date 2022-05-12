@@ -13,7 +13,7 @@ function NextArrow(props) {
 
   return (
     <img
-      src="/travelWithDog/images/arrow-right.png"
+      src="./images/arrow-right.png"
       alt="arrow"
       className={`${className} arrow_right`}
       style={{

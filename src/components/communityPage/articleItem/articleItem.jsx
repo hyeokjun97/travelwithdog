@@ -15,7 +15,7 @@ const ArticleItem = ({ article }) => {
           src={
             article.images.length > 0
               ? article.images[0].url
-              : "/travelWithDog/images/no_image.jpeg"
+              : "./images/no_image.jpeg"
           }
           alt="article_image"
           className={styles.image}
