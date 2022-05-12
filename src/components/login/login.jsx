@@ -4,7 +4,8 @@ import styles from "./login.module.css";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { GoogleLogin } from "react-google-login";
 
-
+//import swal from 'sweetswal';
+import Swal from 'sweetalert2'
 const Login = ({
   onCloseButtonHandler,
   signupPopupHandler,
@@ -26,6 +27,7 @@ const Login = ({
 
   const onInputValueChangeHandler = (e) => {
     const { name, value } = e.target;
+    //console.log("HERE ", e);
     setInputValue({
       ...inputValue,
       [name]: value,
@@ -39,8 +41,10 @@ const Login = ({
   const onLoginHandler = (e) => {
     e.preventDefault();
     if (id === "" || password === "") {
-      alert("이메일과 비밀번호를 입력해주세요.");
-      return;
+      Swal.fire("이메일과 비밀번호를 입력해주세요.");
+      //swal("이메일과 비밀번호를 입력해주세요.");
+      //setWrongId(true);
+      return ;
     }
     if (idSave) {
       localStorage.setItem("savedId", id);
@@ -73,10 +77,9 @@ const Login = ({
         if (err.response.data.message) {
           alert(err.response.data.message);
         } else if (err.response.data.messages.password) {
-          alert("비밀번호는 최소 8자리 이상이어야 합니다.");
+          Swal.fire("비밀번호는 최소 8자리 이상이어야 합니다.");
         } else if (err.response.data.messages.email) {
-
-          alert("이메일 형식에 맞지 않습니다.");
+          Swal.fire("이메일 형식에 맞지 않습니다.");
         }
       });
   };
@@ -90,7 +93,7 @@ const Login = ({
       },
       fail: function (error) {
         //
-        window.alert("에러 발생");
+        window.swal("에러 발생");
       },
     });
   };
@@ -145,6 +148,8 @@ const Login = ({
       <form className={styles.form}>
         <div className={styles.input_container}>
           <p className={styles.text}>이메일</p>
+          {/* MUI LOG IN INSTALL */}
+
           <input
             name="id"
             onChange={onInputValueChangeHandler}
@@ -153,7 +158,7 @@ const Login = ({
             className={styles.input}
             placeholder="이메일"
             spellCheck="false"
-          />
+          />          
         </div>
         <div className={styles.input_container}>
           <p className={styles.text}>비밀번호</p>
