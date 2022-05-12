@@ -11,7 +11,7 @@ const Footer = (props) => {
         <ul className={styles.top_menu}>
           <li>
             <img
-              src="/travelWithDog/images/logo.png"
+              src="./images/logo.png"
               alt="logo"
               className={styles.logo}
             />
@@ -82,7 +82,7 @@ const Footer = (props) => {
             rel="noopenner"
           >
             <img
-              src="/travelWithDog/images/facebook_white.png"
+              src="./images/facebook_white.png"
               alt="sns_icon"
               className={styles.sns_icon}
             />
@@ -93,7 +93,7 @@ const Footer = (props) => {
             rel="noopenner"
           >
             <img
-              src="/travelWithDog/images/kakao_white.png"
+              src="./images/kakao_white.png"
               alt="sns_icon"
               className={styles.sns_icon}
             />
@@ -104,7 +104,7 @@ const Footer = (props) => {
             rel="noopenner"
           >
             <img
-              src="/travelWithDog/images/naver_blog_white.png"
+              src="./images/naver_blog_white.png"
               alt="sns_icon"
               className={styles.sns_icon}
             />
