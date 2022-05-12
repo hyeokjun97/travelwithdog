@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/travelwithdog/static/css/main.e8a22730.css",
-    "main.js": "/travelwithdog/static/js/main.b8160e02.js",
+    "main.css": "/travelwithdog/static/css/main.259bb82b.css",
+    "main.js": "/travelwithdog/static/js/main.42164dd5.js",
     "static/media/top_banner.png": "/travelwithdog/static/media/top_banner.bf80bcecf8f52945173a.png",
     "static/media/main_bottom.png": "/travelwithdog/static/media/main_bottom.e46f946945e6b15eaeda.png",
     "static/media/glyphicons-halflings-regular.svg": "/travelwithdog/static/media/glyphicons-halflings-regular.060b2710bdbbe3dfe48b.svg",
@@ -19,10 +19,10 @@
     "static/media/slick.ttf": "/travelwithdog/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "index.html": "/travelwithdog/index.html",
     "static/media/slick.woff": "/travelwithdog/static/media/slick.295183786cd8a1389865.woff",
-    "static/media/index.cjs": "/travelwithdog/static/media/index.06ad11ea3e32fd3e4303.cjs"
+    "static/media/index.cjs": "/travelwithdog/static/media/index.cd351d7c31d0d3fccf96.cjs"
   },
   "entrypoints": [
-    "static/css/main.e8a22730.css",
-    "static/js/main.b8160e02.js"
+    "static/css/main.259bb82b.css",
+    "static/js/main.42164dd5.js"
   ]
 }
