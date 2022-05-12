@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./articleView.module.css";
 import ReivewItem from "./reivewItem/reivewItem";
-import Heart from "react-animated-heart";
+//import Heart from "react-animated-heart";
 import Popup2 from '../alert/modal.jsx';
 import { Button } from "react-bootstrap";
 
@@ -18,7 +18,7 @@ const ArticleView = (props) => {
   
   
   const modalHandler = () => {
-    console.log("YOU CLICKED M21E");
+    console.log("YOU CLICKED ME");
       
     setPopup({
       open: true,
@@ -70,6 +70,19 @@ const ArticleView = (props) => {
         </div>
       </div>
       <main className={styles.main}>
+        {/*HERE for Several Buttons*/}
+        
+        
+                <Button onClick={modalHandler}>
+          CLICK ME HERE!
+        </Button>
+        <Popup2 open = {popup.open} setPopup = {setPopup} message = {popup.message} title = {popup.title} />
+        
+        
+        
+        
+        
+        {/*HERE for Several Buttons*/}
         <article
           className={styles.article}
           dangerouslySetInnerHTML={{ __html: article && article.content }}
@@ -80,27 +93,15 @@ const ArticleView = (props) => {
               <button className={styles.article_navigate_btn}> 이전글 </button>
             </div>
             <div className={styles.article_like}>
-                {/*npm install react-animated-heart */}
+                {/*npm install react-animated-heart 
                     <Heart isClick={isClick} onClick={() => setClick(!isClick)} /> 
-                    <p>좋아요</p>
+                    */}<p>좋아요</p>
             </div>
             <div className={styles.article_like}>
               <button className={styles.article_navigate_btn}> 다음글 </button>
             </div>
         </div>
-        {/*HERE for Several Buttons*/}
-        
-        
-        <Button onclick={modalHandler}>
-          CLICK ME HERE!
-        </Button>
-        <Popup2 open = {popup.open} setPopup = {setPopup} message = {popup.message} title = {popup.title} />
-        
-        
-        
-        
-        
-        {/*HERE for Several Buttons*/}
+
         <div className={styles.review_container}>
           <div className={styles.review_input_form}>
             <p className={styles.review_text}>댓글(1)</p>

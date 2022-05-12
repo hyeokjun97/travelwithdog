@@ -11,7 +11,7 @@ function Popup2({open, setPopup, message, title, callback}) {
     }
 
     return (
-      <div style={styles.test}>
+        <>
         <Modal show={open} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>{title}</Modal.Title>
@@ -23,7 +23,7 @@ function Popup2({open, setPopup, message, title, callback}) {
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
+        </>
     );
 }
 
