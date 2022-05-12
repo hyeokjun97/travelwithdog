@@ -125,7 +125,7 @@ const Signup = ({ onCloseButtonHandler }) => {
         <i className={`${styles.close_icon} fas fa-times`}></i>
       </div>
       <img
-        src="/travelWithDog/images/logo.png"
+        src="./images/logo.png"
         alt="logo"
         className={styles.logo}
       />
