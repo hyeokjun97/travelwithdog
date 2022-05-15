@@ -41,9 +41,13 @@ const Login = ({
   const onLoginHandler = (e) => {
     e.preventDefault();
     if (id === "" || password === "") {
-      Swal.fire("이메일과 비밀번호를 입력해주세요.");
-      //swal("이메일과 비밀번호를 입력해주세요.");
-      //setWrongId(true);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text: '이메일과 비밀번호를 입력해주세요.',
+        confirmButtonColor: '#1d5e24',
+      });
+
       return ;
     }
     if (idSave) {
@@ -75,11 +79,29 @@ const Login = ({
         console.error(err);
 
         if (err.response.data.message) {
-          alert(err.response.data.message);
+          //alert(err.response.data.message);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: err.response.data.message,
+            confirmButtonColor: '#1d5e24',
+          });
         } else if (err.response.data.messages.password) {
-          Swal.fire("비밀번호는 최소 8자리 이상이어야 합니다.");
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: '비밀번호는 최소 8자리 이상이어야 합니다.',
+            confirmButtonColor: '#1d5e24',
+          });
+          //Swal.fire("");
         } else if (err.response.data.messages.email) {
-          Swal.fire("이메일 형식에 맞지 않습니다.");
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: '이메일 형식에 맞지 않습니다.',
+            confirmButtonColor: '#1d5e24',
+          });
+          //Swal.fire("이메일 형식에 맞지 않습니다.");
         }
       });
   };
@@ -93,7 +115,13 @@ const Login = ({
       },
       fail: function (error) {
         //
-        window.swal("에러 발생");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops!',
+          text: '에러 발생',
+          confirmButtonColor: '#1d5e24',
+        });
+        //window.swal("에러 발생");
       },
     });
   };

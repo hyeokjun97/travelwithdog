@@ -1,3 +1,11 @@
+# 수정한 사항
+https://sweetalert2.github.io/
+Alert ==> Sweet Alert 2 컴포넌트를 이용.
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
