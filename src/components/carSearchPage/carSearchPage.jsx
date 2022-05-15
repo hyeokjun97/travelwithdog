@@ -10,7 +10,7 @@ import axios from "axios";
 import LoadingPage from "../loadingPage/loadingPage";
 import { debounce } from "lodash";
 import ErrorPage from "../errorPage/errorPage";
-
+import Swal from 'sweetalert2';
 const CarSearchPage = ({ carCode }) => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
@@ -160,7 +160,13 @@ const CarSearchPage = ({ carCode }) => {
       selectedDateTime[0].length !== 16 ||
       selectedDateTime[1].length !== 16
     ) {
-      alert("시간을 선택해주세요");
+      //alert("시간을 선택해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '시간을 선택해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     if (selectedDateTime[0] === pickup && selectedDateTime[1] === dropoff) {
@@ -185,7 +191,13 @@ const CarSearchPage = ({ carCode }) => {
           err.response.data.messages.pickup_datetime &&
           err.response.data.messages.pickup_datetime[0].includes("tomorrow")
         ) {
-          alert("오늘 이후로 날짜를 설정해주세요");
+          //alert("오늘 이후로 날짜를 설정해주세요");
+          Swal.fire({
+            icon: 'info',
+            //title: 'Something',
+            text: '오늘 이후로 날짜를 설정해주세요',
+            confirmButtonColor: '#1d5e24',
+          });
           setCarList([]);
           setResultCarList([]);
         } else if (
@@ -194,7 +206,13 @@ const CarSearchPage = ({ carCode }) => {
             "after pickup date"
           )
         ) {
-          alert("반납일자는 대여일자 이후여야 합니다.");
+          //alert("반납일자는 대여일자 이후여야 합니다.");
+          Swal.fire({
+            icon: 'info',
+            //title: 'Something',
+            text: '반납일자는 대여일자 이후여야 합니다.',
+            confirmButtonColor: '#1d5e24',
+          });
           setCarList([]);
           setResultCarList([]);
         } else if (

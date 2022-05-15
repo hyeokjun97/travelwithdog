@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./mobileMypage.module.css";
-
+import Swal from 'sweetalert2';
 const MobileMypage = ({
   isLoggedIn,
   loginPopupHandler,
@@ -13,7 +13,13 @@ const MobileMypage = ({
     localStorage.removeItem("AK");
     localStorage.removeItem("RK");
     localStorage.removeItem("exp");
-    alert("로그아웃 되었습니다.");
+    //alert("로그아웃 되었습니다.");
+    Swal.fire({
+      icon: 'success',
+        //title: 'Something',
+      text: '로그아웃 되었습니다.',
+      confirmButtonColor: '#1d5e24',
+    });
     // window.location.reload();
   };
 

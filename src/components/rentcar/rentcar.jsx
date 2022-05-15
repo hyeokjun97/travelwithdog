@@ -10,7 +10,7 @@ import SlickTemplate from "../slick/slickTemplate/slickTemplate";
 import LoadingPage from "../loadingPage/loadingPage";
 import HelmetComponent from "../helmetComponent/helmetComponent";
 import CarSlick from "../slick/carSlick/carSlick";
-
+import Swal from 'sweetalert2';
 const Rentcar = ({ loadPageData }) => {
   const navigate = useNavigate();
   const [pageData, setPageData] = useState(null);
@@ -147,7 +147,13 @@ const Rentcar = ({ loadPageData }) => {
       selectedDateTime[0].length !== 16 ||
       selectedDateTime[1].length !== 16
     ) {
-      alert("시간을 선택해주세요");
+      //alert("시간을 선택해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '시간을 선택해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     navigate(`/carsearch/${selectedDateTime[0]}/${selectedDateTime[1]}`);

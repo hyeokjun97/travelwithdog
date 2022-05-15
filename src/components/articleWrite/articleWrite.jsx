@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SummerNote from "../summerNote/summerNote";
 import styles from "./articleWrite.module.css";
-
+import Swal from 'sweetalert2';
 const ArticleWrite = ({ isLoggedIn }) => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -21,12 +21,24 @@ const ArticleWrite = ({ isLoggedIn }) => {
 
   const submitArticle = () => {
     if (title === "" || content === "" || boardSelect === "") {
-      alert("모든 정보를 입력해주세요");
+      //alert("모든 정보를 입력해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '모든 정보를 입력해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
 
     if (!isLoggedIn) {
-      alert("로그인 후에 글 작성이 가능합니다.");
+      //alert("로그인 후에 글 작성이 가능합니다.");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '로그인 후에 글 작성이 가능합니다.',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
 
@@ -41,7 +53,13 @@ const ArticleWrite = ({ isLoggedIn }) => {
           navigate(`/community/${boardSelect}`);
           window.scrollTo({ top: 0 });
         } else {
-          alert("에러가 발생했습니다. 잠시 후에 다시 시도해주세요");
+          //alert("에러가 발생했습니다. 잠시 후에 다시 시도해주세요");
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: '에러가 발생했습니다. 잠시 후에 다시 시도해주세요',
+            confirmButtonColor: '#1d5e24',
+          });
         }
       })
       .catch((err) => console.error(err));
@@ -79,7 +97,13 @@ const ArticleWrite = ({ isLoggedIn }) => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      alert("글 작성 권한이 없습니다. 로그인 후에 다시 사용해주세요");
+      //alert("글 작성 권한이 없습니다. 로그인 후에 다시 사용해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '글 작성 권한이 없습니다. 로그인 후에 다시 사용해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       window.location.href = "/travelWithDog";
       return;
     }

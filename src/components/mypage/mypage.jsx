@@ -6,7 +6,7 @@ import MypageEdit from "./mypageEdit/mypageEdit";
 import MypagePayments from "./mypagePayments/mypagePayments";
 import MypageQna from "./mypageQna/mypageQna";
 import MypageWithdrawal from "./mypageWithdrawal/mypageWithdrawal";
-
+import Swal from 'sweetalert2';
 const Mypage = ({ isLoggedIn }) => {
   const { path } = useParams();
   const navigate = useNavigate();
@@ -15,7 +15,13 @@ const Mypage = ({ isLoggedIn }) => {
   const [pageName, setPageName] = useState(null);
   useEffect(() => {
     if (!isLoggedIn) {
-      alert("로그인 후에 사용 가능합니다.");
+      //alert("로그인 후에 사용 가능합니다.");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '로그인 후에 사용 가능합니다.',
+        confirmButtonColor: '#1d5e24',
+      });
       window.location.href = "/travelWithDog";
       return;
     }

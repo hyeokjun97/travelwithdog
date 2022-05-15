@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./reviewUploadPopup.module.css";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
-
+import Swal from 'sweetalert2';
 const ReviewUploadPopup = ({
   where,
   id,
@@ -23,11 +23,23 @@ const ReviewUploadPopup = ({
 
   const onReviewSubmitHandler = () => {
     if (content === "") {
-      alert("내용을 입력해주세요");
+      //alert("내용을 입력해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '내용을 입력해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     if (!isLoggedIn) {
-      alert("로그인 후에 리뷰 작성이 가능합니다.");
+      //alert("로그인 후에 리뷰 작성이 가능합니다.");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '로그인 후에 리뷰 작성이 가능합니다.',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     axios
@@ -36,7 +48,13 @@ const ReviewUploadPopup = ({
         content,
       })
       .then((response) => {
-        alert("리뷰 작성이 완료되었습니다.");
+        //alert("리뷰 작성이 완료되었습니다.");
+        Swal.fire({
+          icon: 'success',
+        //title: 'Something',
+          text: '리뷰 작성이 완료되었습니다.',
+          confirmButtonColor: '#1d5e24',
+        });
         reviewPopupOnChangeHandler();
         setReviewShowCountToInitial();
         loadSpotReview(id);

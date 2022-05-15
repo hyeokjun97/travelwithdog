@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./mobileHeader.module.css";
+import Swal from 'sweetalert2';
 
 const MobileHeader = (props) => {
   const navigate = useNavigate();
@@ -11,7 +12,13 @@ const MobileHeader = (props) => {
   const onSearchSubmitHandler = (e) => {
     e.preventDefault();
     if (searchInput === "") {
-      alert("검색어를 입력해주세요");
+      //alert("검색어를 입력해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '검색어를 입력해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     setSearchInput("");

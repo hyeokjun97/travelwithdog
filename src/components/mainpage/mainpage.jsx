@@ -11,7 +11,7 @@ import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { ko } from "react-date-range/dist/locale/index.js";
-
+import Swal from 'sweetalert2';
 const Mainpage = ({ loadPageData }) => {
   const navigate = useNavigate();
   const [pageData, setPageData] = useState(null);
@@ -24,7 +24,13 @@ const Mainpage = ({ loadPageData }) => {
 
   const onSearchSubmitHandler = () => {
     if (searchInput === "") {
-      alert("검색어를 입력해주세요");
+      //alert("검색어를 입력해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '검색어를 입력해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     navigate(`/search/${searchInput}`);
@@ -190,7 +196,13 @@ const Mainpage = ({ loadPageData }) => {
       selectedDateTime[0].length !== 16 ||
       selectedDateTime[1].length !== 16
     ) {
-      alert("시간을 선택해주세요");
+      //alert("시간을 선택해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '시간을 선택해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     navigate(`/carsearch/${selectedDateTime[0]}/${selectedDateTime[1]}`);

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ItemList from "../itemList/itemList";
 import LoadingPage from "../loadingPage/loadingPage";
 import styles from "./searchPage.module.css";
-
+import Swal from 'sweetalert2';
 const SearchPage = (props) => {
   //컴포넌트 마운트 시 마다 서버 요청해서 결과값 받아오고 분류, 정렬 선택 여부로 보여주기
   const navigate = useNavigate();
@@ -17,7 +17,13 @@ const SearchPage = (props) => {
 
   const onSearchSubmitHandler = () => {
     if (searchValue === "") {
-      alert("검색어를 입력해주세요.");
+      //alert("검색어를 입력해주세요.");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '검색어를 입력해주세요.',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     navigate(`/search/${searchValue}`);

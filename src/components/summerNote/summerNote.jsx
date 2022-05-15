@@ -6,12 +6,18 @@ import "bootstrap/js/modal";
 import "bootstrap/js/dropdown";
 import "bootstrap/js/tooltip";
 import axios from "axios";
-
+import Swal from 'sweetalert2';
 //reader.result
 const SummerNote = ({ onContentChangeHandler, boardSelect }) => {
   const onImageUpload = (fileList) => {
     if (!boardSelect) {
-      alert("게시판을 먼저 선택해주세요");
+      //alert("게시판을 먼저 선택해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '게시판을 먼저 선택해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     const formData = new FormData();

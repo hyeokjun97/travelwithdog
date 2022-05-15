@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./header.module.css";
 import { debounce } from "lodash";
-
+import Swal from 'sweetalert2';
 const Header = ({
   isLoggedIn,
   categoryList,
@@ -25,7 +25,14 @@ const Header = ({
     localStorage.removeItem("AK");
     localStorage.removeItem("RK");
     localStorage.removeItem("exp");
-    alert("로그아웃 되었습니다.");
+    //alert("로그아웃 되었습니다.");
+    Swal.fire({
+      icon: 'success',
+      //title: 'Something',
+      text: '로그아웃 되었습니다.',
+      confirmButtonColor: '#1d5e24',
+    });
+    setTimeout('', 5000);
     window.location.reload();
   };
 

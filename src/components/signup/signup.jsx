@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "./signup.module.css";
-
+import Swal from 'sweetalert2';
 
 const Signup = ({ onCloseButtonHandler }) => {
   const [confirmedId, setConfirmedId] = useState(null);
@@ -39,27 +39,59 @@ const Signup = ({ onCloseButtonHandler }) => {
 
   const getEmailToken = () => {
     if (id === "") {
-      alert("이메일 주소를 입력해주세요");
+      //alert("이메일 주소를 입력해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '이메일 주소를 입력해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     axios
       .post(`${process.env.REACT_APP_BASEURL}/auth/email/token`, {
         email: id,
       })
-      .then((response) => alert("인증번호가 발송되었습니다."))
+      .then((response) => 
+      //alert("인증번호가 발송되었습니다."
+      Swal.fire({
+        icon: 'success',
+        //title: 'Something',
+        text: '인증번호가 발송되었습니다.',
+        confirmButtonColor: '#1d5e24',
+      })
+      )
       .catch((err) => {
         console.error(err);
-        alert(err.response.data.message);
+        //alert(err.response.data.message);
+        Swal.fire({
+          icon: 'error',
+        //title: 'Something',
+          text: err.response.data.message,
+          confirmButtonColor: '#1d5e24',
+        });
       });
   };
 
   const authEmailToken = () => {
     if (authNum === "") {
-      alert("인증번호를 입력해주세요");
+      //alert("인증번호를 입력해주세요");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '인증번호를 입력해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     if (authNum.length !== 6) {
-      alert("인증번호는 6자리입니다.");
+      //alert("인증번호는 6자리입니다.");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '인증번호는 6자리입니다.',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     axios
@@ -68,35 +100,68 @@ const Signup = ({ onCloseButtonHandler }) => {
         token: authNum,
       })
       .then((response) => {
-        alert("인증이 완료되었습니다.");
+        //alert("인증이 완료되었습니다.");
+        Swal.fire({
+          icon: 'success',
+        //title: 'Something',
+          text: '인증이 완료되었습니다.',
+          confirmButtonColor: '#1d5e24',
+        });
         setConfirmedId(response.data);
       })
       .catch((err) => {
         console.error(err);
-        alert(err.response.data.message);
+        //alert(err.response.data.message);
+        Swal.fire({
+          icon: 'error',
+        //title: 'Something',
+          text: (err.response.data.message),
+          confirmButtonColor: '#1d5e24',
+        });
       });
   };
 
   const onSignupSubmitHandler = (e) => {
     e.preventDefault();
     if (!confirmedId) {
-      alert("이메일 인증을 완료해주세요");
-
+      //alert("이메일 인증을 완료해주세요");
+      Swal.fire({
+        icon: 'info',
+          //title: 'Something',
+        text: '이메일 인증을 완료해주세요',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     if (password.length < 8) {
-      alert("비밀번호는 최소 8자리 이상이어야 합니다.");
+      //alert("비밀번호는 최소 8자리 이상이어야 합니다.");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '비밀번호는 최소 8자리 이상이어야 합니다.',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
     if (password !== passwordConfirm) {
-      alert("비밀번호가 일치하지 않습니다.");
+      //alert("비밀번호가 일치하지 않습니다.");
+      Swal.fire({
+        icon: 'error',
+        //title: 'Something',
+        text: '비밀번호가 일치하지 않습니다.',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
 
     if (!checkboxValue.policy) {
-      alert(
-        "개인정보처리방침 및 트래블포레스트 이용약관에 동의하셔야 가입이 가능합니다."
-      );
+      //alert("개인정보처리방침 및 트래블포레스트 이용약관에 동의하셔야 가입이 가능합니다.");
+      Swal.fire({
+        icon: 'info',
+        //title: 'Something',
+        text: '개인정보처리방침 및 트래블포레스트 이용약관에 동의하셔야 가입이 가능합니다.',
+        confirmButtonColor: '#1d5e24',
+      });
       return;
     }
 
@@ -109,12 +174,24 @@ const Signup = ({ onCloseButtonHandler }) => {
         letter: recieve,
       })
       .then((response) => {
-        alert("회원가입이 완료되었습니다.");
+        //alert("회원가입이 완료되었습니다.");
+        Swal.fire({
+          icon: 'success',
+        //title: 'Something',
+          text: '회원가입이 완료되었습니다.',
+          confirmButtonColor: '#1d5e24',
+        });
         window.location.href = "/travelWithDog";
       })
       .catch((err) => {
         console.error(err);
-        alert(err.response.data.message);
+        //alert(err.response.data.message);
+        Swal.fire({
+          icon: 'error',
+        //title: 'Something',
+          text: err.response.data.message,
+          confirmButtonColor: '#1d5e24',
+        });
       });
   };
 
