@@ -157,6 +157,35 @@ iframe {
   height: auto;
   min-height: 300px;
 }
+/* 댓글 기능 추가 */ 
+.commentReview {
+  width: 100%;
+  padding: 13px 0;
+  border-bottom: 1px solid #dadada;
+}
+
+.commentSub_data_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.commentName {
+  font-weight: 700;
+  color: #0e0e0e;
+}
+
+.commentDate {
+  font-size: var(--fontsize-bit-small);
+  color: #0e0e0e;
+}
+
+.comment {
+  color: #0e0e0e;
+}
+
+
 
 @media screen and (max-width: 1000px) {
   .body {

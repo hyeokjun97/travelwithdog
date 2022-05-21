@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./reivewItem.module.css";
-
+import sampleComments from "../commentsSample";
 const ReivewItem = (props) => {
   return (
     <div className={styles.review}>
@@ -14,6 +14,11 @@ const ReivewItem = (props) => {
           싶네요☺️
         </p>
       </div>
+      {/* <ol>{
+              sampleComments.map( (item) =>
+                <li> Product: {item.name} | Price: {item.text} </li>
+              )}
+            </ol> */}
     </div>
   );
 };

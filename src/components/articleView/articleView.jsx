@@ -1,12 +1,14 @@
 import axios from "axios";
 import { Container } from "postcss";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./articleView.module.css";
 import ReivewItem from "./reivewItem/reivewItem";
-//import Heart from "react-animated-heart";
-import Popup2 from '../alert/modal.jsx';
+
 import { Button } from "react-bootstrap";
+import sampleComments from "./commentsSample.jsx";
+import SelectInput from "@mui/material/Select/SelectInput";
+
 
 const ArticleView = (props) => {
   const { articleId } = useParams();
@@ -17,21 +19,7 @@ const ArticleView = (props) => {
   const [popup, setPopup] = useState({open: false, title: "", message: "", callback: false});
   
   
-  const modalHandler = () => {
-    console.log("YOU CLICKED ME");
-      
-    setPopup({
-      open: true,
-      title: "Confirm",
-      message: "Join Success!", 
-    });
-    console.log("YOU CLICKED ME");
 
-    console.log("SHOULD NOT YOU CLICKED ME");
-    
-  }
-  
-  {/*HERE for Several Buttons*/}
   useEffect(() => {
     const loadArticle = () => {
       axios
@@ -40,12 +28,51 @@ const ArticleView = (props) => {
         .catch((err) => console.error(err));
     };
     loadArticle();
+    //데이터를 로드하는 부분
+    setComments([...sampleComments]);
   }, []);
-  // article.like_cnt <-int
-  // article 
-  //console.log("FROM HERE\n");
-  //console.log(article);
-  //
+
+  //댓글기능 추가
+  const [comments, setComments] = useState([]);
+  const [input, setInput] = useState('');
+  const [demoNo, setDemoNo] = useState(0);
+  const inputComment = useRef(null);
+
+  
+  const onChange = (e) => {
+    setInput(e.target.value);
+  }
+  const commentSubmit = (e) => {
+    e.preventDefault();
+    let now = new Date();
+    let year = now.getFullYear();
+    let month =("0"+ (now.getMonth() + 1)).slice(-2);
+    let day =("0"+ now.getDate()).slice(-2);
+    let hours = ("0"+ now.getHours()).slice(-2);
+    let minutes= ("0"+ now.getMinutes()).slice(-2);
+    const updateComments = [{
+      //해당 컴포넌트
+      user_id:"",
+      name: "DEMO " + demoNo,
+      time: year+'-'+month+'-'+day+' '+hours+':'+minutes,
+      text: input, 
+    }].concat(comments);
+    setDemoNo(demoNo+1);
+    setComments(updateComments);
+
+    setInput(''); //Input 안에 문자 초기화
+    console.log("DEBUG", comments);
+    console.log("HERE IS INPUT: ", comments[1].text);
+  }
+/*
+  현재 작동 방식입니다. 
+  1) sampleComments을 읽어온다. <- 이부분은 API를 이용하여 정보를 가져옵니다.
+  2) comments 배열에 복사를 한다.
+  3) input을 입력받고 comments에 추가하여 화면에 반영한다.
+
+  *useref는  댓글의 수정, 삭제에 관한 부분을 위함입니다.
+  *updateComments에서 접속한 유저의 아이디와 이름을 채워줘야합니다. 
+*/
   return (
     <div className={styles.body}>
       <div
@@ -70,54 +97,51 @@ const ArticleView = (props) => {
         </div>
       </div>
       <main className={styles.main}>
-        {/*HERE for Several Buttons*/}
-        
-        
-                <Button onClick={modalHandler}>
-          CLICK ME HERE!
-        </Button>
-        <Popup2 open = {popup.open} setPopup = {setPopup} message = {popup.message} title = {popup.title} />
-        
-        
-        
-        
-        
-        {/*HERE for Several Buttons*/}
         <article
           className={styles.article}
           dangerouslySetInnerHTML={{ __html: article && article.content }}
         ></article>
-        {/*HERE for Several Buttons*/}
-        <div className={styles.article_options}>
-            <div className={styles.article_like}>
-              <button className={styles.article_navigate_btn}> 이전글 </button>
-            </div>
-            <div className={styles.article_like}>
-                {/*npm install react-animated-heart 
-                    <Heart isClick={isClick} onClick={() => setClick(!isClick)} /> 
-                    */}<p>좋아요</p>
-            </div>
-            <div className={styles.article_like}>
-              <button className={styles.article_navigate_btn}> 다음글 </button>
-            </div>
-        </div>
 
         <div className={styles.review_container}>
           <div className={styles.review_input_form}>
-            <p className={styles.review_text}>댓글(1)</p>
+            <p className={styles.review_text}>댓글({comments.length})</p>
 
-            <div className={styles.review_input_container}>
+            <div 
+              className={styles.review_input_container}
+            >
               <textarea
                 className={styles.review_input}
                 spellCheck="false"
+                name="comments"
+                type="text"
                 placeholder="댓글 입력"
+                value={input}
+                onChange={onChange}
+                ref={inputComment}
               ></textarea>
-              <button className={styles.review_upload_button}>작성</button>
+              <button 
+              className={styles.review_upload_button}
+              type="submit"
+              onClick = {commentSubmit}
+              >작성</button>
+
             </div>
           </div>
           <div className={styles.review_list}>
-            <ReivewItem />
-            
+            {/*<ReivewItem />*/}
+            <div >{
+              comments.map( (item) =>
+                <div className={styles.commentReview}>
+                  <div className={styles.commentSub_data_container}>
+                    <p className={styles.commentName}>{item.name}</p>
+                    <p className={styles.commentDate}>{item.time}</p>
+                  </div>
+                  <div className={styles.comment_container}>
+                    <p className={styles.comment}>{item.text}</p>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

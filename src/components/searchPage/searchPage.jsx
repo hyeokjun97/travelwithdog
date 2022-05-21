@@ -46,6 +46,7 @@ const SearchPage = (props) => {
         );
         tmp = tmp.concat(response.data);
       }
+      console.log("DEBUG USE", tmp);
       setSearchResult(tmp);
     } catch (err) {
       console.error(err);
