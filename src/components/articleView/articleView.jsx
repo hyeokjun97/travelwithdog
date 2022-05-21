@@ -1,13 +1,11 @@
 import axios from "axios";
-import { Container } from "postcss";
+
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./articleView.module.css";
-import ReivewItem from "./reivewItem/reivewItem";
 
-import { Button } from "react-bootstrap";
 import sampleComments from "./commentsSample.jsx";
-import SelectInput from "@mui/material/Select/SelectInput";
+
 
 
 const ArticleView = (props) => {
@@ -15,11 +13,7 @@ const ArticleView = (props) => {
   const [article, setArticle] = useState(null);
   const [date, setDate] = useState(null);
   const [isClick, setClick] = useState(false);
-  {/*HERE for Several Buttons*/}
-  const [popup, setPopup] = useState({open: false, title: "", message: "", callback: false});
   
-  
-
   useEffect(() => {
     const loadArticle = () => {
       axios
